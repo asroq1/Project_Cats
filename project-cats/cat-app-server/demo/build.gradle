@@ -14,6 +14,7 @@ repositories {
 }
 
 //for Junit 5
+
 test{
 	useJUnitPlatform()
 }
@@ -28,8 +29,14 @@ dependencies {
 	testAnnotationProcessor 'org.projectlombok:lombok'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	//스프링 부트용 Spring Data Jpa 추상화 라이브러리
+	//스프링 부트 버전에 맞춰 자동으로 JPA관련 라이브러리들의 버전 관리해줌
 	implementation "org.mariadb.jdbc:mariadb-java-client"
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client' // MariaDB
 	implementation 'com.h2database:h2'
+	//h2:인메모리 관계형 데이터베이스, 별도 설치 필요없어 의존성만으로 관리 가능
+	//메모리에서 실행됨>애플리케이션 재시작마다 초기화됨-테스트 용도로 많이 사용
+	//demo에서 JPA의 테스트, 로컬 환경에서의 구동에서 사용
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
