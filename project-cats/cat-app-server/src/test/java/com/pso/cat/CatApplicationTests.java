@@ -1,10 +1,10 @@
-package com.pso.catappserver;
+package com.pso.cat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CatAppServerApplicationTests {
+class CatApplicationTests {
 
 	@Test
 	void contextLoads() {

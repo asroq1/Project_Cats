@@ -1,13 +1,13 @@
-package com.pso.catappserver;
+package com.pso.cat;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 @SpringBootApplication
-public class CatAppServerApplication {
+public class CatApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CatAppServerApplication.class, args);
+		SpringApplication.run(CatApplication.class, args);
+		System.out.println();
 	}
 
 }
