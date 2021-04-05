@@ -2,10 +2,22 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
+import { Provider } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Store from './store/configureStore'
+
+const store = Store()
 
 ReactDOM.render(
+	// <Provider store={wrapper}>
 	<React.StrictMode>
-		<App />
+		{/* React.StrictMode는 배포시 지울 코드 */}
+		<Provider store={store}>
+			<Router>
+				<App />
+			</Router>
+		</Provider>
 	</React.StrictMode>,
+	// </Provider>,
 	document.getElementById('root')
 )
