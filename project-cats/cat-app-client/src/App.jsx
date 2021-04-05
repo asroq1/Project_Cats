@@ -4,7 +4,11 @@ import { Route } from 'react-router-dom'
 import signUp from './pages/signUp'
 import index from './pages/index'
 import weightResult from './pages/weightResult'
+<<<<<<< HEAD
 import main from './pages/main'
+=======
+
+>>>>>>> d3ad080e30352dc0947da0bb4e090bb2e1c29218
 function App() {
 	return (
 		<>

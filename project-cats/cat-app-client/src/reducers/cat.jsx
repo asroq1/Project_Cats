@@ -31,6 +31,7 @@ const dummyCat = {
 }
 export const ADD_CAT = 'ADD_CAT';
 
+
 export const addCat = (data) =>({
     type: ADD_CAT,
     data
@@ -50,4 +51,5 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-export default reducer;
+
+export default reducer
