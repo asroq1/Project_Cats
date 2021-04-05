@@ -44,7 +44,6 @@ const dummyUser = (data) => ({
 
 //액션 함수
 export const loginRequestAction = (data) => {
-   
     return {
         type: LOG_IN_REQUEST,
         data,
@@ -150,6 +149,8 @@ const reducer = (state = initialState, action)=>{
                 signUpDone: false,
                 signUpError: action.error,
                 }
+        default:
+            return state;
     }
 };
 

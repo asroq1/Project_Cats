@@ -1,5 +1,5 @@
 export const initialState = {
-    
+
 }
 
 // export const action_name_action = (data) => {
@@ -9,13 +9,15 @@ export const initialState = {
 //     }
 // }
 
-const reducer = (state = initialState, action)=>{
-    switch (action.type){
+const reducer = (state = initialState, action) => {
+    switch (action.type) {
         // case _ACTION_NAME:
         //     return {
         //         //STATE CHANGE
         //         }
-            }
+        default:
+            return state;
+    }
 };
 
 export default reducer;

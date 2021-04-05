@@ -2,6 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux';
 
+import {loginRequestAction} from '../../reducers/user'
+
 const SignUpForm = props => {
 	const dispatch = useDispatch();
 	
@@ -21,6 +23,8 @@ const SignUpForm = props => {
 	}
 	const submitHandler = e => {
 		e.preventDefault()
+		
+		//dispatch(loginRequestAction(data));
 	}
 	const data = {
 		email,
@@ -28,15 +32,15 @@ const SignUpForm = props => {
 		name,
 	}
 
-	dispatch(register(data)).then(res => {
-		//redux로 가져올 경우 payload
-		data
-		if (res.payload.succeess) {
-			props.history.push('/')
-		} else {
-			alert(res.payload.err)
-		}
-	})
+	// dispatch(loginRequestAction(data)).then(response => {
+	// 	//redux로 가져올 경우 payload
+	// 	if (response.data.success) {
+	// 		props.history.push('/')
+	// 	} else {
+	// 		alert(response.data.err)
+	// 	}
+	// })
+
 	return (
 		<>
 			<form onSubmit={submitHandler}>
