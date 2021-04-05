@@ -1,7 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux';
 
 const SignUpForm = props => {
+	const dispatch = useDispatch();
+	
 	const [email, setEmail] = useState('')
 	const [pwd, setPwd] = useState('')
 	const [name, setName] = useState('')

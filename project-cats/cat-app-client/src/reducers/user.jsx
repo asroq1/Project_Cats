@@ -133,7 +133,7 @@ const reducer = (state = initialState, action)=>{
             return {
                 ...state,
                 signUpLoading: true,
-                signUpDone: false
+                signUpDone: false,
                 signUpError: null,
                 }
         case SIGN_UP_SUCCESS:
