@@ -35,14 +35,16 @@ const dummyUser = (data) => ({
     ...data,
     id: 1, //필요한 건지 확인해볼게요
     user_id: 'dummy user',
-    name: 'dummy user'
+    name: 'dummy user',
     email: 'abc@gmail.com',
     pwd: 'aaa',
     photo: '', //추가
     login_type: '', //추가
 });
 
+//액션 함수
 export const loginRequestAction = (data) => {
+   
     return {
         type: LOG_IN_REQUEST,
         data,
@@ -82,13 +84,14 @@ export const logoutFailureAction = (data) => {
     }
 }
 
+//Reducer 
 const reducer = (state = initialState, action)=>{
     switch (action.type){
         case LOG_IN_REQUEST:
             return {
                 ...state,
                 logInLoading: true,
-                logInDone: false
+                logInDone: false,
                 logInError: null,
                 }
         case LOG_IN_SUCCESS:
