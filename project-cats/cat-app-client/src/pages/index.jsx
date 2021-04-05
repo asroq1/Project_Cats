@@ -6,6 +6,8 @@ const index = () => {
 		<>
 			<h2>index</h2>
 			<Link to="/user/signup">회원가입</Link>
+			
+			<Link to="/user/main">메인화면</Link>
 		</>
 	)
 }

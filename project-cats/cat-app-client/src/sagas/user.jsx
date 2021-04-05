@@ -1,4 +1,4 @@
-import { all, call, fork, takeLatest, put, delay } from 'redux-saga/effects';
+import { all, call, fork, takeLatest, put,getContext, delay } from 'redux-saga/effects';
 import axios from 'axios';
 
 import {  
@@ -68,6 +68,12 @@ function* signUp(){
             error: err.response.data,
         });
     }
+}
+
+// signup 후 login된 상태로 홈페이지에 가기 위함
+function* goToHome(){
+    const history = yield getContext('history');
+    history.push('/');
 }
 
 function* watchLogIn(){
