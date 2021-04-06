@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 export const initialState = {
     user: {
         isLoggedIn: true,
@@ -30,10 +29,8 @@ const dummyCat = {
         wgt: 3.1
     }
 }
+
 export const ADD_CAT = 'ADD_CAT';
-=======
-export const initialState = {}
->>>>>>> d3ad080e30352dc0947da0bb4e090bb2e1c29218
 
 
 export const addCat = (data) =>({
@@ -42,7 +39,6 @@ export const addCat = (data) =>({
 })
 
 const reducer = (state = initialState, action) => {
-<<<<<<< HEAD
     switch (action.type) {
         case ADD_CAT:
             console.log('acted')
@@ -57,16 +53,4 @@ const reducer = (state = initialState, action) => {
 };
 
 
-=======
-	switch (action.type) {
-		// case _ACTION_NAME:
-		//     return {
-		//         //STATE CHANGE
-		//         }
-		default:
-			return state
-	}
-}
-
->>>>>>> d3ad080e30352dc0947da0bb4e090bb2e1c29218
 export default reducer

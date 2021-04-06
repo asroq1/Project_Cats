@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import { all, call, fork, takeLatest, put,getContext, delay } from 'redux-saga/effects';
 import axios from 'axios';
-=======
-import { all, call, fork, takeLatest, put, delay } from 'redux-saga/effects'
-import axios from 'axios'
->>>>>>> d3ad080e30352dc0947da0bb4e090bb2e1c29218
 
 import {
 	LOG_OUT_FAILURE,
@@ -79,7 +74,6 @@ function* signUp() {
 	}
 }
 
-<<<<<<< HEAD
 // signup 후 login된 상태로 홈페이지에 가기 위함
 function* goToHome(){
     const history = yield getContext('history');
@@ -88,10 +82,6 @@ function* goToHome(){
 
 function* watchLogIn(){
     yield takeLatest(LOG_IN_REQUEST, logIn);
-=======
-function* watchLogIn() {
-	yield takeLatest(LOG_IN_REQUEST, logIn)
->>>>>>> d3ad080e30352dc0947da0bb4e090bb2e1c29218
 }
 
 function* watchLogOut() {
