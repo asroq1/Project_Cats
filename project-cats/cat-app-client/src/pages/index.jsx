@@ -8,6 +8,9 @@ const index = () => {
 			<Link to="/user/signup">회원가입</Link>
 			
 			<Link to="/user/main">메인화면</Link>
+
+			<Link to="/cat/add">고양이 추가</Link>
+
 		</>
 	)
 }
