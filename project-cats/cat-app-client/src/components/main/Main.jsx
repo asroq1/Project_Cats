@@ -2,8 +2,8 @@ import React, { useCallback, useMemo } from 'react'
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Link } from 'react-router-dom'
-import {ADD_CAT} from '../../reducers/cat'
 
+import TopBar from './TopBar';
 
 //코드 너무 장황해지니	
 //필요 딱히 없는 건 나중에 지워주기
@@ -15,59 +15,61 @@ const GeneralWrapper = styled.div`
 	padding: 10px;
 	`;
 
-const PhotoContainer = styled.div`
+const PhotoContainer = styled.img`
 	width: 150px;
 	height: 150px;
 	margin: auto;
 	border: 1px solid green;
+	object-fit: cover;
 	`;
 
-const Main = ({cat}) => {
+const Main = ({ cat, current_index }) => {
+	console.log(cat)
+	console.log(current_index);
 	const dispatch = useDispatch();
 
-	const onClick = useCallback(() => {
-		dispatch({
-			type: ADD_CAT,
-		})
-	}, []);
-
-	const colStyle = useMemo(() => ({'max-width': '150px', flex: 'auto'}), []);
-	const menuStyle = useMemo(() => ({height: '2rem', display: 'flex'}), []);
-	const paddingStyle = useMemo(() => ({'margin-top': '1em',padding: '0.5em'}), []);
+	const colStyle = useMemo(() => ({ 'max-width': '150px', flex: 'auto', border: '1px solid lightgreen' }), []);
+	const menuStyle = useMemo(() => ({ height: '2rem', display: 'flex' }), []);
+	const paddingStyle = useMemo(() => ({ 'margin-top': '1em', padding: '0.5em' }), []);
+	const imgStyle = useMemo(() => ({ 'object-fit': 'cover' }), []);
 
 	return (
 		<>
-			<div style={menuStyle}>
-				{/* <CatWrapper><span>후추</span></CatWrapper>
-				<CatWrapper><span>+</span></CatWrapper>
-				<CatWrapper><span>#</span></CatWrapper> */}
-				<div style={colStyle}>{cat[0].name}</div>
-				<div style={colStyle}>+</div>
-				<div style={colStyle}>#</div>
-			</div>
+			<TopBar cat={cat} />
 			{/* <CatChoose /> <Setting Icon /> */}
 
-			<div>
-			<PhotoContainer>
-				<img src="" alt="cat_image"></img>
-			</PhotoContainer>
-			</div>
-			
 			<GeneralWrapper>
-				<div>{cat[0].gender}</div>
-				<div>{cat[0].age}</div>
-
-				<div>{cat[0].Record.cdt}</div>
-				<div>{cat[0].Record.wgt}</div>
+				<PhotoContainer
+					src={cat[current_index].photo}
+					alt="cat_image">
+				</PhotoContainer>
 			</GeneralWrapper>
 
 			<GeneralWrapper>
-			<Link href="/cat/addWeight" ><button style={paddingStyle}>Weight Record</button></Link>
-			
-			<Link href="cat/record"><button style={paddingStyle}>See Previous Data</button></Link>
-			
-			<button style={paddingStyle} onClick = {onClick}>DummyButton</button>
-			
+				<div>{cat[current_index].gender}</div>
+				<div>{cat[current_index].age}</div>
+
+				<div>{cat[current_index].Record.cdt}</div>
+				<div>{cat[current_index].Record.wgt}</div>
+			</GeneralWrapper>
+
+			<GeneralWrapper>
+				<Link to={
+					{
+						pathname: "/cat/addWeight",
+						cat_id: current_index,
+					}
+				} ><button style={paddingStyle}>Weight Record</button></Link>
+
+				<Link to={
+					{
+						pathname: "/cat/record",
+						cat_id: current_index,
+					}
+				}><button style={paddingStyle}>See Previous Data</button></Link>
+
+				<Link to="/">Back to Home</Link>
+
 			</GeneralWrapper>
 		</>
 	)

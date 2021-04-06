@@ -3,11 +3,11 @@ import {useSelector} from 'react-redux';
 import MainComponent from '../components/main/Main';
 
 const Main = () => {
-	const {cat} = useSelector((state) => state.cat);
+	const {cat, current_index} = useSelector((state) => state.cat);
 	return (
 		<>
 			<h2>메인 페이지</h2>
-			<MainComponent cat={cat}/>
+			<MainComponent cat={cat} current_index={current_index}/>
 		</>
 	)
 }
