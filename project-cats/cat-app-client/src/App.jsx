@@ -4,14 +4,8 @@ import { Route } from 'react-router-dom'
 import signUp from './pages/signUp'
 import index from './pages/index'
 import weightResult from './pages/weightResult'
-<<<<<<< Updated upstream
 import main from './pages/main'
 
-=======
-
-import main from './pages/main'
-
->>>>>>> Stashed changes
 function App() {
 	return (
 		<>
