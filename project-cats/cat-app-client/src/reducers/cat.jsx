@@ -48,46 +48,47 @@ export const initialState = {
 	],
 }
 
-const cat = (data) => ({
-    cat_id: 3,
-    user_id: 1,
-    name: data.name,
-    gender: 'M',
-    photo: 'https://lh3.googleusercontent.com/proxy/EfgrOQ0d_7Ovlx-OxNhBHruHhcKg5RRjhUuL_oTnYhR0ixLyR0Aa7LSAaj18freBge9fWG_h2d7fCbR_YIS30pZEMjDfspJyfQYbtbwsBcdhgSCUJ9mFcClsSpNw3mBM-CeBvxUt71Sa24xdF4-WTYMTN0npFLL1cl1tMX0U_nK7F6nwlTgG9waO',
-    age: data.birthyear,
-    Record: {}
+const cat = data => ({
+	cat_id: 3,
+	user_id: 1,
+	name: data.name,
+	gender: 'M',
+	photo:
+		'https://lh3.googleusercontent.com/proxy/EfgrOQ0d_7Ovlx-OxNhBHruHhcKg5RRjhUuL_oTnYhR0ixLyR0Aa7LSAaj18freBge9fWG_h2d7fCbR_YIS30pZEMjDfspJyfQYbtbwsBcdhgSCUJ9mFcClsSpNw3mBM-CeBvxUt71Sa24xdF4-WTYMTN0npFLL1cl1tMX0U_nK7F6nwlTgG9waO',
+	age: data.birthyear,
+	Record: {},
 })
 
-export const CHANGE_CAT = 'CHANGE_CAT';
+export const CHANGE_CAT = 'CHANGE_CAT'
 
-export const ADD_CAT = 'ADD_CAT';
+export const ADD_CAT = 'ADD_CAT'
 
-export const changeCat = (data) => ({
-    type: CHANGE_CAT,
-    data
+export const changeCat = data => ({
+	type: CHANGE_CAT,
+	data,
 })
 
-export const addCat = (data) => ({
-    type: ADD_CAT,
-    data
+export const addCat = data => ({
+	type: ADD_CAT,
+	data,
 })
 
 const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case CHANGE_CAT:
-            return {
-                ...state,
-                current_index: action.data,
-            };
-        case ADD_CAT:
-            console.log(action.data)
-            return {
-                ...state,
-                cat: [...state.cat, cat(action.data)],
-            };
-        default:
-            return state;
-    }
-};
+	switch (action.type) {
+		case CHANGE_CAT:
+			return {
+				...state,
+				current_index: action.data,
+			}
+		case ADD_CAT:
+			console.log(action.data)
+			return {
+				...state,
+				cat: [...state.cat, cat(action.data)],
+			}
+		default:
+			return state
+	}
+}
 
 export default reducer

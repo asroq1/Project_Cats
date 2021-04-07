@@ -14,11 +14,9 @@ ReactDOM.render(
 	<Provider store={store}>
 		<React.StrictMode>
 			{/* React.StrictMode는 배포시 지울 코드 */}
-			<Provider store={store}>
-				<Router>
-					<App />
-				</Router>
-			</Provider>
+			<Router>
+				<App />
+			</Router>
 		</React.StrictMode>
 		,
 	</Provider>,

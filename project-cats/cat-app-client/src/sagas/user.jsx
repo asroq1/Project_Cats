@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-import { all, call, fork, takeLatest, put,getContext, delay } from 'redux-saga/effects';
-import axios from 'axios';
-=======
 import {
 	all,
 	call,
@@ -12,7 +8,6 @@ import {
 	delay,
 } from 'redux-saga/effects'
 import axios from 'axios'
->>>>>>> Stashed changes
 
 import {
 	LOG_OUT_FAILURE,
@@ -93,13 +88,8 @@ function* goToHome() {
 	history.push('/')
 }
 
-<<<<<<< Updated upstream
-function* watchLogIn(){
-    yield takeLatest(LOG_IN_REQUEST, logIn);
-=======
 function* watchLogIn() {
 	yield takeLatest(LOG_IN_REQUEST, logIn)
->>>>>>> Stashed changes
 }
 
 function* watchLogOut() {

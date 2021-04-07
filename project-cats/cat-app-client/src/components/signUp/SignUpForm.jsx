@@ -1,8 +1,7 @@
 import React, { useRef } from 'react'
 import { useState } from 'react'
-import { regExpEmail, regExpPassword } from '../../common/auth'
+import { regExpEmail, regExpPassword } from '../../common/regExp'
 import { useDispatch } from 'react-redux'
-// import { signUpReqAction } from '../../reducers/users'
 import { signUpRequest } from '../../reducers/user'
 const SignUpForm = props => {
 	const dispatch = useDispatch()
@@ -11,13 +10,11 @@ const SignUpForm = props => {
 	const [pwd, setPwd] = useState('')
 	const [pwdCheck, setPwdCheck] = useState('')
 	const [name, setName] = useState('')
+	const [nick, setNick] = useState('')
 	const [passwordError, setPasswordError] = useState(false)
 	const [emailError, setEmailError] = useState(false)
-	const data = {
-		email,
-		pwd,
-		name,
-	}
+	const password = regExpPassword(pwd)
+
 	const onChangeEmail = e => {
 		setEmail(e.currentTarget.value)
 		const mail = regExpEmail(email)
@@ -29,10 +26,6 @@ const SignUpForm = props => {
 	}
 	const onChagePassword = e => {
 		setPwd(e.currentTarget.value)
-		const password = regExpPassword(pwd)
-		if (!password) {
-			console.log('비밀번호 양식이 맞습니다')
-		}
 	}
 	const onChangePasswordChk = e => {
 		setPwdCheck(e.currentTarget.value)
@@ -40,27 +33,24 @@ const SignUpForm = props => {
 	const onChangeName = e => {
 		setName(e.currentTarget.value)
 	}
+	const onChangeNick = e => {
+		setNick(e.currentTarget.value)
+	}
 	const onSubmit = e => {
 		e.preventDefault()
-		if (!emailError && pwd !== pwdCheck) {
+		if (password && !emailError && pwd !== pwdCheck) {
 			setPasswordError(true)
 			pwdRef.current.focus()
 		} else {
 			setPasswordError(false)
-			const data = {
-				email: email,
-				pwd: pwd,
-				name: name,
+			const body = {
+				email,
+				pwd,
+				name,
+				nick,
 			}
-			dispatch(signUpRequest(data)).then(response => {
-				if (response.payload.success) {
-					props.history.push('/')
-				} else {
-					alert('Error ')
-				}
-			})
+			dispatch(signUpRequest(body))
 		}
-		dispatch(signUpRequest(data))
 	}
 	return (
 		<>
@@ -103,6 +93,15 @@ const SignUpForm = props => {
 					value={name}
 					onChange={onChangeName}
 					maxLength="20"
+					required
+				/>
+				<label htmlFor="nick">닉네임</label>
+				<input
+					type="text"
+					name="nick"
+					value={nick}
+					onChange={onChangeNick}
+					maxLength="15"
 					required
 				/>
 				<button type="submit">회원가입</button>

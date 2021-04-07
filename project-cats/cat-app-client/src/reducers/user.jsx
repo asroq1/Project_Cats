@@ -40,7 +40,6 @@ const dummyUser = data => ({
 	name: 'dummy user',
 	email: 'abc@gmail.com',
 	pwd: 'aaa',
-	photo: '', //추가
 	login_type: '', //추가
 })
 
@@ -164,6 +163,7 @@ const reducer = (state = initialState, action) => {
 				signUpDone: true,
 				me: dummyUser(action.data),
 			}
+
 		case SIGN_UP_FAILURE:
 			return {
 				...state,
