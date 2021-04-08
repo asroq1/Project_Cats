@@ -1,7 +1,7 @@
-.index__background {
+.signup__background {
 	background-color: #f4f1de;
 }
-.index__wrapper {
+.signup__wrapper {
 	display: grid;
 	max-width: 1200px;
 	width: 100vw;
@@ -9,16 +9,38 @@
 	margin: 0 auto;
 	background-color: #fff;
 }
-.logo__wrapper {
+
+.title__wrapper {
 	display: grid;
 	align-items: end;
 }
-.logo {
+.title {
+	margin-bottom: 1rem;
+	text-align: center;
+	font-size: 2rem;
+}
+
+.social__form {
 	margin: 0 auto;
 	display: flex;
-	align-items: center;
 	width: 30%;
-	height: 25vh;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.social__form button {
+	width: 49%;
+}
+.kakao_btn {
+	background-color: #f7e600;
+	color: #3a1d1d;
+	font-size: 1rem;
+	font-weight: bold;
+}
+.naver_btn {
+	background-color: #2db400;
+	color: #fff;
+	font-size: 1rem;
+	font-weight: bold;
 }
 .or__line {
 	width: 30%;
@@ -30,7 +52,7 @@
 	color: #909090;
 	font-size: 1.2rem;
 }
-.signup {
+.login {
 	width: 30%;
 	margin: 0 auto;
 	margin-top: 1rem;
@@ -45,14 +67,16 @@
 	font-size: 1rem;
 	text-decoration: none;
 }
-
 @media screen and (max-width: 768px) {
-	input {
-		height: 0.5rem;
+	.social__form {
+		width: 75vw;
 	}
-	.logo,
+	.kakao_btn,
+	.naver_btn {
+		font-size: 0.8rem;
+	}
 	.or__line,
-	.signup {
+	.login {
 		width: 75vw;
 	}
 	.or__line {
