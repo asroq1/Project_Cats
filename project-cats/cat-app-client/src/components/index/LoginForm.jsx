@@ -4,6 +4,7 @@ import { loginRequestAction } from '../../reducers/user'
 import { regExpEmail, regExpPassword } from '../../common/regExp'
 import styles from '../../styles/LoginForm.module.css'
 import 'font-awesome/css/font-awesome.min.css'
+import KakaoLogin from '../socialButton/KakaoLogin'
 
 // const Input
 const LoginForm = () => {
@@ -67,7 +68,7 @@ const LoginForm = () => {
 				<button className={styles.submit__btn}>로그인</button>
 			</form>
 			<div className={styles.social__form}>
-				<button className={styles.kakao_btn}>카카오로 로그인하기</button>
+				<KakaoLogin />
 				<button className={styles.naver_btn}>네이버로 로그인하기</button>
 			</div>
 		</>

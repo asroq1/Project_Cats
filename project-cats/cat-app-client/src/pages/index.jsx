@@ -17,7 +17,6 @@ const index = () => {
 						회원가입
 					</Link>
 				</article>
-				<KakaoLogin />
 			</div>
 		</div>
 	)

@@ -1,0 +1,15 @@
+.kakao__btn {
+	font-size: 1rem;
+	font-weight: bold;
+	text-align: center;
+	background-color: #f7e600;
+	display: flex;
+	color: #3a1d1d;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.kakao__logo {
+	width: 15%;
+}
