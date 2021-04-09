@@ -5,6 +5,7 @@ import { regExpEmail, regExpPassword } from '../../common/regExp'
 import styles from '../../styles/LoginForm.module.css'
 import 'font-awesome/css/font-awesome.min.css'
 import KakaoLogin from '../socialButton/KakaoLogin'
+import NaverLogin from '../socialButton/NaverLogin'
 
 // const Input
 const LoginForm = () => {
@@ -69,7 +70,8 @@ const LoginForm = () => {
 			</form>
 			<div className={styles.social__form}>
 				<KakaoLogin />
-				<button className={styles.naver_btn}>네이버로 로그인하기</button>
+				<NaverLogin />
+				{/* <button className={styles.naver_btn}>네이버로 로그인하기</button> */}
 			</div>
 		</>
 	)
