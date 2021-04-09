@@ -12,12 +12,12 @@ const store = Store(rootReducer, composeWithDevTools());
 
 ReactDOM.render(
     <React.StrictMode>
-        {/* React.StrictMode는 배포시 지울 코드 */}
-        <Provider store={store}>
-            <Router>
-                <App />
-            </Router>
-        </Provider>
+      {/* React.StrictMode는 배포시 지울 코드 */}
+      <Provider store={store}>
+        <Router>
+          <App />
+        </Router>
+      </Provider>
     </React.StrictMode>,
-    document.getElementById('root')
+  document.getElementById('root')
 );

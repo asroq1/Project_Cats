@@ -52,12 +52,25 @@ function* addCat(action) {
 	}
 }
 
+<<<<<<< Updated upstream
 function* watchgetCat(){
 	yield takeLatest(GET_CAT_REQUEST, getCat)
 }
 
 function* watchaddCat(){
 	yield takeLatest(ADD_CAT_REQUEST, addCat)
+=======
+
+function* watchaddCat(){
+	yield takeLatest(ADD_CAT_REQUEST, addCat)
+}
+
+
+export default function* catSaga() {
+	yield all([
+		fork(watchaddCat)
+	])
+>>>>>>> Stashed changes
 }
 
 export default function* catSaga() {
