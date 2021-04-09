@@ -1,7 +1,6 @@
-import React from 'react'
-
+import React from 'react';
 const weightResult = () => {
-	return <div>weightResult</div>
-}
+    return <></>;
+};
 
-export default weightResult
+export default weightResult;
