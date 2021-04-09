@@ -1,0 +1,43 @@
+input,
+button {
+	margin: 0.5rem 0 0.5rem 0;
+	height: 3rem;
+	font-size: 1rem;
+	border-radius: 4px;
+	border-color: #484848;
+}
+input {
+	font-family: FontAwesome;
+}
+input::placeholder {
+	text-align: right;
+}
+button {
+	border: none;
+}
+input {
+	height: 1rem;
+	padding: 1rem;
+}
+.signup__form {
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+}
+.submit__btn {
+	background: #f2cc8f;
+	color: #fff;
+	font-size: 1rem;
+	font-weight: bold;
+}
+.email__message {
+	margin: 0.5rem 0 0.5rem 0;
+	color: #db4455;
+}
+
+@media screen and (max-width: 768px) {
+	.signup__form {
+		width: 75vw;
+	}
+}

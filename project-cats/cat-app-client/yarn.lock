@@ -1255,10 +1255,16 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.35"
 
+<<<<<<< HEAD
 "@fortawesome/react-fontawesome@^0.1.14":
   version "0.1.14"
   resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-0.1.14.tgz#bf28875c3935b69ce2dc620e1060b217a47f64ca"
   integrity sha512-4wqNb0gRLVaBm/h+lGe8UfPPivcbuJ6ecI4hIgW0LjI7kzpYB9FkN0L9apbVzg+lsBdcTf0AlBtODjcSX5mmKA==
+=======
+"@fortawesome/react-fontawesome@fortawesome/react-fontawesome":
+  version "0.1.14"
+  resolved "https://codeload.github.com/fortawesome/react-fontawesome/tar.gz/8e50c3486922849896d4ff48e45ac92b991e3814"
+>>>>>>> 5b9e1e11f0c3c1e83a838c04056a24c0e8d45bdb
   dependencies:
     prop-types "^15.7.2"
 
@@ -5218,6 +5224,11 @@ follow-redirects@^1.10.0:
   version "1.13.3"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.3.tgz#e5598ad50174c1bc4e872301e82ac2cd97f90267"
   integrity sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==
+
+font-awesome@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
+  integrity sha1-j6jPBBGhoxr9B7BtKQK7n8gVoTM=
 
 for-in@^1.0.2:
   version "1.0.2"
@@ -9270,6 +9281,11 @@ react-is@^17.0.1:
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
+
+react-kakao-login@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-kakao-login/-/react-kakao-login-2.1.0.tgz#674d7824284c7f88618d397cdd760745c85d78de"
+  integrity sha512-yvwe9Qc5cG+ucDAWOoIW4QjMB55M0Y97v040pbjcmc3Ud+bYHbQ+SwcVkOBvfDynyQbLPPoGJ+iN8rCRD4lzJw==
 
 react-redux@^7.2.3:
   version "7.2.3"
