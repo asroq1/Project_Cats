@@ -20,12 +20,12 @@ function* getCat(action) {
 		// 첫 번쨰 파라미터는 함수, 나머지 파라미터는 해당 함수에 넣을 인수
 		// const result = yield call(getCatAPI, action.data);
 		yield put({
-			type: ADD_CAT_SUCCESS,
+			type: GET_CAT_SUCCESS,
 			data: action.data,
 		})
 	} catch (err) {
 		yield put({
-			type: ADD_CAT_FAILURE,
+			type: GET_CAT_FAILURE,
 			data: err.response.data,
 		})
 	}
@@ -52,26 +52,15 @@ function* addCat(action) {
 	}
 }
 
-<<<<<<< Updated upstream
+
 function* watchgetCat(){
 	yield takeLatest(GET_CAT_REQUEST, getCat)
 }
 
 function* watchaddCat(){
 	yield takeLatest(ADD_CAT_REQUEST, addCat)
-=======
-
-function* watchaddCat(){
-	yield takeLatest(ADD_CAT_REQUEST, addCat)
 }
 
-
-export default function* catSaga() {
-	yield all([
-		fork(watchaddCat)
-	])
->>>>>>> Stashed changes
-}
 
 export default function* catSaga() {
 	yield all([
