@@ -1,26 +1,34 @@
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useState, useRef, useMemo } from 'react';
 import useInput from '../../hooks/useInput';
 import styled from 'styled-components';
 
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload, faCamera } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faUpload, faCamera } from '@fortawesome/free-solid-svg-icons';
+import 'font-awesome/css/font-awesome.min.css';
 
 import { ADD_CAT_REQUEST } from '../../reducers/cat';
 import palette from '../../styles/palette';
 
 // 스타일링된 input block
-const GeneralWrapper = styled.div`
-	margin-top: 2rem;
-	margin-bottom: 2rem;
+const Global = styled.div`
+    background-color: white;
+    max-width: 1200px;
+    width: 100vw;
+    
+    height: 100%;
+    margin: 0 auto;
     h2 {
         font-size: 2rem;
         text-align: center;
     }
     label {
         font-weight: bold;
+    }
+    @media screen and (max-width: 768px) {
+        width: 75vw;
     }
 `;
 
@@ -32,19 +40,26 @@ const StyledInputBlock = styled.div`
         padding: 0.5rem auto;
         outline: none;
     }
-    & > input:focus,
-    & > .birthcontainer > input:focus {
+    input-placeholder {
+        text-align: center;
+    }
+
+    & > .inputcontainer > input:focus {
         background-color: white;
     }
     .regular {
         width: 100%;
     }
-    .birthcontainer {
+    .inputcontainer {
         display: flex;
     }
+
     .birth {
-        flex: 1;
+        min-width: 100px;
+        max-width: 33%;
+        flex: 1 1 auto;
     }
+
     & + & {
         margin-top: 1rem;
     }
@@ -64,6 +79,14 @@ const PhotoPlaceholder = styled.div`
     display: flex;
     margin: 2rem;
     align-items: center;
+    text-align: center;
+    .fa-camera {
+        display: inline-block;
+        font-size: 5rem;
+    }
+    .fa-upload {
+        display: inline-block;
+    }
 `;
 
 const PhotoAddBtn = styled.button`
@@ -108,6 +131,7 @@ const ButtonWrapper = styled.button`
 
 const RadioBtnWrapper = styled.div`
     margin-top: 1rem;
+    margin-bottom: 2rem;
     display: flex;
     input {
         display: none;
@@ -152,7 +176,7 @@ const CatsAdd = ({ hasCat }) => {
                 type: ADD_CAT_REQUEST,
                 data: { photo, name, birthyear, birthmonth, birthdate, gender },
             });
-			history.push('/user/main');
+            history.push('/user/main');
         },
         [photo, name, birthyear, birthmonth, birthdate, gender]
     );
@@ -172,121 +196,132 @@ const CatsAdd = ({ hasCat }) => {
         reader.readAsDataURL(file);
     }, []);
 
-    return (
-        <GeneralWrapper>
-            <h2>
-                당신의 주인님에 대해
-                <br />
-                알려주세요!
-            </h2>
-            <form onSubmit={onSubmit}>
-                <CenterWrapper>
-                    <PhotoPlaceholder url={photo.url ? photo.url : ''}>
-                        <CenterWrapper>
-                            {!photo.url && (
-                                <FontAwesomeIcon size="6x" icon={faCamera} />
-                            )}
-                        </CenterWrapper>
-                        <input
-                            type="file"
-                            hidden
-                            ref={imageInput}
-                            accept="image/*"
-                            name="cat-image"
-                            onChange={onChangeImage}
-                        />
-                        {/*  DOM에 접근할 때 ref사용 */}
-                        <PhotoAddBtn onClick={onClickImageUpload}>
-                            <FontAwesomeIcon icon={faUpload} />
-                        </PhotoAddBtn>
-                    </PhotoPlaceholder>
-                </CenterWrapper>
-                {/* 이름 */}
-                <StyledInputBlock>
-                    <label htmlFor="cat-name">이름</label>
-                    <br />
-                    <input
-                        class="regular"
-                        type="text"
-                        id="cat-name"
-                        name="cat-name"
-                        value={name}
-                        onChange={onChangeName}
-                        maxLength="50"
-                        required
-                    />
-                </StyledInputBlock>
-                {/* 생일 */}
-                <StyledInputBlock>
-                    <label htmlFor="cat-birthyear">생일</label>
-                    <br />
-                    <div class="birthcontainer">
-                        <input
-                            class="birth"
-                            type="number"
-                            id="cat-birthyear"
-                            name="cat-birthyear"
-                            placeholder="yyyy"
-                            value={birthyear}
-                            onChange={onChangeBirthYear}
-                            required
-                        />
-                        <input
-                            class="birth"
-                            type="number"
-                            name="cat-birthmonth"
-                            placeholder="mm"
-                            value={birthmonth}
-                            onChange={onChangeBirthMonth}
-                            required
-                        />
-                        <input
-                            class="birth"
-                            type="number"
-                            name="cat-birthdate"
-                            placeholder="dd"
-                            value={birthdate}
-                            onChange={onChangeBirthDate}
-                            required
-                        />
-                    </div>
-                </StyledInputBlock>
-                {/* 성별 */}
-                <div style = {{marginTop: '1rem'}}>
-                    <label htmlFor="male">성별</label>
-                    <RadioBtnWrapper>
-                        <input
-                            type="radio"
-                            id="male"
-                            name="cat-gender"
-                            value="M"
-                            checked={gender === 'M'}
-                            onChange={onChangeGender}
-                        />
-                        <label class="radiobtn" htmlFor="male">
-                            남
-                        </label>
+    const goBack = useCallback(() => {
+        history.goBack();
+    });
 
-                        <input
-                            type="radio"
-                            id="female"
-                            name="cat-gender"
-                            value="F"
-                            checked={gender === 'F'}
-                            onChange={onChangeGender}
-                        />
-                        <label class="radiobtn" htmlFor="female">
-                            여
-                        </label>
-                    </RadioBtnWrapper>
-                </div>
-                {/* 버튼 */}
-                <CenterWrapper>
-                    {hasCat && <ButtonWrapper>취소</ButtonWrapper>}
-                    <ButtonWrapper htmlType="submit">등록</ButtonWrapper>
-                </CenterWrapper>
-            </form>
-        </GeneralWrapper>
+    const paddingStyle = useMemo(() => ({ paddingTop: '2rem' }), []);
+
+    return (
+        <>
+            <Global>
+                <h2 style={paddingStyle}>
+                    당신의 주인님에 대해
+                    <br />
+                    알려주세요!
+                </h2>
+                <form onSubmit={onSubmit}>
+                    <CenterWrapper>
+                        <PhotoPlaceholder url={photo.url ? photo.url : ''}>
+                            {!photo.url && (
+                                <span class="fa fa-camera"></span>
+                                /*<FontAwesomeIcon size="6x" icon={faCamera} />*/
+                            )}
+                            <input
+                                type="file"
+                                hidden
+                                ref={imageInput}
+                                accept="image/*"
+                                name="cat-image"
+                                onChange={onChangeImage}
+                            />
+                            {/*  DOM에 접근할 때 ref사용 */}
+                            <PhotoAddBtn onClick={onClickImageUpload}>
+                                <i class="fa fa-upload"></i>
+                            </PhotoAddBtn>
+                        </PhotoPlaceholder>
+                    </CenterWrapper>
+                    {/* 이름 */}
+                    <StyledInputBlock>
+                        <label htmlFor="cat-name">이름</label>
+                        <br />
+                        <div class="inputcontainer">
+                            <input
+                                class="regular"
+                                type="text"
+                                id="cat-name"
+                                name="cat-name"
+                                value={name}
+                                onChange={onChangeName}
+                                maxLength="50"
+                                required
+                            />
+                        </div>
+                    </StyledInputBlock>
+                    {/* 생일 */}
+                    <StyledInputBlock>
+                        <label htmlFor="cat-birthyear">생일</label>
+                        <br />
+                        <div class="inputcontainer">
+                            <input
+                                class="birth"
+                                type="number"
+                                id="cat-birthyear"
+                                name="cat-birthyear"
+                                placeholder="yyyy"
+                                value={birthyear}
+                                onChange={onChangeBirthYear}
+                                required
+                            />
+                            <input
+                                class="birth"
+                                type="number"
+                                name="cat-birthmonth"
+                                placeholder="mm"
+                                value={birthmonth}
+                                onChange={onChangeBirthMonth}
+                                required
+                            />
+                            <input
+                                class="birth"
+                                type="number"
+                                name="cat-birthdate"
+                                placeholder="dd"
+                                value={birthdate}
+                                onChange={onChangeBirthDate}
+                                required
+                            />
+                        </div>
+                    </StyledInputBlock>
+                    {/* 성별 */}
+                    <div style={{ marginTop: '1rem' }}>
+                        <label htmlFor="male">성별</label>
+                        <RadioBtnWrapper>
+                            <input
+                                type="radio"
+                                id="male"
+                                name="cat-gender"
+                                value="M"
+                                checked={gender === 'M'}
+                                onChange={onChangeGender}
+                            />
+                            <label class="radiobtn" htmlFor="male">
+                                남
+                            </label>
+
+                            <input
+                                type="radio"
+                                id="female"
+                                name="cat-gender"
+                                value="F"
+                                checked={gender === 'F'}
+                                onChange={onChangeGender}
+                            />
+                            <label class="radiobtn" htmlFor="female">
+                                여
+                            </label>
+                        </RadioBtnWrapper>
+                    </div>
+                    {/* 버튼 */}
+                    <CenterWrapper>
+                        {hasCat && (
+                            <ButtonWrapper onClick={goBack}>취소</ButtonWrapper>
+                        )}
+                        <ButtonWrapper htmlType="submit">등록</ButtonWrapper>
+                    </CenterWrapper>
+                </form>
+            </Global>
+        </>
     );
 };
 

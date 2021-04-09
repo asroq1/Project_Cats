@@ -14,7 +14,7 @@ export const initialState = {
                 url:
                     'https://welovekitties.com/wp-content/uploads/2015/12/cutekittenspictures-145124821648lcp.jpg',
             },
-            age: 3,
+            birth: '2020-02-28',
             Record: [
                 {
                     cdt: '2021-03-30',
@@ -32,7 +32,7 @@ export const initialState = {
                 url:
                     'https://i.pinimg.com/originals/d5/d2/3e/d5d23ed7f286b97fe8319bea6ee0c9d0.jpg',
             },
-            age: 5,
+            birth: '2010-10-17',
             Record: [
                 {
                     cdt: '2018-03-18',
@@ -40,7 +40,6 @@ export const initialState = {
                 },
             ],
         },
-
         {
             cat_id: 2,
             user_id: 1,
@@ -48,11 +47,10 @@ export const initialState = {
             gender: 'M',
             Photo: {
                 file: '',
-
                 url:
-                    'https://welovekitties.com/wp-content/uploads/2015/12/cutekittenspictures-145124821648lcp.jpg',
+                    'https://static.boredpanda.com/blog/wp-content/uploads/2016/10/laid-back-cat-statue-tombili-istanbul-2.jpg',
             },
-            age: 6,
+            birth: '2018-03-06',
             Record: [
                 {
                     cdt: '2019-02-28',
@@ -72,14 +70,12 @@ const dummyCat = (data) => ({
         file: data.photo.file,
         url: data.photo.url,
     },
-    age: 3,
-
     birth:
         data.birthyear +
         '-' +
         data.birthmonth +
         '-' +
-        data.ADD_CAT_FAILUREbirthdate,
+        data.birthdate,
     Record: [],
 });
 
@@ -111,7 +107,6 @@ export const addCatRequestAction = (data) => ({
     type: ADD_CAT_REQUEST,
     data,
 });
-
 export const addCatSuccessAction = (data) => ({
     type: ADD_CAT_SUCCESS,
     data,
