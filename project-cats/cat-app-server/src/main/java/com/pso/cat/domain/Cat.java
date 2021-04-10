@@ -3,9 +3,11 @@ package com.pso.cat.domain;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,7 +22,7 @@ public class Cat {
     @Column(name = "cat_id")
     private Long id;
 
-    //@ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", updatable = false )
     private Long userId;
 
