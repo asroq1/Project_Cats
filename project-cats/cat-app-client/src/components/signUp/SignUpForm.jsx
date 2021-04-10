@@ -3,7 +3,10 @@ import { useState } from 'react'
 import { regExpEmail, regExpPassword } from '../../common/regExp'
 import { useDispatch } from 'react-redux'
 import { signUpRequest } from '../../reducers/user'
-const SignUpForm = props => {
+import styles from '../../styles/signUpForm.module.css'
+import 'font-awesome/css/font-awesome.min.css'
+
+const SignUpForm = () => {
 	const dispatch = useDispatch()
 	const pwdRef = useRef()
 	const [email, setEmail] = useState('')
@@ -54,17 +57,23 @@ const SignUpForm = props => {
 	}
 	return (
 		<>
-			<form onSubmit={onSubmit}>
+			<form onSubmit={onSubmit} className={styles.signup__form}>
 				<label htmlFor="name">이메일</label>
 				<input
+					className={styles.font}
 					type="text"
 					name="email"
 					value={email}
 					onChange={onChangeEmail}
 					maxLength="50"
+					placeholder="&#xf0e0;"
 					required
 				/>
-				{emailError && <div>옳지않은 이메일 양식입니다.</div>}
+				{emailError && (
+					<div className={styles.email__message}>
+						옳지않은 이메일 양식입니다.
+					</div>
+				)}
 				<label htmlFor="pwd">비밀번호</label>
 				<input
 					ref={pwdRef}
@@ -73,7 +82,7 @@ const SignUpForm = props => {
 					value={pwd}
 					onChange={onChagePassword}
 					maxLength="20"
-					placeholder=""
+					placeholder="&#xf09c;"
 					required
 				/>
 				<label htmlFor="pwdCheck">비밀번호 확인</label>
@@ -83,6 +92,7 @@ const SignUpForm = props => {
 					maxLength="20"
 					value={pwdCheck}
 					onChange={onChangePasswordChk}
+					placeholder="&#xf09c;"
 					required
 				/>
 				{passwordError && <h2>비밀번호가 일치하지 않습니다.</h2>}
@@ -92,6 +102,7 @@ const SignUpForm = props => {
 					name="name"
 					value={name}
 					onChange={onChangeName}
+					placeholder="&#xF007;"
 					maxLength="20"
 					required
 				/>
@@ -101,10 +112,13 @@ const SignUpForm = props => {
 					name="nick"
 					value={nick}
 					onChange={onChangeNick}
+					placeholder="&#xf2c1;"
 					maxLength="15"
 					required
 				/>
-				<button type="submit">회원가입</button>
+				<button type="submit" className={styles.submit__btn}>
+					회원가입
+				</button>
 			</form>
 		</>
 	)

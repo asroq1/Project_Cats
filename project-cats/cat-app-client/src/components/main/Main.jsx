@@ -1,91 +1,111 @@
-import React, { useCallback, useMemo } from 'react'
-import { useDispatch } from 'react-redux'
-import styled from 'styled-components'
-import { BrowserRouter as Router, Link } from 'react-router-dom'
+import React, { useEffect, useCallback, useMemo } from 'react';
+import styled from 'styled-components';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 
-import TopBar from './TopBar'
+import palette from '../../styles/palette';
 
 //코드 너무 장황해지니
 //필요 딱히 없는 건 나중에 지워주기
 //짧은 건 useMemo로 넣어줌
+const Global = styled.div`
+    background-color: white;
+    max-width: 1200px;
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+
+    @media screen and (max-width: 768px) {
+        width: 75vw;
+    }
+`;
+    
 const GeneralWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 10px;
-`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin-top: 1rem;
+`;
 
 const PhotoContainer = styled.img`
-	width: 150px;
-	height: 150px;
-	margin: auto;
-	border: 1px solid green;
-	object-fit: cover;
-`
+    width: 200px;
+    height: 200px;
+    margin-top: 2rem;
+    border: 2px solid ${palette.navy};
+    object-fit: cover;
+`;
+
+const ButtonWrapper = styled.button`
+    width: 100%;
+    padding: 0.5rem auto;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: ${palette.navy};
+    color: ${palette.beige};
+    cursor: pointer;
+    border: 1px solid black;
+    &:hover {
+        background: black;
+    }
+    margin-top: 0.5rem;
+`;
 
 const Main = ({ cat, current_index }) => {
-	console.log(cat)
-	console.log(current_index)
-	const dispatch = useDispatch()
+    // styled-component대신 useMemo 써줌
+    const colStyle = useMemo(() => ({maxWidth: '150px',flex: 'auto',border: '1px solid lightgreen',}), []);
+    const paddingStyle = useMemo(() => ({ marginTop: '1em', padding: '0.5rem' }), []);
+    const boldStyle = useMemo(() => ({ fontWeight: 'bold', padding: '0.25rem' }), []);
+    
+    const currentCat = cat[current_index];
 
-	const colStyle = useMemo(
-		() => ({
-			'max-width': '150px',
-			flex: 'auto',
-			border: '1px solid lightgreen',
-		}),
-		[]
-	)
-	const menuStyle = useMemo(() => ({ height: '2rem', display: 'flex' }), [])
-	const paddingStyle = useMemo(
-		() => ({ 'margin-top': '1em', padding: '0.5em' }),
-		[]
-	)
-	const imgStyle = useMemo(() => ({ 'object-fit': 'cover' }), [])
+    return (
+        <Global>
+            <GeneralWrapper>
+                <PhotoContainer
+                    src={currentCat.Photo.url}
+                    alt="cat_image"
+                ></PhotoContainer>
+                <div style={paddingStyle}>
+                    {currentCat.age[0]}년 {currentCat.age[1]}개월 |{' '}
+                    {currentCat.gender === 'M' ? '수컷' : '암컷'}
+                </div>
+            </GeneralWrapper>
+            <GeneralWrapper>
+                <div style={boldStyle}>최종 기록</div>
+                <div style={boldStyle}>
+                    {currentCat.Record.length > 0
+                        ? currentCat.Record[currentCat.Record.length - 1].cdt
+                        : '-'}{' '}
+                    {currentCat.Record.length > 0
+                        ? currentCat.Record[currentCat.Record.length - 1].wgt + "kg"
+                        : '-'}
+                </div>
+            </GeneralWrapper>
 
-	return (
-		<>
-			<TopBar cat={cat} />
-			{/* <CatChoose /> <Setting Icon /> */}
+            <div style={paddingStyle}>
+                <Link
+                    to={{
+                        pathname: '/cat/addWeight',
+                        cat_id: current_index,
+                    }}
+                >
+                    
+                    
+                    
+                    <ButtonWrapper>오늘 체중 기록하기</ButtonWrapper>
+                </Link>
+                <Link
+                    to={{
+                        pathname: '/cat/record',
+                        cat_id: current_index,
+                    }}
+                >
+                    <ButtonWrapper>이전 데이터 보기</ButtonWrapper>
+                </Link>
+            </div> 
+        </Global>
+    );
+};
 
-			<GeneralWrapper>
-				<PhotoContainer
-					src={cat[current_index].photo}
-					alt="cat_image"
-				></PhotoContainer>
-			</GeneralWrapper>
-
-			<GeneralWrapper>
-				<div>{cat[current_index].gender}</div>
-				<div>{cat[current_index].age}</div>
-
-				<div>{cat[current_index].Record.cdt}</div>
-				<div>{cat[current_index].Record.wgt}</div>
-			</GeneralWrapper>
-
-			<GeneralWrapper>
-				<Link
-					to={{
-						pathname: '/cat/addWeight',
-						cat_id: current_index,
-					}}
-				>
-					<button style={paddingStyle}>Weight Record</button>
-				</Link>
-
-				<Link
-					to={{
-						pathname: '/cat/record',
-						cat_id: current_index,
-					}}
-				>
-					<button style={paddingStyle}>See Previous Data</button>
-				</Link>
-
-				<Link to="/">Back to Home</Link>
-			</GeneralWrapper>
-		</>
-	)
-}
-
-export default Main
+export default Main;

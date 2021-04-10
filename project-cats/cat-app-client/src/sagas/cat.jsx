@@ -1,34 +1,70 @@
 import { all, call, fork, takeLatest, put, delay } from 'redux-saga/effects'
 import axios from 'axios'
 
-import //ACTION NAMES
-'../reducers/cat'
+import {
+	GET_CAT_REQUEST, GET_CAT_SUCCESS, GET_CAT_FAILURE,
+	ADD_CAT_REQUEST, ADD_CAT_SUCCESS, ADD_CAT_FAILURE
+} from '../reducers/cat'
 
-function function_name_API(data) {
-	return
-	//axios...
+// 해당 유저의 모든 고양이 정보 받아오기
+// 이 부분은 논의할 것 - 로그인할 때 그냥 다 불러와도 됨
+function getCatAPI(data) {
+	return axios.get('/api/cat', data)
 }
 
-function* function_name(action) {
-	try {
-		const result = yield call(function_name_API, action.data)
-
+function* getCat(action) {
+	try {	
+		// call은 비동기 호출, fork는 동기 호출
+		
+		// Call 사용 시 Promise를 반환하는 함수 호출하고 기다릴 수 있음
+		// 첫 번쨰 파라미터는 함수, 나머지 파라미터는 해당 함수에 넣을 인수
+		// const result = yield call(getCatAPI, action.data);
 		yield put({
-			type: ACTION_NAME_SUCCESS,
-			data: result.data,
+			type: GET_CAT_SUCCESS,
+			data: action.data,
 		})
 	} catch (err) {
 		yield put({
-			type: ACTION_NAME_FAILURE,
+			type: GET_CAT_FAILURE,
 			data: err.response.data,
 		})
 	}
 }
 
-function* watch_function_name() {
-	yield takeLatest(ACTION_NAME, logOut)
+// 해당 유저에게
+// 새로운 고양이 정보 추가
+function addCatAPI(data) {
+	return axios.post('/api/cat', data)
 }
 
-export default function* userSaga() {
-	yield all([fork(watch_function_name)])
+function* addCat(action) {
+	try {	
+		// const result = yield call(addCatAPI, action.data);
+		yield put({
+			type: ADD_CAT_SUCCESS,
+			data: action.data,
+		})
+	} catch (err) {
+		yield put({
+			type: ADD_CAT_FAILURE,
+			data: err.response.data,
+		})
+	}
+}
+
+
+function* watchgetCat(){
+	yield takeLatest(GET_CAT_REQUEST, getCat)
+}
+
+function* watchaddCat(){
+	yield takeLatest(ADD_CAT_REQUEST, addCat)
+}
+
+
+export default function* catSaga() {
+	yield all([
+		fork(watchgetCat),
+		fork(watchaddCat)
+	])
 }
