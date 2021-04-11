@@ -27,3 +27,20 @@
     width: 20%;
     margin: 0 auto;
 }
+
+.content__main {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    text-align: center;
+}
+
+.box__wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.box__wrapper button {
+    width: 48%;
+}
