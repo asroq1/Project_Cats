@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface CatRepository extends JpaRepository<Cat, Long> {
     @Modifying
     @Query("UPDATE cat c SET c.state = 0 where c.id = :id")
-    int inactive(@Param("no") Long id);
+    int inactive(@Param("id") Long id);
 
-    List<Cat> findAllByStateOrderByRegistrationDateDesc(@Param("state") int state);
+    List<Cat> findAllByStateOrderByCreatedDateDesc(@Param("state") int state);
 }

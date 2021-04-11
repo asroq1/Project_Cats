@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +23,7 @@ public class Record {
     private Long id;
 
     @ManyToOne(targetEntity = Cat.class, fetch = FetchType.LAZY)
-    @Column(name = "cat_id")
+    @JoinColumn(name = "cat_id", updatable = false)
     private Long catId;
 
     @Column(name = "cdt")
