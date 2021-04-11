@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RecordRepository extends JpaRepository<Record, Long> {
-    List<Record> findAllByCatIdOOrderByCreateDateDesc(Long catId);
+    List<Record> findAllByCatIdOrderByCreateDateDesc(Long catId);
 }

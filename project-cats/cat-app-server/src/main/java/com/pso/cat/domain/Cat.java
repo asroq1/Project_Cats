@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,12 +23,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 @ToString
 public class Cat {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cat_id")
     private Long id;
 
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", updatable = false )
+    @Column(name = "user_id", updatable = false )
     private Long userId;
 
     private String name;
@@ -36,7 +36,7 @@ public class Cat {
 
     private String photo;
 
-    @Column(name = "cdt")
+    @Column(name = "cdt", updatable = false, insertable = false)
     private Date createdDate;
 
     @Column(name = "goal_wgt")

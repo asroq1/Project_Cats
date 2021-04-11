@@ -24,15 +24,15 @@ public class RecordService {
         return recordRepository.findById(id);
     }
 
-    public void delete(Long id) {
+    public void remove(Long id) {
         recordRepository.deleteById(id);
     }
 
-    public void update(Record record) {
+    public void modify(Record record) {
         recordRepository.save(record);
     }
 
     public List<Record> listByCatId(Long catId) {
-        return recordRepository.findAllByCatIdOOrderByCreateDateDesc(catId);
+        return recordRepository.findAllByCatIdOrderByCreateDateDesc(catId);
     }
 }

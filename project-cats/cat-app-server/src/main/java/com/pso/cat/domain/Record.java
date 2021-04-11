@@ -3,11 +3,9 @@ package com.pso.cat.domain;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,12 +16,11 @@ import lombok.ToString;
 @ToString
 public class Record {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rc_id")
     private Long id;
 
-    @ManyToOne(targetEntity = Cat.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "cat_id", updatable = false)
+    @Column(name = "cat_id", updatable = false, insertable = false)
     private Long catId;
 
     @Column(name = "cdt")

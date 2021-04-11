@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(value="고양이 추가, 수정, 삭제, 조회", tags = {"고양이 CRUD API"})
+@Api(value="고양이 추가, 수정, 삭제, 조회", tags = {"고양이 API"})
 @RequestMapping("/api/cats")
 public class CatController {
     private final CatService catService;
@@ -43,14 +43,14 @@ public class CatController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity get(@PathVariable Long id, @RequestBody Cat cat) {
-        catService.update(cat);
+    public ResponseEntity modify(@PathVariable Long id, @RequestBody Cat cat) {
+        catService.modify(cat);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(Long id) {
-        catService.delete(id);
+    public ResponseEntity remove(Long id) {
+        catService.remove(id);
         return ResponseEntity.ok().build();
     }
 

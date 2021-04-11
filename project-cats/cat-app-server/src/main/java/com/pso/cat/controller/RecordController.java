@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(value="기록 추가, 수정, 삭제, 조회", tags = {"기록 CRUD API"})
-@RequestMapping("/api/cats")
+@Api(value="기록 추가, 수정, 삭제, 조회", tags = {"체중 기록 API"})
+@RequestMapping("/api/records")
 public class RecordController {
     private final RecordService recordService;
 
@@ -28,8 +28,8 @@ public class RecordController {
     }
 
     @PostMapping
-    public ResponseEntity add(Record cat) {
-        recordService.save(cat);
+    public ResponseEntity add(Record record) {
+        recordService.save(record);
         return ResponseEntity.ok().build();
     }
 
@@ -40,14 +40,14 @@ public class RecordController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity get(@PathVariable Long id, @RequestBody Record record) {
-        recordService.update(record);
+    public ResponseEntity modify(@PathVariable Long id, @RequestBody Record record) {
+        recordService.modify(record);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(Long  id) {
-        recordService.delete(id);
+    public ResponseEntity remove(Long id) {
+        recordService.remove(id);
         return ResponseEntity.ok().build();
     }
 
