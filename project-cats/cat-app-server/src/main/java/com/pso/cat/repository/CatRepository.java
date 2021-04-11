@@ -14,5 +14,5 @@ public interface CatRepository extends JpaRepository<Cat, Long> {
     @Query("UPDATE cat c SET c.state = 0 where c.id = :id")
     int inactive(@Param("id") Long id);
 
-    List<Cat> findAllByStateOrderByCreatedDateDesc(@Param("state") int state);
+    List<Cat> findAllByUserIdAndStateOrderByCreatedDateDesc(@Param("userId") Long userId, @Param("state") int state);
 }

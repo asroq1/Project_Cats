@@ -11,8 +11,11 @@ import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.DynamicUpdate;
+
 
 @Entity(name = "cat")
+@DynamicUpdate
 @Getter
 @Setter
 @ToString
