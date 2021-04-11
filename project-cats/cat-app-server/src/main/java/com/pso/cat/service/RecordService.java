@@ -4,8 +4,11 @@ import com.pso.cat.domain.Cat;
 import com.pso.cat.domain.Record;
 import com.pso.cat.repository.CatRepository;
 import com.pso.cat.repository.RecordRepository;
+import java.util.List;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RecordService {
     private final RecordRepository recordRepository;
 
@@ -25,4 +28,11 @@ public class RecordService {
         recordRepository.deleteById(id);
     }
 
+    public void update(Record record) {
+        recordRepository.save(record);
+    }
+
+    public List<Record> listByCatId(Long catId) {
+        return recordRepository.findAllByCatIdOOrderByCreateDateDesc(catId);
+    }
 }

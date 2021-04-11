@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity(name = "cat")
@@ -39,8 +40,9 @@ public class Cat {
     private Date createdDate;
 
     @Column(name = "goal_wgt")
-    private float goalWeight;
+    private Float goalWeight;
 
+    @DateTimeFormat(pattern ="yyyy-MM-dd")
     private Date birth;
 
     @Column(insertable = false)
