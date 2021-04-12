@@ -1,8 +1,11 @@
-/* .carousel__container {
+input {
+    font-size: 1.2rem;
+}
+.carousel__container {
     max-width: 100%;
     overflow-x: hidden;
     overflow-y: auto;
-} */
+}
 .carousel__wrapper {
     /* margin: 0 auto; */
     width: 300vw;
@@ -11,8 +14,10 @@
 }
 
 .carousel__content {
+    display: grid;
+    align-items: center;
     width: 100vw;
-    height: 100vh;
+    height: 90vh;
     float: left;
 }
 
@@ -35,7 +40,18 @@
     width: 30%;
     text-align: center;
 }
-
+.content__text {
+    margin: 1rem 0 1rem 0;
+    font-size: 1.4rem;
+}
+.result__box {
+    display: flex;
+    flex-direction: column;
+}
+.result__box strong {
+    margin: 1rem 0 1rem 0;
+    font-size: 1.8rem;
+}
 .box__wrapper {
     display: flex;
     justify-content: space-between;
@@ -43,4 +59,43 @@
 
 .box__wrapper button {
     width: 48%;
+}
+
+.weight__box {
+    display: flex;
+}
+
+.weight__box input {
+    width: 85%;
+}
+
+.weight__box p {
+    font-size: 2rem;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    .content__wrapper {
+        /* display: none; */
+        width: 100vw;
+        margin: 0 auto;
+    }
+
+    .content__image {
+        width: 50%;
+        margin: 0 auto;
+    }
+    .content__main {
+        width: 90%;
+    }
+    .weight__box input {
+        height: 1rem;
+    }
+    .weight__box p {
+        padding: 0.5rem;
+    }
 }

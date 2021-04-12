@@ -70,14 +70,14 @@ const dummyCat = (data) => ({
         file: data.photo.file,
         url: data.photo.url,
     },
-    birth:
-        data.birthyear +
-        '-' +
-        data.birthmonth +
-        '-' +
-        data.birthdate,
+    birth: data.birthyear + '-' + data.birthmonth + '-' + data.birthdate,
     Record: [],
 });
+
+// 몸무게 추가
+export const WEIGHT_REQUEST = 'WEIGHT_REQUEST';
+export const WEIGHT_SUCCESS = 'WEIGHT_SUCCESS';
+export const WEIGHT_FAILURE = 'WEIGHT_FAILURE';
 
 // 논의할 부분
 export const GET_CAT_REQUEST = 'GET_CAT_REQUEST';
@@ -115,6 +115,24 @@ export const addCatFailureAction = (data) => ({
     type: ADD_CAT_FAILURE,
     data,
 });
+export const weightRequest = (data) => {
+    return {
+        type: WEIGHT_REQUEST,
+        data,
+    };
+};
+export const weightSuccess = (data) => {
+    return {
+        type: WEIGHT_SUCCESS,
+        data,
+    };
+};
+export const weightFailure = (data) => {
+    return {
+        type: WEIGHT_FAILURE,
+        data,
+    };
+};
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -141,6 +159,19 @@ const reducer = (state = initialState, action) => {
                 cat: [...state.cat, dummyCat(action.data)],
             };
         case ADD_CAT_FAILURE:
+            return {
+                ...state,
+            };
+        case WEIGHT_REQUEST:
+            console.log(action.data);
+            return {
+                ...state,
+            };
+        case WEIGHT_SUCCESS:
+            return {
+                ...state,
+            };
+        case WEIGHT_FAILURE:
             return {
                 ...state,
             };
