@@ -1,84 +1,121 @@
 import React from 'react';
-import '../../styles/WeightResultGraph.module.css';
+import styles from '../../styles/WeightResultGraph.module.css';
+
 import {
     ComposedChart,
     Line,
-    Bar,
     XAxis,
     YAxis,
     CartesianGrid,
     Tooltip,
-    Legend,
     LabelList,
+    Area,
     ResponsiveContainer,
 } from 'recharts';
 import { useEffect } from 'react';
+import axios from 'axios';
 
 const data = [
     {
         name: '08-02',
         wgt: 22.2,
-        pv: 800,
     },
     {
         name: '08-03',
         wgt: 22.4,
-        pv: 967,
     },
     {
-        name: '09-02',
+        name: '09-12',
         wgt: 25.2,
-        pv: 1098,
     },
     {
         name: '09-22',
         wgt: 25.0,
-        pv: 1200,
     },
     {
         name: '10-22',
-        wgt: 26,
-        pv: 1108,
+        wgt: 28.2,
     },
     {
-        name: '11-22',
-        wgt: 20,
-        pv: 680,
+        name: '12-22',
+        wgt: 30.2,
+    },
+    {
+        name: '12-30',
+        wgt: 22.2,
     },
 ];
 
 export default function WeightResultGraph() {
     const comapareRes = data[data.length - 1].wgt - data[data.length - 2].wgt;
-    useEffect(() => {});
+    const test = Math.floor(comapareRes);
+    // let test = 0;
+
+    const perDayHandler = () => {
+        // axios.get('<주소>').then((res) => {
+        //     const data = res.data.map((data) => {
+        //         return {
+        //               //코드 작성
+        //         };
+        //     });
+        // });
+        data.map((data) => {
+            return {
+                XAxis: data.name,
+            };
+        });
+        console.log('일마다', XAxis);
+    };
+    const perMonthHandler = () => {
+        // axios.get('<주소>').then((res) => {
+        //     const data = res.data.map((data) => {
+        //         return {
+        //             XAxis: data.name,
+        //             YAxis: data.name,
+        //         };
+        //     });
+        // });
+        console.log('매달');
+    };
+    useEffect(() => {
+        // const data = axios.get('<주소> ');
+    });
+
     return (
         <>
-            <ResponsiveContainer>
-                <ComposedChart
-                    data={data}
-                    margin={{
-                        top: 20,
-                        right: 20,
-                        bottom: 20,
-                        left: 20,
-                    }}
-                >
-                    <CartesianGrid stroke="#f5f5f5" />
-                    <XAxis dataKey="name" scale="band" />
-                    <YAxis
-                        dataKey="wgt"
-                        label={{
-                            value: '몸무게(kg)',
-                            angle: -90,
-                            position: 'insideLeft',
+            <div style={{ width: '90%', height: 400, maxWidth: 1200 }}>
+                <ResponsiveContainer>
+                    <ComposedChart
+                        width={1000}
+                        height={400}
+                        data={data}
+                        margin={{
+                            top: 20,
+                            right: 20,
+                            bottom: 20,
+                            left: 20,
                         }}
-                    />
-                    {/* <Tooltip /> */}
-                    <Bar dataKey="wgt" fill="#f2cc8f" barSize={30}>
-                        <LabelList dataKey="wgt" position="top" />
-                    </Bar>
-                    <Line dataKey="wgt" stroke="#e07a5f" />
-                </ComposedChart>
-            </ResponsiveContainer>
+                    >
+                        <CartesianGrid stroke="#f5f5f5" />
+                        <XAxis dataKey="name" />
+                        <YAxis type="number" dataKey="wgt" unit="kg" />
+                        <Tooltip />
+                        <Area
+                            type="monotone"
+                            dataKey="wgt"
+                            fill="#f2cc8f"
+                            stroke="#f2cc8f"
+                        />
+                        <Line type="monotone" dataKey="wgt" stroke="#ff7300">
+                            <LabelList dataKey="wgt" position="top" />
+                        </Line>
+                    </ComposedChart>
+                </ResponsiveContainer>
+            </div>
+            <div>
+                <button onClick={perDayHandler}>일</button>
+                <button onClick={perMonthHandler}>월</button>
+            </div>
             <div>
                 <div>
                     <ul>
@@ -96,7 +133,11 @@ export default function WeightResultGraph() {
                 </div>
                 <div>
                     <p>몸무게 변화</p>
-                    <p>{comapareRes}kg</p>
+                    <p>
+                        {test}
+                        {/* {comapareRes < 0 ? comapareRes : comapareRes} */}
+                        kg
+                    </p>
                 </div>
             </div>
         </>
