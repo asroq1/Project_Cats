@@ -1,63 +1,66 @@
+import product, { produce } from 'immer';
+
+
 export const initialState = {
     user: {
         isLoggedIn: true,
         user: 1,
     },
     cat: [
-        {
-            cat_id: 0,
-            user_id: 1,
-            name: 'Garfield',
-            gender: 'M',
-            Photo: {
-                file: '',
-                url:
-                    'https://welovekitties.com/wp-content/uploads/2015/12/cutekittenspictures-145124821648lcp.jpg',
-            },
-            birth: '2020-02-28',
-            Record: [
-                {
-                    cdt: '2021-03-30',
-                    wgt: 3.1,
-                },
-            ],
-        },
-        {
-            cat_id: 1,
-            user_id: 1,
-            name: 'meme',
-            gender: 'F',
-            Photo: {
-                file: '',
-                url:
-                    'https://i.pinimg.com/originals/d5/d2/3e/d5d23ed7f286b97fe8319bea6ee0c9d0.jpg',
-            },
-            birth: '2010-10-17',
-            Record: [
-                {
-                    cdt: '2018-03-18',
-                    wgt: 5.7,
-                },
-            ],
-        },
-        {
-            cat_id: 2,
-            user_id: 1,
-            name: '냥냥이',
-            gender: 'M',
-            Photo: {
-                file: '',
-                url:
-                    'https://static.boredpanda.com/blog/wp-content/uploads/2016/10/laid-back-cat-statue-tombili-istanbul-2.jpg',
-            },
-            birth: '2018-03-06',
-            Record: [
-                {
-                    cdt: '2019-02-28',
-                    wgt: 10.2,
-                },
-            ],
-        },
+        // {
+        //     cat_id: 0,
+        //     user_id: 1,
+        //     name: 'Garfield',
+        //     gender: 'M',
+        //     Photo: {
+        //         file: '',
+        //         url:
+        //             'https://welovekitties.com/wp-content/uploads/2015/12/cutekittenspictures-145124821648lcp.jpg',
+        //     },
+        //     birth: '2020-02-28',
+        //     Record: [
+        //         {
+        //             cdt: '2021-03-30',
+        //             wgt: 3.1,
+        //         },
+        //     ],
+        // },
+        // {
+        //     cat_id: 1,
+        //     user_id: 1,
+        //     name: 'meme',
+        //     gender: 'F',
+        //     Photo: {
+        //         file: '',
+        //         url:
+        //             'https://i.pinimg.com/originals/d5/d2/3e/d5d23ed7f286b97fe8319bea6ee0c9d0.jpg',
+        //     },
+        //     birth: '2010-10-17',
+        //     Record: [
+        //         {
+        //             cdt: '2018-03-18',
+        //             wgt: 5.7,
+        //         },
+        //     ],
+        // },
+        // {
+        //     cat_id: 2,
+        //     user_id: 1,
+        //     name: '냥냥이',
+        //     gender: 'M',
+        //     Photo: {
+        //         file: '',
+        //         url:
+        //             'https://static.boredpanda.com/blog/wp-content/uploads/2016/10/laid-back-cat-statue-tombili-istanbul-2.jpg',
+        //     },
+        //     birth: '2018-03-06',
+        //     Record: [
+        //         {
+        //             cdt: '2019-02-28',
+        //             wgt: 10.2,
+        //         },
+        //     ],
+        // },
     ],
 };
 
@@ -116,37 +119,34 @@ export const addCatFailureAction = (data) => ({
     data,
 });
 
+// 리듀서는
+// 이전 상태를 액션을 통해 다음 상태로 만드는 함수
+// 단 불변성은 지켜야 함
+// 'draft'를 state로 생각하면 됨
 const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case GET_CAT_REQUEST:
-            return {
-                ...state,
-            };
-        case GET_CAT_SUCCESS:
-            return {
-                ...state,
-            };
-        case GET_CAT_FAILURE:
-            return {
-                ...state,
-            };
-        case ADD_CAT_REQUEST:
-            return {
-                ...state,
-            };
-        case ADD_CAT_SUCCESS:
-            console.log(action.data);
-            return {
-                ...state,
-                cat: [...state.cat, dummyCat(action.data)],
-            };
-        case ADD_CAT_FAILURE:
-            return {
-                ...state,
-            };
-        default:
-            return state;
-    }
+    // state는 가만히 두고
+    // draft이용해 상태 바꿈 (state를 모두 draft로 대체)
+    // immer가 알아서 불변성 지키며 바꿔줌
+    return produce(state, (draft) => {
+        switch (action.type) {
+            case GET_CAT_REQUEST:
+                break;
+            case GET_CAT_SUCCESS:
+                break;
+            case GET_CAT_FAILURE:
+                break;
+            case ADD_CAT_REQUEST:
+                break;
+            case ADD_CAT_SUCCESS:
+                draft.cat = draft.cat.concat(dummyCat(action.data));
+                break;
+            case ADD_CAT_FAILURE:
+                break;
+            default:
+                break
+        }
+        
+    })
 };
 
 export default reducer;

@@ -24,7 +24,7 @@ const Global = styled.div`
 const MainEmpty = () => {
     return (
         <Global>
-            <i class="fa fa-heart"></i>
+            <i className="fa fa-heart"></i>
            귀여운 고양이를 추가해 주세용!
         </Global>
     );

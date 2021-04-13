@@ -70,9 +70,9 @@ const TopBar = ({ cat, current_index, onSelect }) => {
                         {el.name}
                     </EachCol>
                 ))}
-                <EachCol onClick={gotoAddCat}><i class="fa fa-plus"></i></EachCol>
+                <EachCol onClick={gotoAddCat}><i className="fa fa-plus"></i></EachCol>
 
-                <EachCol><Link to =  "/"><i class="fa fa-cog"></i></Link></EachCol>
+                <EachCol><Link to =  "/"><i className="fa fa-cog"></i></Link></EachCol>
             </div>
         </Global>
     );
