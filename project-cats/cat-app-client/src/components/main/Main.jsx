@@ -18,7 +18,7 @@ const Global = styled.div`
         width: 75vw;
     }
 `;
-    
+
 const GeneralWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -53,10 +53,23 @@ const ButtonWrapper = styled.button`
 
 const Main = ({ cat, current_index }) => {
     // styled-component대신 useMemo 써줌
-    const colStyle = useMemo(() => ({maxWidth: '150px',flex: 'auto',border: '1px solid lightgreen',}), []);
-    const paddingStyle = useMemo(() => ({ marginTop: '1em', padding: '0.5rem' }), []);
-    const boldStyle = useMemo(() => ({ fontWeight: 'bold', padding: '0.25rem' }), []);
-    
+    const colStyle = useMemo(
+        () => ({
+            maxWidth: '150px',
+            flex: 'auto',
+            border: '1px solid lightgreen',
+        }),
+        []
+    );
+    const paddingStyle = useMemo(
+        () => ({ marginTop: '1em', padding: '0.5rem' }),
+        []
+    );
+    const boldStyle = useMemo(
+        () => ({ fontWeight: 'bold', padding: '0.25rem' }),
+        []
+    );
+
     const currentCat = cat[current_index];
 
     return (
@@ -78,7 +91,8 @@ const Main = ({ cat, current_index }) => {
                         ? currentCat.Record[currentCat.Record.length - 1].cdt
                         : '-'}{' '}
                     {currentCat.Record.length > 0
-                        ? currentCat.Record[currentCat.Record.length - 1].wgt + "kg"
+                        ? currentCat.Record[currentCat.Record.length - 1].wgt +
+                          'kg'
                         : '-'}
                 </div>
             </GeneralWrapper>
@@ -90,9 +104,6 @@ const Main = ({ cat, current_index }) => {
                         cat_id: current_index,
                     }}
                 >
-                    
-                    
-                    
                     <ButtonWrapper>오늘 체중 기록하기</ButtonWrapper>
                 </Link>
                 <Link
@@ -103,7 +114,7 @@ const Main = ({ cat, current_index }) => {
                 >
                     <ButtonWrapper>이전 데이터 보기</ButtonWrapper>
                 </Link>
-            </div> 
+            </div>
         </Global>
     );
 };

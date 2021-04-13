@@ -2,7 +2,9 @@ package com.pso.cat.controller;
 
 
 import com.pso.cat.domain.Cat;
+import com.pso.cat.domain.Record;
 import com.pso.cat.service.CatService;
+import com.pso.cat.service.RecordService;
 import io.swagger.annotations.Api;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
@@ -16,41 +18,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(value="고양이 추가, 수정, 삭제, 조회", tags = {"고양이 API"})
-@RequestMapping("/api/cats")
-public class CatController {
-    private final CatService catService;
+@Api(value="기록 추가, 수정, 삭제, 조회", tags = {"체중 기록 API"})
+@RequestMapping("/api/records")
+public class RecordController {
+    private final RecordService recordService;
 
-    public CatController(CatService catService) {
-        this.catService = catService;
+    public RecordController(RecordService recordService) {
+        this.recordService = recordService;
     }
 
     @PostMapping
-    public ResponseEntity add(Cat cat) {
-        catService.save(cat);
+    public ResponseEntity add(Record record) {
+        recordService.save(record);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<Cat>> list(Long userId) {
-        List<Cat> list = catService.listByUserId(userId);
+    public ResponseEntity<List<Record>> list(Long catId) {
+        List<Record> list = recordService.listByCatId(catId);
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping("/{id}")
-    public Cat get(@PathVariable Long id) {
-        return catService.read(id).get();
-    }
-
     @PatchMapping("/{id}")
-    public ResponseEntity modify(@PathVariable Long id, @RequestBody Cat cat) {
-        catService.modify(cat);
+    public ResponseEntity modify(@PathVariable Long id, @RequestBody Record record) {
+        recordService.modify(record);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity remove(Long id) {
-        catService.remove(id);
+        recordService.remove(id);
         return ResponseEntity.ok().build();
     }
 

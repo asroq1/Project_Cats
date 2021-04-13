@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
 import user from './user'
 import cat from './cat'
@@ -17,4 +17,4 @@ const rootReducer = combineReducers({
 	post,
 })
 
-export default rootReducer
+export default rootReducer;
