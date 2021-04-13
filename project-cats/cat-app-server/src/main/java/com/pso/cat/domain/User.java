@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -17,4 +18,15 @@ public class User {
     @GeneratedValue
     @Column(name = "user_id")
     private Long id;
+
+    private String email;
+
+    public User(Long id, String email) {
+        this.id = id;
+        this.email = email;
+    }
+
+    public User() {
+
+    }
 }
