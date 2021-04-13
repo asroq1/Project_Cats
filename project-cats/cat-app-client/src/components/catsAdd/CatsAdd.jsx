@@ -53,11 +53,23 @@ const StyledInputBlock = styled.div`
     .inputcontainer {
         display: flex;
     }
-
     .birth {
         min-width: 100px;
         max-width: 33%;
         flex: 1 1 auto;
+        text-align: center;
+        
+        
+
+
+
+
+        &::placeholder{
+
+            text-align: center;
+        
+        }
+    
     }
 
     & + & {
@@ -214,7 +226,7 @@ const CatsAdd = ({ hasCat }) => {
                     <CenterWrapper>
                         <PhotoPlaceholder url={photo.url ? photo.url : ''}>
                             {!photo.url && (
-                                <span class="fa fa-camera"></span>
+                                <span className="fa fa-camera"></span>
                                 /*<FontAwesomeIcon size="6x" icon={faCamera} />*/
                             )}
                             <input
@@ -227,7 +239,7 @@ const CatsAdd = ({ hasCat }) => {
                             />
                             {/*  DOM에 접근할 때 ref사용 */}
                             <PhotoAddBtn onClick={onClickImageUpload}>
-                                <i class="fa fa-upload"></i>
+                                <i className="fa fa-upload"></i>
                             </PhotoAddBtn>
                         </PhotoPlaceholder>
                     </CenterWrapper>
@@ -235,9 +247,9 @@ const CatsAdd = ({ hasCat }) => {
                     <StyledInputBlock>
                         <label htmlFor="cat-name">이름</label>
                         <br />
-                        <div class="inputcontainer">
+                        <div className="inputcontainer">
                             <input
-                                class="regular"
+                                className="regular"
                                 type="text"
                                 id="cat-name"
                                 name="cat-name"
@@ -252,9 +264,9 @@ const CatsAdd = ({ hasCat }) => {
                     <StyledInputBlock>
                         <label htmlFor="cat-birthyear">생일</label>
                         <br />
-                        <div class="inputcontainer">
+                        <div className="inputcontainer">
                             <input
-                                class="birth"
+                                className="birth"
                                 type="number"
                                 id="cat-birthyear"
                                 name="cat-birthyear"
@@ -264,7 +276,7 @@ const CatsAdd = ({ hasCat }) => {
                                 required
                             />
                             <input
-                                class="birth"
+                                className="birth"
                                 type="number"
                                 name="cat-birthmonth"
                                 placeholder="mm"
@@ -273,7 +285,7 @@ const CatsAdd = ({ hasCat }) => {
                                 required
                             />
                             <input
-                                class="birth"
+                                className="birth"
                                 type="number"
                                 name="cat-birthdate"
                                 placeholder="dd"
@@ -295,7 +307,7 @@ const CatsAdd = ({ hasCat }) => {
                                 checked={gender === 'M'}
                                 onChange={onChangeGender}
                             />
-                            <label class="radiobtn" htmlFor="male">
+                            <label className="radiobtn" htmlFor="male">
                                 남
                             </label>
 
@@ -307,7 +319,7 @@ const CatsAdd = ({ hasCat }) => {
                                 checked={gender === 'F'}
                                 onChange={onChangeGender}
                             />
-                            <label class="radiobtn" htmlFor="female">
+                            <label className="radiobtn" htmlFor="female">
                                 여
                             </label>
                         </RadioBtnWrapper>

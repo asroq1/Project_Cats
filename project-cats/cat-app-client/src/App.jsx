@@ -4,9 +4,15 @@ import { Route } from 'react-router-dom';
 import signUp from './pages/signUp';
 import index from './pages/index';
 import weightResult from './pages/weightResult';
+import weightAdd from './pages/weightAdd';
 import catAdd from './pages/catAdd';
 import main from './pages/main';
-import weightAdd from './pages/weightAdd';
+
+import postWrite from './pages/postWrite';
+
+import postList from './pages/postList';
+
+import postView from './pages/postView';
 
 function App() {
     return (
@@ -19,6 +25,9 @@ function App() {
             <Route path="/cat/record" component={weightAdd} />
             <Route path="/cat/add" component={catAdd} />
             <Route path="/user/main" component={main} />
+            <Route path="/post/write" component={postWrite}/>
+            <Route path="/post/list" component= {postList}/>
+            <Route path="/post/view" component = {postView}/>
         </>
     );
 }
