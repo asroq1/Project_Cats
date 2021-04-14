@@ -1,0 +1,40 @@
+.graph__container {
+    display: grid;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 90%;
+    height: 90vh;
+    align-items: center;
+}
+
+.select__wrapper {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.select__wrapper button {
+    width: 15%;
+}
+
+.weight__wrapper {
+    margin: 1rem 0 1rem 0;
+    border: 1px solid black;
+    padding: 1rem;
+}
+.weight__wrapper ul {
+    display: flex;
+    justify-content: space-around;
+}
+.weight__wrapper li:nth-last-child(1) {
+    font-weight: bold;
+}
+.result__wrapper {
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem 0 1rem 0;
+    border: 1px solid black;
+    padding: 1rem;
+}
+.result__wrapper p:nth-child(2) {
+    font-weight: bold;
+}

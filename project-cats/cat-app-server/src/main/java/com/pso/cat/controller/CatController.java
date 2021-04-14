@@ -4,6 +4,7 @@ package com.pso.cat.controller;
 import com.pso.cat.domain.Cat;
 import com.pso.cat.service.CatService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
