@@ -12,7 +12,6 @@ const SignUpForm = () => {
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [pwdCheck, setPwdCheck] = useState('');
-    const [name, setName] = useState('');
     const [nick, setNick] = useState('');
     const [passwordError, setPasswordError] = useState(false);
     const [emailError, setEmailError] = useState(false);
@@ -33,9 +32,7 @@ const SignUpForm = () => {
     const onChangePasswordChk = (e) => {
         setPwdCheck(e.currentTarget.value);
     };
-    const onChangeName = (e) => {
-        setName(e.currentTarget.value);
-    };
+
     const onChangeNick = (e) => {
         setNick(e.currentTarget.value);
     };
@@ -49,7 +46,6 @@ const SignUpForm = () => {
             const body = {
                 email,
                 pwd,
-                name,
                 nick,
             };
             dispatch(signUpRequest(body));
@@ -96,16 +92,6 @@ const SignUpForm = () => {
                     required
                 />
                 {passwordError && <h2>비밀번호가 일치하지 않습니다.</h2>}
-                <label htmlFor="name">이름</label>
-                <input
-                    type="text"
-                    name="name"
-                    value={name}
-                    onChange={onChangeName}
-                    placeholder="&#xF007;"
-                    maxLength="20"
-                    required
-                />
                 <label htmlFor="nick">닉네임</label>
                 <input
                     type="text"

@@ -46,6 +46,7 @@ const dummyUser = (data) => ({
 
 //액션 함수
 export const loginRequestAction = (data) => {
+    console.log('로그인 츄라이');
     return {
         type: LOG_IN_REQUEST,
         data,
@@ -53,6 +54,7 @@ export const loginRequestAction = (data) => {
 };
 
 export const loginSuccessAction = (data) => {
+    console.log('로그인 성공');
     return {
         type: LOG_IN_SUCCESS,
         data,
@@ -90,6 +92,8 @@ export const signUpRequest = (data) => {
     const request = axios
         .post('<root>', data)
         .then((response) => response.data);
+    console.log('트라이');
+
     return {
         type: SIGN_UP_REQUEST,
         data: request,
@@ -102,6 +106,7 @@ export const signUpSuccess = (data) => {
     };
 };
 export const signUpFailure = (data) => {
+    console.log('실패');
     return {
         type: SIGN_UP_FAILURE,
         data,

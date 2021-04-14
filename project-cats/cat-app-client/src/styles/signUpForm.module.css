@@ -35,7 +35,16 @@ input {
     margin: 0.5rem 0 0.5rem 0;
     color: #db4455;
 }
-
+.social__container {
+    height: 100vh;
+    width: 100%;
+    display: grid;
+}
+.social__title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 @media screen and (max-width: 768px) {
     .signup__form {
         width: 90vw;
