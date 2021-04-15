@@ -12,7 +12,7 @@ const SignUpForm = () => {
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [pwdCheck, setPwdCheck] = useState('');
-    const [nick, setNick] = useState('');
+    const [nickname, setNickName] = useState('');
     const [passwordError, setPasswordError] = useState(false);
     const [emailError, setEmailError] = useState(false);
     const password = regExpPassword(pwd);
@@ -34,7 +34,7 @@ const SignUpForm = () => {
     };
 
     const onChangeNick = (e) => {
-        setNick(e.currentTarget.value);
+        setNickName(e.currentTarget.value);
     };
     const onSubmit = (e) => {
         e.preventDefault();
@@ -46,7 +46,7 @@ const SignUpForm = () => {
             const body = {
                 email,
                 pwd,
-                nick,
+                nickname,
             };
             dispatch(signUpRequest(body));
         }
@@ -96,7 +96,7 @@ const SignUpForm = () => {
                 <input
                     type="text"
                     name="nick"
-                    value={nick}
+                    value={nickname}
                     onChange={onChangeNick}
                     placeholder="&#xf2c1;"
                     maxLength="15"

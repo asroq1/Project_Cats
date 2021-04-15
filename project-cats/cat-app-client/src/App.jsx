@@ -7,11 +7,8 @@ import weightResult from './pages/weightResult';
 import weightAdd from './pages/weightAdd';
 import catAdd from './pages/catAdd';
 import main from './pages/main';
-
 import postWrite from './pages/postWrite';
-
 import postList from './pages/postList';
-
 import postView from './pages/postView';
 import Settings from './components/settings/setting';
 import SocialSignup from './components/signUp/SocialSignup';
