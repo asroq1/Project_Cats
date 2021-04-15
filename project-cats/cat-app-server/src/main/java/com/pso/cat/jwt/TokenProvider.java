@@ -45,12 +45,16 @@ public class TokenProvider implements InitializingBean {
         this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000;
     }
 
+    //빈이 생성되고 의존성 주입까지 끝낸 후
+    //주입받은 secrete 값을 base64 decode 하여 key 변수에 할당한다.
     @Override
     public void afterPropertiesSet() {
         byte[] keyBytes = Decoders.BASE64.decode(secret);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
+    // Authentication 객체에 포함되어 있는 권한 정보를 담은 토큰을 생성한다.
+    // jwt.token-validity-in-seconds 값을 이용해 토큰 만료 시간을 지정한다.
     public String createToken(Authentication authentication) {
         String authorities = authentication.getAuthorities().stream()
             .map(GrantedAuthority::getAuthority)
@@ -67,6 +71,7 @@ public class TokenProvider implements InitializingBean {
             .compact();
     }
 
+    // 토큰에 담겨 있는 권한 정보를 이용해 Authentication 객체를 리턴한다.
     public Authentication getAuthentication(String token) {
         Claims claims = Jwts
             .parserBuilder()
@@ -85,6 +90,7 @@ public class TokenProvider implements InitializingBean {
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 
+    // 토큰을 검증하는 역할을 수행한다.
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
