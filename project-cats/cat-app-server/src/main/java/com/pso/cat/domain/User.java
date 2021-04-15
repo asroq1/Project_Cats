@@ -1,5 +1,6 @@
 package com.pso.cat.domain;
 
+import java.util.Map;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,14 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
+    @Column(name = "email", length = 50, unique = true)
     private String email;
+
+    @Column(name = "pwd", length = 100)
+    private String password;
+
+    @Column(name = "nickname", length = 50)
+    private String nickname;
 
     public User(Long id, String email) {
         this.id = id;
@@ -29,4 +37,5 @@ public class User {
     public User() {
 
     }
+
 }

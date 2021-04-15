@@ -1,8 +1,12 @@
 package com.pso.cat.config;
 
+import java.security.Security;
 import java.util.Collections;
+import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.service.AuthorizationScope;
+import springfox.documentation.service.SecurityReference;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -36,7 +40,7 @@ public class SwaggerConfig {
 
         return new ApiInfoBuilder()
             .title("cat-api")
-            .description("크지만 소중해!")
+            .description("!")
             .termsOfServiceUrl("")
             .contact(new Contact("hayeon17kim", "", "hayeon17kim@gmail.com"))
             .version("1.0")
@@ -47,13 +51,18 @@ public class SwaggerConfig {
         return new ApiKey("Bearer", "Authorization", "header");
     }
 
-
-    /*
     private SecurityContext securityContext() {
         return SecurityContext.builder()
-            .securityReferences();
+            .securityReferences(defaultAuth())
+            .forPaths(PathSelectors.any())
+            .build();
     }
 
-     */
+    private List<SecurityReference> defaultAuth() {
+        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+        authorizationScopes[0] = authorizationScope;
+        return Collections.singletonList(new SecurityReference("Bearer", authorizationScopes));
+    }
 }
 
