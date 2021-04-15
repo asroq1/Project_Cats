@@ -3,7 +3,7 @@ import { useHistory, BrowserRouter as Router, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../../styles/palette';
 
-import 'font-awesome/css/font-awesome.min.css'
+import 'font-awesome/css/font-awesome.min.css';
 
 const Global = styled.div`
     max-width: 1200px;
@@ -12,7 +12,7 @@ const Global = styled.div`
     @media screen and (max-width: 768px) {
         width: 75vw;
     }
-    `;
+`;
 
 const EachCol = styled.div`
     padding-top: 1.5rem;
@@ -22,21 +22,22 @@ const EachCol = styled.div`
     text-decoration: none;
     font-size: 1rem;
     flex: auto;
-    background-color: ${props => props.active ? 'white':palette.navy };
+    background-color: ${(props) => (props.active ? 'white' : palette.navy)};
     &: hover {
-        background-color: ${props => props.active ?  'white':'black'};
+        background-color: ${(props) => (props.active ? 'white' : 'black')};
     }
-    &:not(:last-child){
+    &:not(:last-child) {
         max-width: 150px;
         justify-content: center;
-        color: ${props => props.active ? 'black' : palette.beige};
+        color: ${(props) => (props.active ? 'black' : palette.beige)};
         border-radius: 5px 5px 0 0;
-        border: 1px solid ${props => props.active ? 'lightgray' : 'black'};
-        border-bottom: ${props=>props.active ? 'none' : '1px solid black'};
+        border: 1px solid ${(props) => (props.active ? 'lightgray' : 'black')};
+        border-bottom: ${(props) =>
+            props.active ? 'none' : '1px solid black'};
         cursor: pointer;
     }
-    &:last-child {       
-        font-size: 2rem; 
+    &:last-child {
+        font-size: 2rem;
         text-align: right;
         justify-content: flex-end;
         border: 1px solid white;
@@ -44,19 +45,29 @@ const EachCol = styled.div`
         background: white;
     }
     .fa-cog {
-        color:${palette.navy};
+        color: ${palette.navy};
     }
 `;
 
 const TopBar = ({ cat, current_index, onSelect }) => {
-    const menuStyle = useMemo(() => ({ height: '2rem', display: 'flex'}), []);
-    const fillerCol = useMemo(() => ({display: 'inline-block', flex: 1,borderBottom: '1px solid black', paddingTop: '1.5rem', paddingBottom: '1.5rem',fontSize: '1rem'}), []);
+    const menuStyle = useMemo(() => ({ height: '2rem', display: 'flex' }), []);
+    const fillerCol = useMemo(
+        () => ({
+            display: 'inline-block',
+            flex: 1,
+            borderBottom: '1px solid black',
+            paddingTop: '1.5rem',
+            paddingBottom: '1.5rem',
+            fontSize: '1rem',
+        }),
+        []
+    );
 
     const history = useHistory();
-	const gotoAddCat = useCallback(()=>{
-		history.push('/cat/add');
-	})
-    
+    const gotoAddCat = useCallback(() => {
+        history.push('/cat/add');
+    });
+
     return (
         <Global>
             <div style={menuStyle}>
@@ -70,9 +81,15 @@ const TopBar = ({ cat, current_index, onSelect }) => {
                         {el.name}
                     </EachCol>
                 ))}
-                <EachCol onClick={gotoAddCat}><i className="fa fa-plus"></i></EachCol>
+                <EachCol onClick={gotoAddCat}>
+                    <i className="fa fa-plus"></i>
+                </EachCol>
 
-                <EachCol><Link to =  "/"><i className="fa fa-cog"></i></Link></EachCol>
+                <EachCol>
+                    <Link to="/user/settings">
+                        <i className="fa fa-cog"></i>
+                    </Link>
+                </EachCol>
             </div>
         </Global>
     );

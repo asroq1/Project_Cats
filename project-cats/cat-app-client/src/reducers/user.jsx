@@ -1,5 +1,6 @@
 import produce from 'immer';
 import axios from 'axios';
+import { useHistory } from 'react-router';
 
 export const initialState = {
     logInLoading: false, //로그인 시도중
@@ -46,6 +47,7 @@ const dummyUser = (data) => ({
 
 //액션 함수
 export const loginRequestAction = (data) => {
+    console.log('로그인 츄라이');
     return {
         type: LOG_IN_REQUEST,
         data,
@@ -53,6 +55,8 @@ export const loginRequestAction = (data) => {
 };
 
 export const loginSuccessAction = (data) => {
+    console.log('로그인 성공');
+
     return {
         type: LOG_IN_SUCCESS,
         data,
@@ -60,6 +64,8 @@ export const loginSuccessAction = (data) => {
 };
 
 export const loginFailureAction = (data) => {
+    const token = data.token;
+    localStorage.setItem('jwtToken', token);
     return {
         type: LOG_IN_FAILURE,
         data,
@@ -86,13 +92,9 @@ export const logoutFailureAction = (data) => {
 };
 //회원가입 액션 함수
 export const signUpRequest = (data) => {
-    //axios로 회원가입 요청
-    const request = axios
-        .post('<root>', data)
-        .then((response) => response.data);
     return {
         type: SIGN_UP_REQUEST,
-        data: request,
+        data,
     };
 };
 export const signUpSuccess = (data) => {
@@ -102,6 +104,7 @@ export const signUpSuccess = (data) => {
     };
 };
 export const signUpFailure = (data) => {
+    console.log('실패');
     return {
         type: SIGN_UP_FAILURE,
         data,
@@ -169,6 +172,7 @@ const reducer = (state = initialState, action) => {
             };
 
         case SIGN_UP_FAILURE:
+            alert('다시 시도해주세요.');
             return {
                 ...state,
                 signUpLoading: false,

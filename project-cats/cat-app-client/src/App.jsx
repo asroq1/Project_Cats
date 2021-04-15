@@ -7,12 +7,11 @@ import weightResult from './pages/weightResult';
 import weightAdd from './pages/weightAdd';
 import catAdd from './pages/catAdd';
 import main from './pages/main';
-
 import postWrite from './pages/postWrite';
-
 import postList from './pages/postList';
-
 import postView from './pages/postView';
+import Settings from './components/settings/setting';
+import SocialSignup from './components/signUp/SocialSignup';
 
 function App() {
     return (
@@ -20,14 +19,16 @@ function App() {
             {/* ResetCSS  */}
             <Reset />
             <Route path="/" component={index} exact />
-            <Route path="/user/signup" component={signUp} />
+            <Route path="/user/signup" component={signUp} exact />
+            <Route path="/user/signup/social" component={SocialSignup} />
             <Route path="/cat/data" component={weightResult} />
             <Route path="/cat/record" component={weightAdd} />
             <Route path="/cat/add" component={catAdd} />
             <Route path="/user/main" component={main} />
-            <Route path="/post/write" component={postWrite}/>
-            <Route path="/post/list" component= {postList}/>
-            <Route path="/post/view" component = {postView}/>
+            <Route path="/user/settings" component={Settings} />
+            <Route path="/post/write" component={postWrite} />
+            <Route path="/post/list" component={postList} />
+            <Route path="/post/view" component={postView} />
         </>
     );
 }

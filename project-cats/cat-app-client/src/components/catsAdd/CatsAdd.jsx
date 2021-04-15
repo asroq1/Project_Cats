@@ -17,7 +17,7 @@ const Global = styled.div`
     background-color: white;
     max-width: 1200px;
     width: 100vw;
-    
+
     height: 100%;
     margin: 0 auto;
     h2 {
@@ -58,18 +58,10 @@ const StyledInputBlock = styled.div`
         max-width: 33%;
         flex: 1 1 auto;
         text-align: center;
-        
-        
 
-
-
-
-        &::placeholder{
-
+        &::placeholder {
             text-align: center;
-        
         }
-    
     }
 
     & + & {
