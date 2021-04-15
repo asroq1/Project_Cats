@@ -10,21 +10,21 @@ import rootSaga from '../sagas';
 // 함수 실행마다 로그해줘서 개발에 유용함
 // 이런 식으로 middleware를 직접 만들어 Redux기능을 확장시켜줄 수 있다
 const loggerMiddleware = ({ dispatch, getState }) => (next) => (action) => {
-  console.log(action);
-  return next(action);
+    console.log(action);
+    return next(action);
 };
 
 const configureStore = () => {
-  const sagaMiddleware = createSagaMiddleware();
-  const middlewares = [sagaMiddleware, loggerMiddleware];
-  const enhancer =
-    process.env.NODE_ENV === 'production'
-      ? compose(applyMiddleware(...middlewares)) //배포용
-      : composeWithDevTools(applyMiddleware(...middlewares));
-  const store = createStore(rootReducer, enhancer);
-  store.sagaTask = sagaMiddleware.run(rootSaga);
+    const sagaMiddleware = createSagaMiddleware();
+    const middlewares = [sagaMiddleware, loggerMiddleware];
+    const enhancer =
+        process.env.NODE_ENV === 'production'
+            ? compose(applyMiddleware(...middlewares)) //배포용
+            : composeWithDevTools(applyMiddleware(...middlewares));
+    const store = createStore(rootReducer, enhancer);
+    store.sagaTask = sagaMiddleware.run(rootSaga);
 
-  return store;
+    return store;
 };
 
 export default configureStore;

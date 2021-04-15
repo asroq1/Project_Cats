@@ -22,13 +22,16 @@ import {
 } from '../reducers/user';
 
 function logInAPI(data) {
-    return axios.post('/api/login', data);
+    return axios.post('/api/login', data).then((res) => {
+        const token = res.data.token;
+        localStorage.setItem('jwtToken', token);
+    });
 }
 
 function* logIn(action) {
     try {
         // 백엔드 연동하면 넣을 코드
-        //const result = yield call(logInAPI, action.data);
+        const result = yield call(logInAPI, action.data);
         yield delay(1000); // 백엔드 연동 안 됐기 때문에 딜레이하는 거 가짜로 표현하기 위함
         yield put({
             type: LOG_IN_SUCCESS,
@@ -48,11 +51,11 @@ function logOutAPI() {
 
 function* logOut() {
     try {
-        //const result = yield call(logOutAPI)
+        const result = yield call(logOutAPI);
         yield delay(1000);
         yield put({
             type: LOG_OUT_SUCCESS,
-            // data: result.data
+            data: result.data,
         });
     } catch (err) {
         yield put({
@@ -101,5 +104,8 @@ function* watchSignUp() {
 }
 
 export default function* userSaga() {
-    yield all([fork(watchLogIn), fork(watchLogOut), fork(watchSignUp)]);
+    yield all(
+        [fork(watchLogIn), fork(watchLogOut), fork(watchSignUp)],
+        fork(goToHome)
+    );
 }
