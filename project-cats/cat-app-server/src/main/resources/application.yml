@@ -7,5 +7,5 @@ spring:
 
 jwt:
   header: Authorization
-  secret: Y2F0Y2hvby1wcm9qZWN0LXNlY3JldC1rZXkK
+  secret: 4oCYY2F0LXNlcnZlci1hcHAtY2F0Y2hvby1zcHJpbmctYm9vdC1qd3Qtc2VjcmV0LWhheWVvbi1zcHJpbmctYm9vdC1qd3Qtc2VjcmV04oCZCg==
   token-validity-in-seconds: 86400
