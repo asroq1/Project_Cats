@@ -1,11 +1,10 @@
 package com.pso.cat.service;
 
-import com.pso.cat.domain.Cat;
 import com.pso.cat.domain.Record;
-import com.pso.cat.repository.CatRepository;
+import com.pso.cat.dto.RecordDto;
 import com.pso.cat.repository.RecordRepository;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,23 +15,24 @@ public class RecordService {
         this.recordRepository = recordRepository;
     }
 
-    public Record save(Record record) {
-        return recordRepository.save(record);
+    public void save(RecordDto.Request request) {
+        recordRepository.save(request.toEntity());
     }
 
-    public Optional<Record> read(Long id) {
-        return recordRepository.findById(id);
+    public RecordDto.Response read(Long id) {
+        return RecordDto.Response.ofEntity(recordRepository.findById(id).get());
     }
 
     public void remove(Long id) {
         recordRepository.deleteById(id);
     }
 
-    public void modify(Record record) {
-        recordRepository.save(record);
+    public void modify(RecordDto.Request request) {
+        recordRepository.save(request.toEntity());
     }
 
-    public List<Record> listByCatId(Long catId) {
-        return recordRepository.findAllByCatIdOrderByCreateDateDesc(catId);
+    public List<RecordDto.Response> listByCatId(Long catId) {
+        return recordRepository.findAllByCatIdOrderByCreateDateDesc(catId)
+            .stream().map(record -> RecordDto.Response.ofEntity(record)).collect(Collectors.toList());
     }
 }

@@ -3,6 +3,7 @@ package com.pso.cat.controller;
 
 import com.pso.cat.domain.Cat;
 import com.pso.cat.domain.Record;
+import com.pso.cat.dto.RecordDto;
 import com.pso.cat.service.CatService;
 import com.pso.cat.service.RecordService;
 import io.swagger.annotations.Api;
@@ -28,19 +29,19 @@ public class RecordController {
     }
 
     @PostMapping
-    public ResponseEntity add(Record record) {
-        recordService.save(record);
+    public ResponseEntity add(RecordDto.Request request) {
+        recordService.save(request);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<Record>> list(Long catId) {
-        List<Record> list = recordService.listByCatId(catId);
+    public ResponseEntity<List<RecordDto.Response>> list(Long catId) {
+        List<RecordDto.Response> list = recordService.listByCatId(catId);
         return ResponseEntity.ok().body(list);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity modify(@PathVariable Long id, @RequestBody Record record) {
+    public ResponseEntity modify(@PathVariable Long id, @RequestBody RecordDto.Request record) {
         recordService.modify(record);
         return ResponseEntity.ok().build();
     }

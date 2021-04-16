@@ -18,11 +18,20 @@ public class CatDto {
 
     @Getter
     @Builder
-    static class Request {
+    public static class Request {
         private String name;
         private char gender;
         private String photo;
         private Date birth;
+
+
+        public Cat toEntity() {
+            return Cat.builder()
+                .name(this.getName())
+                .gender(this.getGender())
+                .photo(this.getPhoto())
+                .birth(this.getBirth()).build();
+        }
     }
 
     @Getter
@@ -52,6 +61,7 @@ public class CatDto {
                 .gender(cat.getGender())
                 .photo(cat.getPhoto()).build();
         }
+
     }
 
 

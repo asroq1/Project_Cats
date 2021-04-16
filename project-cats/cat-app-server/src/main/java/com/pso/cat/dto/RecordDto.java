@@ -12,7 +12,7 @@ public class RecordDto {
 
     @Builder
     @Getter
-    static class Response {
+    public static class Response {
         private Date createdDate;
         private float weight;
 
@@ -24,7 +24,11 @@ public class RecordDto {
     }
 
     @Getter
-    static class Request {
+    public static class Request {
         private float weight;
+
+        public Record toEntity() {
+            return Record.builder().weight(this.getWeight()).build();
+        }
     }
 }
