@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@Api(value="집사 추가, 수정, 삭제, 조회", tags = {"집사 API"})
-@RequestMapping("/api/users")
+//@RestController
+
+//@Api(value="집사 추가, 수정, 삭제, 조회", tags = {"집사 API"})
+//@RequestMapping("/api/users")
 public class UserController {
+    /*
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -54,5 +56,5 @@ public class UserController {
         catService.remove(id);
         return ResponseEntity.ok().build();
     }
-
+*/
 }

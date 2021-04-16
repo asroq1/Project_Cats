@@ -31,8 +31,8 @@ public class SwaggerConfig {
             .build()
             .useDefaultResponseMessages(false)
             .apiInfo(apiInfo())
-            .securitySchemes(Collections.singletonList(apiKey()));
-            //.securityContexts(Collections.singletonList(securityContext()));
+            .securitySchemes(Collections.singletonList(apiKey()))
+            .securityContexts(Collections.singletonList(securityContext()));
     }
 
 

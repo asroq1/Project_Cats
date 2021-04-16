@@ -1,26 +1,33 @@
 package com.pso.cat.service;
 
 import com.pso.cat.domain.Cat;
+import com.pso.cat.dto.CatDto;
 import com.pso.cat.repository.CatRepository;
+import com.pso.cat.repository.RecordRepository;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CatService {
     private final CatRepository catRepository;
+    private final RecordRepository recordRepository;
 
-    public CatService(CatRepository catRepository) {
+    public CatService(CatRepository catRepository, RecordRepository recordRepository) {
         this.catRepository = catRepository;
+        this.recordRepository = recordRepository;
     }
 
     public Cat save(Cat cat) {
         return catRepository.save(cat);
     }
 
-    public Optional<Cat> read(Long id) {
-        return catRepository.findById(id);
+    public CatDto.Response read(Long id) {
+        return CatDto.Response.ofEntity(
+            catRepository.findById(id).get(),
+            recordRepository.findFirstByCatIdOrderByCreateDateDesc(id));
     }
 
     @Transactional
@@ -33,7 +40,9 @@ public class CatService {
         return catRepository.inactive(id);
     }
 
-    public List<Cat> listByUserId(Long userId) {
-        return catRepository.findAllByUserIdAndStateOrderByCreatedDateDesc(userId, 1);
+    public List<CatDto.Response> listByUserId(Long userId) {
+        return catRepository
+            .findAllByUserIdAndStateOrderByCreatedDateDesc(userId, 1)
+            .stream().map(cat -> CatDto.Response.ofEntity(cat)).collect(Collectors.toList());
     }
 }

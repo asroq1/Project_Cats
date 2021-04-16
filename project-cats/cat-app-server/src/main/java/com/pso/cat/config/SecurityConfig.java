@@ -40,8 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         "/webjars/**",
 
         // user
-        "/api/auth/authenticate",
-        "/api/auth/signup"
+        "/api/authenticate",
+        "/api/signup",
+
+        // test
+        "/api/cats/**",
     };
 
     @Override

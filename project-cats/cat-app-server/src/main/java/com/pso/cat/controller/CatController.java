@@ -2,9 +2,9 @@ package com.pso.cat.controller;
 
 
 import com.pso.cat.domain.Cat;
+import com.pso.cat.dto.CatDto;
 import com.pso.cat.service.CatService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,14 +33,14 @@ public class CatController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Cat>> list(Long userId) {
-        List<Cat> list = catService.listByUserId(userId);
+    public ResponseEntity<List<CatDto.Response>> list(Long userId) {
+        List<CatDto.Response> list = catService.listByUserId(userId);
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping("/{id}")
-    public Cat get(@PathVariable Long id) {
-        return catService.read(id).get();
+    public ResponseEntity<CatDto.Response> get(@PathVariable Long id) {
+        return ResponseEntity.ok().body(catService.read(id));
     }
 
     @PatchMapping("/{id}")
