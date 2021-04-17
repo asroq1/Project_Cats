@@ -1,7 +1,7 @@
 package com.pso.cat.controller;
 
 
-import com.pso.cat.domain.Cat;
+import com.pso.cat.entity.Cat;
 import com.pso.cat.dto.CatDto;
 import com.pso.cat.service.CatService;
 import io.swagger.annotations.Api;
@@ -44,8 +44,8 @@ public class CatController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity modify(@PathVariable Long id, @RequestBody Cat cat) {
-        catService.modify(cat);
+    public ResponseEntity modify(@PathVariable Long id, @RequestBody CatDto.Request catRequest) {
+        catService.modify(id, catRequest);
         return ResponseEntity.ok().build();
     }
 

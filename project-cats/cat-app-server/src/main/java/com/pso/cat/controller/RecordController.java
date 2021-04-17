@@ -1,10 +1,7 @@
 package com.pso.cat.controller;
 
 
-import com.pso.cat.domain.Cat;
-import com.pso.cat.domain.Record;
 import com.pso.cat.dto.RecordDto;
-import com.pso.cat.service.CatService;
 import com.pso.cat.service.RecordService;
 import io.swagger.annotations.Api;
 import java.util.List;
@@ -41,8 +38,8 @@ public class RecordController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity modify(@PathVariable Long id, @RequestBody RecordDto.Request record) {
-        recordService.modify(record);
+    public ResponseEntity modify(@PathVariable Long id, @RequestBody RecordDto.Request request) {
+        recordService.modify(id, request);
         return ResponseEntity.ok().build();
     }
 

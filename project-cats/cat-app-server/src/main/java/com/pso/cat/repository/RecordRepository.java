@@ -1,12 +1,8 @@
 package com.pso.cat.repository;
 
-import com.pso.cat.domain.Cat;
-import com.pso.cat.domain.Record;
+import com.pso.cat.entity.Record;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository

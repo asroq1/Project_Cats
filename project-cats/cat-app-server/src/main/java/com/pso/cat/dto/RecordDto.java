@@ -1,8 +1,6 @@
 package com.pso.cat.dto;
 
-import com.pso.cat.domain.Cat;
-import com.pso.cat.domain.Record;
-import com.pso.cat.dto.CatDto.Response;
+import com.pso.cat.entity.Record;
 import java.util.Date;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,16 +11,19 @@ public class RecordDto {
     @Builder
     @Getter
     public static class Response {
+        private Long id;
         private Date createdDate;
         private float weight;
 
         public static Response ofEntity(Record record) {
             return Response.builder()
+                .id(record.getId())
                 .createdDate(record.getCreateDate())
                 .weight(record.getWeight()).build();
         }
     }
 
+    @Setter
     @Getter
     public static class Request {
         private float weight;

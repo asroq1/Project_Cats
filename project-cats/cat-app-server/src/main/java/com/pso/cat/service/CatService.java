@@ -1,11 +1,10 @@
 package com.pso.cat.service;
 
-import com.pso.cat.domain.Cat;
+import com.pso.cat.entity.Cat;
 import com.pso.cat.dto.CatDto;
 import com.pso.cat.repository.CatRepository;
 import com.pso.cat.repository.RecordRepository;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -31,13 +30,15 @@ public class CatService {
     }
 
     @Transactional
-    public Cat modify(Cat cat) {
+    public Cat modify(Long id, CatDto.Request catRequest) {
+        Cat cat = catRequest.toEntity();
+        cat.setId(id);
         return catRepository.save(cat);
     }
 
     @Transactional
-    public int remove(Long id) {
-        return catRepository.inactive(id);
+    public void remove(Long id) {
+        catRepository.inactive(id);
     }
 
     public List<CatDto.Response> listByUserId(Long userId) {

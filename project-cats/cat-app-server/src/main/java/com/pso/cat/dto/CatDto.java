@@ -1,24 +1,20 @@
 package com.pso.cat.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.pso.cat.domain.Cat;
-import com.pso.cat.domain.Record;
+import com.pso.cat.entity.Cat;
+import com.pso.cat.entity.Record;
 import java.util.Date;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.lang.Nullable;
 
 public class CatDto {
 
     @Getter
     @Builder
     public static class Request {
+        private Long id;
         private String name;
         private char gender;
         private String photo;
@@ -27,6 +23,7 @@ public class CatDto {
 
         public Cat toEntity() {
             return Cat.builder()
+                .id(this.getId())
                 .name(this.getName())
                 .gender(this.getGender())
                 .photo(this.getPhoto())
@@ -37,6 +34,7 @@ public class CatDto {
     @Getter
     @Builder
     public static class Response {
+        private Long id;
         private String name;
         private char gender;
         private String photo;
@@ -47,6 +45,7 @@ public class CatDto {
 
         public static Response ofEntity(Cat cat, Record recentRecord) {
             return Response.builder()
+                .id(cat.getId())
                 .name(cat.getName())
                 .birth(cat.getBirth())
                 .gender(cat.getGender())
@@ -56,6 +55,7 @@ public class CatDto {
 
         public static Response ofEntity(Cat cat) {
             return Response.builder()
+                .id(cat.getId())
                 .name(cat.getName())
                 .birth(cat.getBirth())
                 .gender(cat.getGender())
