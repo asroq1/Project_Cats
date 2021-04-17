@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"6@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/6/-/6-0.0.1.tgz#5a27dfd2fa882dbcd730ba957fed914902640d5a"
+  integrity sha1-Wiff0vqILbzXMLqVf+2RSQJkDVo=
+
 "@angular-devkit/build-optimizer@0.0.35":
   version "0.0.35"
   resolved "https://registry.yarnpkg.com/@angular-devkit/build-optimizer/-/build-optimizer-0.0.35.tgz#3aadad1d7e9ffc7dcd106fda8a5670465936562c"
@@ -10657,6 +10662,11 @@ react-error-overlay@^6.0.9:
   version "6.0.9"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
   integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
+
+react-hook-form@6:
+  version "6.15.6"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.15.6.tgz#5d4985ffd3758dee97912e370595e49a6fcd24ab"
+  integrity sha512-WIrOAoWw+ftMC13tJd5VL/vyNV6EkPKOUY/TwUHBinym/45k3gmC67an2rETvdDXxwXfCIaD+kPyMwjXBnCjBw==
 
 react-is@16.10.2:
   version "16.10.2"

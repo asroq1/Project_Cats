@@ -10,7 +10,7 @@ const KakaoLogin = () => {
         Kakao.Auth.login({
             success: function (authObj) {
                 //여기에 백엔드 주소 넣어주기
-                fetch('http://localhost:3000/user/signup', {
+                fetch('/user/login', {
                     method: 'POST',
                     body: JSON.stringify({
                         access_token: authObj.access_token,
@@ -24,10 +24,11 @@ const KakaoLogin = () => {
                     .then((res) => {
                         localStorage.setItem('Kakao_token', res.access_token);
                         if (res.access_token) {
-                            alert('로그인 성공');
-                            history.push('/main');
+                            history.push('/user/signup/social');
                         }
                     });
+                history.push('/user/signup/social');
+
                 console.log(authObj);
             },
             fail: function (err) {
@@ -51,9 +52,6 @@ const KakaoLogin = () => {
                 />
                 카카오 로그인
             </button>
-            {/* <button onClick={onKakaoLogin}>kakaoLogin</button> */}
-            {/* <button onClick={kakaoLogout}>kakaoLogout</button>
-			<input id="userinfo" value="" /> */}
         </>
     );
 };

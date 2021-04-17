@@ -1,41 +1,40 @@
 import React from 'react';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { signUpRequest } from '../../reducers/user';
 import styles from '../../styles/signUpForm.module.css';
 const SocialSignup = () => {
     const dispatch = useDispatch();
-    const [nick, setNick] = useState('');
-    const onChangeNick = (e) => {
-        setNick(e.currentTarget.value);
-    };
+    const { register, errors, handleSubmit } = useForm();
 
-    const onSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = (data) => {
+        console.log('success', data);
         const body = {
-            nick,
+            data,
         };
         dispatch(signUpRequest(body));
     };
-
     return (
-        <div className={styles.social__container}>
-            <form onSubmit={onSubmit} className={styles.signup__form}>
-                <label htmlFor="nick">닉네임</label>
-                <input
-                    type="text"
-                    name="nick"
-                    value={nick}
-                    onChange={onChangeNick}
-                    placeholder="&#xf2c1;"
-                    maxLength="15"
-                    required
-                />
-                <button type="submit" className={styles.submit__btn}>
-                    회원가입
-                </button>
-            </form>
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <label>닉네임</label>
+            <input
+                name="nickname"
+                ref={register({ required: true, maxLength: 10 })}
+                placeholder="&#xf2c1;"
+            />
+            {errors.nickname && errors.nickname.type === 'required' && (
+                <p className={styles.error__message}>닉네임을 입력해주세요.</p>
+            )}
+            {errors.nickname && errors.nickname.type === 'maxLength' && (
+                <p className={styles.error__message}>
+                    닉네임은 최대 10자까지만 가능합니다.
+                </p>
+            )}
+            <button type="submit" className={styles.submit__btn}>
+                가입하기
+            </button>
+        </form>
     );
 };
 
