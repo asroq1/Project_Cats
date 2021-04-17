@@ -31,9 +31,14 @@ input {
     font-size: 1rem;
     font-weight: bold;
 }
-.email__message {
+.error__message {
     margin: 0.5rem 0 0.5rem 0;
     color: #db4455;
+}
+
+.success__message {
+    margin: 0.5rem 0 0.5rem 0;
+    color: #28a745;
 }
 .social__container {
     height: 100vh;

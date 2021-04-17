@@ -8,6 +8,7 @@ import {
     delay,
 } from 'redux-saga/effects';
 import axios from 'axios';
+import { useHistory } from 'react-router';
 
 import {
     LOG_OUT_FAILURE,
@@ -22,10 +23,15 @@ import {
 } from '../reducers/user';
 
 function logInAPI(data) {
-    return axios.post('/api/login', data).then((res) => {
-        const token = res.data.token;
-        localStorage.setItem('jwtToken', token);
-    });
+    //로컬스토리지에 엑세스 토큰 저장
+    return axios
+        .post('/user/login', data)
+        .then((res) => {
+            const { accessToken } = res.data;
+            localStorage.setItem('jwtToken', token);
+            console.log('jwt토큰', token);
+        })
+        .then(useHistory.push('/main'));
 }
 
 function* logIn(action) {
