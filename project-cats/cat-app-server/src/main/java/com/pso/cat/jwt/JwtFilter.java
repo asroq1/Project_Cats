@@ -1,5 +1,7 @@
 package com.pso.cat.jwt;
 
+import java.util.Arrays;
+import java.util.Collections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -26,8 +28,6 @@ public class JwtFilter extends GenericFilterBean {
         this.tokenProvider = tokenProvider;
     }
 
-    // 필터링 로직
-    // jwt 토큰의 인증 정보를 현재 실행중인 스레드 (Security Context) 에 저장한다.
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
         throws IOException, ServletException {
@@ -46,7 +46,6 @@ public class JwtFilter extends GenericFilterBean {
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
-    // HttpServletRequest 객체의 Header에서 token을 꺼내는 역할을 수행한다.
     private String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {

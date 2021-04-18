@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 
-@Entity(name = "user_authority")
+@Entity(name = "authority")
 @Getter
 @Setter
 @Builder
@@ -19,5 +19,5 @@ import org.hibernate.annotations.DynamicUpdate;
 public class Authority {
     @Id
     @Column(name = "name", length = 50)
-    private String authorityName;
+    private String name;
 }
