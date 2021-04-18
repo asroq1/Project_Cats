@@ -28,8 +28,11 @@ function logInAPI(data) {
         .post('/user/login', data)
         .then((res) => {
             const { accessToken } = res.data;
-            localStorage.setItem('jwtToken', token);
-            console.log('jwt토큰', token);
+            axios.defaults.headers.common[
+                'Authorization'
+            ] = `Bearer${accessToken}`;
+            // localStorage.setItem('jwtToken', accessToken);
+            // console.log('jwt토큰', accessToken);
         })
         .then(useHistory.push('/main'));
 }
@@ -37,7 +40,7 @@ function logInAPI(data) {
 function* logIn(action) {
     try {
         // 백엔드 연동하면 넣을 코드
-        const result = yield call(logInAPI, action.data);
+        // const result = yield call(logInAPI, action.data);
         yield delay(1000); // 백엔드 연동 안 됐기 때문에 딜레이하는 거 가짜로 표현하기 위함
         yield put({
             type: LOG_IN_SUCCESS,

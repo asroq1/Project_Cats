@@ -1,6 +1,5 @@
 import product, { produce } from 'immer';
 
-
 export const initialState = {
     user: {
         isLoggedIn: true,
@@ -78,9 +77,9 @@ const dummyCat = (data) => ({
 });
 
 // 몸무게 추가
-export const WEIGHT_REQUEST = 'WEIGHT_REQUEST';
-export const WEIGHT_SUCCESS = 'WEIGHT_SUCCESS';
-export const WEIGHT_FAILURE = 'WEIGHT_FAILURE';
+export const ADD_WEIGHT_REQUEST = 'ADD_WEIGHT_REQUEST';
+export const ADD_WEIGHT_SUCCESS = 'ADD_WEIGHT_SUCCESS';
+export const ADD_WEIGHT_FAILURE = 'ADD_WEIGHT_FAILURE';
 
 // 논의할 부분
 export const GET_CAT_REQUEST = 'GET_CAT_REQUEST';
@@ -118,21 +117,21 @@ export const addCatFailureAction = (data) => ({
     type: ADD_CAT_FAILURE,
     data,
 });
-export const weightRequest = (data) => {
+export const addWeightRequest = (data) => {
     return {
-        type: WEIGHT_REQUEST,
+        type: ADD_WEIGHT_REQUEST,
         data,
     };
 };
-export const weightSuccess = (data) => {
+export const addWeightSuccess = (data) => {
     return {
-        type: WEIGHT_SUCCESS,
+        type: ADD_WEIGHT_SUCCESS,
         data,
     };
 };
-export const weightFailure = (data) => {
+export const addWeightFailure = (data) => {
     return {
-        type: WEIGHT_FAILURE,
+        type: ADD_WEIGHT_FAILURE,
         data,
     };
 };
@@ -160,18 +159,17 @@ const reducer = (state = initialState, action) => {
                 break;
             case ADD_CAT_FAILURE:
                 break;
-            case WEIGHT_REQUEST:
+            case ADD_WEIGHT_REQUEST:
                 console.log(action.data);
                 break;
-            case WEIGHT_SUCCESS:
+            case ADD_WEIGHT_SUCCESS:
                 break;
-            case WEIGHT_FAILURE:
+            case ADD_WEIGHT_FAILURE:
                 break;
             default:
-                break
+                break;
         }
-        
-    })
+    });
 };
 
 export default reducer;

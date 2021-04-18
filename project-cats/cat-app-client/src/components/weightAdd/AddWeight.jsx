@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { weightRequest } from '../../reducers/cat';
+import { addWeightRequest } from '../../reducers/cat';
 import styles from '../../styles/AddWeight.module.css';
 const AddWeight = () => {
     const [alone, setAlone] = useState('');
@@ -8,15 +8,23 @@ const AddWeight = () => {
     const weightResult = together - alone;
     const nextRef = useRef(null);
     const dispatch = useDispatch();
+    const date = new Date();
+
+    const today = date.toLocaleString();
 
     const onTogetherChange = (e) => {
+        setTogether(e.target.value);
         if (together < 0) {
             setTogether(0);
+            alert('잘못된 입력입니다.');
         }
-        setTogether(e.currentTarget.value);
     };
     const onAloneChange = (e) => {
         setAlone(e.currentTarget.value);
+        if (alone < 0) {
+            setAlone(0);
+            alert('잘못된 입력입니다.');
+        }
     };
 
     const onNextPage = (e) => {
@@ -38,10 +46,14 @@ const AddWeight = () => {
             alert('등록완료');
             const body = {
                 wgt: weightResult,
+                createdDate: today,
             };
-            dispatch(weightRequest(body));
+            dispatch(addWeightRequest(body));
         }
     };
+    // useEffect(() => {
+    //     console.log(today);
+    // });
     return (
         <>
             <div className={styles.carousel__container}>
@@ -62,6 +74,7 @@ const AddWeight = () => {
                                         type="number"
                                         value={together}
                                         onChange={onTogetherChange}
+                                        max="1000"
                                     />
                                     <p>kg</p>
                                 </div>
@@ -88,7 +101,7 @@ const AddWeight = () => {
                                         value={alone}
                                         onChange={onAloneChange}
                                         min={0}
-                                        max={1000}
+                                        max="1000"
                                     />
                                     <p>kg</p>
                                 </div>
