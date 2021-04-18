@@ -36,7 +36,7 @@ public class UserService {
 
         User user = User.builder()
             .email(request.getEmail())
-            .password(request.getPassword())
+            .password(passwordEncoder.encode(request.getPassword()))
             .nickname(request.getNickname())
             .loginType(request.getLoginType())
             .authorities(Collections.singleton(authority))
