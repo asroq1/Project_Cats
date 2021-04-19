@@ -6,11 +6,11 @@ import com.pso.cat.entity.User;
 import java.util.Date;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 public class PostDto {
 
-    @Builder
     @Setter
     @Getter
     public static class Request {
