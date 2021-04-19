@@ -1,9 +1,10 @@
 package com.pso.cat.controller;
 
 
-import com.pso.cat.entity.Cat;
-import com.pso.cat.dto.CatDto;
-import com.pso.cat.service.CatService;
+import com.pso.cat.dto.PostDto;
+import com.pso.cat.dto.PostDto.Response;
+import com.pso.cat.entity.Post;
+import com.pso.cat.service.PostService;
 import io.swagger.annotations.Api;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
@@ -17,41 +18,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(value="고양이 추가, 수정, 삭제, 조회", tags = {"고양이 API"})
-@RequestMapping("/api/cats")
-public class CatController {
-    private final CatService catService;
+@Api(value="게시글 추가, 수정, 삭제, 조회", tags = {"게시글 API"})
+@RequestMapping("/api/posts")
+public class PostController {
+    private final PostService postService;
 
-    public CatController(CatService catService) {
-        this.catService = catService;
+    public PostController(PostService postService) {
+        this.postService = postService;
     }
 
     @PostMapping
-    public ResponseEntity add(CatDto.Request cat) {
-        catService.save(cat);
+    public ResponseEntity add(PostDto.Request post) {
+        postService.save(post);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<CatDto.Response>> list(Long userId) {
-        List<CatDto.Response> list = catService.listByUserId(userId);
+    public ResponseEntity<List<Response>> list() {
+        List<PostDto.Response> list = postService.list();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CatDto.Response> get(@PathVariable Long id) {
-        return ResponseEntity.ok().body(catService.read(id));
+    public ResponseEntity<PostDto.Response> get(@PathVariable Long id) {
+        return ResponseEntity.ok().body(postService.read(id));
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity modify(@PathVariable Long id, @RequestBody CatDto.Request catRequest) {
-        catService.modify(id, catRequest);
+    public ResponseEntity modify(@PathVariable Long id, @RequestBody PostDto.Request postRequest) {
+        postService.modify(id, postRequest);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity remove(Long id) {
-        catService.remove(id);
+        postService.remove(id);
         return ResponseEntity.ok().build();
     }
 

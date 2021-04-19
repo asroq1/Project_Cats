@@ -19,8 +19,8 @@ public class CatService {
         this.recordRepository = recordRepository;
     }
 
-    public Cat save(Cat cat) {
-        return catRepository.save(cat);
+    public Cat save(CatDto.Request cat) {
+        return catRepository.save(cat.toEntity());
     }
 
     public CatDto.Response read(Long id) {

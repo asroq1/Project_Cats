@@ -1,9 +1,7 @@
 package com.pso.cat.dto;
 
-import com.pso.cat.dto.RecordDto.Response;
 import com.pso.cat.dto.UserDto.WriterResponse;
 import com.pso.cat.entity.Post;
-import com.pso.cat.entity.Record;
 import com.pso.cat.entity.User;
 import java.util.Date;
 import lombok.Builder;
@@ -37,6 +35,7 @@ public class PostDto {
         private Long id;
         private String title;
         private String content;
+        private int viewCount;
         private UserDto.WriterResponse writer;
         private Date createdDate;
         private Date updatedDate;
@@ -46,6 +45,7 @@ public class PostDto {
                 .id(post.getId())
                 .title(post.getTitle())
                 .content(post.getContent())
+                .viewCount(post.getViewCount())
                 .writer(WriterResponse.ofEntity(post.getWriter()))
                 .createdDate(post.getCreatedDate())
                 .updatedDate(post.getUpdatedDate()).build();

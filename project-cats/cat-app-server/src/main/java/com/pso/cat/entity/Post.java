@@ -42,6 +42,9 @@ public class Post {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "vw_cnt")
+    private int viewCount;
+
     @CreationTimestamp
     @Column(name = "cdt")
     private Date createdDate;
@@ -50,6 +53,8 @@ public class Post {
     @Column(name = "udt")
     private Date updatedDate;
 
-    private int state;
+    @Column(name = "ddt")
+    private Date deletedDate;
 
+    private int state;
 }
