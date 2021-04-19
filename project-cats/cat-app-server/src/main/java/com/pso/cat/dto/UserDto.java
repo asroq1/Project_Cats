@@ -42,4 +42,17 @@ public class UserDto {
                 .nickname(user.getNickname()).build();
         }
     }
+
+    @Builder
+    @Getter
+    public static class WriterResponse {
+        private Long id;
+        private String nickname;
+
+        public static WriterResponse ofEntity(User user) {
+            return WriterResponse.builder()
+                .id(user.getId())
+                .nickname(user.getNickname()).build();
+        }
+    }
 }
