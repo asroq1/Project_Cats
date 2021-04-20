@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { signUpRequest } from '../../reducers/user';
 import styles from '../../styles/signUpForm.module.css';
@@ -16,6 +16,7 @@ const SignUpForm = () => {
         };
         dispatch(signUpRequest(body));
     };
+    useEffect(() => {});
     return (
         <>
             <form

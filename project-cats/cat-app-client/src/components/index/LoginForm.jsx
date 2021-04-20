@@ -1,34 +1,22 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginRequestAction } from '../../reducers/user';
 import styles from '../../styles/LoginForm.module.css';
 import 'font-awesome/css/font-awesome.min.css';
 import KakaoLogin from '../socialButton/KakaoLogin';
 import NaverLogin from '../socialButton/NaverLogin';
 import { useForm } from 'react-hook-form';
+import { withRouter } from 'react-router-dom';
 
 // const Input
-const LoginForm = () => {
+const LoginForm = ({ history }) => {
     const dispatch = useDispatch();
-    // const [email, setEmail] = useState('');
-    // const [pwd, setPwd] = useState('');
-    // const [emailError, setEmailError] = useState(false);
-
-    // const onChangeEmail = (e) => {
-    //     setEmail(e.currentTarget.value);
+    const { register, errors, handleSubmit } = useForm();
+    // const onUser = useSelector((state) => {
+    // return {
+    // onUser: state.onUser,
     // };
-    // const onChangePwd = (e) => {
-    //     setPwd(e.currentTarget.value);
-    // };
-    // const onSubmit = (e) => {
-    //     e.preventDefault();
-    //     const body = {
-    //         email,
-    //         pwd,
-    //     };
-    //     dispatch(loginRequestAction(body));
-    // };
-    const { register, watch, errors, handleSubmit } = useForm();
+    // });
     const onSubmit = (data) => {
         console.log('success', data);
         const body = {
@@ -36,40 +24,14 @@ const LoginForm = () => {
         };
         dispatch(loginRequestAction(body));
     };
+    // useEffect(() => {
+    //     if (onUser) {
+    //         console.log(`로그인 중 : ${onUser}`);
+    //         history.push('/user/main');
+    //     }
+    // }, [dispatch]);
     return (
         <>
-            {/* <form onSubmit={onSubmit} className={styles.login__form}>
-                <label className={styles.form__label} htmlFor="email">
-                    이메일
-                </label>
-                <input
-                    type="text"
-                    name="email"
-                    value={email}
-                    onChange={onChangeEmail}
-                    placeholder="&#xf0e0; "
-                    maxLength="50"
-                    required
-                />
-                {emailError && (
-                    <h2 className={styles.email__message}>
-                        부적합한 이메일 양식입니다.
-                    </h2>
-                )}
-                <label className={styles.form__label} htmlFor="pwd">
-                    비밀번호
-                </label>
-                <input
-                    type="password"
-                    name="pwd"
-                    value={pwd}
-                    onChange={onChangePwd}
-                    placeholder="&#xf09c;"
-                    maxLength="20"
-                    required
-                />
-                <button className={styles.submit__btn}>로그인</button>
-            </form> */}
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className={styles.login__form}
@@ -91,7 +53,7 @@ const LoginForm = () => {
                 <input
                     name="pwd"
                     type="password"
-                    ref={register({ required: true, minLength: 6 })}
+                    ref={register({ required: true, minLength: 4 })}
                     placeholder="&#xf09c;"
                 />
                 {errors.pwd && errors.pwd.type === 'required' && (
@@ -116,4 +78,4 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default withRouter(LoginForm);
