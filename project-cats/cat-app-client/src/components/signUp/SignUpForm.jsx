@@ -8,10 +8,9 @@ const SignUpForm = () => {
     const dispatch = useDispatch();
     const { register, watch, errors, handleSubmit } = useForm();
     const password = useRef();
-    password.current = watch('pwd');
+    password.current = watch('password');
 
     const onSubmit = (data) => {
-        console.log('success', data);
         const body = {
             data,
         };
@@ -38,17 +37,17 @@ const SignUpForm = () => {
 
                 <label>비밀번호</label>
                 <input
-                    name="pwd"
+                    name="password"
                     type="password"
                     ref={register({ required: true, minLength: 6 })}
                     placeholder="&#xf09c;"
                 />
-                {errors.pwd && errors.pwd.type === 'required' && (
+                {errors.password && errors.password.type === 'required' && (
                     <p className={styles.error__message}>
                         비밀번호를 입력해주세요.
                     </p>
                 )}
-                {errors.pwd && errors.pwd.type === 'minLength' && (
+                {errors.password && errors.password.type === 'minLength' && (
                     <p className={styles.error__message}>
                         비밀번호는 최소 6자 이상을 입력해주세요.
                     </p>
