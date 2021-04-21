@@ -11,6 +11,7 @@ export const initialState = {
         user: 1,
     },
     cat: [
+<<<<<<< HEAD
         {
             cat_id: 0,
             user_id: 1,
@@ -69,7 +70,64 @@ export const initialState = {
                 },
             ],
         },
+=======
+        // {
+        //     cat_id: 0,
+        //     user_id: 1,
+        //     name: 'Garfield',
+        //     gender: 'M',
+        //     Photo: {
+        //         file: '',
+        //         url:
+        //             'https://welovekitties.com/wp-content/uploads/2015/12/cutekittenspictures-145124821648lcp.jpg',
+        //     },
+        //     birth: '2020-02-28',
+        //     Record: [
+        //         {
+        //             cdt: '2021-03-30',
+        //             wgt: 3.1,
+        //         },
+        //     ],
+        // },
+        // {
+        //     cat_id: 1,
+        //     user_id: 1,
+        //     name: 'meme',
+        //     gender: 'F',
+        //     Photo: {
+        //         file: '',
+        //         url:
+        //             'https://i.pinimg.com/originals/d5/d2/3e/d5d23ed7f286b97fe8319bea6ee0c9d0.jpg',
+        //     },
+        //     birth: '2010-10-17',
+        //     Record: [
+        //         {
+        //             cdt: '2018-03-18',
+        //             wgt: 5.7,
+        //         },
+        //     ],
+        // },
+        // {
+        //     cat_id: 2,
+        //     user_id: 1,
+        //     name: '냥냥이',
+        //     gender: 'M',
+        //     Photo: {
+        //         file: '',
+        //         url:
+        //             'https://static.boredpanda.com/blog/wp-content/uploads/2016/10/laid-back-cat-statue-tombili-istanbul-2.jpg',
+        //     },
+        //     birth: '2018-03-06',
+        //     Record: [
+        //         {
+        //             cdt: '2019-02-28',
+        //             wgt: 10.2,
+        //         },
+        //     ],
+        // },
+>>>>>>> ce429c1baa1b23f38c6b0a937bd0ac017739a736
     ],
+    isLoading: true
 };
 
 const dummyCat = (data) => ({
@@ -158,8 +216,11 @@ const reducer = (state = initialState, action) => {
     return produce(state, (draft) => {
         switch (action.type) {
             case GET_CAT_REQUEST:
+                draft.isLoading = true;
                 break;
             case GET_CAT_SUCCESS:
+                draft.cat = action.data;
+                draft.isLoading = false;
                 break;
             case GET_CAT_FAILURE:
                 break;

@@ -8,6 +8,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Store from './store/configureStore';
 import rootReducer from './reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
+
 axios.defaults.baseURL = 'https://localhost:8080';
 axios.defaults.withCredentials = true;
 const store = Store(rootReducer, composeWithDevTools());

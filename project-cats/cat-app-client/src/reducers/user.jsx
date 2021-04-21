@@ -12,6 +12,7 @@ export const initialState = {
     onUser: null,
     signUpData: {},
     loginData: {},
+    user: null,
 };
 
 // 기본적인 액션 이름들
@@ -28,6 +29,10 @@ export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
+
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+
+export const RESET_CURRENT_USER = 'RESET_CURRENT_USER';
 
 //백엔드 연동 전
 //더미데이터
@@ -85,6 +90,7 @@ export const logoutFailureAction = (data) => {
         data,
     };
 };
+
 //회원가입 액션 함수
 export const signUpRequest = (data) => {
     return {
@@ -104,6 +110,19 @@ export const signUpFailure = (data) => {
     return {
         type: SIGN_UP_FAILURE,
         data,
+    };
+};
+
+export const setCurrentUser =(user) => {
+    return {
+        type: SET_CURRENT_USER,
+        user,
+    };
+};
+
+export const resetCurrentUser =() => {
+    return {
+        type: RESET_CURRENT_USER,
     };
 };
 
@@ -174,6 +193,17 @@ const reducer = (state = initialState, action) => {
                 signUpDone: false,
                 signUpError: action.error,
             };
+        case SET_CURRENT_USER:
+            return {
+                ...state,
+                user: action.user,
+            };
+        
+        case RESET_CURRENT_USER:
+            return {
+                ...state,
+                user: null,
+            }
         default:
             return state;
     }

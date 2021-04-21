@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, useEffect } from 'react';
 import { useHistory, BrowserRouter as Router, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../../styles/palette';
@@ -73,10 +73,10 @@ const TopBar = ({ cat, current_index, onSelect }) => {
             <div style={menuStyle}>
                 {cat.map((el) => (
                     <EachCol
-                        key={el.cat_id}
-                        active={current_index === el.cat_id}
-                        onClick={() => onSelect(el.cat_id)}
-                        id={el.cat_id}
+                        key={el.id}
+                        active={current_index === el.id}
+                        onClick={() => onSelect(el.id)}
+                        id={el.id}
                     >
                         {el.name}
                     </EachCol>

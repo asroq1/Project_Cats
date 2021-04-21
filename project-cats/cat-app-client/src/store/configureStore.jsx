@@ -21,9 +21,10 @@ const configureStore = () => {
         process.env.NODE_ENV === 'production'
             ? compose(applyMiddleware(...middlewares)) //배포용
             : composeWithDevTools(applyMiddleware(...middlewares));
+    
     const store = createStore(rootReducer, enhancer);
     store.sagaTask = sagaMiddleware.run(rootSaga);
-
+    
     return store;
 };
 

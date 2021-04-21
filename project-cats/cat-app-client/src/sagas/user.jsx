@@ -8,6 +8,7 @@ import {
     delay,
 } from 'redux-saga/effects';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
 
 import {
     LOG_OUT_FAILURE,
@@ -19,7 +20,7 @@ import {
     SIGN_UP_FAILURE,
     SIGN_UP_REQUEST,
     SIGN_UP_SUCCESS,
-} from '../reducers/user';
+    } from '../reducers/user';
 
 function signUpAPI() {
     return axios.post('http://localhost:8080/api/signup');
@@ -45,6 +46,7 @@ function* signUp(action) {
 }
 
 // 3
+<<<<<<< HEAD
 // function logInAPI(data) {
 //     //로컬스토리지에 엑세스 토큰 저장
 //     return axios.post('/api/authenticate', data).then((res) => {
@@ -54,6 +56,28 @@ function* signUp(action) {
 //         console.log('jwt토큰', accessToken);
 //     });
 // }
+=======
+function logInAPI(data) {
+    return axios
+        // CORS 문제 해결에 따라 줄 변경
+        //.post('/user/login', data)
+        .post('http://localhost:8080/api/authenticate', data)
+        .then((res) => {
+            const { accessToken } = res.data;
+            axios.defaults.headers.common[
+                'Authorization' 
+            ] = `Bearer${accessToken}`;
+
+            // 현재 유저 아이디만 로컬 스토리지에 저장
+            const {id} = jwt.decode(accessToken);
+            //CORS 문제 해결에 따라 아래 두 줄 중 하나 사용
+            localStorage.setItem('currentUser', id);
+            //localStorage.setItem('currentUser', 1);
+        })
+        // 이 부분 작동 x -> 알아볼 것
+        //.then(useHistory.push('/main'));
+}
+>>>>>>> ce429c1baa1b23f38c6b0a937bd0ac017739a736
 // 2 call은 동기 await역할 fork는 비동기
 function* logIn(action) {
     try {
@@ -77,17 +101,19 @@ function* logIn(action) {
 }
 
 function logOutAPI() {
-    return axios.post('/api/logout');
+    return axios.post('/api/logout').then(localStorage.removeItem('currentUser'));
 }
 
 function* logOut() {
     try {
         const result = yield call(logOutAPI);
         yield delay(1000);
-        yield put({
-            type: LOG_OUT_SUCCESS,
-            data: result.data,
-        });
+        yield all([
+            put({
+                type: LOG_OUT_SUCCESS,
+                data: result.data,
+            })
+        ])
     } catch (err) {
         yield put({
             type: LOG_OUT_FAILURE,

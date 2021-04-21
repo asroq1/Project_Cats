@@ -57,7 +57,7 @@ const LoginForm = ({ history }) => {
 
                 <label>비밀번호</label>
                 <input
-                    name="pwd"
+                    name="password"
                     type="password"
                     ref={register({ required: true, minLength: 4 })}
                     placeholder="&#xf09c;"
