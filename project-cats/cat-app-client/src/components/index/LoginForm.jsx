@@ -13,9 +13,9 @@ const LoginForm = ({ history }) => {
     const dispatch = useDispatch();
     const { register, errors, handleSubmit } = useForm();
     // const onUser = useSelector((state) => {
-    // return {
-    // onUser: state.onUser,
-    // };
+    //     return {
+    //         onUser: state.onUser,
+    //     };
     // });
     const onSubmit = (data) => {
         console.log('success', data);
@@ -25,11 +25,17 @@ const LoginForm = ({ history }) => {
         dispatch(loginRequestAction(body));
     };
     // useEffect(() => {
-    //     if (onUser) {
+    //     if () {
     //         console.log(`로그인 중 : ${onUser}`);
     //         history.push('/user/main');
     //     }
     // }, [dispatch]);
+    // useEffect(() => {
+    //     if (!onUser) {
+    //         console.log(`로그인 필요 : ${onUser}`);
+    //         history.push('/');
+    //     }
+    // });
     return (
         <>
             <form

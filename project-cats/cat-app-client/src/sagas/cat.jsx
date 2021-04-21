@@ -64,7 +64,7 @@ function addCatWeightAPI(data) {
 }
 function* addWeight(action) {
     try {
-        const result = yield call(addCatWeightAPI, action.data);
+        // const result = yield call(addCatWeightAPI, action.data);
         yield put({
             type: ADD_WEIGHT_SUCCESS,
             data: action.data,
@@ -88,5 +88,5 @@ function* watchAddWeight() {
     yield takeLatest(ADD_WEIGHT_REQUEST, addWeight);
 }
 export default function* catSaga() {
-    yield all([fork(watchgetCat), fork(watchaddCat)], fork(watchAddWeight));
+    yield all([fork(watchgetCat), fork(watchaddCat), fork(watchAddWeight)]);
 }

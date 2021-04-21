@@ -2,16 +2,17 @@ import React from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { signUpRequest } from '../../reducers/user';
-import styles from '../../styles/signUpForm.module.css';
-const SocialSignup = () => {
+import { signUpRequest } from '../reducers/user';
+import styles from '../styles/signUpForm.module.css';
+const KakaLogin = () => {
     const dispatch = useDispatch();
     const { register, errors, handleSubmit } = useForm();
-
+    const type = 'kako';
     const onSubmit = (data) => {
         console.log('success', data);
         const body = {
             data,
+            type,
         };
         dispatch(signUpRequest(body));
     };
@@ -38,4 +39,4 @@ const SocialSignup = () => {
     );
 };
 
-export default SocialSignup;
+export default KakaLogin;

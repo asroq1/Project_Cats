@@ -1,6 +1,11 @@
 import product, { produce } from 'immer';
 
 export const initialState = {
+    addWeightRequest: false,
+    addWeightSuccess: false,
+    addWeightFailure: null,
+
+    catWeight: null,
     user: {
         isLoggedIn: true,
         user: 1,
@@ -21,6 +26,10 @@ export const initialState = {
                 {
                     cdt: '2021-03-30',
                     wgt: 3.1,
+                },
+                {
+                    cdt: '2021-04-21',
+                    wgt: 4.1,
                 },
             ],
         },
@@ -68,10 +77,11 @@ const dummyCat = (data) => ({
     user_id: 1,
     name: data.name,
     gender: data.gender,
-    Photo: {
-        file: data.photo.file,
-        url: data.photo.url,
-    },
+    // Photo: {
+    //     // file: data.photo.file,
+    //     // url: data.photo.url,
+    //     null,
+    // },
     birth: data.birthyear + '-' + data.birthmonth + '-' + data.birthdate,
     Record: [],
 });
@@ -118,6 +128,7 @@ export const addCatFailureAction = (data) => ({
     data,
 });
 export const addWeightRequest = (data) => {
+    console.log('추가 액션');
     return {
         type: ADD_WEIGHT_REQUEST,
         data,
@@ -155,14 +166,21 @@ const reducer = (state = initialState, action) => {
             case ADD_CAT_REQUEST:
                 break;
             case ADD_CAT_SUCCESS:
-                draft.cat = draft.cat.concat(dummyCat(action.data));
+                draft.cat.Record = draft.cat.concat(dummyCat(action.data));
                 break;
             case ADD_CAT_FAILURE:
                 break;
             case ADD_WEIGHT_REQUEST:
-                console.log(action.data);
+                // draft.cat[1].Record = draft.cat[1].Record.concat(
+                //     dummyCat(action.data)
+                // );
+
                 break;
             case ADD_WEIGHT_SUCCESS:
+                draft.cat[1].Record = draft.cat[1].Record.concat({
+                    cdt: '2021-03-30',
+                    wgt: 20.1,
+                });
                 break;
             case ADD_WEIGHT_FAILURE:
                 break;

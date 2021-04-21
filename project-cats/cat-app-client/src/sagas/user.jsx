@@ -22,18 +22,18 @@ import {
 } from '../reducers/user';
 
 function signUpAPI() {
-    return axios.post('/api/signup');
+    return axios.post('http://localhost:8080/api/signup');
 }
 
-function* signUp() {
+function* signUp(action) {
     try {
         console.log('SAGA SIGN UP');
-        const result = yield call(signUpAPI);
-        console.log('Res data :', result.data);
+        // const result = yield call(signUpAPI);
+        console.log('Res data :', action.data);
         yield delay(1000);
         yield put({
             type: SIGN_UP_SUCCESS,
-            data: result.data,
+            data: action.data,
         });
     } catch (err) {
         console.log('SAGA SIGN UP ERR', err);
@@ -45,20 +45,24 @@ function* signUp() {
 }
 
 // 3
-function logInAPI(data) {
-    //로컬스토리지에 엑세스 토큰 저장
-    return axios.post('/api/authenticate', data).then((res) => {
-        const { accessToken } = res.data;
-        axios.defaults.headers.common['Authorization'] = `Bearer${accessToken}`;
-        localStorage.setItem('jwtToken', accessToken);
-        console.log('jwt토큰', accessToken);
-    });
-}
+// function logInAPI(data) {
+//     //로컬스토리지에 엑세스 토큰 저장
+//     return axios.post('/api/authenticate', data).then((res) => {
+//         const { accessToken } = res.data;
+//         axios.defaults.headers.common['Authorization'] = `Bearer${accessToken}`;
+//         localStorage.setItem('jwtToken', accessToken);
+//         console.log('jwt토큰', accessToken);
+//     });
+// }
 // 2 call은 동기 await역할 fork는 비동기
 function* logIn(action) {
     try {
         console.log('SAGA LOGIN');
         // const result = yield call(logInAPI, action.data);
+        const { accessToken } = action.data;
+        axios.defaults.headers.common['Authorization'] = `Bearer${accessToken}`;
+        localStorage.setItem('jwtToken', accessToken);
+        console.log('jwt토큰', accessToken);
         yield put({
             type: LOG_IN_SUCCESS,
             data: action.data,

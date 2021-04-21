@@ -23,9 +23,9 @@ const KakaoLogin = () => {
                     .then((res) => res.json())
                     .then((res) => {
                         localStorage.setItem('Kakao_token', res.access_token);
-                        if (res.access_token) {
-                            history.push('/user/signup/social');
-                        }
+                        // if (res.access_token) {
+                        history.push('/user/signup/social');
+                        // }
                     });
 
                 console.log(authObj);
