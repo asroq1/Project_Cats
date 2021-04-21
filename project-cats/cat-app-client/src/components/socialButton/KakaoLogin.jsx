@@ -10,7 +10,7 @@ const KakaoLogin = () => {
         Kakao.Auth.login({
             success: function (authObj) {
                 //여기에 백엔드 주소 넣어주기
-                fetch('/user/login', {
+                fetch('api/authenticate', {
                     method: 'POST',
                     body: JSON.stringify({
                         access_token: authObj.access_token,
@@ -27,7 +27,6 @@ const KakaoLogin = () => {
                             history.push('/user/signup/social');
                         }
                     });
-                history.push('/user/signup/social');
 
                 console.log(authObj);
             },

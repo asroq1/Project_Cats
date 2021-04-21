@@ -8,7 +8,6 @@ import {
     delay,
 } from 'redux-saga/effects';
 import axios from 'axios';
-import { useHistory } from 'react-router';
 import jwt from 'jsonwebtoken';
 
 import {
@@ -21,11 +20,32 @@ import {
     SIGN_UP_FAILURE,
     SIGN_UP_REQUEST,
     SIGN_UP_SUCCESS,
-    SET_CURRENT_USER,
-    RESET_CURRENT_USER,
     } from '../reducers/user';
-import { GET_CAT_REQUEST } from '../reducers/cat';
 
+function signUpAPI() {
+    return axios.post('/api/signup');
+}
+
+function* signUp() {
+    try {
+        console.log('SAGA SIGN UP');
+        const result = yield call(signUpAPI);
+        console.log('Res data :', result.data);
+        yield delay(1000);
+        yield put({
+            type: SIGN_UP_SUCCESS,
+            data: result.data,
+        });
+    } catch (err) {
+        console.log('SAGA SIGN UP ERR', err);
+        yield put({
+            type: SIGN_UP_FAILURE,
+            error: err,
+        });
+    }
+}
+
+// 3
 function logInAPI(data) {
     return axios
         // CORS 문제 해결에 따라 줄 변경
@@ -46,32 +66,20 @@ function logInAPI(data) {
         // 이 부분 작동 x -> 알아볼 것
         //.then(useHistory.push('/main'));
 }
-
+// 2 call은 동기 await역할 fork는 비동기
 function* logIn(action) {
     try {
-        // 백엔드 연동하면 넣을 코드
-        console.log(action.data);
-        const result = yield call(logInAPI, action.data);
-        yield delay(1000); // 백엔드 연동 안 됐기 때문에 딜레이하는 거 가짜로 표현하기 위함
-        yield all([
-            put({
-                type: LOG_IN_SUCCESS,
-                data: action.data, 
-                // data: result.data
-            }),
-            put({
-                type: SET_CURRENT_USER,
-                data: localStorage.currentUser,
-            }),
-            put({
-                type: GET_CAT_REQUEST,
-                data: localStorage.currentUser
-            })
-        ])
+        console.log('SAGA LOGIN');
+        // const result = yield call(logInAPI, action.data);
+        yield put({
+            type: LOG_IN_SUCCESS,
+            data: action.data,
+        });
     } catch (err) {
+        console.log('SAGA LOGIN ERR', err);
         yield put({
             type: LOG_IN_FAILURE,
-            error: err
+            error: err,
         });
     }
 }
@@ -98,32 +106,13 @@ function* logOut() {
     }
 }
 
-function signUpAPI() {
-    return axios.post('/user/signup');
-}
-
-function* signUp() {
-    try {
-        const result = yield call(signUpAPI);
-        yield delay(1000);
-        yield put({
-            type: SIGN_UP_SUCCESS,
-            data: result.data,
-        });
-    } catch (err) {
-        yield put({
-            type: SIGN_UP_FAILURE,
-            error: err.response.data,
-        });
-    }
-}
-
 // signup 후 login된 상태로 홈페이지에 가기 위함
 function* goToHome() {
     const history = yield getContext('history');
     history.push('/');
 }
 
+//1.계속 감시하고 있다가 해당하는 Action이 발생하면 기다리고 있다가 얘가 실행된다. 2번째 인자의 함수가 실행.
 function* watchLogIn() {
     yield takeLatest(LOG_IN_REQUEST, logIn);
 }
