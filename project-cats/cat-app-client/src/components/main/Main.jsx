@@ -51,7 +51,7 @@ const ButtonWrapper = styled.button`
     margin-top: 0.5rem;
 `;
 
-const Main = ({ cat, current_index }) => {
+const Main = ({ cat, current_index, age }) => {
     // styled-component대신 useMemo 써줌
     const colStyle = useMemo(
         () => ({
@@ -70,23 +70,23 @@ const Main = ({ cat, current_index }) => {
         []
     );
 
-    const currentCat = cat[current_index];
+    const currentCat = cat[current_index - 1];
 
     return (
         <Global>
             <GeneralWrapper>
                 <PhotoContainer
-                    src={currentCat.Photo.url}
+                    src={currentCat.photo}
                     alt="cat_image"
                 ></PhotoContainer>
                 <div style={paddingStyle}>
-                    {/* {currentCat.age[0]}년 {currentCat.age[1]}개월 |{' '} */}
+                    {age[0]}년 {age[1]}개월 |{' '}
                     {currentCat.gender === 'M' ? '수컷' : '암컷'}
                 </div>
             </GeneralWrapper>
             <GeneralWrapper>
                 <div style={boldStyle}>최종 기록</div>
-                <div style={boldStyle}>
+                {/* <div style={boldStyle}>
                     {currentCat.Record.length > 0
                         ? currentCat.Record[currentCat.Record.length - 1].cdt
                         : '-'}{' '}
@@ -94,7 +94,7 @@ const Main = ({ cat, current_index }) => {
                         ? currentCat.Record[currentCat.Record.length - 1].wgt +
                           'kg'
                         : '-'}
-                </div>
+                </div> */}
             </GeneralWrapper>
 
             <div style={paddingStyle}>

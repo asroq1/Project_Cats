@@ -16,7 +16,7 @@ import {
 // 해당 유저의 모든 고양이 정보 받아오기
 // 이 부분은 논의할 것 - 로그인할 때 그냥 다 불러와도 됨
 function getCatAPI(data) {
-    return axios.get('/api/cat', data);
+    return axios.get(`http://localhost:8080/api/cats?userId=${data}`);
 }
 
 function* getCat(action) {
@@ -25,15 +25,16 @@ function* getCat(action) {
 
         // Call 사용 시 Promise를 반환하는 함수 호출하고 기다릴 수 있음
         // 첫 번쨰 파라미터는 함수, 나머지 파라미터는 해당 함수에 넣을 인수
-        // const result = yield call(getCatAPI, action.data);
+        const result = yield call(getCatAPI, action.data);
         yield put({
             type: GET_CAT_SUCCESS,
-            data: action.data,
+            //data: result.data,
+            data: result.data,
         });
     } catch (err) {
         yield put({
             type: GET_CAT_FAILURE,
-            data: err.response.data,
+            data: err,
         });
     }
 }

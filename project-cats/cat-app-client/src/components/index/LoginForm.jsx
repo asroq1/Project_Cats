@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 // const Input
 const LoginForm = () => {
     const dispatch = useDispatch();
-    // const [email, setEmail] = useState('');
+    // const [email, setEmail] = useState('');  
     // const [pwd, setPwd] = useState('');
     // const [emailError, setEmailError] = useState(false);
 
@@ -89,9 +89,9 @@ const LoginForm = () => {
 
                 <label>비밀번호</label>
                 <input
-                    name="pwd"
+                    name="password"
                     type="password"
-                    ref={register({ required: true, minLength: 6 })}
+                    ref={register({ required: true, minLength: 4 })}
                     placeholder="&#xf09c;"
                 />
                 {errors.pwd && errors.pwd.type === 'required' && (

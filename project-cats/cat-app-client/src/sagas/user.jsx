@@ -9,6 +9,7 @@ import {
 } from 'redux-saga/effects';
 import axios from 'axios';
 import { useHistory } from 'react-router';
+import jwt from 'jsonwebtoken';
 
 import {
     LOG_OUT_FAILURE,
@@ -20,52 +21,75 @@ import {
     SIGN_UP_FAILURE,
     SIGN_UP_REQUEST,
     SIGN_UP_SUCCESS,
-} from '../reducers/user';
+    SET_CURRENT_USER,
+    RESET_CURRENT_USER,
+    } from '../reducers/user';
+import { GET_CAT_REQUEST } from '../reducers/cat';
 
 function logInAPI(data) {
-    //로컬스토리지에 엑세스 토큰 저장
     return axios
-        .post('/user/login', data)
+        // CORS 문제 해결에 따라 줄 변경
+        //.post('/user/login', data)
+        .post('http://localhost:8080/api/authenticate', data)
         .then((res) => {
             const { accessToken } = res.data;
             axios.defaults.headers.common[
-                'Authorization'
+                'Authorization' 
             ] = `Bearer${accessToken}`;
-            // localStorage.setItem('jwtToken', accessToken);
-            // console.log('jwt토큰', accessToken);
+
+            // 현재 유저 아이디만 로컬 스토리지에 저장
+            const {id} = jwt.decode(accessToken);
+            //CORS 문제 해결에 따라 아래 두 줄 중 하나 사용
+            localStorage.setItem('currentUser', id);
+            //localStorage.setItem('currentUser', 1);
         })
-        .then(useHistory.push('/main'));
+        // 이 부분 작동 x -> 알아볼 것
+        //.then(useHistory.push('/main'));
 }
 
 function* logIn(action) {
     try {
         // 백엔드 연동하면 넣을 코드
-        // const result = yield call(logInAPI, action.data);
+        console.log(action.data);
+        const result = yield call(logInAPI, action.data);
         yield delay(1000); // 백엔드 연동 안 됐기 때문에 딜레이하는 거 가짜로 표현하기 위함
-        yield put({
-            type: LOG_IN_SUCCESS,
-            data: action.data,
-        });
+        yield all([
+            put({
+                type: LOG_IN_SUCCESS,
+                data: action.data, 
+                // data: result.data
+            }),
+            put({
+                type: SET_CURRENT_USER,
+                data: localStorage.currentUser,
+            }),
+            put({
+                type: GET_CAT_REQUEST,
+                data: localStorage.currentUser
+            })
+        ])
     } catch (err) {
         yield put({
             type: LOG_IN_FAILURE,
-            error: err.response.data,
+            error: err
         });
     }
 }
 
 function logOutAPI() {
-    return axios.post('/api/logout');
+    return axios.post('/api/logout').then(localStorage.removeItem('currentUser'));
 }
 
 function* logOut() {
     try {
         const result = yield call(logOutAPI);
         yield delay(1000);
-        yield put({
-            type: LOG_OUT_SUCCESS,
-            data: result.data,
-        });
+        yield all([
+            put({
+                type: LOG_OUT_SUCCESS,
+                data: result.data,
+            })
+        ])
     } catch (err) {
         yield put({
             type: LOG_OUT_FAILURE,
