@@ -60,8 +60,8 @@ function logInAPI(data) {
             // 현재 유저 아이디만 로컬 스토리지에 저장
             const {id} = jwt.decode(accessToken);
             //CORS 문제 해결에 따라 아래 두 줄 중 하나 사용
-            localStorage.setItem('currentUser', id);
-            //localStorage.setItem('currentUser', 1);
+            //localStorage.setItem('currentUser', id);
+            localStorage.setItem('currentUser', 1);
         })
         // 이 부분 작동 x -> 알아볼 것
         //.then(useHistory.push('/main'));
@@ -70,7 +70,7 @@ function logInAPI(data) {
 function* logIn(action) {
     try {
         console.log('SAGA LOGIN');
-        // const result = yield call(logInAPI, action.data);
+        const result = yield call(logInAPI, action.data);
         yield put({
             type: LOG_IN_SUCCESS,
             data: action.data,

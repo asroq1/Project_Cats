@@ -30,10 +30,6 @@ export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 
-export const SET_CURRENT_USER = 'SET_CURRENT_USER';
-
-export const RESET_CURRENT_USER = 'RESET_CURRENT_USER';
-
 //백엔드 연동 전
 //더미데이터
 const dummyUser = (data) => ({
@@ -113,19 +109,6 @@ export const signUpFailure = (data) => {
     };
 };
 
-export const setCurrentUser =(user) => {
-    return {
-        type: SET_CURRENT_USER,
-        user,
-    };
-};
-
-export const resetCurrentUser =() => {
-    return {
-        type: RESET_CURRENT_USER,
-    };
-};
-
 //Reducer
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -193,17 +176,6 @@ const reducer = (state = initialState, action) => {
                 signUpDone: false,
                 signUpError: action.error,
             };
-        case SET_CURRENT_USER:
-            return {
-                ...state,
-                user: action.user,
-            };
-        
-        case RESET_CURRENT_USER:
-            return {
-                ...state,
-                user: null,
-            }
         default:
             return state;
     }
