@@ -9,10 +9,11 @@ const SignUpForm = () => {
     const { register, watch, errors, handleSubmit } = useForm();
     const password = useRef();
     password.current = watch('password');
-
+    const type = 'normal';
     const onSubmit = (data) => {
         const body = {
             data,
+            type,
         };
         dispatch(signUpRequest(body));
     };

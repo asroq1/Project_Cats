@@ -11,7 +11,8 @@ import postWrite from './pages/postWrite';
 import postList from './pages/postList';
 import postView from './pages/postView';
 import Settings from './components/settings/setting';
-import SocialSignup from './components/signUp/SocialSignup';
+import KakaLogin from './pages/kakaoLogin';
+import NaverLogin from './pages/naverLogin';
 
 function App() {
     return (
@@ -20,7 +21,8 @@ function App() {
             <Reset />
             <Route path="/" component={index} exact />
             <Route path="/user/signup" component={signUp} exact />
-            <Route path="/user/signup/social" component={SocialSignup} />
+            <Route path="/user/signup/naver" component={KakaLogin} />
+            <Route path="/user/signup/kakao" component={NaverLogin} />
             <Route path="/cat/data" component={weightResult} />
             <Route path="/cat/record" component={weightAdd} />
             <Route path="/cat/add" component={catAdd} />

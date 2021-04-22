@@ -53,10 +53,10 @@ export const loginRequestAction = (data) => {
 
 export const loginSuccessAction = (data) => {
     console.log('login request act :', data);
-
     return {
         type: LOG_IN_SUCCESS,
         data,
+        onUser: dummyUser(),
     };
 };
 
@@ -124,7 +124,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 logInLoading: false,
                 logInDone: true,
-                onUser: { ...action.data },
+                onUser: action.data,
             };
         case LOG_IN_FAILURE:
             return {

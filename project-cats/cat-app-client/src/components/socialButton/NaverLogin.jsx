@@ -7,8 +7,8 @@ const NaverLogin = () => {
     const initializeNaverLogin = () => {
         const naverLogin = new naver.LoginWithNaverId({
             clientId: 'BAEpSASWOOk_802ChzqB', //발급받은 client ID,
-            callbackUrl: 'http://localhost:3000/user/signup/social', //app 등록할 때 callbackurl에 추가해주었던 url,
-            isPopup: false, // popup 형식으로 띄울것인지 설정
+            callbackUrl: 'http://localhost:3000/user/signup/naver', //app 등록할 때 callbackurl에 추가해주었던 url,
+            isPopup: false, // popup 형식으2로 띄울것인지 설정
             loginButton: {
                 color: 'green',
                 type: 3,
