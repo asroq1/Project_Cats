@@ -11,11 +11,8 @@ const SignUpForm = () => {
     password.current = watch('password');
     const type = 'normal';
     const onSubmit = (data) => {
-        const body = {
-            data,
-            type,
-        };
-        dispatch(signUpRequest(body));
+        console.log(data);
+        dispatch(signUpRequest(data));
     };
     useEffect(() => {});
     return (
