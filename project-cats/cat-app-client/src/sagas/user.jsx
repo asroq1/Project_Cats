@@ -29,7 +29,7 @@ function signUpAPI() {
 function* signUp(action) {
     try {
         console.log('SAGA SIGN UP');
-        // const result = yield call(signUpAPI);
+        const result = yield call(signUpAPI);
         console.log('Res data :', action.data);
         yield delay(1000);
         yield put({
@@ -52,16 +52,17 @@ function logInAPI(data) {
         //.post('/user/login', data)
         .post('http://localhost:8080/api/authenticate', data)
         .then((res) => {
-            const { accessToken } = res.data;
+            console.log(res.data);
+            const { token } = res.data;
             axios.defaults.headers.common[
                 'Authorization' 
-            ] = `Bearer${accessToken}`;
+            ] = `Bearer${token}`;
 
             // 현재 유저 아이디만 로컬 스토리지에 저장
-            const {id} = jwt.decode(accessToken);
+            const {id} = jwt.decode(token);
             //CORS 문제 해결에 따라 아래 두 줄 중 하나 사용
-            //localStorage.setItem('currentUser', id);
-            localStorage.setItem('currentUser', 1);
+            localStorage.setItem('currentUser', id);
+            //localStorage.setItem('currentUser', 1);
         })
         // 이 부분 작동 x -> 알아볼 것
         //.then(useHistory.push('/main'));
@@ -70,11 +71,7 @@ function logInAPI(data) {
 function* logIn(action) {
     try {
         console.log('SAGA LOGIN');
-        // const result = yield call(logInAPI, action.data);
-        const { accessToken } = action.data;
-        axios.defaults.headers.common['Authorization'] = `Bearer${accessToken}`;
-        localStorage.setItem('jwtToken', accessToken);
-        console.log('jwt토큰', accessToken);
+        const result = yield call(logInAPI, action.data);
         yield put({
             type: LOG_IN_SUCCESS,
             //로그인 구현 되면 data: result.data로 변경할 것

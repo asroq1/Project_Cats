@@ -19,10 +19,10 @@ const LoginForm = ({ history }) => {
     // });
     const onSubmit = (data) => {
         console.log('success', data);
-        const body = {
-            data,
-        };
-        dispatch(loginRequestAction(body));
+        // const body = {
+        //     data,
+        // };
+        dispatch(loginRequestAction(data));
     };
     // useEffect(() => {
     //     if () {

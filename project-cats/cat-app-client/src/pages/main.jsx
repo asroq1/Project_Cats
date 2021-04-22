@@ -4,23 +4,30 @@ import MainComponent from '../components/main/Main';
 
 import MainEmptyComponent from '../components/main/MainEmpty'
 import TopBar from '../components/main/TopBar';
-import { GET_CAT_REQUEST } from '../reducers/cat';
+import { GET_CAT_REQUEST, SET_CURRENT_CAT } from '../reducers/cat';
 import palette from '../styles/palette';
 
 const Main = () => {
     const { cat } = useSelector((state) => state.cat);
     const { isLoading } = useSelector((state) => state.cat);
-    const [current_index, setCurrentIndex] = useState(1);
+    const { currentIndex } = useSelector((state) => state.cat);
+    //const [current_index, setCurrentIndex] = useState(1);
     //const [age, setAge] = useState([0,0]);
     
+    const dispatch = useDispatch();
+    
     const onSelect = useCallback((index) => {
-        setCurrentIndex(index);
+        //setCurrentIndex(index);
+        dispatch({
+            type: SET_CURRENT_CAT,
+            data: index,
+        })
     }, []);
 
     const today = new Date();
     
     const getAge = useCallback(()=>{
-        const currentCat = cat[current_index - 1];
+        const currentCat = cat[currentIndex - 1];
         const [birthYear, birthMonth, birthDate] = currentCat.birth.split("-");
                 let ageYear = today.getFullYear() - parseInt(birthYear);
                 let ageMonth =today.getMonth()+1 -parseInt(birthMonth);
@@ -38,8 +45,6 @@ const Main = () => {
 
 
     const bgColor = useMemo(() => ({backgroundColor: palette.beige}), []);
-
-    const dispatch = useDispatch();
     
     useEffect(()=>{
         dispatch({
@@ -54,12 +59,12 @@ const Main = () => {
         <div style={bgColor}>
             <TopBar
                 cat={cat}
-                current_index={current_index}
+                currentIndex={currentIndex}
                 onSelect={onSelect}
             />
             {(!isLoading) &&
                 (cat.length > 0 ? (
-                    <MainComponent cat={cat} current_index={current_index} age={getAge()} />
+                    <MainComponent cat={cat} currentIndex={currentIndex} age={getAge()} />
                 ) : (
                     
                     <MainEmptyComponent></MainEmptyComponent>

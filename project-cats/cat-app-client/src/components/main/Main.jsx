@@ -51,7 +51,7 @@ const ButtonWrapper = styled.button`
     margin-top: 0.5rem;
 `;
 
-const Main = ({ cat, current_index, age }) => {
+const Main = ({ cat, currentIndex, age }) => {
     // styled-component대신 useMemo 써줌
     const colStyle = useMemo(
         () => ({
@@ -62,7 +62,7 @@ const Main = ({ cat, current_index, age }) => {
         []
     );
     const paddingStyle = useMemo(
-        () => ({ marginTop: '1em', padding: '0.5rem' }),
+        () => ({ marginTop: '0.5em', padding: '0.5rem' }),
         []
     );
     const boldStyle = useMemo(
@@ -70,7 +70,7 @@ const Main = ({ cat, current_index, age }) => {
         []
     );
 
-    const currentCat = cat[current_index - 1];
+    const currentCat = cat[currentIndex - 1];
 
     return (
         <Global>
@@ -79,6 +79,7 @@ const Main = ({ cat, current_index, age }) => {
                     src={currentCat.photo}
                     alt="cat_image"
                 ></PhotoContainer>
+                <div style={paddingStyle}>{currentCat.name}</div>
                 <div style={paddingStyle}>
                     {age[0]}년 {age[1]}개월 |{' '}
                     {currentCat.gender === 'M' ? '수컷' : '암컷'}
@@ -101,7 +102,13 @@ const Main = ({ cat, current_index, age }) => {
                 <Link
                     to={{
                         pathname: '/cat/addWeight',
-                        cat_id: current_index,
+                        // Link컴포넌트를 사용해 페이지 전환하면
+                        // 애플리케이션은 그대로 유지한 상태에서
+                        // 페이지를 새로 불러오지 않고 HTML5 History API를 사용하여
+                        // 페이지의 주소만 바꿔줍니다 (벨로퍼트님 책 13.2.5)
+                        // 따라서 redux에 저장되어 있는 상태도 날라가지 않고,
+                        // redux의 currentIndex를 참조해 현재 선택된 고양이가 어떤 고양이인 지 알 수 있을 것 같아요
+                        //cat_id: current_index,
                     }}
                 >
                     <ButtonWrapper>오늘 체중 기록하기</ButtonWrapper>
@@ -109,7 +116,7 @@ const Main = ({ cat, current_index, age }) => {
                 <Link
                     to={{
                         pathname: '/cat/record',
-                        cat_id: current_index,
+                        //cat_id: current_index,
                     }}
                 >
                     <ButtonWrapper>이전 데이터 보기</ButtonWrapper>

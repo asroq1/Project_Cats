@@ -18,10 +18,10 @@ const Global = styled.div`
     max-width: 1200px;
     width: 100vw;
 
-    height: 100%;
+    height: 100vh;
     margin: 0 auto;
     h2 {
-        font-size: 2rem;
+        font-size: 1.5rem;
         text-align: center;
     }
     label {
@@ -30,6 +30,11 @@ const Global = styled.div`
     @media screen and (max-width: 768px) {
         width: 75vw;
     }
+`;
+
+const InnerGlobal = styled.div`
+    width: 90%;
+    margin: 0 auto;
 `;
 
 const StyledInputBlock = styled.div`
@@ -54,7 +59,7 @@ const StyledInputBlock = styled.div`
         display: flex;
     }
     .birth {
-        min-width: 100px;
+        min-width: 20px;
         max-width: 33%;
         flex: 1 1 auto;
         text-align: center;
@@ -65,7 +70,7 @@ const StyledInputBlock = styled.div`
     }
 
     & + & {
-        margin-top: 1rem;
+        margin-top: 0.5rem;
     }
     .birth + .birth {
         margin-left: 0.5rem;
@@ -73,8 +78,8 @@ const StyledInputBlock = styled.div`
 `;
 
 const PhotoPlaceholder = styled.div`
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     background: ${(props) => (!props.url ? palette.orange : '')};
     background-image: ${(props) => (props.url ? 'url(' + props.url + ')' : '')};
@@ -86,10 +91,12 @@ const PhotoPlaceholder = styled.div`
     text-align: center;
     .fa-camera {
         display: inline-block;
-        font-size: 5rem;
+        font-size: 6rem;
+        margin-left: 38px;
     }
     .fa-upload {
         display: inline-block;
+        margin-left: -2.5px;
     }
 `;
 
@@ -123,7 +130,7 @@ const ButtonWrapper = styled.button`
     font-weight: bold;
     background-color: ${palette.orange};
     cursor: pointer;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     border: 1px solid darkred;
     & + & {
         margin-left: 0.5rem;
@@ -134,8 +141,8 @@ const ButtonWrapper = styled.button`
 `;
 
 const RadioBtnWrapper = styled.div`
-    margin-top: 1rem;
-    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
     display: flex;
     input {
         display: none;
@@ -144,8 +151,8 @@ const RadioBtnWrapper = styled.div`
         flex: 1;
         display: inline-block;
         background-color: lightgray;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
         border-radius: 5px;
         cursor: pointer;
         border: 1px solid gray;
@@ -160,12 +167,13 @@ const RadioBtnWrapper = styled.div`
     }
 `;
 
-const CatsAdd = ({ hasCat }) => {
+const CatsAdd = ({}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const imageInput = useRef();
 
-    const [photo, onChangePhoto] = useState({ file: '', url: '' });
+    const [image, onChangeImageFile] = useState('');
+    const [previewImage, onChangePreviewImage] = useState('');
     const [name, onChangeName] = useInput('');
     const [birthyear, onChangeBirthYear] = useInput('');
     const [birthmonth, onChangeBirthMonth] = useInput('');
@@ -178,11 +186,11 @@ const CatsAdd = ({ hasCat }) => {
             e.preventDefault();
             dispatch({
                 type: ADD_CAT_REQUEST,
-                data: { photo, name, birthyear, birthmonth, birthdate, gender },
+                data: { image, name, birthyear, birthmonth, birthdate, gender },
             });
             history.push('/user/main');
         },
-        [photo, name, birthyear, birthmonth, birthdate, gender]
+        [image, name, birthyear, birthmonth, birthdate, gender]
     );
 
     // 버튼을 눌러서 사진 업로드 창 띄우기 위함!
@@ -192,12 +200,20 @@ const CatsAdd = ({ hasCat }) => {
 
     // 이미지 올렸을 때, 파일과 미리보기를 위한 URL 저장
     const onChangeImage = useCallback((e) => {
-        const reader = new FileReader();
-        const file = e.target.files[0];
-        reader.onloadend = () => {
-            onChangePhoto({ file: file, url: reader.result });
-        };
-        reader.readAsDataURL(file);
+        // FileReader는 사용x
+        // const reader = new FileReader();
+        // const file = e.target.files[0];
+        // reader.onloadend = () => {
+        //     onChangePhoto({ file: file, url: reader.result });
+        // };
+        // reader.readAsDataURL(file);
+        
+        
+        // BE에 전해줄 정보
+        onChangeImageFile(e.target.file);
+
+        // 미리보기위한 정보
+        onChangePreviewImage(URL.createObjectURL(e.target.file));
     }, []);
 
     const goBack = useCallback(() => {
@@ -205,19 +221,24 @@ const CatsAdd = ({ hasCat }) => {
     });
 
     const paddingStyle = useMemo(() => ({ paddingTop: '2rem' }), []);
+    const marginTopStyle = useMemo(() =>({ marginTop: '0.5rem' }), []);
 
     return (
         <>
             <Global>
+                <InnerGlobal>
                 <h2 style={paddingStyle}>
                     당신의 주인님에 대해
                     <br />
                     알려주세요!
                 </h2>
-                <form onSubmit={onSubmit}>
+                <form
+                onSubmit={onSubmit}
+                encType="multipart/form-data"
+                >
                     <CenterWrapper>
-                        <PhotoPlaceholder url={photo.url ? photo.url : ''}>
-                            {!photo.url && (
+                        <PhotoPlaceholder url={ previewImage ? previewImage : ''}>
+                            {!previewImage && (
                                 <span className="fa fa-camera"></span>
                                 /*<FontAwesomeIcon size="6x" icon={faCamera} />*/
                             )}
@@ -266,6 +287,8 @@ const CatsAdd = ({ hasCat }) => {
                                 value={birthyear}
                                 onChange={onChangeBirthYear}
                                 required
+                                min="1900"
+                                max ="2025"
                             />
                             <input
                                 className="birth"
@@ -275,6 +298,8 @@ const CatsAdd = ({ hasCat }) => {
                                 value={birthmonth}
                                 onChange={onChangeBirthMonth}
                                 required
+                                min="1"
+                                max="12"
                             />
                             <input
                                 className="birth"
@@ -284,11 +309,14 @@ const CatsAdd = ({ hasCat }) => {
                                 value={birthdate}
                                 onChange={onChangeBirthDate}
                                 required
+                                min="1"
+                                max="31"
+
                             />
                         </div>
                     </StyledInputBlock>
                     {/* 성별 */}
-                    <div style={{ marginTop: '1rem' }}>
+                    <div style= {marginTopStyle}>
                         <label htmlFor="male">성별</label>
                         <RadioBtnWrapper>
                             <input
@@ -318,12 +346,13 @@ const CatsAdd = ({ hasCat }) => {
                     </div>
                     {/* 버튼 */}
                     <CenterWrapper>
-                        {hasCat && (
+                        {/* {hasCat && (
                             <ButtonWrapper onClick={goBack}>취소</ButtonWrapper>
-                        )}
+                        )} */}
                         <ButtonWrapper htmlType="submit">등록</ButtonWrapper>
                     </CenterWrapper>
                 </form>
+                </InnerGlobal>
             </Global>
         </>
     );

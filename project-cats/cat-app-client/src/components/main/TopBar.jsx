@@ -49,7 +49,7 @@ const EachCol = styled.div`
     }
 `;
 
-const TopBar = ({ cat, current_index, onSelect }) => {
+const TopBar = ({ cat, currentIndex, onSelect }) => {
     const menuStyle = useMemo(() => ({ height: '2rem', display: 'flex' }), []);
     const fillerCol = useMemo(
         () => ({
@@ -74,7 +74,7 @@ const TopBar = ({ cat, current_index, onSelect }) => {
                 {cat.map((el) => (
                     <EachCol
                         key={el.id}
-                        active={current_index === el.id}
+                        active={currentIndex === el.id}
                         onClick={() => onSelect(el.id)}
                         id={el.id}
                     >
