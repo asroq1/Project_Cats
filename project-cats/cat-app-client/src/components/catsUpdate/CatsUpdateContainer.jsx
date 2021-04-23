@@ -1,7 +1,12 @@
-import styled from 'styled-components';
-import CatImageUpload from './CatImageUpload';
+import React from 'react';
 
-import CatsAdd from './CatsAdd';
+import {useSelector} from 'react-redux';
+
+
+import styled from 'styled-components';
+import CatImageUpdate from './CatImageUpdate';
+
+import CatsUpdate from './CatsUpdate';
 
 const Global = styled.div`
     background-color: white;
@@ -23,14 +28,18 @@ const Global = styled.div`
 `;
 
 
-const CatsAddContainer = ({}) => {
+const CatsUpdateContainer = ({}) => {
+
+    const {cat, currentIndex} = useSelector((state) => state.cat);
+    const currentCat =cat[currentIndex - 1];
+
     return (
         <>
         <Global>
-                <CatImageUpload/>
-                    <CatsAdd/>
+                <CatImageUpdate currentCat={currentCat}/>
+                <CatsUpdate currentCat={currentCat}/>
         </Global>
         </>
     )
 };
-export default CatsAddContainer;
+export default CatsUpdateContainer;

@@ -1,6 +1,6 @@
 // Based on the example on https://www.npmjs.com/package/react-easy-crop
 // https://codesandbox.io/s/y09komm059
-import React, { useState, useMemo, useRef, useCallback } from 'react';
+import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Cropper from 'react-easy-crop';
 import { getCroppedImg } from './canvasUtils';
@@ -39,10 +39,9 @@ const ImageUploadButtons = styled.button`
 `;
 
 const CenterWrapper = styled.div`
-    width: 50%;
     display: flex;
     position: relative;
-    justify-content: center;
+    justify-content: end;
 `;
 
 const CropperContainer = styled.div`
@@ -53,19 +52,19 @@ const CropperContainer = styled.div`
 
 const SliderContainer = styled.div`
     input[type='range'] {
-        max-width: 50%;
+        //width: 100%;
         padding: 1rem;
         margin: 0.5rem;
     }
-    max-width: 50%;
+    width: 50%;
 `;
 
-const CatImageUpload = ({}) => {
+const CatImageUpdate = ({currentCat}) => {
     const [imageSrc, setImageSrc] = useState(null);
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useInput(1.0);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-    const [croppedImage, setCroppedImage] = useState(null);
+    const [croppedImage, setCroppedImage] = useState(currentCat.photo);
 
     // 파일 업로드 창 숨기기 위함
     const imageInput = useRef();
@@ -105,6 +104,14 @@ const CatImageUpload = ({}) => {
         });
     }, []);
 
+    useEffect(() =>{
+        setCroppedImage(currentCat.photo);
+        dispatch({
+            type: SET_CURRENT_IMAGE,
+            data: currentCat.photo,
+        });
+    }, []);
+
     const onFileChange = async (e) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
@@ -125,9 +132,9 @@ const CatImageUpload = ({}) => {
     return (
         <>
             <h2 style={paddingStyle}>
-                당신의 주인님에 대해
+                고양님에 대해
                 <br />
-                알려주세요!
+                수정할까요?
             </h2>
             <div>
                 {!croppedImage ? (
@@ -153,7 +160,7 @@ const CatImageUpload = ({}) => {
                                     min="1.0"
                                     max="3.0"
                                     step="0.1"
-                                    aria-labeledby="Zoom"
+                                    aria-labelledby="Zoom"
                                     onChange={setZoom}
                                 />
                             </SliderContainer>
@@ -210,4 +217,4 @@ function readFile(file) {
     });
 }
 
-export default CatImageUpload;
+export default CatImageUpdate;

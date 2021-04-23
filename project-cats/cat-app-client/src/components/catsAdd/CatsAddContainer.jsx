@@ -1,3 +1,6 @@
+import React from 'react';
+
+
 import styled from 'styled-components';
 import CatImageUpload from './CatImageUpload';
 
@@ -24,11 +27,12 @@ const Global = styled.div`
 
 
 const CatsAddContainer = ({}) => {
+
     return (
         <>
         <Global>
                 <CatImageUpload/>
-                    <CatsAdd/>
+                <CatsAdd/>
         </Global>
         </>
     )

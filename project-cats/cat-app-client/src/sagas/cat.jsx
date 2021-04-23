@@ -8,6 +8,9 @@ import {
     ADD_CAT_REQUEST,
     ADD_CAT_SUCCESS,
     ADD_CAT_FAILURE,
+    UPDATE_CAT_REQUEST,
+    UPDATE_CAT_SUCCESS,
+    UPDATE_CAT_FAILURE,
     ADD_WEIGHT_REQUEST,
     ADD_WEIGHT_SUCCESS,
     ADD_WEIGHT_FAILURE,
@@ -47,7 +50,7 @@ function addCatAPI(data) {
 
 function* addCat(action) {
     try {
-        // const result = yield call(addCatAPI, action.data);
+        const result = yield call(addCatAPI, action.data);
         yield put({
             type: ADD_CAT_SUCCESS,
             data: action.data,
@@ -55,6 +58,29 @@ function* addCat(action) {
     } catch (err) {
         yield put({
             type: ADD_CAT_FAILURE,
+            data: err.response.data,
+        });
+    }
+}
+
+
+
+
+
+function updateCatAPI(data) {
+    return axios.patch('/api/cat', data);
+}
+
+function* updateCat(action) {
+    try {
+        const result = yield call(updateCatAPI, action.data);
+        yield put({
+            type: UPDATE_CAT_SUCCESS,
+            data: result.data,
+        });
+    } catch (err) {
+        yield put({
+            type: UPDATE_CAT_FAILURE,
             data: err.response.data,
         });
     }
@@ -85,9 +111,13 @@ function* watchaddCat() {
     yield takeLatest(ADD_CAT_REQUEST, addCat);
 }
 
+function* watchupdateCat() {
+    yield takeLatest(UPDATE_CAT_REQUEST, updateCat);
+}
+
 function* watchAddWeight() {
     yield takeLatest(ADD_WEIGHT_REQUEST, addWeight);
 }
 export default function* catSaga() {
-    yield all([fork(watchgetCat), fork(watchaddCat), fork(watchAddWeight)]);
+    yield all([fork(watchgetCat), fork(watchaddCat), fork(watchupdateCat),fork(watchAddWeight)]);
 }

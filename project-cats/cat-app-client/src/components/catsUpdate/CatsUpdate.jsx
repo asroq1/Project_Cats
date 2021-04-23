@@ -5,10 +5,8 @@ import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4} from 'uuid';
 
 import useInput from '../../hooks/useInput';
-import { ADD_CAT_REQUEST } from '../../reducers/cat';
+import { SET_CURRENT_IMAGE, UPDATE_CAT_REQUEST } from '../../reducers/cat';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faUpload, faCamera } from '@fortawesome/free-solid-svg-icons';
 import 'font-awesome/css/font-awesome.min.css';
 
 import palette from '../../styles/palette';
@@ -31,6 +29,8 @@ const StyledInputBlock = styled.div`
     input-placeholder {
         text-align: center;
     }
+
+
 
     & > .inputcontainer > input:focus {
         background-color: white;
@@ -60,44 +60,6 @@ const StyledInputBlock = styled.div`
     }
 `;
 
-// const PhotoPlaceholder = styled.div`
-//     width: 180px;
-//     height: 180px;
-//     border-radius: 50%;
-//     background: ${(props) => (!props.url ? palette.orange : '')};
-//     background-image: ${(props) => (props.url ? 'url(' + props.url + ')' : '')};
-//     background-size: cover;
-//     border: 1px solid magenta;
-//     display: flex;
-//     margin: 2rem;
-//     align-items: center;
-//     text-align: center;
-//     .fa-camera {
-//         display: inline-block;
-//         font-size: 6rem;
-//         margin-left: 38px;
-//     }
-//     .fa-upload {
-//         display: inline-block;
-//         margin-left: -2.5px;
-//     }
-// `;
-
-// const PhotoAddBtn = styled.button`
-//     width: 3rem;
-//     height: 3rem;
-//     font-size: 1.5rem;
-//     border: none;
-//     border-radius: 50%;
-//     background: black;
-//     color: white;
-//     cursor: pointer;
-//     padding: 1rem;
-//     position: relative;
-//     margin-left: auto;
-//     margin-top: auto;
-// `;
-
 const CenterWrapper = styled.div`
     width: 100%;
     display: flex;
@@ -126,6 +88,8 @@ const ButtonWrapper = styled.button`
 const RadioBtnWrapper = styled.div`
     margin-top: 0.5rem;
     margin-bottom: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     display: flex;
     input {
         display: none;
@@ -150,16 +114,17 @@ const RadioBtnWrapper = styled.div`
     }
 `;
 
-const CatsAdd = ({}) => {
+const CatsUpdate = ({currentCat}) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
     const {currImgUrl} = useSelector((state) => state.cat);
-    const [name, onChangeName] = useInput('');
-    const [birthyear, onChangeBirthYear] = useInput('');
-    const [birthmonth, onChangeBirthMonth] = useInput('');
-    const [birthdate, onChangeBirthDate] = useInput('');
-    const [gender, onChangeGender] = useInput('');
+    const [currbirthyear, currbirthmonth, currbirthdate] = currentCat.birth.split("-");
+    const [name, onChangeName] =useInput(currentCat.name);
+    const [birthyear, onChangeBirthYear] = useInput(currbirthyear);
+    const [birthmonth, onChangeBirthMonth] = useInput(currbirthmonth);
+    const [birthdate, onChangeBirthDate] = useInput(currbirthdate);
+    const [gender, onChangeGender] = useInput(currentCat.gender);
 
     // 버튼 누르면 정보 전달
     const onSubmit = useCallback(
@@ -169,7 +134,7 @@ const CatsAdd = ({}) => {
             formData.append('birth', birthyear+"-"+birthmonth+"-"+birthdate);
             formData.append('gender',gender);
             // POST API가 id를 요구하기 때문
-            formData.append('id', uuidv4());
+            //formData.append('id', uuidv4());
             formData.append('name',name);
             console.log(currImgUrl);
             formData.append('photo', currImgUrl);
@@ -190,7 +155,12 @@ const CatsAdd = ({}) => {
             // }
 
             dispatch({
-                type: ADD_CAT_REQUEST,
+                type: SET_CURRENT_IMAGE,
+                data: null,
+            });
+
+            dispatch({
+                type: UPDATE_CAT_REQUEST,
                 data: formData,
             });
             history.push('/user/main');
@@ -222,6 +192,7 @@ const CatsAdd = ({}) => {
                                 type="text"
                                 id="cat-name"
                                 name="cat-name"
+                                placeholder="Name"
                                 value={name}
                                 onChange={onChangeName}
                                 maxLength="50"
@@ -311,4 +282,4 @@ const CatsAdd = ({}) => {
     );
 };
 
-export default CatsAdd;
+export default CatsUpdate;

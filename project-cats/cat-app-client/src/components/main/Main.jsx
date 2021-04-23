@@ -2,6 +2,8 @@ import React, { useEffect, useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
+import 'font-awesome/css/font-awesome.min.css';
+
 import palette from '../../styles/palette';
 
 //코드 너무 장황해지니
@@ -11,7 +13,7 @@ const Global = styled.div`
     background-color: ${palette.beige};
     max-width: 1200px;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     margin: 0 auto;
 
     @media screen and (max-width: 768px) {
@@ -111,6 +113,9 @@ const Main = ({ cat, currentIndex, age }) => {
                 <div style={paddingStyle}>
                     {age[0]}년 {age[1]}개월 |{' '}
                     {currentCat.gender === 'M' ? '수컷' : '암컷'}
+                    <Link to = "/cat/update">
+                        <i class="fa fa-edit"></i>
+                    </Link>
                 </div>
                 {currentCat.photo ? (<PhotoContainer
                     style={{backgroundImage: `url(${currentCat.photo})`}}

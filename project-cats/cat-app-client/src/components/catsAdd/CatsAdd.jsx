@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4} from 'uuid';
 
 import useInput from '../../hooks/useInput';
-import { ADD_CAT_REQUEST } from '../../reducers/cat';
+import { SET_CURRENT_IMAGE, ADD_CAT_REQUEST } from '../../reducers/cat';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faUpload, faCamera } from '@fortawesome/free-solid-svg-icons';
@@ -188,6 +188,11 @@ const CatsAdd = ({}) => {
             // for (var entry of formData.entries()){
             //     console.log(entry);
             // }
+
+            dispatch({
+                type: SET_CURRENT_IMAGE,
+                data: null,
+            });
 
             dispatch({
                 type: ADD_CAT_REQUEST,

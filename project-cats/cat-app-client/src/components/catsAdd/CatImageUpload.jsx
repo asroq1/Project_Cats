@@ -153,7 +153,7 @@ const CatImageUpload = ({}) => {
                                     min="1.0"
                                     max="3.0"
                                     step="0.1"
-                                    aria-labeledby="Zoom"
+                                    aria-labelledby="Zoom"
                                     onChange={setZoom}
                                 />
                             </SliderContainer>
