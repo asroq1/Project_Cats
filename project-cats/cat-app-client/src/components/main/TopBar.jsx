@@ -6,11 +6,12 @@ import palette from '../../styles/palette';
 import 'font-awesome/css/font-awesome.min.css';
 
 const Global = styled.div`
+    background-color: ${palette.beige};
     max-width: 1200px;
     width: 100vw;
     margin: 0 auto;
     @media screen and (max-width: 768px) {
-        width: 75vw;
+        width: 100vw;
     }
 `;
 
@@ -20,11 +21,12 @@ const EachCol = styled.div`
     display: flex;
     align-items: center;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
     flex: auto;
-    background-color: ${(props) => (props.active ? 'white' : palette.navy)};
+    background-color: ${(props) => (props.active ? palette.beige : palette.navy)};
     &: hover {
-        background-color: ${(props) => (props.active ? 'white' : 'black')};
+        background-color: ${(props) => (props.active ? palette.beige : 'black')};
     }
     &:not(:last-child) {
         max-width: 150px;
@@ -42,7 +44,7 @@ const EachCol = styled.div`
         justify-content: flex-end;
         border: 1px solid white;
         border-bottom: 1px solid black;
-        background: white;
+        background: ${palette.beige};
     }
     .fa-cog {
         color: ${palette.navy};

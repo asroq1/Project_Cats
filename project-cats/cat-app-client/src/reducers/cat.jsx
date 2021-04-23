@@ -68,21 +68,8 @@ export const initialState = {
     ],
     isLoading: true,
     currentIndex: 1,
+    currImgUrl: null,
 };
-
-const dummyCat = (data) => ({
-    cat_id: 3,
-    user_id: 1,
-    name: data.name,
-    gender: data.gender,
-    // Photo: {
-    //     // file: data.photo.file,
-    //     // url: data.photo.url,
-    //     null,
-    // },
-    birth: data.birthyear + '-' + data.birthmonth + '-' + data.birthdate,
-    Record: [],
-});
 
 // 몸무게 추가
 export const ADD_WEIGHT_REQUEST = 'ADD_WEIGHT_REQUEST';
@@ -100,6 +87,8 @@ export const ADD_CAT_SUCCESS = 'ADD_CAT_SUCCESS';
 export const ADD_CAT_FAILURE = 'ADD_CAT_FAILURE';
 
 export const SET_CURRENT_CAT = 'SET_CURRENT_CAT';
+
+export const SET_CURRENT_IMAGE = 'SET_CURRENT_IMAGE'
 
 export const getCatRequestAction = (data) => ({
     type: GET_CAT_REQUEST,
@@ -154,6 +143,13 @@ export const setCurrentCat = (data) => {
     }
 }
 
+export const setCurrentImage = (data) => {
+    return {
+        type: SET_CURRENT_IMAGE,
+        data,
+    }
+}
+
 // 리듀서는
 // 이전 상태를 액션을 통해 다음 상태로 만드는 함수
 // 단 불변성은 지켜야 함
@@ -176,7 +172,7 @@ const reducer = (state = initialState, action) => {
             case ADD_CAT_REQUEST:
                 break;
             case ADD_CAT_SUCCESS:
-                draft.cat.Record = draft.cat.concat(dummyCat(action.data));
+                draft.cat = draft.cat.concat(action.data);
                 break;
             case ADD_CAT_FAILURE:
                 break;
@@ -197,6 +193,10 @@ const reducer = (state = initialState, action) => {
 
             case SET_CURRENT_CAT:
                 draft.currentIndex = action.data;
+                break;
+
+            case SET_CURRENT_IMAGE:
+                draft.currImgUrl = action.data;
                 break;
             default:
                 break;

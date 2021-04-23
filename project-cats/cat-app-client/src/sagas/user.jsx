@@ -71,7 +71,8 @@ function logInAPI(data) {
 function* logIn(action) {
     try {
         console.log('SAGA LOGIN');
-        const result = yield call(logInAPI, action.data);
+        //const result = yield call(logInAPI, action.data);
+        localStorage.setItem('currentUser', 1);
         yield put({
             type: LOG_IN_SUCCESS,
             //로그인 구현 되면 data: result.data로 변경할 것

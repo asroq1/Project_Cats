@@ -8,14 +8,14 @@ import palette from '../../styles/palette';
 //필요 딱히 없는 건 나중에 지워주기
 //짧은 건 useMemo로 넣어줌
 const Global = styled.div`
-    background-color: white;
+    background-color: ${palette.beige};
     max-width: 1200px;
     width: 100vw;
     height: 100vh;
     margin: 0 auto;
 
     @media screen and (max-width: 768px) {
-        width: 75vw;
+        width: 100vw;
     }
 `;
 
@@ -27,12 +27,22 @@ const GeneralWrapper = styled.div`
     margin-top: 1rem;
 `;
 
-const PhotoContainer = styled.img`
+const PhotoContainer = styled.div`
     width: 200px;
     height: 200px;
-    margin-top: 2rem;
-    border: 2px solid ${palette.navy};
-    object-fit: cover;
+    background-color: lightgray;
+    margin-top: 0.5rem;
+    border-radius: 10px;
+    background-size: cover;
+    box-shadow:3px 5px 5px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .fa-paw {
+        font-size: 10rem;
+        color: ${palette.beige};
+    }
 `;
 
 const ButtonWrapper = styled.button`
@@ -42,15 +52,38 @@ const ButtonWrapper = styled.button`
     font-size: 1rem;
     font-weight: bold;
     background-color: ${palette.navy};
-    color: ${palette.beige};
+    color:white;
     cursor: pointer;
     border: 1px solid black;
     &:hover {
         background: black;
     }
-    margin-top: 0.5rem;
+    & + & {margin-top: 0.5rem;}
 `;
 
+
+const WeightRecordWrapper = styled.div`
+
+text-align: center;
+margin-top: 1.5rem;
+margin-bottom: 0;
+
+h1 {
+    font-size: 1rem;
+
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+h3 {
+    font-size: 2rem;
+
+}
+
+`;
 const Main = ({ cat, currentIndex, age }) => {
     // styled-component대신 useMemo 써줌
     const colStyle = useMemo(
@@ -62,7 +95,7 @@ const Main = ({ cat, currentIndex, age }) => {
         []
     );
     const paddingStyle = useMemo(
-        () => ({ marginTop: '0.5em', padding: '0.5rem' }),
+        () => ({ marginTop: '1.5em', padding: '0.5rem' }),
         []
     );
     const boldStyle = useMemo(
@@ -75,18 +108,21 @@ const Main = ({ cat, currentIndex, age }) => {
     return (
         <Global>
             <GeneralWrapper>
-                <PhotoContainer
-                    src={currentCat.photo}
-                    alt="cat_image"
-                ></PhotoContainer>
-                <div style={paddingStyle}>{currentCat.name}</div>
                 <div style={paddingStyle}>
                     {age[0]}년 {age[1]}개월 |{' '}
                     {currentCat.gender === 'M' ? '수컷' : '암컷'}
                 </div>
-            </GeneralWrapper>
-            <GeneralWrapper>
-                <div style={boldStyle}>최종 기록</div>
+                {currentCat.photo ? (<PhotoContainer
+                    style={{backgroundImage: `url(${currentCat.photo})`}}
+                />)
+                : (<PhotoContainer><i class="fa fa-paw"></i></PhotoContainer>)
+                }
+                <WeightRecordWrapper>
+                    <h1>마지막 체중 기록</h1>
+                    <h2>{currentCat.Record ? currentCat.Record.cdt : '체중을'}</h2>
+                    <h3>{currentCat.Record ? currentCat.Record.wgt : '기록해주세용'}</h3>
+
+                </WeightRecordWrapper>
                 {/* <div style={boldStyle}>
                     {currentCat.Record.length > 0
                         ? currentCat.Record[currentCat.Record.length - 1].cdt
