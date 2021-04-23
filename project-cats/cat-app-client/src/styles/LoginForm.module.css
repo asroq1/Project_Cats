@@ -1,41 +1,23 @@
-input,
-button {
-    margin: 0.5rem 0 0.5rem 0;
-    height: 3rem;
-    font-size: 1rem;
-    border-radius: 4px;
-}
-button {
-    border: none;
-}
-input {
-    height: 1rem;
-    padding: 1rem;
-    border: 1px solid #909090;
-}
-
-input::placeholder {
-    text-align: right;
-}
+/* 
 .login__form {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     width: 30%;
-}
-.submit__btn {
+} */
+/* .submit__btn {
     background: #f2cc8f;
     color: #fff;
     font-size: 1rem;
     font-weight: bold;
-}
-.social__form {
+} */
+/* .social__form {
     margin: 0 auto;
     display: flex;
     width: 30%;
     flex-direction: row;
     justify-content: space-between;
-}
+} */
 
 .form__label {
     margin: 0.5rem 0 0.5rem 0;
@@ -56,9 +38,6 @@ input::placeholder {
     color: #fff;
     font-size: 1rem;
     font-weight: bold;
-}
-.error__message {
-    color: #db4455;
 }
 
 @media screen and (max-width: 768px) {
