@@ -12,30 +12,24 @@ import { withRouter } from 'react-router-dom';
 const LoginForm = ({ history }) => {
     const dispatch = useDispatch();
     const { register, errors, handleSubmit } = useForm();
-    // const onUser = useSelector((state) => {
-    //     return {
-    //         onUser: state.onUser,
-    //     };
-    // });
+    const { logInDone } = useSelector((state) => state.user);
+
     const onSubmit = (data) => {
         console.log('success', data);
-        // const body = {
-        //     data,
-        // };
         dispatch(loginRequestAction(data));
     };
-    // useEffect(() => {
-    //     if () {
-    //         console.log(`로그인 중 : ${onUser}`);
-    //         history.push('/user/main');
-    //     }
-    // }, [dispatch]);
-    // useEffect(() => {
-    //     if (!onUser) {
-    //         console.log(`로그인 필요 : ${onUser}`);
-    //         history.push('/');
-    //     }
-    // });
+    useEffect(() => {
+        if (logInDone === true) {
+            console.log(`로그인 중 : ${logInDone}`);
+            history.push('/user/main');
+        }
+    }, []);
+    useEffect(() => {
+        if (!logInDone) {
+            console.log(`로그인 필요 : ${logInDone}`);
+            history.push('/');
+        }
+    }, []);
     return (
         <>
             <form
