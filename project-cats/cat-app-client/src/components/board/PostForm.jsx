@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import useInput from '../../hooks/useInput';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {
     ADD_POST_REQUEST,
     UPLOAD_IMAGES_SUCCESS,
@@ -12,50 +12,18 @@ import styled from 'styled-components';
 
 import 'font-awesome/css/font-awesome.min.css';
 import palette from '../../styles/palette';
+import OverallPostsLayout from './OverallPostsLayout';
 
-const Global = styled.div`
-    background-color: white;
-    max-width: 1200px;
-    width: 100vw;
+const FormBlock = styled.div`
+    position: relative;
 
-    height: 100%;
+    padding-top: 50px;
+
+    width:80%;
     margin: 0 auto;
-    h2 {
-        font-size: 2rem;
-        text-align: center;
-    }
-    label {
-        font-weight: bold;
-    }
-    @media screen and (max-width: 768px) {
-        width: 75vw;
-    }
-`;
 
-const Header = styled.div`
-    display: flex;
-    height: 50px;
-    font-size: 1rem;
-    background-color: ${palette.green};
+    min-height: 100vh;
 `;
-const HeaderCol = styled.div`
-    padding: 1rem;
-    display: flex;
-    font-size: 1rem;
-    color: ${palette.beige};
-    flex: auto;
-    &:last-child {
-        flex-direction: row-reverse;
-        a {
-            text-decoration: none;
-            color: ${palette.beige};
-        }
-        a:hover {
-            color: ${palette.navy};
-        }
-    }
-`;
-
 const EditBlock = styled.div`
     padding-top: 5rem;
     padding-bottom: 5rem;
@@ -64,38 +32,86 @@ const EditBlock = styled.div`
 
 const StyledBlock = styled.div`
     display: flex;
-    textarea, input {
+    line-height: 1.5rem;
+    textarea,
+    input {
         width: 100%;
         font-size: 1rem;
-        border: 1px solid  ${palette.green};
+        border: 1px solid gray;
         padding: 0.5rem auto;
-        
-        border-radius:5px;
+
+        border-radius: 5px;
         outline: none;
     }
-    textarea{
-        height: 150px;
+    textarea {
+        height: 300px;
+
+        padding: 1rem;
+        margin-bottom: 1rem;
     }
 
-    input::placeholder{
-        text-align:start;
+    input::placeholder {
+        text-align: start;
     }
 `;
 
+
+const CenterWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    position: relative;
+`;
+
+const ImagesContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
 
 const StyledButton = styled.button`
-background-color: ${palette.green};
-color: ${palette.beige};
+    flex: 1;
+    padding: 0 auto;
+    border-radius: 10px;
+    color: white;
+    
+    background-color: ${palette.green};
+    font-weight:bold;
+    cursor:pointer;
+
+    margin-bottom: 1rem;
+    
+    & + & {
+        margin-left: 0.5rem;
+    }
+    &:hover {
+        background-color: darkgreen;
+    }
+    &:first-child {
+        background-color: ${palette.navy};
+    }
+    &:first-child:hover {
+        background-color: black;
+    }
 `;
 const PreviewBox = styled.div`
-padding: 1rem;
-border: 1px dotted gray;
+    padding: 1rem;
+    border: 1px dotted gray;
 
+    margin: 0 auto;
+
+
+    button {
+        border-radius: 10px;
+        border: 1px solid gray;
+        background-color: none;
+
+        width: 100%;
+    }
 `;
 
 const PostForm = () => {
     const dispatch = useDispatch();
     const imageInput = useRef();
+    const history=useHistory();
 
     // 각 form 내용은 useState이용한 커스텀 훅으로 관리
     const [title, onChangeTitle, setTitle] = useInput('');
@@ -149,6 +165,10 @@ const PostForm = () => {
         []
     );
 
+    const goBack = useCallback(()=>{
+        history.goBack();
+    })
+
     const onSubmit = useCallback(
         (e) => {
             e.preventDefault();
@@ -186,87 +206,100 @@ const PostForm = () => {
     );
 
     return (
-        <Global>
-            <Header>
-                <HeaderCol>자유게시판</HeaderCol>
-
-                <HeaderCol>
-                    <Link to="/post/list">전체 글</Link>
-                </HeaderCol>
-            </Header>
-            <form
-                style={{ margin: '10px 0 20px' }}
-                encType="multipart/form-data"
-                onSubmit={onSubmit}
-            >
-                
-                <StyledBlock>
-                    <input
-                        value={title}
-                        onChange={onChangeTitle}
-                        maxLength="20"
-                        placeholder="제목을 입력하세용"
-                    />
-                </StyledBlock>
-                
-                <StyledBlock>
-                <textarea
-                    value={text}
-                    onChange={onChangeText}
-                    maxLength={200}
-                    placeholder="글을 작성해주세용"
-                />
-                
-                </StyledBlock>
-                <div>
-                    <input
-                        type="file"
-                        hidden
-                        ref={imageInput}
-                        accept="image/*"
-                        name="post-images"
-                        multiple
-                        onChange={onChangeImages}
-                    />
-                    
-                    
-                    
-                    <StyledButton type="button" onClick={onClickImageUpload}>
-                        사진을 올려달라냥! <i className="fa fa-paw"></i>
-                    </StyledButton>
-                    <StyledButton
-                        type="primary"
-                        style={{ float: 'right' }}
-                        htmltype="submit"
+        <>
+            <OverallPostsLayout>
+                <FormBlock>
+                    <form
+                        style={{ margin: '10px 0 20px' }}
+                        encType="multipart/form-data"
+                        onSubmit={onSubmit}
                     >
-                        등록
-                    </StyledButton>
-                </div>
-                <div>
-                    <div>사진 체크</div>
-                    {imagePaths.map((v, i) => (
-                        <PreviewBox
-                            key={v.file.name}
-                            style={{ display: 'inline-block' }}
-                        >
-                            <img
-                                src={v.url}
-                                style={{ width: '200px' }}
-                                alt={v.file.name}
-                            ></img>
-                            <div>
-                                <button
-                                    type="button"
-                                    onClick={onRemoveImages(v.file.name)}
+                        <StyledBlock>
+                            <input
+                                value={title}
+                                onChange={onChangeTitle}
+                                maxLength="20"
+                                placeholder="제목을 입력하세용"
+                            />
+                        </StyledBlock>
+
+                        <StyledBlock>
+                            <textarea
+                                value={text}
+                                onChange={onChangeText}
+                                maxLength={200}
+                                placeholder="글을 작성해주세용"
+                            />
+                        </StyledBlock>
+                        
+                        <CenterWrapper>
+
+                            <StyledButton
+                                type="button"
+
+                                onClick={goBack} 
+                        
+                            >
+                            
+                            취소
+                            </StyledButton>
+                            <StyledButton
+                                type="primary"
+                                htmltype="submit"
+                            >
+                                등록
+                            </StyledButton>
+                        
+                        </CenterWrapper>
+                        <CenterWrapper>
+                            <input
+                                type="file"
+                                hidden
+                                ref={imageInput}
+                                accept="image/*"
+                                name="post-images"
+                                multiple
+                                onChange={onChangeImages}
+                            />
+
+                            <StyledButton
+                                type="button"
+                                onClick={onClickImageUpload}
+                            >
+                                사진을 올려달라냥! <i className="fa fa-paw"></i>
+                            </StyledButton>
+                        </CenterWrapper>
+
+
+                        
+                        <ImagesContainer>
+                            {imagePaths.map((v, i) => (
+                                <PreviewBox
+                                    key={v.file.name}
+                                    style={{ display: 'inline-block' }}
                                 >
-                                    삭제
-                                </button>
-                            </div>
-                        </PreviewBox>
-                    ))}
-                </div>
-            </form>
-        </Global>
+                                    <img
+                                        src={v.url}
+                                        style={{ width: '200px' }}
+                                        alt={v.file.name}
+                                    ></img>
+                                    <div>
+                                        <button
+                                            type="button"
+                                            onClick={onRemoveImages(
+                                                v.file.name
+                                            )}
+                                        >
+                                            삭제
+                                        </button>
+                                    </div>
+                                </PreviewBox>
+                            ))}
+                        </ImagesContainer>
+                    </form>
+                </FormBlock>
+            </OverallPostsLayout>
+        </>
     );
 };
 
