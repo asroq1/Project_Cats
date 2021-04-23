@@ -1,6 +1,6 @@
 // Based on the example on https://www.npmjs.com/package/react-easy-crop
 // https://codesandbox.io/s/y09komm059
-import React, { useState, useMemo, useRef, useCallback } from 'react';
+import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Cropper from 'react-easy-crop';
 import { getCroppedImg } from './canvasUtils';
@@ -14,58 +14,59 @@ import { SET_CURRENT_IMAGE } from '../../reducers/cat';
 import 'font-awesome/css/font-awesome.min.css';
 
 const InnerGlobal = styled.div`
-    width: 90%;
-    margin: 0 auto;
-    margin-bottom:0.25rem;
-    display: flex;
+width: 80%;
+margin: 0 auto;
+margin-bottom:0.25rem;
+display: flex;
 `;
 
 const ImageUploadButtons = styled.button`
-    flex: 1;
-    padding: 0.5rem auto;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-    background-color: ${palette.orange};
-    cursor: pointer;
-    margin-top: 0.5rem;
-    border: 1px solid darkred;
-    & + & {
-        margin-left: 0.5rem;
-    }
-    &:hover {
-        background: darkred;
-    }
+flex: 1;
+padding: 0.5rem auto;
+
+border-radius:10px;
+font-size: 1rem;
+font-weight: bold;
+background-color: ${palette.orange};
+cursor: pointer;
+
+color: white;
+margin-top: 0.5rem;
+& + & {
+    margin-left: 0.5rem;
+}
+&:hover {
+    background: darkred;
+}
 `;
 
 const CenterWrapper = styled.div`
-    width: 50%;
-    display: flex;
-    position: relative;
-    justify-content: center;
+width: 50%;
+display: flex;
+position: relative;
+justify-content: center;
 `;
 
 const CropperContainer = styled.div`
-    margin-top: 1rem;
-    height: 200px;
-    position: relative;
+margin-top: 1rem;
+height: 200px;
+position: relative;
 `;
 
 const SliderContainer = styled.div`
-    input[type='range'] {
-        max-width: 50%;
-        padding: 1rem;
-        margin: 0.5rem;
-    }
+input[type='range'] {
     max-width: 50%;
+    padding: 1rem;
+    margin: 0.5rem;
+}
 `;
 
-const CatImageUpload = ({}) => {
+const CatImageUpdate = ({currentCat}) => {
     const [imageSrc, setImageSrc] = useState(null);
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useInput(1.0);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-    const [croppedImage, setCroppedImage] = useState(null);
+    const [croppedImage, setCroppedImage] = useState(currentCat.photo);
 
     // 파일 업로드 창 숨기기 위함
     const imageInput = useRef();
@@ -105,6 +106,14 @@ const CatImageUpload = ({}) => {
         });
     }, []);
 
+    useEffect(() =>{
+        setCroppedImage(currentCat.photo);
+        dispatch({
+            type: SET_CURRENT_IMAGE,
+            data: currentCat.photo,
+        });
+    }, []);
+
     const onFileChange = async (e) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
@@ -114,7 +123,7 @@ const CatImageUpload = ({}) => {
         }
     };
 
-    const paddingStyle = useMemo(() => ({ paddingTop: '2rem' }), []);
+    const headerStyle = useMemo(() => ({ fontWeight: 'bold',paddingTop: '30px' , lineHeight: '1.5'}), []);
 
     const flexStyle = useMemo(
         () => ({ display: 'flex', justifyContent: 'center', height: '80px' }),
@@ -124,10 +133,10 @@ const CatImageUpload = ({}) => {
 
     return (
         <>
-            <h2 style={paddingStyle}>
-                당신의 주인님에 대해
+            <h2 style={headerStyle}>
+                고양님에 대해
                 <br />
-                알려주세요!
+                수정할까요?
             </h2>
             <div>
                 {!croppedImage ? (
@@ -153,7 +162,7 @@ const CatImageUpload = ({}) => {
                                     min="1.0"
                                     max="3.0"
                                     step="0.1"
-                                    aria-labeledby="Zoom"
+                                    aria-labelledby="Zoom"
                                     onChange={setZoom}
                                 />
                             </SliderContainer>
@@ -210,4 +219,4 @@ function readFile(file) {
     });
 }
 
-export default CatImageUpload;
+export default CatImageUpdate;

@@ -2,6 +2,8 @@ import React, { useEffect, useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
+import 'font-awesome/css/font-awesome.min.css';
+
 import palette from '../../styles/palette';
 
 //코드 너무 장황해지니
@@ -95,7 +97,7 @@ const Main = ({ cat, currentIndex, age }) => {
         []
     );
     const paddingStyle = useMemo(
-        () => ({ marginTop: '1.5em', padding: '0.5rem' }),
+        () => ({ marginTop: '1.5em', padding: '0.5rem  1.75rem' }),
         []
     );
     const boldStyle = useMemo(
@@ -111,6 +113,9 @@ const Main = ({ cat, currentIndex, age }) => {
                 <div style={paddingStyle}>
                     {age[0]}년 {age[1]}개월 |{' '}
                     {currentCat.gender === 'M' ? '수컷' : '암컷'}
+                    <Link to = "/cat/update">
+                        <i class="fa fa-edit"></i>
+                    </Link>
                 </div>
                 {currentCat.photo ? (<PhotoContainer
                     style={{backgroundImage: `url(${currentCat.photo})`}}
@@ -137,7 +142,7 @@ const Main = ({ cat, currentIndex, age }) => {
             <div style={paddingStyle}>
                 <Link
                     to={{
-                        pathname: '/cat/addWeight',
+                        pathname: '/cat/record',
                         // Link컴포넌트를 사용해 페이지 전환하면
                         // 애플리케이션은 그대로 유지한 상태에서
                         // 페이지를 새로 불러오지 않고 HTML5 History API를 사용하여
@@ -151,7 +156,7 @@ const Main = ({ cat, currentIndex, age }) => {
                 </Link>
                 <Link
                     to={{
-                        pathname: '/cat/record',
+                        pathname: '/cat/data',
                         //cat_id: current_index,
                     }}
                 >

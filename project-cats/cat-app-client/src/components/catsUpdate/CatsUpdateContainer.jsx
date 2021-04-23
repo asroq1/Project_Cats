@@ -1,12 +1,17 @@
 import React from 'react';
 
+import {useSelector} from 'react-redux';
+
 
 import styled from 'styled-components';
 
 import palette from '../../styles/palette';
-import CatImageUpload from './CatImageUpload';
+import CatImageUpdate from './CatImageUpdate';
 
-import CatsAdd from './CatsAdd';
+import CatsUpdate from './CatsUpdate';
+
+
+import CatsDelete from './CatsDelete';
 
 const Global = styled.div`
     background-color:${palette.beige};
@@ -28,15 +33,19 @@ const Global = styled.div`
 `;
 
 
-const CatsAddContainer = ({}) => {
+const CatsUpdateContainer = ({}) => {
+
+    const {cat, currentIndex} = useSelector((state) => state.cat);
+    const currentCat =cat[currentIndex - 1];
 
     return (
         <>
         <Global>
-                <CatImageUpload/>
-                <CatsAdd/>
+                <CatImageUpdate currentCat={currentCat}/>
+                <CatsUpdate currentCat={currentCat}/>
+                <CatsDelete currentIndex={currentIndex}/>
         </Global>
         </>
     )
 };
-export default CatsAddContainer;
+export default CatsUpdateContainer;

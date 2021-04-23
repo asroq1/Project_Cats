@@ -1,8 +1,6 @@
 import React, { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import palette from '../styles/palette';
-
 import CatsAddContainer from '../components/catsAdd/CatsAddContainer';
 
 const CatAdd = () => {

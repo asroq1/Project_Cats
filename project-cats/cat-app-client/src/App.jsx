@@ -6,6 +6,7 @@ import index from './pages/index';
 import weightResult from './pages/weightResult';
 import weightAdd from './pages/weightAdd';
 import catAdd from './pages/catAdd';
+import catUpdate from './pages/catUpdate';
 import main from './pages/main';
 import postWrite from './pages/postWrite';
 import postList from './pages/postList';
@@ -26,6 +27,7 @@ function App() {
             <Route path="/cat/data" component={weightResult} />
             <Route path="/cat/record" component={weightAdd} />
             <Route path="/cat/add" component={catAdd} />
+            <Route path="/cat/update" component={catUpdate}/>
             <Route path="/user/main" component={main} />
             <Route path="/user/settings" component={Settings} />
             <Route path="/post/write" component={postWrite} />

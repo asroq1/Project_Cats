@@ -58,7 +58,7 @@ function logInAPI(data) {
                 axios.defaults.headers.common[
                     'Authorization'
                 ] = `Bearer${token}`;
-                localStorage.setItem('test-token', token);
+
                 // 현재 유저 아이디만 로컬 스토리지에 저장
                 const { id } = jwt.decode(token);
                 //CORS 문제 해결에 따라 아래 두 줄 중 하나 사용
@@ -66,6 +66,8 @@ function logInAPI(data) {
                 //localStorage.setItem('currentUser', 1);
             })
     );
+    // 이 부분 작동 x -> 알아볼 것
+    //.then(useHistory.push('/main'));
 }
 // 2 call은 동기 await역할 fork는 비동기
 function* logIn(action) {
@@ -73,6 +75,7 @@ function* logIn(action) {
         console.log('SAGA LOGIN');
         //const result = yield call(logInAPI, action.data);
         localStorage.setItem('currentUser', 1);
+
         yield put({
             type: LOG_IN_SUCCESS,
             //로그인 구현 되면 data: result.data로 변경할 것

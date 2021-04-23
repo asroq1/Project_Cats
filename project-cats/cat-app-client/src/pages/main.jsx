@@ -11,13 +11,10 @@ const Main = () => {
     const { cat } = useSelector((state) => state.cat);
     const { isLoading } = useSelector((state) => state.cat);
     const { currentIndex } = useSelector((state) => state.cat);
-    //const [current_index, setCurrentIndex] = useState(1);
-    //const [age, setAge] = useState([0,0]);
     
     const dispatch = useDispatch();
     
     const onSelect = useCallback((index) => {
-        //setCurrentIndex(index);
         dispatch({
             type: SET_CURRENT_CAT,
             data: index,
