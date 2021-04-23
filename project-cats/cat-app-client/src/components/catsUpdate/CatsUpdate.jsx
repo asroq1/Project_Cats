@@ -13,105 +13,106 @@ import palette from '../../styles/palette';
 
 // 스타일링된 input block
 const InnerGlobal = styled.div`
-    width: 90%;
-
-    margin: 0 auto;
+width: 80%;
+margin: 0 auto;
 `;
 
 const StyledInputBlock = styled.div`
-    input {
-        font-size: 1rem;
-        border: 1px solid gray;
-        background-color: lightgray;
-        padding: 0.5rem auto;
-        outline: none;
-    }
-    input-placeholder {
+input {
+    font-size: 1rem;
+    border: 1px solid gray;
+    background-color:white;
+    padding: 0.5rem auto;
+    border-radius:10px;
+    outline: none;
+}
+input-placeholder {
+    text-align: center;
+}
+
+& > .inputcontainer > input:focus {
+    background-color: white;
+}
+.regular {
+    width: 100%;
+}
+.inputcontainer {
+    display: flex;
+}
+.birth {
+    min-width: 20px;
+    max-width: 33%;
+    flex: 1 1 auto;
+    text-align: center;
+
+    &::placeholder {
         text-align: center;
     }
+}
 
-
-
-    & > .inputcontainer > input:focus {
-        background-color: white;
-    }
-    .regular {
-        width: 100%;
-    }
-    .inputcontainer {
-        display: flex;
-    }
-    .birth {
-        min-width: 20px;
-        max-width: 33%;
-        flex: 1 1 auto;
-        text-align: center;
-
-        &::placeholder {
-            text-align: center;
-        }
-    }
-
-    & + & {
-        margin-top: 0.5rem;
-    }
-    .birth + .birth {
-        margin-left: 0.5rem;
-    }
+& + & {
+    margin-top: 0.5rem;
+}
+.birth + .birth {
+    margin-left: 0.5rem;
+}
 `;
 
 const CenterWrapper = styled.div`
-    width: 100%;
-    display: flex;
-    position: relative;
-    justify-content: center;
+width: 100%;
+display: flex;
+position: relative;
+justify-content: center;
 `;
 
 const ButtonWrapper = styled.button`
-    flex: 1;
-    padding: 0.5rem auto;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
+flex: 1;
+padding: 0 auto;
+border-radius: 10px;
+font-size: 1rem;
+font-weight: bold;
+cursor: pointer;
+margin-top: 0.5rem;
+color: white;
+& + & {
+    margin-left: 0.5rem;
+}
+&:hover {
+    background: darkred;
+}
+&:first-child {
+    background-color: ${palette.navy};
+}
+&:last-child {
     background-color: ${palette.orange};
-    cursor: pointer;
-    margin-top: 0.5rem;
-    border: 1px solid darkred;
-    & + & {
-        margin-left: 0.5rem;
-    }
-    &:hover {
-        background: darkred;
-    }
+
+}
 `;
 
 const RadioBtnWrapper = styled.div`
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    display: flex;
-    input {
-        display: none;
-    }
-    .radiobtn {
-        flex: 1;
-        display: inline-block;
-        background-color: lightgray;
-        padding-top: 0.75rem;
-        padding-bottom: 0.75rem;
-        border-radius: 5px;
-        cursor: pointer;
-        border: 1px solid gray;
-        text-align: center;
-    }
-    input + .radiobtn:last-child {
-        margin-left: 0.5rem;
-    }
-    input:checked + .radiobtn {
-        background-color: ${palette.orange};
-        border: 1px solid darkred;
-    }
+margin-top: 0.5rem;
+margin-bottom: 1rem;
+display: flex;
+input {
+    display: none;
+}
+.radiobtn {
+    flex: 1;
+    display: inline-block;
+    background-color: lightgray;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+}
+input + .radiobtn:last-child {
+    margin-left: 0.5rem;
+}
+input:checked + .radiobtn {
+    background-color: ${palette.orange};
+}
 `;
 
 const CatsUpdate = ({currentCat}) => {
@@ -273,7 +274,7 @@ const CatsUpdate = ({currentCat}) => {
                     </div>
                     {/* 버튼 */}
                     <CenterWrapper>
-                        <ButtonWrapper onClick={goBack}>취소</ButtonWrapper>
+                        <ButtonWrapper onClick={goBack}  type="button">취소</ButtonWrapper>
                         <ButtonWrapper htmlType="submit">등록</ButtonWrapper>
                     </CenterWrapper>
                 </form>

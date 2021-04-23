@@ -13,7 +13,7 @@ const Global = styled.div`
     background-color: ${palette.beige};
     max-width: 1200px;
     width: 100vw;
-    height: 100%;
+    height: 100vh;
     margin: 0 auto;
 
     @media screen and (max-width: 768px) {
@@ -97,7 +97,7 @@ const Main = ({ cat, currentIndex, age }) => {
         []
     );
     const paddingStyle = useMemo(
-        () => ({ marginTop: '1.5em', padding: '0.5rem' }),
+        () => ({ marginTop: '1.5em', padding: '0.5rem  1.75rem' }),
         []
     );
     const boldStyle = useMemo(
@@ -142,7 +142,7 @@ const Main = ({ cat, currentIndex, age }) => {
             <div style={paddingStyle}>
                 <Link
                     to={{
-                        pathname: '/cat/addWeight',
+                        pathname: '/cat/record',
                         // Link컴포넌트를 사용해 페이지 전환하면
                         // 애플리케이션은 그대로 유지한 상태에서
                         // 페이지를 새로 불러오지 않고 HTML5 History API를 사용하여
@@ -156,7 +156,7 @@ const Main = ({ cat, currentIndex, age }) => {
                 </Link>
                 <Link
                     to={{
-                        pathname: '/cat/record',
+                        pathname: '/cat/data',
                         //cat_id: current_index,
                     }}
                 >

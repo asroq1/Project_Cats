@@ -15,8 +15,7 @@ import palette from '../../styles/palette';
 
 // 스타일링된 input block
 const InnerGlobal = styled.div`
-    width: 90%;
-
+    width: 80%;
     margin: 0 auto;
 `;
 
@@ -24,8 +23,9 @@ const StyledInputBlock = styled.div`
     input {
         font-size: 1rem;
         border: 1px solid gray;
-        background-color: lightgray;
+        background-color:white;
         padding: 0.5rem auto;
+        border-radius:10px;
         outline: none;
     }
     input-placeholder {
@@ -60,44 +60,6 @@ const StyledInputBlock = styled.div`
     }
 `;
 
-// const PhotoPlaceholder = styled.div`
-//     width: 180px;
-//     height: 180px;
-//     border-radius: 50%;
-//     background: ${(props) => (!props.url ? palette.orange : '')};
-//     background-image: ${(props) => (props.url ? 'url(' + props.url + ')' : '')};
-//     background-size: cover;
-//     border: 1px solid magenta;
-//     display: flex;
-//     margin: 2rem;
-//     align-items: center;
-//     text-align: center;
-//     .fa-camera {
-//         display: inline-block;
-//         font-size: 6rem;
-//         margin-left: 38px;
-//     }
-//     .fa-upload {
-//         display: inline-block;
-//         margin-left: -2.5px;
-//     }
-// `;
-
-// const PhotoAddBtn = styled.button`
-//     width: 3rem;
-//     height: 3rem;
-//     font-size: 1.5rem;
-//     border: none;
-//     border-radius: 50%;
-//     background: black;
-//     color: white;
-//     cursor: pointer;
-//     padding: 1rem;
-//     position: relative;
-//     margin-left: auto;
-//     margin-top: auto;
-// `;
-
 const CenterWrapper = styled.div`
     width: 100%;
     display: flex;
@@ -107,19 +69,25 @@ const CenterWrapper = styled.div`
 
 const ButtonWrapper = styled.button`
     flex: 1;
-    padding: 0.5rem auto;
-    border-radius: 5px;
+    padding: 0 auto;
+    border-radius: 10px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${palette.orange};
     cursor: pointer;
     margin-top: 0.5rem;
-    border: 1px solid darkred;
+    color: white;
     & + & {
         margin-left: 0.5rem;
     }
     &:hover {
         background: darkred;
+    }
+    &:first-child {
+        background-color: ${palette.navy};
+    }
+    &:last-child {
+        background-color: ${palette.orange};
+
     }
 `;
 
@@ -136,9 +104,9 @@ const RadioBtnWrapper = styled.div`
         background-color: lightgray;
         padding-top: 0.75rem;
         padding-bottom: 0.75rem;
-        border-radius: 5px;
+        border-radius: 10px;
+        color: white;
         cursor: pointer;
-        border: 1px solid gray;
         text-align: center;
     }
     input + .radiobtn:last-child {
@@ -146,7 +114,6 @@ const RadioBtnWrapper = styled.div`
     }
     input:checked + .radiobtn {
         background-color: ${palette.orange};
-        border: 1px solid darkred;
     }
 `;
 
@@ -307,7 +274,7 @@ const CatsAdd = ({}) => {
                     </div>
                     {/* 버튼 */}
                     <CenterWrapper>
-                        <ButtonWrapper onClick={goBack}>취소</ButtonWrapper>
+                        <ButtonWrapper onClick={goBack}  type="button">취소</ButtonWrapper>
                         <ButtonWrapper htmlType="submit">등록</ButtonWrapper>
                     </CenterWrapper>
                 </form>

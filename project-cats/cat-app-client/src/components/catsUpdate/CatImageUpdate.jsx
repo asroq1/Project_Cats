@@ -14,49 +14,51 @@ import { SET_CURRENT_IMAGE } from '../../reducers/cat';
 import 'font-awesome/css/font-awesome.min.css';
 
 const InnerGlobal = styled.div`
-    width: 90%;
-    margin: 0 auto;
-    margin-bottom:0.25rem;
-    display: flex;
+width: 80%;
+margin: 0 auto;
+margin-bottom:0.25rem;
+display: flex;
 `;
 
 const ImageUploadButtons = styled.button`
-    flex: 1;
-    padding: 0.5rem auto;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-    background-color: ${palette.orange};
-    cursor: pointer;
-    margin-top: 0.5rem;
-    border: 1px solid darkred;
-    & + & {
-        margin-left: 0.5rem;
-    }
-    &:hover {
-        background: darkred;
-    }
+flex: 1;
+padding: 0.5rem auto;
+
+border-radius:10px;
+font-size: 1rem;
+font-weight: bold;
+background-color: ${palette.orange};
+cursor: pointer;
+
+color: white;
+margin-top: 0.5rem;
+& + & {
+    margin-left: 0.5rem;
+}
+&:hover {
+    background: darkred;
+}
 `;
 
 const CenterWrapper = styled.div`
-    display: flex;
-    position: relative;
-    justify-content: end;
+width: 50%;
+display: flex;
+position: relative;
+justify-content: center;
 `;
 
 const CropperContainer = styled.div`
-    margin-top: 1rem;
-    height: 200px;
-    position: relative;
+margin-top: 1rem;
+height: 200px;
+position: relative;
 `;
 
 const SliderContainer = styled.div`
-    input[type='range'] {
-        //width: 100%;
-        padding: 1rem;
-        margin: 0.5rem;
-    }
-    width: 50%;
+input[type='range'] {
+    max-width: 50%;
+    padding: 1rem;
+    margin: 0.5rem;
+}
 `;
 
 const CatImageUpdate = ({currentCat}) => {
@@ -121,7 +123,7 @@ const CatImageUpdate = ({currentCat}) => {
         }
     };
 
-    const paddingStyle = useMemo(() => ({ paddingTop: '2rem' }), []);
+    const headerStyle = useMemo(() => ({ fontWeight: 'bold',paddingTop: '30px' , lineHeight: '1.5'}), []);
 
     const flexStyle = useMemo(
         () => ({ display: 'flex', justifyContent: 'center', height: '80px' }),
@@ -131,7 +133,7 @@ const CatImageUpdate = ({currentCat}) => {
 
     return (
         <>
-            <h2 style={paddingStyle}>
+            <h2 style={headerStyle}>
                 고양님에 대해
                 <br />
                 수정할까요?

@@ -50,7 +50,9 @@ export const ADD_CAT_REQUEST = 'ADD_CAT_REQUEST';
 export const ADD_CAT_SUCCESS = 'ADD_CAT_SUCCESS';
 export const ADD_CAT_FAILURE = 'ADD_CAT_FAILURE';
 
-
+export const DELETE_CAT_REQUEST = 'DELETE_CAT_REQUEST';
+export const DELETE_CAT_SUCCESS = 'DELETE_CAT_SUCCESS';
+export const DELETE_CAT_FAILURE = 'DELETE_CAT_FAILURE';
 
 export const UPDATE_CAT_REQUEST = 'UPDATE_CAT_REQUEST';
 export const UPDATE_CAT_SUCCESS = 'UPDATE_CAT_SUCCESS';
@@ -84,6 +86,18 @@ export const addCatSuccessAction = (data) => ({
 });
 export const addCatFailureAction = (data) => ({
     type: ADD_CAT_FAILURE,
+    data,
+});
+export const deleteCatRequestAction = (data) => ({
+    type: DELETE_CAT_REQUEST,
+    data,
+});
+export const deleteCatSuccessAction = (data) => ({
+    type: DELETE_CAT_SUCCESS,
+    data,
+});
+export const deleteCatFailureAction = (data) => ({
+    type: DELETE_CAT_FAILURE,
     data,
 });
 export const updateCatRequestAction = (data) => ({
@@ -159,10 +173,20 @@ const reducer = (state = initialState, action) => {
             case ADD_CAT_FAILURE:
                 break;
 
+            
+            case DELETE_CAT_REQUEST:
+                break;
+            case DELETE_CAT_SUCCESS:
+                
+                draft.cat = draft.cat.filter((v) => v.id !== action.data);
+                break;
+            case DELETE_CAT_FAILURE:
+                break;
+
             case UPDATE_CAT_REQUEST:
                 break;
             case UPDATE_CAT_SUCCESS:
-                draft.cat[draft.currentIndex] = action.data;
+                draft.cat[draft.currentIndex - 1] = action.data;
                 break;
             case UPDATE_CAT_FAILURE:
                 break;

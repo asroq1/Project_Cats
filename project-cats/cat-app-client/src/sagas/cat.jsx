@@ -8,6 +8,10 @@ import {
     ADD_CAT_REQUEST,
     ADD_CAT_SUCCESS,
     ADD_CAT_FAILURE,
+
+    DELETE_CAT_REQUEST,
+    DELETE_CAT_SUCCESS,
+    DELETE_CAT_FAILURE,
     UPDATE_CAT_REQUEST,
     UPDATE_CAT_SUCCESS,
     UPDATE_CAT_FAILURE,
@@ -63,9 +67,24 @@ function* addCat(action) {
     }
 }
 
+function deleteCatAPI(data) {
+    return axios.delete('/api/cats/{id}', data);
+}
 
-
-
+function* deleteCat(action) {
+    try {
+        //const result = yield call(deleteCatAPI, action.data);
+        yield put({
+            type: DELETE_CAT_SUCCESS,
+            data: action.data,
+        });
+    } catch (err) {
+        yield put({
+            type: DELETE_CAT_FAILURE,
+            data: err.response.data,
+        });
+    }
+}
 
 function updateCatAPI(data) {
     return axios.patch('/api/cat', data);
