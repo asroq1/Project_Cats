@@ -33,14 +33,16 @@ const EditBlock = styled.div`
 const StyledBlock = styled.div`
     display: flex;
     line-height: 1.5rem;
+    
     textarea,
     input {
+        margin-top: 1rem;
         width: 100%;
         font-size: 1rem;
         border: 1px solid gray;
-        padding: 0.5rem auto;
+        padding: 1rem;
 
-        border-radius: 5px;
+        border-radius: 10px;
         outline: none;
     }
     textarea {
@@ -69,9 +71,10 @@ const ImagesContainer = styled.div`
 
 const StyledButton = styled.button`
     flex: 1;
-    padding: 0 auto;
+    padding: 1rem;
     border-radius: 10px;
     color: white;
+    border:none; 
     
     background-color: ${palette.green};
     font-weight:bold;
@@ -102,8 +105,10 @@ const PreviewBox = styled.div`
     button {
         border-radius: 10px;
         border: 1px solid gray;
+        padding: 0.25rem;
         background-color: none;
 
+        margin-top: 0.5rem;
         width: 100%;
     }
 `;

@@ -17,17 +17,27 @@ import palette from '../../styles/palette';
 const InnerGlobal = styled.div`
     width: 80%;
     margin: 0 auto;
-`;
 
+    & > form > div > label {
+        visibility: hidden;
+    }
+`;
 const StyledInputBlock = styled.div`
     input {
         font-size: 1rem;
         border: 1px solid gray;
         background-color:white;
-        padding: 0.5rem auto;
+        padding: 1rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
         border-radius:10px;
         outline: none;
     }
+
+    label {
+        visibility: hidden;
+    }
+
     input-placeholder {
         text-align: center;
     }
@@ -69,8 +79,10 @@ const CenterWrapper = styled.div`
 
 const ButtonWrapper = styled.button`
     flex: 1;
-    padding: 0 auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     border-radius: 10px;
+    border: none;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
@@ -102,8 +114,8 @@ const RadioBtnWrapper = styled.div`
         flex: 1;
         display: inline-block;
         background-color: lightgray;
-        padding-top: 0.75rem;
-        padding-bottom: 0.75rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
         border-radius: 10px;
         color: white;
         cursor: pointer;
@@ -195,6 +207,7 @@ const CatsAdd = ({}) => {
                                 id="cat-name"
                                 name="cat-name"
                                 value={name}
+                                placeholder="Name"
                                 onChange={onChangeName}
                                 maxLength="50"
                                 required

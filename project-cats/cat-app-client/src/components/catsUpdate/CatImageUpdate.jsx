@@ -22,12 +22,13 @@ display: flex;
 
 const ImageUploadButtons = styled.button`
 flex: 1;
-padding: 0.5rem auto;
+padding:1rem;
 
 border-radius:10px;
 font-size: 1rem;
 font-weight: bold;
 background-color: ${palette.orange};
+border: none;
 cursor: pointer;
 
 color: white;
@@ -59,6 +60,7 @@ input[type='range'] {
     padding: 1rem;
     margin: 0.5rem;
 }
+
 `;
 
 const CatImageUpdate = ({currentCat}) => {

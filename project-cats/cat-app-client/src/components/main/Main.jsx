@@ -49,7 +49,9 @@ const PhotoContainer = styled.div`
 
 const ButtonWrapper = styled.button`
     width: 100%;
-    padding: 0.5rem auto;
+    padding-top:1rem;
+    padding-bottom: 1rem;
+    margin-bottom:0.75rem;
     border-radius: 5px;
     font-size: 1rem;
     font-weight: bold;
@@ -60,7 +62,6 @@ const ButtonWrapper = styled.button`
     &:hover {
         background: black;
     }
-    & + & {margin-top: 0.5rem;}
 `;
 
 

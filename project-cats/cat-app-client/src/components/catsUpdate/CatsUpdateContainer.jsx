@@ -17,7 +17,7 @@ const Global = styled.div`
     background-color:${palette.beige};
     max-width: 1200px;
     width: 100vw;
-    height: 100%;
+    min-height: 100vh;
     margin: 0 auto;
 
     h2 {

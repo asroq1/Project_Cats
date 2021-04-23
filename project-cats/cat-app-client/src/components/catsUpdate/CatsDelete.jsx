@@ -10,13 +10,16 @@ import palette from '../../styles/palette';
 // 스타일링된 input block
 const InnerGlobal = styled.div`
     width: 80%;
-    margin: 0 auto;
+    margin: 1rem auto;
 `;
 
 const ButtonWrapper = styled.button`
     width: 100%;
-    padding: 0.5rem auto;
 
+    
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border: none;
     border-radius:10px;
     font-size: 1rem;
     font-weight: bold;
