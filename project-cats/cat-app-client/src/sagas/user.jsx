@@ -22,19 +22,19 @@ import {
     SIGN_UP_SUCCESS,
 } from '../reducers/user';
 
-function signUpAPI() {
-    return axios.post('http://localhost:8080/api/signup');
+function signUpAPI(data) {
+    return axios.post('http://localhost:8080/api/signup', data);
 }
 
 function* signUp(action) {
     try {
-        console.log('SAGA SIGN UP');
-        const result = yield call(signUpAPI);
+        console.log('SAGA SIGN UP', action);
+        const result = yield call(signUpAPI, action.data);
         console.log('Res data :', action.data);
         yield delay(1000);
         yield put({
             type: SIGN_UP_SUCCESS,
-            data: action.data,
+            data: result.data,
         });
     } catch (err) {
         console.log('SAGA SIGN UP ERR', err);

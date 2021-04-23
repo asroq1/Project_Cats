@@ -5,6 +5,10 @@ export const initialState = {
     addWeightSuccess: false,
     addWeightFailure: null,
 
+    getWeightSuccess: false,
+    getWeightFailure: false,
+    getWeighRequest: false,
+
     catWeight: null,
     user: {
         isLoggedIn: true,
@@ -88,7 +92,11 @@ export const ADD_CAT_FAILURE = 'ADD_CAT_FAILURE';
 
 export const SET_CURRENT_CAT = 'SET_CURRENT_CAT';
 
-export const SET_CURRENT_IMAGE = 'SET_CURRENT_IMAGE'
+export const SET_CURRENT_IMAGE = 'SET_CURRENT_IMAGE';
+
+export const GET_WEIGHT_REQUEST = 'GET_WEIGHT_REQUEST';
+export const GET_WEIGHT_SUCCESS = 'GET_WEIGHT_SUCCESS';
+export const GET_WEIGHT_FAILURE = 'GET_WEIGHT_FAILURE';
 
 export const getCatRequestAction = (data) => ({
     type: GET_CAT_REQUEST,
@@ -140,16 +148,34 @@ export const setCurrentCat = (data) => {
     return {
         type: SET_CURRENT_CAT,
         data,
-    }
-}
+    };
+};
 
 export const setCurrentImage = (data) => {
     return {
         type: SET_CURRENT_IMAGE,
         data,
-    }
-}
+    };
+};
 
+export const getWeightRequest = (data) => {
+    return {
+        type: getWeightRequest,
+        data,
+    };
+};
+export const getWeightSuccess = (data) => {
+    return {
+        type: getWeightSuccess,
+        data,
+    };
+};
+export const getWeightFailure = (data) => {
+    return {
+        type: getWeightFailure,
+        data,
+    };
+};
 // 리듀서는
 // 이전 상태를 액션을 통해 다음 상태로 만드는 함수
 // 단 불변성은 지켜야 함
@@ -198,6 +224,19 @@ const reducer = (state = initialState, action) => {
             case SET_CURRENT_IMAGE:
                 draft.currImgUrl = action.data;
                 break;
+
+            case GET_WEIGHT_REQUEST:
+                draft.isLoading = true;
+                break;
+
+            // case GET_WEIGHT_SUCCESS:
+            //     draft.isLoading - false;
+            //     draft.cat = action.data;
+            //     break;
+
+            case GET_WEIGHT_FAILURE:
+                break;
+
             default:
                 break;
         }

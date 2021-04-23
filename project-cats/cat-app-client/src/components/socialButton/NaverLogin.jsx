@@ -1,6 +1,18 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router';
+import styled from 'styled-components';
 import styles from '../../styles/NaverLogin.module.css';
+import palette from '../../styles/palette';
+
+const NaverButton = styled.button`
+    width: 49%;
+    background-color: ${palette.beige};
+    border: none;
+    img {
+        width: 100%;
+        margin: 0.5rem 0 0.5rem 0;
+    }
+`;
 const NaverLogin = () => {
     const { naver } = window;
     const location = useLocation();
@@ -30,7 +42,7 @@ const NaverLogin = () => {
     });
     return (
         <>
-            <div id="naverIdLogin" className={styles.naver__logo} />
+            <NaverButton id="naverIdLogin" className={styles.naver__logo} />
         </>
     );
 };

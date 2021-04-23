@@ -21,8 +21,8 @@ function App() {
             <Reset />
             <Route path="/" component={index} exact />
             <Route path="/user/signup" component={signUp} exact />
-            <Route path="/user/signup/naver" component={KakaLogin} />
-            <Route path="/user/signup/kakao" component={NaverLogin} />
+            <Route path="/user/signup/naver" component={NaverLogin} />
+            <Route path="/user/signup/kakao" component={KakaLogin} />
             <Route path="/cat/data" component={weightResult} />
             <Route path="/cat/record" component={weightAdd} />
             <Route path="/cat/add" component={catAdd} />
