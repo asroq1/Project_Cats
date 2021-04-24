@@ -30,13 +30,16 @@ public class CatController {
     @PostMapping
     public ResponseEntity add(CatDto.Request cat) {
         Long userId = SecurityUtil.getCurrentUserId().orElseThrow(
-            () -> new RuntimeException("고양이를 추가하려면 로그인해주세요."));
+            () -> new RuntimeException("로그인을 해주세요."));
         catService.save(userId, cat);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<CatDto.Response>> list(Long userId) {
+    public ResponseEntity<List<CatDto.Response>> list() {
+        Long userId = SecurityUtil.getCurrentUserId().orElseThrow(
+            () -> new RuntimeException("로그인을 해주세요.")
+        );
         List<CatDto.Response> list = catService.listByUserId(userId);
         return ResponseEntity.ok().body(list);
     }
@@ -47,8 +50,8 @@ public class CatController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity modify(@PathVariable Long id, @RequestBody CatDto.Request catRequest) {
-        catService.modify(id, catRequest);
+    public ResponseEntity modify(@PathVariable Long catId, @RequestBody CatDto.Request catRequest) {
+        catService.modify(catId, catRequest);
         return ResponseEntity.ok().build();
     }
 

@@ -11,13 +11,13 @@ public class RecordDto {
     @Builder
     @Getter
     public static class Response {
-        private Long id;
+        private Long catId;
         private Date createdDate;
         private float weight;
 
         public static Response ofEntity(Record record) {
             return Response.builder()
-                .id(record.getId())
+                .catId(record.getCatId())
                 .createdDate(record.getCreateDate())
                 .weight(record.getWeight()).build();
         }
