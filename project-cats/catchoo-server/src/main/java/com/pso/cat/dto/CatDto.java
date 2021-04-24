@@ -8,7 +8,6 @@ import com.pso.cat.entity.Record;
 import java.util.Date;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,14 +34,14 @@ public class CatDto {
     @Getter
     @Builder
     public static class Response {
-        private Long id;
-        private String name;
-        private char gender;
-        private String photo;
+        private final Long id;
+        private final String name;
+        private final char gender;
+        private final String photo;
         @JsonFormat(pattern = "yyyy-MM-dd")
-        private Date birth;
+        private final Date birth;
         @JsonInclude(Include.NON_NULL)
-        private RecordDto.Response recentRecord;
+        private final RecordDto.Response recentRecord;
 
         public static Response ofEntity(Cat cat, Record recentRecord) {
             return Response.builder()

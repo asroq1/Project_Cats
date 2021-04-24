@@ -2,7 +2,6 @@ package com.pso.cat.dto;
 
 import com.pso.cat.dto.UserDto.WriterResponse;
 import com.pso.cat.entity.Comment;
-import com.pso.cat.entity.User;
 import java.util.Date;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,10 +16,9 @@ public class CommentDto {
         private Long postId;
         private String content;
 
-        public Comment toEntity(Long userId) {
+        public Comment toEntity() {
             return Comment.builder()
                 .postId(postId)
-                .writer(User.builder().id(userId).build())
                 .content(this.getContent())
                 .build();
         }
@@ -30,12 +28,12 @@ public class CommentDto {
     @Getter
     public static class Response {
 
-        private Long id;
-        private Long postId;
-        private String content;
-        private WriterResponse writer;
-        private Date createdDate;
-        private Boolean isEdited;
+        private final Long id;
+        private final Long postId;
+        private final String content;
+        private final WriterResponse writer;
+        private final Date createdDate;
+        private final Boolean isEdited;
 
         public static Response ofEntity(Comment comment) {
             return Response.builder()

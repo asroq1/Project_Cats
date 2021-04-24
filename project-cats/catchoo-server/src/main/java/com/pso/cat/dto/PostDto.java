@@ -2,11 +2,9 @@ package com.pso.cat.dto;
 
 import com.pso.cat.dto.UserDto.WriterResponse;
 import com.pso.cat.entity.Post;
-import com.pso.cat.entity.User;
 import java.util.Date;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 public class PostDto {
@@ -32,13 +30,13 @@ public class PostDto {
     @Getter
     public static class Response {
 
-        private Long id;
-        private String title;
-        private String content;
-        private int viewCount;
-        private UserDto.WriterResponse writer;
-        private Date createdDate;
-        private Date updatedDate;
+        private final Long id;
+        private final String title;
+        private final String content;
+        private final int viewCount;
+        private final UserDto.WriterResponse writer;
+        private final Date createdDate;
+        private final Date updatedDate;
 
         public static Response ofEntity(Post post) {
             return Response.builder()
