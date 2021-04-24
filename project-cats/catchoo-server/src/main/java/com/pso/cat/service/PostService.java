@@ -24,12 +24,12 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public PostDto.Response read(Long id) {
+    public PostDto.SingleResponse read(Long id) {
         Optional<Post> post = postRepository.findById(id);
         post.ifPresent(p -> {
             postRepository.updateViewCount(p.getId());
         });
-        return PostDto.Response.ofEntity(post.get());
+        return PostDto.SingleResponse.ofEntity(post.get());
     }
 
     @Transactional
@@ -44,9 +44,9 @@ public class PostService {
         postRepository.inactive(id);
     }
 
-    public List<PostDto.Response> list() {
+    public List<PostDto.ListResponse> list() {
         return postRepository
             .findAllByStateOrderByCreatedDateDesc(1)
-            .stream().map(post -> PostDto.Response.ofEntity(post)).collect(Collectors.toList());
+            .stream().map(post -> PostDto.ListResponse.ofEntity(post)).collect(Collectors.toList());
     }
 }
