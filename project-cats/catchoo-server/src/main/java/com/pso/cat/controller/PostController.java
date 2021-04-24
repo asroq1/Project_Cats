@@ -2,8 +2,7 @@ package com.pso.cat.controller;
 
 
 import com.pso.cat.dto.PostDto;
-import com.pso.cat.dto.PostDto.Response;
-import com.pso.cat.entity.Post;
+import com.pso.cat.dto.PostDto.ListResponse;
 import com.pso.cat.service.PostService;
 import com.pso.cat.util.SecurityUtil;
 import io.swagger.annotations.Api;
@@ -38,13 +37,13 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Response>> list() {
-        List<PostDto.Response> list = postService.list();
+    public ResponseEntity<List<PostDto.ListResponse>> list() {
+        List<ListResponse> list = postService.list();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PostDto.Response> get(@PathVariable Long id) {
+    public ResponseEntity<PostDto.SingleResponse> get(@PathVariable Long id) {
         return ResponseEntity.ok().body(postService.read(id));
     }
 

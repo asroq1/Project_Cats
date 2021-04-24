@@ -44,7 +44,6 @@ public class UserDto {
     public static class WriterResponse {
         private final Long id;
         private final String nickname;
-        private final String photo;
 
         public static WriterResponse ofEntity(User user) {
             return WriterResponse.builder()

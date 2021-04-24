@@ -1,6 +1,7 @@
 package com.pso.cat.service;
 
 import com.pso.cat.dto.CommentDto;
+import com.pso.cat.dto.CommentDto.Response;
 import com.pso.cat.dto.PostDto;
 import com.pso.cat.entity.Comment;
 import com.pso.cat.entity.Post;
@@ -47,6 +48,6 @@ public class CommentService {
     public List<CommentDto.Response> list(Long postId) {
         return commentRepository
             .findAllByPostIdAndStateOrderByCreatedDateDesc(postId, 1)
-            .stream().map(comment -> CommentDto.Response.ofEntity(comment)).collect(Collectors.toList());
+            .stream().map(Response::ofEntity).collect(Collectors.toList());
     }
 }
