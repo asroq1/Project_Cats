@@ -85,16 +85,19 @@ const CatImageUpload = ({}) => {
 
     const showCroppedImage = useCallback(async () => {
         try {
-            const croppedImage = await getCroppedImg(
+            const [toSave, blobURL] = await getCroppedImg(
                 imageSrc,
                 croppedAreaPixels
             );
-            console.log('donee', { croppedImage });
-            setCroppedImage(croppedImage);
+
+            console.log('donee', { blobURL });
+            setCroppedImage(blobURL);
+            
             dispatch({
                 type: SET_CURRENT_IMAGE,
-                data: croppedImage,
+                data: toSave,
             });
+
         } catch (e) {
             console.error(e);
         }

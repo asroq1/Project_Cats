@@ -52,13 +52,16 @@ export async function getCroppedImg(imageSrc, pixelCrop, rotation = 0) {
     Math.round(0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y)
   )
 
-  // As Base64 string
-  // return canvas.toDataURL('image/jpeg');
+ 
+  //As Base64 string
+  const toSave =  canvas.toDataURL('image/jpeg');
 
-  // As a blob
-  return new Promise((resolve) => {
+  //As a blob
+  const blobURL =  await new Promise((resolve) => {
     canvas.toBlob((file) => {
       resolve(URL.createObjectURL(file))
     }, 'image/png')
   })
+
+  return [toSave, blobURL];
 }
