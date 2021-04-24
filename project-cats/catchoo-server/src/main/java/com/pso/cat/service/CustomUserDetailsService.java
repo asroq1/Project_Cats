@@ -1,8 +1,8 @@
 package com.pso.cat.service;
 
 import com.pso.cat.entity.User;
+import com.pso.cat.jwt.JwtUser;
 import com.pso.cat.repository.UserRepository;
-import com.pso.cat.security.CustomUserDetails;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -11,48 +11,52 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 @Component("userDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public CustomUserDetailsService(UserRepository userRepository) {
+    public CustomUserDetailsService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     @Transactional
-    public CustomUserDetails loadUserByUsername(final String username) {
-        return userRepository.findOneWithAuthoritiesByEmail(username)
-            .map(user -> createUser(username, user))
-            .orElseThrow(() -> new UsernameNotFoundException(username + " -> 데이터베이스에서 찾을 수 없습니다."));
+    public UserDetails loadUserByUsername(final String username) {
+        return new JwtUser(findByEmail(username));
     }
 
-    public User findByUserIdAndUserPassword(String userId, String password) {
-        User user = userRepository.findByEmailAndPassword(userId, password);
-        this.validate(user);
+
+    public User findByEmail(String email) {
+        return userRepository.findOneWithAuthoritiesByEmail(email)
+            .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 Email입니다."));
+    }
+
+    public User findByEmailAndPassword(String email, String password) {
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 Email입니다."));
+
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
+        }
+
         return user;
     }
 
-    private CustomUserDetails createUser(String username, User user) {
+    private org.springframework.security.core.userdetails.User createUser(String username, User user) {
         if (!user.isActivated()) {
             throw new RuntimeException(username + " -> 활성화되어 있지 않습니다.");
         }
         List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
             .map(authority -> new SimpleGrantedAuthority(authority.getName()))
             .collect(Collectors.toList());
-        CustomUserDetails customUserDetails = new CustomUserDetails(user.getEmail(), user.getPassword(), grantedAuthorities);
-        customUserDetails.setId(user.getId());
-        customUserDetails.setNickname(user.getNickname());
-        return customUserDetails;
+        return new org.springframework.security.core.userdetails.User(user.getEmail(),
+            user.getPassword(),
+            grantedAuthorities);
     }
 
-    private void validate(User user){
-        if(Objects.isNull(user) || StringUtils.isEmpty(user.getPassword())){
-            throw new RuntimeException("일치하는 정보가 없습니다.");
-        }
-    }
 }
