@@ -59,14 +59,17 @@ const Main = () => {
                 currentIndex={currentIndex}
                 onSelect={onSelect}
             />
-            {(!isLoading) &&
-                (cat.length > 0 ? (
+            {/* {(!isLoading) && */}
+                {(cat.length > 0 ? (
                     <MainComponent cat={cat} currentIndex={currentIndex} age={getAge()} />
                 ) : (
                     
                     <MainEmptyComponent></MainEmptyComponent>
                 )
-            )}
+
+                )
+}
+            {/* )} */}
         </div>
         </>
     );

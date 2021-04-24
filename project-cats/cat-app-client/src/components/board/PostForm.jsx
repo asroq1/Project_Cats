@@ -154,7 +154,6 @@ const PostForm = () => {
                     });
                 };
                 reader.readAsDataURL(file);
-                // reader.readAsBinaryString(file);
             });
         },
         [imagePaths]

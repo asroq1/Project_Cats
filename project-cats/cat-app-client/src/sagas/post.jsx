@@ -7,7 +7,9 @@ import {
     REMOVE_POST_REQUEST, REMOVE_POST_SUCCESS, REMOVE_POST_FAILURE,
     READ_POST_REQUEST, READ_POST_SUCCESS, READ_POST_FAILURE,
     
-    LIST_POST_REQUEST,LIST_POST_SUCCESS, LIST_POST_FAILURE
+    LIST_POST_REQUEST,LIST_POST_SUCCESS, LIST_POST_FAILURE,
+
+    ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE,
 } from '../reducers/post';
 
 function addPostAPI(data){
@@ -102,6 +104,27 @@ function* listPost(action){
     }
 }
 
+function addCommentAPI(page){
+    return axios.get(`/api/post/${page}`);
+}
+
+
+function* addComment(action){
+    try {
+        //const result= yield call(listPostAPI, action.data);
+        yield put({
+            type: ADD_COMMENT_SUCCESS,
+            data: action.data,
+        })
+    
+    } catch(err){
+        yield put({
+            type: ADD_COMMENT_FAILURE,
+            data: err.response.data,
+        })
+    }
+}
+
 function* watchAddPost(){
     yield takeLatest(ADD_POST_REQUEST, addPost);
 }
@@ -118,10 +141,18 @@ function* watchListPost(){
     yield takeLatest(LIST_POST_REQUEST, listPost);
 }
 
+function* watchAddComment(){
+
+
+    yield takeLatest(ADD_COMMENT_REQUEST,addComment);
+}
+
 export default function* postSaga(){
     yield all([
         fork(watchAddPost),   
         fork(watchRemovePost),
-        fork(watchReadPost)
+        fork(watchReadPost),
+
+        fork(watchAddComment),
     ]);
 }

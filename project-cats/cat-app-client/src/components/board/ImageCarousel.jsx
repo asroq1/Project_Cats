@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Slick from 'react-slick';
 
 import Slider from 'react-slick';
 
@@ -9,7 +8,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-export const SlickWrapper = styled.div`
+const SlickWrapper = styled.div`
 
     margin-top: 1rem;
     padding-top: 2rem;
@@ -18,19 +17,28 @@ export const SlickWrapper = styled.div`
     background: lightgray;
 
     border-radius: 10px;
+
+    .slider-initialized {
+        overflow:hidden;
+    }
+
+    
 `;
 
-export const ImgWrapper = styled.div`
+const ImgWrapper = styled.div`
     // padding: 2rem;
     text-align: center;
 
     & img {
         margin: 0 auto;
-        max-height: 200px;
+        max-height: 250px;
+        max-width: 250px;
+        object-fit: contain;
+        overflow: hidden;
     }
 `;
 
-export const Indicator = styled.div`
+const Indicator = styled.div`
     text-align: center;
 
     & > div {
@@ -46,10 +54,12 @@ export const Indicator = styled.div`
     }
 `;
 
-export const Global = createGlobalStyle`
+const Global = createGlobalStyle`
     .slick-slide {
         display: inline-block;
     }
+
+    
 `;
 
 const ImageCarousel = ({ images }) => {
