@@ -7,15 +7,18 @@ import 'font-awesome/css/font-awesome.min.css'
 
 
 const Global = styled.div`
-    display: flex;
     background-color: ${palette.beige};
     max-width: 1200px;
     width: 100vw;
-    height: 100vh;
-    margin: 0 auto;
+    height: calc(100vh - 32px);
+    display: flex;
+    text-align:center;
 
-    justify-content: center;
-    align-items: center;
+    div {
+        margin:auto;
+    }
+
+
 
     @media screen and (max-width: 768px) {
         width: 100vw;
@@ -24,10 +27,15 @@ const Global = styled.div`
 
 const MainEmpty = () => {
     return (
+        <>
         <Global>
+            <div>
             <i className="fa fa-heart"></i>
-           귀여운 고양이를 추가해 주세용!
+           <h1>귀여운 고양이를 추가해 주세용!</h1>
+
+        </div>
         </Global>
+        </>
     );
 };
 
