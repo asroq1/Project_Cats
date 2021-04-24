@@ -17,13 +17,11 @@ public class PostDto {
 
         private String title;
         private String content;
-        private Long writerId;
 
         public Post toEntity() {
             return Post.builder()
                 .title(this.getTitle())
                 .content(this.getContent())
-                .writer(User.builder().id(this.getWriterId()).build())
                 .build();
         }
     }
