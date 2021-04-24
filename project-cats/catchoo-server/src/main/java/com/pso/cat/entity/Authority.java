@@ -20,4 +20,8 @@ public class Authority {
     @Id
     @Column(name = "name", length = 50)
     private String name;
+
+    public String toString() {
+        return name;
+    }
 }
