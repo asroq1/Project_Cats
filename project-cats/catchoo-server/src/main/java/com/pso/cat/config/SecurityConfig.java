@@ -68,8 +68,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         "/api/signup",
 
         // test
-        "/api/cats/**",
-        "/api/records/**",
         "/api/users/**",
         "/api/posts/**",
 

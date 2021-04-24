@@ -31,7 +31,7 @@ public class PostController {
     @PostMapping
     public ResponseEntity add(PostDto.Request post) {
         Long userId = SecurityUtil.getCurrentUserId().orElseThrow(
-            () -> new RuntimeException("게시글 작성에는 로그인이 필요합니다.")
+            () -> new RuntimeException("로그인을 해주세요.")
         );
         postService.save(userId, post);
         return ResponseEntity.ok().build();
