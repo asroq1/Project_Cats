@@ -4,6 +4,7 @@ package com.pso.cat.controller;
 import com.pso.cat.entity.Cat;
 import com.pso.cat.dto.CatDto;
 import com.pso.cat.service.CatService;
+import com.pso.cat.util.SecurityUtil;
 import io.swagger.annotations.Api;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,9 @@ public class CatController {
 
     @PostMapping
     public ResponseEntity add(CatDto.Request cat) {
-        catService.save(cat);
+        Long userId = SecurityUtil.getCurrentUserId().orElseThrow(
+            () -> new RuntimeException("고양이를 추가하려면 로그인해주세요."));
+        catService.save(userId, cat);
         return ResponseEntity.ok().build();
     }
 

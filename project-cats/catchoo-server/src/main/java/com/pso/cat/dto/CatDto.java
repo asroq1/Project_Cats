@@ -8,21 +8,23 @@ import com.pso.cat.entity.Record;
 import java.util.Date;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class CatDto {
 
     @Getter
-    @Builder
+    @Setter
     public static class Request {
-        private Long id;
         private String name;
         private char gender;
         private String photo;
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
         private Date birth;
 
         public Cat toEntity() {
             return Cat.builder()
-                .id(this.getId())
                 .name(this.getName())
                 .gender(this.getGender())
                 .photo(this.getPhoto())
