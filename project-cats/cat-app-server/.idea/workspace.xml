@@ -5,56 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f09083d-9c81-4f0a-885c-dac30150dcd3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/CatApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/config/AppConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/config/CorsConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/config/SwaggerConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/controller/AuthController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/controller/CatController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/controller/PostController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/controller/RecordController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/controller/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/dto/CatDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/dto/LoginDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/dto/PostDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/dto/RecordDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/dto/TokenDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/dto/UserDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/entity/Authority.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/entity/Cat.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/entity/Post.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/entity/Record.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/jwt/JwtAccessDeniedHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/jwt/JwtAuthenticationEntryPoint.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/jwt/JwtFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/jwt/JwtSecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/jwt/TokenProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/repository/CatRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/repository/PostRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/repository/RecordRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/repository/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/service/CatService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/service/CustomUserDetailsService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/service/PostService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/service/RecordService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/service/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pso/cat/util/SecurityUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/pso/cat/CatApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.." beforeDir="false" afterPath="$PROJECT_DIR$/../.." afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/App.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/components/catsAdd/CatsAdd.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/components/index/LoginForm.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/components/index/OtherForm.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/components/main/Main.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/components/signUp/OtherForm.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/components/signUp/SignUpForm.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/components/weightAdd/AddWeight.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/components/weightResult/WeightResult.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/components/weightResult/WeightResultGraph.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/components/weightResult/WeightResultTable.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/pages/catsAdd.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/pages/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/pages/main.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/pages/signUp.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/pages/weightAdd.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/pages/weightResult.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../yarn.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -127,6 +111,9 @@
       </RecentBranches>
     </option>
   </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
   <component name="ProjectId" id="1qhiQDyMWMGSFOlKMiqBZMsz5Hp" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -146,6 +133,12 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.0" />
@@ -172,19 +165,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.CatApplication">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="AppConfig" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -201,9 +181,7 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
     <configuration name="AppConfigTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -222,9 +200,7 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
     <configuration name="CatServiceTest.save" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -243,9 +219,7 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
     <configuration name="CatAppServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -308,6 +282,7 @@
       <workItem from="1618897049321" duration="8099000" />
       <workItem from="1618913948006" duration="7741000" />
       <workItem from="1618963328053" duration="7969000" />
+      <workItem from="1619251592592" duration="656000" />
     </task>
     <servers />
   </component>
