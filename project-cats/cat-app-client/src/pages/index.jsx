@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import LoginForm from '../components/index/LoginForm';
-import styles from '../styles/index.module.css';
 import palette from '../styles/palette';
 
 const IndexContainer = styled.div`
@@ -61,19 +60,26 @@ const DivdeText = styled.div`
     text-align: center;
     color: ${palette.borderColor};
 `;
+
+const Logo = styled.img`
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    width: 30%;
+    height: 25vh;
+    @media ${(props) => props.theme.mobile} {
+        width: 85vw;
+    }
+`;
 const index = () => {
     return (
         <div>
             <IndexContainer>
-                <div className={styles.logo__wrapper}>
+                <LogoWrapper>
                     <Link to="/">
-                        <img
-                            src="/image/cats.png"
-                            alt="logo"
-                            className={styles.logo}
-                        />
+                        <Logo src="/image/cats.png" alt="logo" />
                     </Link>
-                </div>
+                </LogoWrapper>
                 <article>
                     <LoginForm />
                     <DivdeContainer>
