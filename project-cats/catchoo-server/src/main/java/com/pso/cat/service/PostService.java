@@ -17,8 +17,15 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
+<<<<<<< HEAD
+    public Post save(Long userId, PostDto.Request postDto) {
+        Post post = postDto.toEntity();
+        post.setWriter(User.builder().id(userId).build());
+        return postRepository.save(post);
+=======
     public Post save(PostDto.Request post) {
         return postRepository.save(post.toEntity());
+>>>>>>> 5d4f34166559408907d3291a7bf2e12629d6b055
     }
 
     public PostDto.Response read(Long id) {
