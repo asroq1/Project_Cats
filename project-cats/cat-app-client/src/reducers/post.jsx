@@ -32,6 +32,15 @@ export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST';
 export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS';
 export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE';
 
+
+export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
+export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
+export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
+
+export const REMOVE_COMMENT_REQUEST = 'REMOVE_COMMENT_REQUEST'
+export const REMOVE_COMMENT_SUCCESS = 'REMOVE_COMMENT_SUCCESS'
+export const REMOVE_COMMENT_FAILURE = 'REMOVE_COMMENT_FAILURE'
+
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 
 const initialState = {
@@ -55,7 +64,7 @@ const initialState = {
                 {
                     id: shortId.generate(),
                     src:
-                        'https://lh3.googleusercontent.com/proxy/dzh0rzyuW-6TWnJqTubXnRcC8QHGdE8lgyzmf4AvR3Rby4lKs0DVXgOBD7poTaf-NCYdawli6prvNGvnEW49-bvbX1qdsC3KFP55SoHk2XSItdyRwy1POX_Nk0_58kOIn8b5h6ogrdZ8RVFObNjpSA-cm2eJff9pHRKzigpi00Rwsrle_991qA',
+                        'https://imgnn.seoul.co.kr/img/upload/2019/01/30/SSI_20190130171000_V.jpg',
                 },
                 {
                     id: shortId.generate(),
@@ -188,6 +197,10 @@ const initialState = {
     currentPost: null,
     listPosts: null,
     error: null,
+    
+    addCommentLoading: false,
+    addCommentDone: false,
+    addCommentError: null, 
 };
 
 export const addPost = (data) => ({
@@ -202,6 +215,15 @@ export const readPost = (data) => ({
 
 export const listPost = (data) => ({
     type: LIST_POST_REQUEST,
+    data,
+})
+
+
+
+
+
+export const addComment = (data) => ({
+    type: ADD_COMMENT_REQUEST,
     data,
 })
 
@@ -263,6 +285,35 @@ const reducer = (state = initialState, action) => {
                 );
                 break;
             case REMOVE_POST_FAILURE:
+                break;
+
+
+            case ADD_COMMENT_REQUEST:
+                draft.addCommentLoading = true;
+                draft.addCommentDone =  false;
+                draft.addCommentError =  null
+                break;
+            case ADD_COMMENT_SUCCESS:
+                
+                const post = draft.mainPosts.find((v) => v.id === action.data.postId);
+                post.Comments.unshift(action.data);
+                draft.addCommentLoading = false;
+                draft.addCommentDone = true;
+                break;
+            case ADD_COMMENT_FAILURE:
+
+                draft.addCommentLoading = false;
+                draft.addCommentError = action.error;
+                break;
+
+            case REMOVE_COMMENT_REQUEST:
+                break;
+            case REMOVE_COMMENT_SUCCESS:
+                draft.mainPosts.Comments[action.data.i] = draft.mainPosts.Commments[action.data.i].filter(
+                    (v) => v.key !== action.data.key
+                );    
+                break;
+            case REMOVE_COMMENT_FAILURE:
                 break;
             case UPLOAD_IMAGES_REQUEST:
                 break;
