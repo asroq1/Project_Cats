@@ -1,6 +1,8 @@
 package com.pso.cat.entity;
 
+import com.google.common.collect.ImmutableMap;
 import java.util.Date;
+import java.util.Map;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -59,6 +61,14 @@ public class User {
 
     public boolean isActivated() {
         return this.state == 1;
+    }
+
+    public Map<String,Object> toClaims(){
+        return ImmutableMap.<String,Object>builder()
+            .put("id"    , getId())
+            .put("email"     , getEmail())
+            .put("nickname"   , getNickname())
+            .build();
     }
 
 }
