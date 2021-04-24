@@ -1,30 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from '../../styles/AddWeightHeader.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import styled from 'styled-components';
+import palette from '../../styles/palette';
+
+const Header = styled.header`
+    height: 5vh;
+    background-color: ${palette.beige};
+`;
+const ExitButton = styled.p`
+position: fixed;
+    right: 0;
+    font-size: 2rem;
+    padding: 0.5rem;
+
+    a{
+        color: ${palette.navy}
+    }
+    
+}
+`;
 const AddWeightHeader = () => {
     return (
-        <header>
-            <div className={styles.header}>
-                <Link to="/">
-                    <img
-                        src="/image/default.png"
-                        alt="logo"
-                        className={styles.logo}
-                    />
+        <Header>
+            <ExitButton>
+                <Link to="/user/main">
+                    <FontAwesomeIcon icon={faArrowRight} />
                 </Link>
-                <h2>체중 측정하기</h2>
-                <span className={styles.exit__btn}>
-                    <Link to="/user/main">
-                        <FontAwesomeIcon
-                            icon={faArrowRight}
-                            className={styles.icon}
-                        />
-                    </Link>
-                </span>
-            </div>
-        </header>
+            </ExitButton>
+        </Header>
     );
 };
 
