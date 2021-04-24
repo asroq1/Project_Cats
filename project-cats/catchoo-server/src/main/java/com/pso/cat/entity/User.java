@@ -1,7 +1,11 @@
 package com.pso.cat.entity;
 
 import com.google.common.collect.ImmutableMap;
+import io.jsonwebtoken.Claims;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.persistence.Column;
@@ -18,6 +22,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity(name = "user")
@@ -67,8 +72,17 @@ public class User {
         return ImmutableMap.<String,Object>builder()
             .put("id"    , getId())
             .put("email"     , getEmail())
-            .put("nickname"   , getNickname())
+            .put("nickname" , getNickname())
+            .put("auth", StringUtils.join(getAuthorities(), ","))
             .build();
     }
 
+    public static User valueOf(Claims claims) {
+
+        return User.builder()
+            .id(Long.valueOf(claims.get("id").toString()))
+            .email((String) claims.get("email"))
+            .nickname((String) claims.get("nickname"))
+            .build();
+    }
 }

@@ -20,7 +20,6 @@ public class CatDto {
         private String photo;
         private Date birth;
 
-
         public Cat toEntity() {
             return Cat.builder()
                 .id(this.getId())

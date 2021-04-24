@@ -2,9 +2,7 @@ package com.pso.cat.service;
 
 import com.pso.cat.dto.PostDto;
 import com.pso.cat.entity.Post;
-import com.pso.cat.entity.User;
 import com.pso.cat.repository.PostRepository;
-import com.pso.cat.util.SecurityUtil;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,12 +17,8 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public Post save(PostDto.Request postDto) {
-        Post post = postDto.toEntity();
-        post.setWriter(User.builder()
-                    .id(SecurityUtil.getCurrentUserId().get())
-                    .build());
-        return postRepository.save(post);
+    public Post save(PostDto.Request post) {
+        return postRepository.save(post.toEntity());
     }
 
     public PostDto.Response read(Long id) {
