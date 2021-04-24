@@ -8,7 +8,7 @@ import {
     delay,
 } from 'redux-saga/effects';
 import axios from 'axios';
-import { useHistory } from 'react-router';
+import jwt from 'jsonwebtoken';
 
 import {
     LOG_OUT_FAILURE,
@@ -22,73 +22,93 @@ import {
     SIGN_UP_SUCCESS,
 } from '../reducers/user';
 
-function logInAPI(data) {
-    //로컬스토리지에 엑세스 토큰 저장
-    return axios
-        .post('/user/login', data)
-        .then((res) => {
-            const { accessToken } = res.data;
-            axios.defaults.headers.common[
-                'Authorization'
-            ] = `Bearer${accessToken}`;
-            // localStorage.setItem('jwtToken', accessToken);
-            // console.log('jwt토큰', accessToken);
-        })
-        .then(useHistory.push('/main'));
+function signUpAPI(data) {
+    return axios.post('http://localhost:8080/api/signup', data);
 }
 
-function* logIn(action) {
+function* signUp(action) {
     try {
-        // 백엔드 연동하면 넣을 코드
-        // const result = yield call(logInAPI, action.data);
-        yield delay(1000); // 백엔드 연동 안 됐기 때문에 딜레이하는 거 가짜로 표현하기 위함
-        yield put({
-            type: LOG_IN_SUCCESS,
-            data: action.data,
-        });
-    } catch (err) {
-        yield put({
-            type: LOG_IN_FAILURE,
-            error: err.response.data,
-        });
-    }
-}
-
-function logOutAPI() {
-    return axios.post('/api/logout');
-}
-
-function* logOut() {
-    try {
-        const result = yield call(logOutAPI);
-        yield delay(1000);
-        yield put({
-            type: LOG_OUT_SUCCESS,
-            data: result.data,
-        });
-    } catch (err) {
-        yield put({
-            type: LOG_OUT_FAILURE,
-            error: err.response.data,
-        });
-    }
-}
-
-function signUpAPI() {
-    return axios.post('/user/signup');
-}
-
-function* signUp() {
-    try {
-        const result = yield call(signUpAPI);
+        console.log('SAGA SIGN UP', action);
+        const result = yield call(signUpAPI, action.data);
+        console.log('Res data :', action.data);
         yield delay(1000);
         yield put({
             type: SIGN_UP_SUCCESS,
             data: result.data,
         });
     } catch (err) {
+        console.log('SAGA SIGN UP ERR', err);
         yield put({
             type: SIGN_UP_FAILURE,
+            error: err,
+        });
+    }
+}
+
+// 3
+function logInAPI(data) {
+    return (
+        axios
+            // CORS 문제 해결에 따라 줄 변경
+            //.post('/user/login', data)
+            .post('http://localhost:8080/api/authenticate', data)
+            .then((res) => {
+                console.log(res.data);
+                const { token } = res.data;
+                axios.defaults.headers.common[
+                    'Authorization'
+                ] = `Bearer${token}`;
+
+                // 현재 유저 아이디만 로컬 스토리지에 저장
+                const { id } = jwt.decode(token);
+                //CORS 문제 해결에 따라 아래 두 줄 중 하나 사용
+                localStorage.setItem('currentUser', id);
+                //localStorage.setItem('currentUser', 1);
+            })
+    );
+    // 이 부분 작동 x -> 알아볼 것
+    //.then(useHistory.push('/main'));
+}
+// 2 call은 동기 await역할 fork는 비동기
+function* logIn(action) {
+    try {
+        console.log('SAGA LOGIN');
+        //const result = yield call(logInAPI, action.data);
+        localStorage.setItem('currentUser', 1);
+
+        yield put({
+            type: LOG_IN_SUCCESS,
+            //로그인 구현 되면 data: result.data로 변경할 것
+            data: action.data,
+        });
+    } catch (err) {
+        console.log('SAGA LOGIN ERR', err);
+        yield put({
+            type: LOG_IN_FAILURE,
+            error: err,
+        });
+    }
+}
+
+function logOutAPI() {
+    return axios
+        .post('/api/logout')
+        .then(localStorage.removeItem('currentUser'));
+}
+
+function* logOut() {
+    try {
+        const result = yield call(logOutAPI);
+        yield delay(1000);
+        yield all([
+            put({
+                type: LOG_OUT_SUCCESS,
+                data: result.data,
+            }),
+        ]);
+    } catch (err) {
+        yield put({
+            type: LOG_OUT_FAILURE,
             error: err.response.data,
         });
     }
@@ -100,6 +120,7 @@ function* goToHome() {
     history.push('/');
 }
 
+//1.계속 감시하고 있다가 해당하는 Action이 발생하면 기다리고 있다가 얘가 실행된다. 2번째 인자의 함수가 실행.
 function* watchLogIn() {
     yield takeLatest(LOG_IN_REQUEST, logIn);
 }

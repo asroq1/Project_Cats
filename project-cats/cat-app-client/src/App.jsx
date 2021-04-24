@@ -6,12 +6,14 @@ import index from './pages/index';
 import weightResult from './pages/weightResult';
 import weightAdd from './pages/weightAdd';
 import catAdd from './pages/catAdd';
+import catUpdate from './pages/catUpdate';
 import main from './pages/main';
 import postWrite from './pages/postWrite';
 import postList from './pages/postList';
 import postView from './pages/postView';
 import Settings from './components/settings/setting';
-import SocialSignup from './components/signUp/SocialSignup';
+import KakaLogin from './pages/kakaoLogin';
+import NaverLogin from './pages/naverLogin';
 
 function App() {
     return (
@@ -20,10 +22,12 @@ function App() {
             <Reset />
             <Route path="/" component={index} exact />
             <Route path="/user/signup" component={signUp} exact />
-            <Route path="/user/signup/social" component={SocialSignup} />
+            <Route path="/user/signup/naver" component={NaverLogin} />
+            <Route path="/user/signup/kakao" component={KakaLogin} />
             <Route path="/cat/data" component={weightResult} />
             <Route path="/cat/record" component={weightAdd} />
             <Route path="/cat/add" component={catAdd} />
+            <Route path="/cat/update" component={catUpdate}/>
             <Route path="/user/main" component={main} />
             <Route path="/user/settings" component={Settings} />
             <Route path="/post/write" component={postWrite} />

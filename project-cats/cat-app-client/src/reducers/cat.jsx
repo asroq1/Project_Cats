@@ -1,80 +1,43 @@
 import product, { produce } from 'immer';
 
 export const initialState = {
+    addWeightRequest: false,
+    addWeightSuccess: false,
+    addWeightFailure: null,
+
+    getWeightSuccess: false,
+    getWeightFailure: false,
+    getWeighRequest: false,
+
+    catWeight: null,
     user: {
         isLoggedIn: true,
         user: 1,
     },
     cat: [
-        {
-            cat_id: 0,
-            user_id: 1,
-            name: 'Garfield',
-            gender: 'M',
-            Photo: {
-                file: '',
-                url:
-                    'https://welovekitties.com/wp-content/uploads/2015/12/cutekittenspictures-145124821648lcp.jpg',
-            },
-            birth: '2020-02-28',
-            Record: [
-                {
-                    cdt: '2021-03-30',
-                    wgt: 3.1,
-                },
-            ],
-        },
-        {
-            cat_id: 1,
-            user_id: 1,
-            name: 'meme',
-            gender: 'F',
-            Photo: {
-                file: '',
-                url:
-                    'https://i.pinimg.com/originals/d5/d2/3e/d5d23ed7f286b97fe8319bea6ee0c9d0.jpg',
-            },
-            birth: '2010-10-17',
-            Record: [
-                {
-                    cdt: '2018-03-18',
-                    wgt: 5.7,
-                },
-            ],
-        },
-        {
-            cat_id: 2,
-            user_id: 1,
-            name: '냥냥이',
-            gender: 'M',
-            Photo: {
-                file: '',
-                url:
-                    'https://static.boredpanda.com/blog/wp-content/uploads/2016/10/laid-back-cat-statue-tombili-istanbul-2.jpg',
-            },
-            birth: '2018-03-06',
-            Record: [
-                {
-                    cdt: '2019-02-28',
-                    wgt: 10.2,
-                },
-            ],
-        },
+        // {
+        //     cat_id: 0,
+        //     user_id: 1,
+        //     name: 'Garfield',
+        //     gender: 'M',
+        //     Photo: {
+        //         file: '',
+        //         url:
+        //             'https://welovekitties.com/wp-content/uploads/2015/12/cutekittenspictures-145124821648lcp.jpg',
+        //     },
+        //     birth: '2020-02-28',
+        //     Record: [
+        //         {
+        //             cdt: '2021-03-30',
+        //             wgt: 3.1,
+        //         },
+        //     ],
+        // },
     ],
+    isLoading: true,
+    currentIndex: 1,
+    currImgUrl: null,
 };
-
-const dummyCat = (data) => ({
-    cat_id: 3,
-    user_id: 1,
-    name: data.name,
-    gender: data.gender,
-    Photo: {
-        file: data.photo.file,
-        url: data.photo.url,
-    },
-    birth: data.birthyear + '-' + data.birthmonth + '-' + data.birthdate,
-    Record: [],
-});
 
 // 몸무게 추가
 export const ADD_WEIGHT_REQUEST = 'ADD_WEIGHT_REQUEST';
@@ -90,6 +53,22 @@ export const GET_CAT_FAILURE = 'GET_CAT_FAILURE';
 export const ADD_CAT_REQUEST = 'ADD_CAT_REQUEST';
 export const ADD_CAT_SUCCESS = 'ADD_CAT_SUCCESS';
 export const ADD_CAT_FAILURE = 'ADD_CAT_FAILURE';
+
+export const DELETE_CAT_REQUEST = 'DELETE_CAT_REQUEST';
+export const DELETE_CAT_SUCCESS = 'DELETE_CAT_SUCCESS';
+export const DELETE_CAT_FAILURE = 'DELETE_CAT_FAILURE';
+
+export const UPDATE_CAT_REQUEST = 'UPDATE_CAT_REQUEST';
+export const UPDATE_CAT_SUCCESS = 'UPDATE_CAT_SUCCESS';
+export const UPDATE_CAT_FAILURE = 'UPDATE_CAT_FAILURE';
+
+export const SET_CURRENT_CAT = 'SET_CURRENT_CAT';
+
+export const SET_CURRENT_IMAGE = 'SET_CURRENT_IMAGE';
+
+export const GET_WEIGHT_REQUEST = 'GET_WEIGHT_REQUEST';
+export const GET_WEIGHT_SUCCESS = 'GET_WEIGHT_SUCCESS';
+export const GET_WEIGHT_FAILURE = 'GET_WEIGHT_FAILURE';
 
 export const getCatRequestAction = (data) => ({
     type: GET_CAT_REQUEST,
@@ -117,7 +96,32 @@ export const addCatFailureAction = (data) => ({
     type: ADD_CAT_FAILURE,
     data,
 });
+export const deleteCatRequestAction = (data) => ({
+    type: DELETE_CAT_REQUEST,
+    data,
+});
+export const deleteCatSuccessAction = (data) => ({
+    type: DELETE_CAT_SUCCESS,
+    data,
+});
+export const deleteCatFailureAction = (data) => ({
+    type: DELETE_CAT_FAILURE,
+    data,
+});
+export const updateCatRequestAction = (data) => ({
+    type: UPDATE_CAT_REQUEST,
+    data,
+});
+export const updateCatSuccessAction = (data) => ({
+    type: UPDATE_CAT_SUCCESS,
+    data,
+});
+export const updateCatFailureAction = (data) => ({
+    type: UPDATE_CAT_FAILURE,
+    data,
+});
 export const addWeightRequest = (data) => {
+    console.log('추가 액션');
     return {
         type: ADD_WEIGHT_REQUEST,
         data,
@@ -136,6 +140,38 @@ export const addWeightFailure = (data) => {
     };
 };
 
+export const setCurrentCat = (data) => {
+    return {
+        type: SET_CURRENT_CAT,
+        data,
+    };
+};
+
+export const setCurrentImage = (data) => {
+    return {
+        type: SET_CURRENT_IMAGE,
+        data,
+    };
+};
+
+export const getWeightRequest = (data) => {
+    return {
+        type: getWeightRequest,
+        data,
+    };
+};
+export const getWeightSuccess = (data) => {
+    return {
+        type: getWeightSuccess,
+        data,
+    };
+};
+export const getWeightFailure = (data) => {
+    return {
+        type: getWeightFailure,
+        data,
+    };
+};
 // 리듀서는
 // 이전 상태를 액션을 통해 다음 상태로 만드는 함수
 // 단 불변성은 지켜야 함
@@ -147,25 +183,74 @@ const reducer = (state = initialState, action) => {
     return produce(state, (draft) => {
         switch (action.type) {
             case GET_CAT_REQUEST:
+                draft.isLoading = true;
                 break;
             case GET_CAT_SUCCESS:
+                draft.cat = action.data;
+                draft.isLoading = false;
                 break;
             case GET_CAT_FAILURE:
                 break;
             case ADD_CAT_REQUEST:
                 break;
             case ADD_CAT_SUCCESS:
-                draft.cat = draft.cat.concat(dummyCat(action.data));
+                draft.cat = draft.cat.concat(action.data);
                 break;
             case ADD_CAT_FAILURE:
                 break;
+
+            
+            case DELETE_CAT_REQUEST:
+                break;
+            case DELETE_CAT_SUCCESS:
+                
+                draft.cat = draft.cat.filter((v) => v.id !== action.data);
+                break;
+            case DELETE_CAT_FAILURE:
+                break;
+
+            case UPDATE_CAT_REQUEST:
+                break;
+            case UPDATE_CAT_SUCCESS:
+                draft.cat[draft.currentIndex - 1] = action.data;
+                break;
+            case UPDATE_CAT_FAILURE:
+                break;
             case ADD_WEIGHT_REQUEST:
-                console.log(action.data);
+                // draft.cat[1].Record = draft.cat[1].Record.concat(
+                //     dummyCat(action.data)
+                // );
+
                 break;
             case ADD_WEIGHT_SUCCESS:
+                draft.cat[1].Record = draft.cat[1].Record.concat({
+                    cdt: '2021-03-30',
+                    wgt: 20.1,
+                });
                 break;
             case ADD_WEIGHT_FAILURE:
                 break;
+
+            case SET_CURRENT_CAT:
+                draft.currentIndex = action.data;
+                break;
+
+            case SET_CURRENT_IMAGE:
+                draft.currImgUrl = action.data;
+                break;
+
+            case GET_WEIGHT_REQUEST:
+                draft.isLoading = true;
+                break;
+
+            // case GET_WEIGHT_SUCCESS:
+            //     draft.isLoading - false;
+            //     draft.cat = action.data;
+            //     break;
+
+            case GET_WEIGHT_FAILURE:
+                break;
+
             default:
                 break;
         }

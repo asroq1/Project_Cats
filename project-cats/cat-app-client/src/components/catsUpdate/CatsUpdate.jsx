@@ -5,10 +5,8 @@ import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4} from 'uuid';
 
 import useInput from '../../hooks/useInput';
-import { SET_CURRENT_IMAGE, ADD_CAT_REQUEST } from '../../reducers/cat';
+import { SET_CURRENT_IMAGE, UPDATE_CAT_REQUEST } from '../../reducers/cat';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faUpload, faCamera } from '@fortawesome/free-solid-svg-icons';
 import 'font-awesome/css/font-awesome.min.css';
 
 import palette from '../../styles/palette';
@@ -129,16 +127,17 @@ const RadioBtnWrapper = styled.div`
     }
 `;
 
-const CatsAdd = ({}) => {
+const CatsUpdate = ({currentCat}) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
     const {currImgUrl} = useSelector((state) => state.cat);
-    const [name, onChangeName] = useInput('');
-    const [birthyear, onChangeBirthYear] = useInput('');
-    const [birthmonth, onChangeBirthMonth] = useInput('');
-    const [birthdate, onChangeBirthDate] = useInput('');
-    const [gender, onChangeGender] = useInput('');
+    const [currbirthyear, currbirthmonth, currbirthdate] = currentCat.birth.split("-");
+    const [name, onChangeName] =useInput(currentCat.name);
+    const [birthyear, onChangeBirthYear] = useInput(currbirthyear);
+    const [birthmonth, onChangeBirthMonth] = useInput(currbirthmonth);
+    const [birthdate, onChangeBirthDate] = useInput(currbirthdate);
+    const [gender, onChangeGender] = useInput(currentCat.gender);
 
     // 버튼 누르면 정보 전달
     const onSubmit = useCallback(
@@ -148,7 +147,7 @@ const CatsAdd = ({}) => {
             formData.append('birth', birthyear+"-"+birthmonth+"-"+birthdate);
             formData.append('gender',gender);
             // POST API가 id를 요구하기 때문
-            formData.append('id', uuidv4());
+            //formData.append('id', uuidv4());
             formData.append('name',name);
             console.log(currImgUrl);
             formData.append('photo', currImgUrl);
@@ -174,7 +173,7 @@ const CatsAdd = ({}) => {
             });
 
             dispatch({
-                type: ADD_CAT_REQUEST,
+                type: UPDATE_CAT_REQUEST,
                 data: formData,
             });
             history.push('/user/main');
@@ -206,8 +205,8 @@ const CatsAdd = ({}) => {
                                 type="text"
                                 id="cat-name"
                                 name="cat-name"
-                                value={name}
                                 placeholder="Name"
+                                value={name}
                                 onChange={onChangeName}
                                 maxLength="50"
                                 required
@@ -296,4 +295,4 @@ const CatsAdd = ({}) => {
     );
 };
 
-export default CatsAdd;
+export default CatsUpdate;

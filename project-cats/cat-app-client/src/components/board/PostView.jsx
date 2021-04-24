@@ -2,22 +2,34 @@ import React, { useState, useCallback } from 'react';
 import palette from '../../styles/palette';
 import styled from 'styled-components';
 
+
+
+const OverallContainer = styled.div`
+
+    color: gray;
+    line-height:1.25rem;
+    `;
+
 const PostHead = styled.div`
     border-bottom: 1px solid ${palette.green};
     padding-bottom: 1rem;
     margin-bottom: 1.25rem;
     h1 {
+        font-weight: bold;
+
+        color: ${palette.navy};
+        line-height: 1.5rem;
         font-size: 1.5rem;
-        margin: 1rem;
+        margin-top: 2rem;
     }
 `;
 
 const SubInfo = styled.div`
-    margin: 1rem;
+    margin-top: 1rem;
     font-size: 1rem;
     color: ${palette.green};
     span + span:before {
-        color: ${palette.green};
+        color: gray;
         padding-left: 0.25rem;
         padding-right: 0.25rem;
         content: '\\B7';
@@ -25,16 +37,15 @@ const SubInfo = styled.div`
 `;
 
 const PostContent = styled.div`
-    margin: 1rem;
+    margin-top: 1rem;
     font-size: 1rem;
     color: gray;
 `;
 
 const CommentWrapper = styled.div`
-    margin: 1rem;
+    margin-top: 1rem;
     font-size: 1rem;
     color: gray;
-
 
     h1 {
         font-weight: bold;
@@ -68,7 +79,7 @@ const PostView = ({ post, error, loading }) => {
     }
     const { title, content, User, date, Images, Comments } = post;
     return (
-        <>
+        <OverallContainer>
             <PostHead>
                 <h1>{title}</h1>
                 <SubInfo>
@@ -90,7 +101,8 @@ const PostView = ({ post, error, loading }) => {
                     ))}
                 </div>
             </CommentWrapper>
-        </>
+        
+        </OverallContainer>
     );
 };
 export default PostView;

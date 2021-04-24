@@ -1,52 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import { Link } from 'react-router-dom'
+
+import 'font-awesome/css/font-awesome.min.css';
 import palette from '../../styles/palette';
 import styled from 'styled-components';
 
-const Header = styled.div`
-    display: flex;
-    height: 50px;
-    font-size: 1rem;
-    background-color: ${palette.green};
-`;
 
-const HeaderCol = styled.div`
-    padding: 1rem;
-    display: flex;
-    font-size: 1rem;
-    color: ${palette.beige};
-    flex: auto;
-    &:last-child {
-        flex-direction: row-reverse;
-        a {
-            text-decoration: none;
-            color: ${palette.beige};
-        }
-        a:hover {
-            color: ${palette.navy};
-        }
-    }
-`;
-
-const PostWriteButton = styled.button`
-    font-size: 1rem;
-    margin: 0;
-    margin-left: auto;
-    background: none;
-    color: ${palette.beige};
-    &:hover {
-        border: 1px solid ${palette.beige};
-        background-color: ${palette.green};
-    }
+const PostItemsContainer = styled.div`
+    width: 80%;
+    margin: auto;
 `;
 
 const PostItemBlock = styled.div`
     padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
+    padding-bottom: 0.75rem;
+    position:relative;
     margin-top: 1rem;
     display: flex;
-    border: 1px solid ${palette.green};
-    border-radius: 10px;
+    // border: 1px solid ${palette.green};
+    // border-radius: 10px;
+
+    border-bottom: 1px solid gray;
     &:first-child {
         padding-top: 0;
     }
@@ -55,18 +30,26 @@ const PostItemBlock = styled.div`
     }
 `;
 
+
+const PostListBody = styled.div`
+    position: relative;
+    min-height: 100vh;
+    padding-top: 50px;
+`;
+
 const PhotoContainer = styled.img`
     display: inline-block;
     width: 100px;
     height: 100px;
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;
-    border: 2px solid ${palette.navy};
+    
+    border-radius:5px;
     object-fit: cover;
 `;
 
 const SubInfo = styled.div`
-    color: ${palette.green};
+    color: gray;
     display: inline-block;
     margin-top: 1rem;
     margin-left: 1rem;
@@ -74,22 +57,39 @@ const SubInfo = styled.div`
     font-size: 1.25rem;
     /* 스팬 사이 가운뎃점 문자 보여주기 */
     span + span:before {
-        color: ${palette.green};
+        color: gray;
         padding-left: 0.25rem;
         padding-right: 0.25rem;
         content: '\\B7'; /* 가운뎃점 문자 */
     }
     /* 제목 */
     h1 {
-        font-size: 1.5rem;
+        font-size: 1rem;
+        font-weight: bold;
         color: ${palette.navy};
+        margin: 0;
+        margin-bottom: 0.25rem;
     }
-    h2 {
+    div {
+        font-size: 0.75rem;
         margin:0;
+        padding: 0;
         text-align: start;
     }
     h2 > span {
-        font-size: 1rem;
+        font-size: 0.75rem;
+        color: gray;
+    }
+`;
+
+
+const PreviewWrapper = styled.div`
+    font-size: 0.75rem;
+    top: 20px;
+    margin-left: auto;
+    position: relative;
+    i + span {
+        padding-left: 0.25rem;
     }
 `;
 
@@ -107,7 +107,7 @@ const StyledLink = styled(Link)`
 `;
 
 const PostItem = ({ post }) => {
-    const { date, User, title, content, _id, Images } = post;
+    const { date, User, title, Comments, _id, Images } = post;
     return (
         <StyledLink to={`/post/view/${_id}`}>
             <PostItemBlock>
@@ -115,13 +115,17 @@ const PostItem = ({ post }) => {
 
                 <SubInfo>
                     <h1>{title}</h1>
-                    <h2>
+                    <div>
                         <span>
                             <b>{User.nickname}</b>
                         </span>
                         {/* <span>{new Date(date)}</span> */}
                         <span>{date}</span>
-                    </h2>
+                    </div>
+                    <PreviewWrapper>
+                        <i className="fa fa-comment"></i>
+                        <span>{Comments.length}</span>
+                    </PreviewWrapper>
                 </SubInfo>
             </PostItemBlock>
         </StyledLink>
@@ -135,23 +139,24 @@ const PostList = ({ posts, loading, error }) => {
     }
     return (
         <>
-            <Header>
-                <HeaderCol>자유게시판</HeaderCol>
-                <HeaderCol>
-                    <Link to="/post/write">새 글 작성</Link>
-                </HeaderCol>
-            </Header>
 
             {/* 로딩 중 아니고 포스트 배열 존재할 때만 */}
             {/* {!loading && posts && ( */}
 
+            <PostListBody>
+
+            <PostItemsContainer>
             {posts && (
                 <div>
                     {posts.map((post) => (
+                        <>
                         <PostItem post={post} key={post._id} />
+                        </>
                     ))}
                 </div>
             )}
+            </PostItemsContainer>
+            </PostListBody>
         </>
     );
 };

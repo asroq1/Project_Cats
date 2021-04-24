@@ -83,6 +83,106 @@ const initialState = {
                 },
             ],
         },
+        {
+            _id: 2,
+            User: {
+                id: 1,
+                nickname: '고양이제국만세',
+            },
+            title: '전 고양이가 너무 좋아요... 어떡하죠?',
+            content: '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
+            date: '2020-01-03',
+            Images: [
+                {
+                    id: shortId.generate(),
+                    src:
+                        'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
+                },
+            ],
+
+            Comments: [
+            ],
+        },
+        {
+            _id: 3,
+            User: {
+                id: 1,
+                nickname: '고양이제국만세',
+            },
+            title: '전 고양이가 너무 좋아요... 어떡하죠?',
+            content: '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
+            date: '2020-01-03',
+            Images: [
+                {
+                    id: shortId.generate(),
+                    src:
+                        'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
+                },
+            ],
+
+            Comments: [
+            ],
+        },
+        {
+            _id: 4,
+            User: {
+                id: 1,
+                nickname: '고양이제국만세',
+            },
+            title: '전 고양이가 너무 좋아요... 어떡하죠?',
+            content: '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
+            date: '2020-01-03',
+            Images: [
+                {
+                    id: shortId.generate(),
+                    src:
+                        'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
+                },
+            ],
+
+            Comments: [
+            ],
+        },
+        {
+            _id: 5,
+            User: {
+                id: 1,
+                nickname: '고양이제국만세',
+            },
+            title: '전 고양이가 너무 좋아요... 어떡하죠?',
+            content: '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
+            date: '2020-01-03',
+            Images: [
+                {
+                    id: shortId.generate(),
+                    src:
+                        'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
+                },
+            ],
+
+            Comments: [
+            ],
+        },
+        {
+            _id: 6,
+            User: {
+                id: 1,
+                nickname: '고양이제국만세',
+            },
+            title: '전 고양이가 너무 좋아요... 어떡하죠?',
+            content: '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
+            date: '2020-01-03',
+            Images: [
+                {
+                    id: shortId.generate(),
+                    src:
+                        'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
+                },
+            ],
+
+            Comments: [
+            ],
+        },
     ],
     imagePaths: [],
     currentPost: null,

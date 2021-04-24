@@ -1,15 +1,9 @@
-import React, { useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { useDispatch, useSelector } from 'react-redux';
-import qs from 'qs';
 import palette from '../../styles/palette';
 import styled from 'styled-components';
 
-import OverallPostsLayout from '../board/OverallPostsLayout';
-
-import PostList from './PostList';
-import { LIST_POST_REQUEST } from '../../reducers/post';
 
 const Global = styled.div`
     background-color: ${palette.beige};
@@ -78,34 +72,36 @@ const Footer = styled.div`
 
 
 
-const PostListContainer = ({ location, match }) => {
-    const dispatch = useDispatch();
-    const { posts, error, loading, user } = useSelector(
-        ({ post, loading }) => ({
-            posts: post.mainPosts,
-            error: post.error,
-            loading: '로딩 중예용',
-        })
-    );
-    useEffect(() => {
-        const { page } = qs.parse(location.search, {
-            ignoreQueryPrefix: true,
-        });
-        dispatch({
-            type: LIST_POST_REQUEST,
-            date: page,
-        });
-    }, [dispatch, location.search]);
+const OverallPostsLayout = ({ children }) => {
 
     return (
-        <>
-        <OverallPostsLayout>
-            
-            <PostList loading={loading} error={error} posts={posts} />
+        <Global>
+            <Header>
+                <NavCol>커뮤니티</NavCol>
+                <NavCol className="plus">
+                    <i className= "fa fa-bars" ></i>
+                </NavCol>
+            </Header>
 
-        </OverallPostsLayout>
-        </>
+            {children}
+
+            <Footer>
+                <NavCol className = "center"><i className = "fa fa-search"></i></NavCol>
+                <NavCol className = "center">
+                    
+                    <Link to="/post/write">
+                        <i className = "fa fa-plus-square"></i>
+                    </Link>
+                    </NavCol>
+                <NavCol className = "center">    
+                    <Link to ="/post/list">
+                    <i className ="fa fa-paw"></i>
+                    </Link>
+                    </NavCol>
+
+            </Footer>
+        </Global>
     );
 };
 
-export default withRouter(PostListContainer);
+export default OverallPostsLayout;
