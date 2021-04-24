@@ -1,6 +1,7 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from '../../styles/WeightResultList.module.css';
+
 const data = [
     {
         name: '2020-08-02',

@@ -1,13 +1,14 @@
 import React, { useEffect, useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 
+import palette from '../../styles/palette';
 import 'font-awesome/css/font-awesome.min.css'
 
 
 
 const Global = styled.div`
     display: flex;
-    background-color: white;
+    background-color: ${palette.beige};
     max-width: 1200px;
     width: 100vw;
     height: 100vh;
@@ -17,7 +18,7 @@ const Global = styled.div`
     align-items: center;
 
     @media screen and (max-width: 768px) {
-        width: 75vw;
+        width: 100vw;
     }
 `;
 

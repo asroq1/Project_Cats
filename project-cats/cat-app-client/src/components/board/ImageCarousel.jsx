@@ -2,18 +2,26 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Slick from 'react-slick';
 
+import Slider from 'react-slick';
+
 import styled, { createGlobalStyle } from 'styled-components';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 export const SlickWrapper = styled.div`
+
+    margin-top: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     height: calc(100% - 44px);
     background: lightgray;
+
+    border-radius: 10px;
 `;
 
 export const ImgWrapper = styled.div`
-    padding: 2rem;
+    // padding: 2rem;
     text-align: center;
 
     & img {
@@ -45,14 +53,15 @@ export const Global = createGlobalStyle`
 `;
 
 const ImageCarousel = ({ images }) => {
-    const [currentSlide, setCurrentSlide] = useState(0);
+
     return (
         <>
             <SlickWrapper>
                 <div>
-                    <Slick
+                    <Slider
                         initialSlide={0}
-                        beforeChange={(slide) => setCurrentSlide(slide)}
+                        dots={true}
+                        speed={500}
                         infinite
                         arrows={false}
                         slidesToShow={1}
@@ -63,14 +72,11 @@ const ImageCarousel = ({ images }) => {
                                 <img src={v.src} alt={v.src} />
                             </ImgWrapper>
                         ))}
-                        {/* Slick이 저절로 여기 div들을 carousel로 만들어줌 */}
-                    </Slick>
-                    <Indicator>
-                        <div>
-                            {currentSlide + 1} /{images.length}
-                        </div>
-                    </Indicator>
+                    </Slider>
+                    {/* Slick이 저절로 여기 div들을 carousel로 만들어줌 */}
                 </div>
+
+                
             </SlickWrapper>
         </>
     );

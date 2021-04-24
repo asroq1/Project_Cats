@@ -9,9 +9,10 @@ export const initialState = {
     signUpDone: false,
     signUpError: null,
 
-    me: null,
+    onUser: null,
     signUpData: {},
     loginData: {},
+    user: null,
 };
 
 // 기본적인 액션 이름들
@@ -51,17 +52,16 @@ export const loginRequestAction = (data) => {
 };
 
 export const loginSuccessAction = (data) => {
-    console.log('로그인 성공');
-
+    console.log('login request act :', data);
     return {
         type: LOG_IN_SUCCESS,
         data,
+        onUser: dummyUser(),
     };
 };
 
 export const loginFailureAction = (data) => {
     console.log('로그인 실패 (액션함수)');
-
     return {
         type: LOG_IN_FAILURE,
         data,
@@ -86,11 +86,13 @@ export const logoutFailureAction = (data) => {
         data,
     };
 };
+
 //회원가입 액션 함수
 export const signUpRequest = (data) => {
     return {
         type: SIGN_UP_REQUEST,
         data,
+        // type: 'normal',
     };
 };
 export const signUpSuccess = (data) => {
@@ -122,7 +124,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 logInLoading: false,
                 logInDone: true,
-                me: dummyUser(action.data),
+                onUser: action.data,
             };
         case LOG_IN_FAILURE:
             return {
@@ -143,7 +145,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 logOutLoading: false,
                 logInDone: false,
-                me: dummyUser(action.data),
+                onUser: action.data,
             };
 
         case LOG_OUT_FAILURE:
@@ -164,7 +166,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 signUpLoading: false,
                 signUpDone: true,
-                me: dummyUser(action.data),
+                onUser: action.data,
             };
 
         case SIGN_UP_FAILURE:

@@ -1,58 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
-import palette from '../../styles/palette';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
+import OverallPostsLayout from '../board/OverallPostsLayout';
 import PostView from './PostView';
 
 import ImageCarousel from './ImageCarousel';
 
-const Global = styled.div`
-    background-color: white;
-    max-width: 1200px;
-    width: 100vw;
-
-    height: 100%;
+const PostViewBody = styled.div`
+    position: relative;
+    width: 80%;
     margin: 0 auto;
-    h2 {
-        font-size: 2rem;
-        text-align: center;
-    }
-    label {
-        font-weight: bold;
-    }
-    @media screen and (max-width: 768px) {
-        width: 75vw;
-    }
-`;
-const Header = styled.div`
-    display: flex;
-    height: 50px;
-    font-size: 1rem;
-    background-color: ${palette.green};
-
-    position: sticky;
-    top: 0;
-    z-index: 1;
-`;
-
-const HeaderCol = styled.div`
-    padding: 1rem;
-    display: flex;
-    font-size: 1rem;
-    color: ${palette.beige};
-    flex: auto;
-    &:last-child {
-        flex-direction: row-reverse;
-        a {
-            text-decoration: none;
-            color: ${palette.beige};
-        }
-        a:hover {
-            color: ${palette.navy};
-        }
-    }
+    min-height: 100vh;
+    padding-top: 50px;
 `;
 
 const PostViewContainer = ({ match }) => {
@@ -78,16 +39,17 @@ const PostViewContainer = ({ match }) => {
     // }, [postId])
 
     return (
-        <Global>
-            <Header>
-                <HeaderCol>자유게시판</HeaderCol>
-                <HeaderCol>
-                    <Link to="/post/list">전체 글</Link>
-                </HeaderCol>
-            </Header>
+        <>
+        <OverallPostsLayout>
+        <PostViewBody>
+
             <ImageCarousel images={post.Images} />
             <PostView post={post} loading={loading} error={error} />
-        </Global>
+        
+        </PostViewBody>
+        </OverallPostsLayout>
+
+        </>
     );
 };
 //URL 파라미터로 온 id값을 조회해야 하므로 withRouter 사용
