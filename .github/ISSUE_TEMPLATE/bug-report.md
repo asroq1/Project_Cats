@@ -1,5 +1,5 @@
 ---
-name: Bug report
+name: Bug Report
 about: 버그를 잡기 위한 리포트 템플릿!
 title: ''
 labels: bug
