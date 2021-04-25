@@ -1,8 +1,14 @@
-import React from 'react';
+import React,{useCallback,useState} from 'react';
 import { Link } from 'react-router-dom';
 
 import palette from '../../styles/palette';
 import styled from 'styled-components';
+
+
+
+
+
+import ModalMenu from '../modal/ModalMenu';
 
 
 const Global = styled.div`
@@ -74,12 +80,26 @@ const Footer = styled.div`
 
 const OverallPostsLayout = ({ children }) => {
 
+    
+    const [showModalMenu, setShowModalMenu] =useState(false);
+    
+    const onModalMenu = useCallback(() => {
+        
+        setShowModalMenu(true);
+    }, []);
+
+    const onModalClose = useCallback(() => {
+
+        setShowModalMenu(false);
+    }, []);
+    
     return (
         <Global>
             <Header>
                 <NavCol>커뮤니티</NavCol>
                 <NavCol className="plus">
-                    <i className= "fa fa-bars" ></i>
+                    <i onClick={onModalMenu} className= "fa fa-bars" ></i>
+                    {showModalMenu && <ModalMenu userNickname={"어쩌구 저쩌궁"}onClose = {onModalClose} />}
                 </NavCol>
             </Header>
 
