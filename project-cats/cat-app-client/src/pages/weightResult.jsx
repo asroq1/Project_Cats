@@ -20,7 +20,7 @@ const Header = styled.header`
     align-items: center;
     border: none;
 `;
-const GraphtButton = styled.button`
+const DataButton = styled.button`
     width: 40%;
     height: 100%;
     border: none;
@@ -29,18 +29,23 @@ const GraphtButton = styled.button`
     border-radius: 8px;
     color: white;
     font-weight: 600;
+
+    //background-color: ${(props) => (props.active ? 'black' : palette.beige)};
+    &.active {
+        background-color: 'black';
+    }
 `;
 
-const ListButton = styled.button`
-    width: 40%;
-    height: 100%;
-    border: none;
-    font-size: 1rem;
-    background-color: ${palette.navy};
-    border-radius: 8px;
-    color: white;
-    font-weight: 600;
-`;
+// const ListButton = styled.button`
+//     width: 40%;
+//     height: 100%;
+//     border: none;
+//     font-size: 1rem;
+//     background-color: ${palette.navy};
+//     border-radius: 8px;
+//     color: white;
+//     font-weight: 600;
+// `;
 
 const ExitButton = styled.span`
     position: absolute;
@@ -64,10 +69,16 @@ const WeightResult = () => {
     return (
         <>
             <Header>
-                <GraphtButton primary onClick={chartHandler}>
+                <DataButton active activeClassName={{}} onClick={chartHandler}>
                     그래프
-                </GraphtButton>
-                <ListButton onClick={listHandler}>리스트</ListButton>
+                </DataButton>
+                <DataButton
+                    active={false}
+                    activeClassName={{}}
+                    onClick={listHandler}
+                >
+                    리스트
+                </DataButton>
                 <ExitButton>
                     <Link to="/user/main">
                         <FontAwesomeIcon
