@@ -15,7 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     int inactive(@Param("id") Long id);
 
     User findByEmailAndPassword(String email, String password);
-    User findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
     @EntityGraph(attributePaths = "authorities")
     Optional<User> findOneWithAuthoritiesByEmail(String email);

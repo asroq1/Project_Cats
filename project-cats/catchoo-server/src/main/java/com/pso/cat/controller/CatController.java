@@ -4,6 +4,7 @@ package com.pso.cat.controller;
 import com.pso.cat.entity.Cat;
 import com.pso.cat.dto.CatDto;
 import com.pso.cat.service.CatService;
+import com.pso.cat.util.SecurityUtil;
 import io.swagger.annotations.Api;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
@@ -28,12 +29,17 @@ public class CatController {
 
     @PostMapping
     public ResponseEntity add(CatDto.Request cat) {
-        catService.save(cat);
+        Long userId = SecurityUtil.getCurrentUserId().orElseThrow(
+            () -> new RuntimeException("로그인을 해주세요."));
+        catService.save(userId, cat);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<CatDto.Response>> list(Long userId) {
+    public ResponseEntity<List<CatDto.Response>> list() {
+        Long userId = SecurityUtil.getCurrentUserId().orElseThrow(
+            () -> new RuntimeException("로그인을 해주세요.")
+        );
         List<CatDto.Response> list = catService.listByUserId(userId);
         return ResponseEntity.ok().body(list);
     }
@@ -44,8 +50,8 @@ public class CatController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity modify(@PathVariable Long id, @RequestBody CatDto.Request catRequest) {
-        catService.modify(id, catRequest);
+    public ResponseEntity modify(@PathVariable Long catId, @RequestBody CatDto.Request catRequest) {
+        catService.modify(catId, catRequest);
         return ResponseEntity.ok().build();
     }
 

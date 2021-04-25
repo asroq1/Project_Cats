@@ -1,9 +1,9 @@
 package com.pso.cat.controller;
 
 
-import com.pso.cat.dto.PostDto;
-import com.pso.cat.dto.PostDto.ListResponse;
-import com.pso.cat.service.PostService;
+import com.pso.cat.dto.CommentDto;
+import com.pso.cat.dto.CommentDto.Response;
+import com.pso.cat.service.CommentService;
 import com.pso.cat.util.SecurityUtil;
 import io.swagger.annotations.Api;
 import java.util.List;
@@ -18,44 +18,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(value="게시글 추가, 수정, 삭제, 조회", tags = {"게시글 API"})
-@RequestMapping("/api/posts")
-public class PostController {
-    private final PostService postService;
+@Api(value="댓글 추가, 수정, 삭제, 조회", tags = {"댓글 API"})
+@RequestMapping("/api/comment")
+public class CommentController {
+    private final CommentService commentService;
 
-    public PostController(PostService postService) {
-        this.postService = postService;
+    public CommentController(CommentService commentService) {
+        this.commentService = commentService;
     }
 
     @PostMapping
-    public ResponseEntity add(PostDto.Request post) {
+    public ResponseEntity add(CommentDto.Request comment) {
         Long userId = SecurityUtil.getCurrentUserId().orElseThrow(
             () -> new RuntimeException("로그인을 해주세요.")
         );
-        postService.save(userId, post);
+        commentService.save(userId, comment);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
-    public ResponseEntity<List<PostDto.ListResponse>> list() {
-        List<ListResponse> list = postService.list();
+    @GetMapping("/{postId}")
+    public ResponseEntity<List<Response>> list(@PathVariable Long postId) {
+        List<Response> list = commentService.list(postId);
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<PostDto.SingleResponse> get(@PathVariable Long id) {
-        return ResponseEntity.ok().body(postService.read(id));
-    }
-
     @PatchMapping("/{id}")
-    public ResponseEntity modify(@PathVariable Long id, @RequestBody PostDto.Request postRequest) {
-        postService.modify(id, postRequest);
+    public ResponseEntity modify(@PathVariable Long id, @RequestBody CommentDto.Request commentRequest) {
+        commentService.modify(id, commentRequest);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity remove(Long id) {
-        postService.remove(id);
+        commentService.remove(id);
         return ResponseEntity.ok().build();
     }
 

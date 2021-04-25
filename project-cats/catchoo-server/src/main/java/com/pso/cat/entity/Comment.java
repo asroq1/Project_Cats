@@ -1,18 +1,13 @@
 package com.pso.cat.entity;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -21,35 +16,31 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
-@Entity(name = "post")
+@Entity(name = "comment")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @DynamicUpdate
-public class Post {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_id")
+    @Column(name = "cmt_id")
     private Long id;
+
+    @Column(name = "post_id")
+    private Long postId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User writer;
 
-    @Column(name = "title", length = 100)
-    private String title;
-
     @Column(name = "content")
     private String content;
-
-    @Column(name = "vw_cnt")
-    private int viewCount;
 
     @CreationTimestamp
     @Column(name = "cdt")
@@ -65,7 +56,4 @@ public class Post {
     @Column(insertable = false)
     private int state;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "post_id")
-    private List<Comment> comments;
 }

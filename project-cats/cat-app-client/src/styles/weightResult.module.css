@@ -1,4 +1,4 @@
-.header {
+/* .header {
     position: sticky;
     top: 0;
     background: #f2cc8f;
@@ -10,7 +10,7 @@
     justify-content: space-evenly;
     align-items: center;
     border: none;
-}
+} */
 
 .header svg {
     align-items: center;
