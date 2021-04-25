@@ -1,10 +1,12 @@
 package com.pso.cat.config;
 
+import com.google.common.collect.ImmutableList;
 import com.pso.cat.jwt.JwtAccessDeniedHandler;
 import com.pso.cat.jwt.JwtAuthenticationEntryPoint;
 import com.pso.cat.jwt.JwtSecurityConfig;
 import com.pso.cat.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,6 +15,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @EnableWebSecurity
@@ -41,6 +46,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
 
     private static final String[] AUTH_WHITELIST = {
         // swagger ui
@@ -53,12 +64,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         "/webjars/**",
 
         // user
-        "/api/authenticate",
+        "/api/login",
         "/api/signup",
 
         // test
-        "/api/cats/**",
-        "/api/records/**",
         "/api/users/**",
         "/api/posts/**",
 
@@ -91,6 +100,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .anyRequest().authenticated()
 
             .and()
+            .cors()
+
+            .and()
             .apply(new JwtSecurityConfig(tokenProvider));
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        final CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(ImmutableList.of("*"));
+        configuration.setAllowedMethods(ImmutableList.of("HEAD","GET", "POST", "PUT", "DELETE", "PATCH"));
+        configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(ImmutableList.of("Authorization", "Cache-Control", "Content-Type"));
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }

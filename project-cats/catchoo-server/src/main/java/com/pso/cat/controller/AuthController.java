@@ -9,11 +9,11 @@ import com.pso.cat.service.CustomUserDetailsService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,44 +25,34 @@ import javax.validation.Valid;
 @RequestMapping("/api")
 public class AuthController {
 
-    private final TokenProvider tokenProvider;
-    private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final CustomUserDetailsService customUserDetailsService;
+    private final TokenProvider tokenProvider;
+    private final AuthenticationManager authenticationManager;
 
-    public AuthController(TokenProvider tokenProvider,
-        AuthenticationManagerBuilder authenticationManagerBuilder,
-        CustomUserDetailsService customUserDetailsService) {
-        this.tokenProvider = tokenProvider;
-        this.authenticationManagerBuilder = authenticationManagerBuilder;
+    public AuthController(CustomUserDetailsService customUserDetailsService,
+        TokenProvider tokenProvider,
+        AuthenticationManager authenticationManager) {
         this.customUserDetailsService = customUserDetailsService;
+        this.tokenProvider = tokenProvider;
+        this.authenticationManager = authenticationManager;
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto) {
 
         String email = loginDto.getEmail();
         String password = loginDto.getPassword();
 
-        final User user = customUserDetailsService.findByUserIdAndUserPassword(email, password);
+        final User user = customUserDetailsService.findByEmailAndPassword(email, password);
 
-        UsernamePasswordAuthenticationToken authenticationToken =
-            new UsernamePasswordAuthenticationToken(email, password);
-        Authentication authentication = authenticationManagerBuilder.getObject()
-            .authenticate(authenticationToken);
+        authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(email, password));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        String jwt = tokenProvider.createToken(user, authentication);
+        String jwt = tokenProvider.createToken(user);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 
         return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
     }
-
-    @GetMapping("/tokenToUser")
-    public ResponseEntity<User> tokenToUser() {
-
-    }
-
 }

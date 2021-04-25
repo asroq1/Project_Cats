@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from '../../styles/WeightResultGraph.module.css';
 
 import {
     ComposedChart,
@@ -13,7 +12,95 @@ import {
     ResponsiveContainer,
 } from 'recharts';
 import { useEffect } from 'react';
-import axios from 'axios';
+import styled from 'styled-components';
+import palette from '../../styles/palette';
+
+const GraphContainer = styled.div`
+    display: grid;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+    height: 94vh;
+    background-color: ${palette.navy};
+    align-items: center;
+`;
+
+const SelectorContainer = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+
+    button {
+        width: 40%;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 8px;
+    }
+`;
+
+const DateSelector = styled.button`
+    color: ${palette.white};
+    font-size: 1rem;
+    background-color: ${(props) => (props.primary ? '#E07A5F' : '#d5d3d3')};
+    border: none;
+`;
+
+// const MonthSelector = styled.button`
+//     color: ${palette.white};
+//     font-size: 1rem;
+//     background-color: ${palette.borderColor};
+//     border: none;
+// `;
+const DataContainer = styled.div`
+    width: 90%;
+    margin: 0 auto;
+`;
+
+const WeightWrapper = styled.div`
+    margin: 1rem 0 1rem 0;
+    border-top: 1px solid ${palette.borderColor};
+    padding: 1rem;
+
+    h2{
+        color: ${palette.borderColor}
+    }
+    ul {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    li{ 
+        color: ${palette.white};
+        font-weight: bold;
+        font-size: 2rem;
+    }
+
+    li:nth-last-child(2) {
+        margin-top: 1rem;
+        color: ${palette.borderColor};
+        font-weight: bold;
+        font-size: 1rem;
+   
+`;
+
+const ResultWrapper = styled.div`
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem 0 1rem 0;
+    border-top: 1px solid ${palette.borderColor};
+    padding: 1rem;
+
+    p:nth-child(2) {
+        font-weight: bold;
+        color: ${palette.white};
+        font-size: 2rem;
+    }
+    p:nth-child(1) {
+        font-weight: bold;
+        color: ${palette.borderColor};
+        margin-top: 1rem;
+        font-size: 1rem;
+    }
+`;
 
 const data = [
     {
@@ -99,8 +186,15 @@ export default function WeightResultGraph() {
     });
 
     return (
-        <div className={styles.graph__container}>
-            <div style={{ width: '90%', height: 400, maxWidth: 1200 }}>
+        <GraphContainer>
+            <div
+                style={{
+                    width: '100%',
+                    height: 400,
+                    maxWidth: 1200,
+                    margin: 0,
+                }}
+            >
                 <ResponsiveContainer>
                     <ComposedChart
                         width={1000}
@@ -114,45 +208,50 @@ export default function WeightResultGraph() {
                         }}
                     >
                         <CartesianGrid stroke="#f5f5f5" />
-                        <XAxis dataKey="name" />
-                        <YAxis type="number" dataKey="wgt" unit="kg" />
-                        <Tooltip />
+                        <XAxis dataKey="name" stroke="#fff" />
+                        <Tooltip stroke="#fff" />
                         <Area
                             type="monotone"
                             dataKey="wgt"
-                            fill="#f2cc8f"
+                            fill="#E07A5F"
                             stroke="#f2cc8f"
                         />
                         <Line type="monotone" dataKey="wgt" stroke="#ff7300">
-                            <LabelList dataKey="wgt" position="top" />
+                            <LabelList
+                                dataKey="wgt"
+                                position="top"
+                                stroke="#fff"
+                            />
                         </Line>
                     </ComposedChart>
                 </ResponsiveContainer>
             </div>
-            <div className={styles.select__wrapper}>
-                <button onClick={perDayHandler}>일별</button>
-                <button onClick={perMonthHandler}>월별</button>
-            </div>
-            <div>
-                <div className={styles.weight__wrapper}>
+            <SelectorContainer>
+                <DateSelector primary onClick={perDayHandler}>
+                    일별
+                </DateSelector>
+                <DateSelector onClick={perMonthHandler}>월별</DateSelector>
+            </SelectorContainer>
+            <DataContainer>
+                <WeightWrapper>
                     <h2>오늘 몸무게</h2>
                     <ul>
                         <li>{data[data.length - 1].name}</li>
                         <li>{data[data.length - 1].wgt}KG</li>
                     </ul>
-                </div>
-                <div className={styles.weight__wrapper}>
+                </WeightWrapper>
+                <WeightWrapper>
                     <h2>이전 몸무게</h2>
                     <ul>
                         <li>{data[data.length - 2].name}</li>
                         <li>{data[data.length - 2].wgt}KG</li>
                     </ul>
-                </div>
-                <div className={styles.result__wrapper}>
-                    <p>몸무게 변화</p>
+                </WeightWrapper>
+                <ResultWrapper>
+                    <p>체중 변화</p>
                     <p>{Result < 0 ? `${Result}` : `+ ${Result}`} kg</p>
-                </div>
-            </div>
-        </div>
+                </ResultWrapper>
+            </DataContainer>
+        </GraphContainer>
     );
 }

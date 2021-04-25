@@ -2,9 +2,7 @@ package com.pso.cat.service;
 
 import com.pso.cat.dto.PostDto;
 import com.pso.cat.entity.Post;
-import com.pso.cat.entity.User;
 import com.pso.cat.repository.PostRepository;
-import com.pso.cat.util.SecurityUtil;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,20 +17,23 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public Post save(PostDto.Request postDto) {
+<<<<<<< HEAD
+    public Post save(Long userId, PostDto.Request postDto) {
         Post post = postDto.toEntity();
-        post.setWriter(User.builder()
-                    .id(SecurityUtil.getCurrentUserId().get())
-                    .build());
+        post.setWriter(User.builder().id(userId).build());
         return postRepository.save(post);
+=======
+    public Post save(PostDto.Request post) {
+        return postRepository.save(post.toEntity());
+>>>>>>> 5d4f34166559408907d3291a7bf2e12629d6b055
     }
 
-    public PostDto.Response read(Long id) {
+    public PostDto.SingleResponse read(Long id) {
         Optional<Post> post = postRepository.findById(id);
         post.ifPresent(p -> {
             postRepository.updateViewCount(p.getId());
         });
-        return PostDto.Response.ofEntity(post.get());
+        return PostDto.SingleResponse.ofEntity(post.get());
     }
 
     @Transactional
@@ -47,9 +48,9 @@ public class PostService {
         postRepository.inactive(id);
     }
 
-    public List<PostDto.Response> list() {
+    public List<PostDto.ListResponse> list() {
         return postRepository
             .findAllByStateOrderByCreatedDateDesc(1)
-            .stream().map(post -> PostDto.Response.ofEntity(post)).collect(Collectors.toList());
+            .stream().map(post -> PostDto.ListResponse.ofEntity(post)).collect(Collectors.toList());
     }
 }

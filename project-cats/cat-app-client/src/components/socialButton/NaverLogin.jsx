@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router';
 import styled from 'styled-components';
-import styles from '../../styles/NaverLogin.module.css';
 import palette from '../../styles/palette';
 
 const NaverButton = styled.button`
@@ -42,7 +41,7 @@ const NaverLogin = () => {
     });
     return (
         <>
-            <NaverButton id="naverIdLogin" className={styles.naver__logo} />
+            <NaverButton id="naverIdLogin" />
         </>
     );
 };
