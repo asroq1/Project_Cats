@@ -15,5 +15,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     int inactive(@Param("id") Long id);
 
     List<Comment> findAllByPostIdAndStateOrderByCreatedDateDesc(
-        @Param("postId") Long postId, @Param("state") int state);
+        @Param("postId") Long postId, @Param("state") int state
+    );
 }
