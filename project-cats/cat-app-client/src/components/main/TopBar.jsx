@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useEffect } from 'react';
+import React, { useMemo, useCallback, useState, } from 'react';
 import { useHistory, BrowserRouter as Router, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../../styles/palette';
@@ -65,6 +65,7 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
         []
     );
 
+    const [showModalMenu, setShowModalMenu] = useState(false);
     const history = useHistory();
     const gotoAddCat = useCallback(() => {
         history.push('/cat/add');
@@ -88,9 +89,8 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
                 </EachCol>
 
                 <EachCol>
-                    <Link to="/user/settings">
+                    
                         <i className="fa fa-cog"></i>
-                    </Link>
                 </EachCol>
             </div>
         </Global>
