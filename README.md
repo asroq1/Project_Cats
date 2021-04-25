@@ -4,12 +4,7 @@
 # Catchoo (In Progress)
 Web App for Cat Lovers.
 
-[catchoo.netlify.app](catchoo.netlify.app){:target="_blank"}
-
-|||
-:---:|:---:
-![home](/img/posts/Catchoo_home.png)|![main](/img/posts/Catchoo_main.png)
-![add](/img/posts/Catchoo_add.png)|![post](/img/posts/Catchoo_post.png)
+[catchoo.netlify.app](catchoo.netlify.app)
 
 <br />
 
@@ -17,7 +12,7 @@ Web App for Cat Lovers.
 - This project is being developed by (2) Front-end engineers and (2) Back-end engineers, gathered via Korean developers' online community - OKKY.kr.
 - Project started on 03/30/21.
 - Tool decision, task distribution, debugging, etc. discussed every day via Slack. Weekly zoom meetings held for deeper discussion and catch-up.
-- **Front-end**: HR, HS
+- **Front-end**: HS, HR
 - **Back-end**: HY, SH <br />
 
 ## Functionalities
@@ -34,7 +29,8 @@ Web App for Cat Lovers.
 - Whether it be to show off your cat's beauty or to ask questions, this app is here for you! <br />
 
 ## Tech Stack
-![tech_stack](/img/posts/Catchoo_tech_stack.png) <br/>
+- Front-end: React + Redux (State Management) + Redux-Saga (Async Actions Management)
+- Back-end: SpringBoot + MariaDB
 
 #### General
 - Implemented RESTful Routes <br/>
