@@ -74,10 +74,14 @@ const LoginForm = ({ history }) => {
     const { logInDone } = useSelector((state) => state.user);
 
     const onSubmit = useCallback((data) => {
-        console.log('success', data);
-        dispatch(loginRequestAction(data));
-        console.log(logInDone);
+        console.log('LoginForm', data);
+        return dispatch(loginRequestAction(data));
     }, []);
+
+    // const onSubmit = (data) => {
+    //     dispatch(loginRequestAction(data));
+    // };
+
     useEffect(() => {
         if (logInDone) {
             history.push('/user/main');

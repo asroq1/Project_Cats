@@ -32,11 +32,12 @@ const KakaoLogin = () => {
         Kakao.Auth.login({
             success: function (authObj) {
                 //여기에 백엔드 주소 넣어주기
-                fetch('http://localhost:8080/api/authenticate', {
+                fetch('http://localhost:8080/api/signup', {
                     method: 'POST',
                     body: JSON.stringify({
                         access_token: authObj.access_token,
                     }),
+                    type: 'kakao',
                     headers: {
                         'Content-Type': 'application/json',
                         Accept: 'application/json',
