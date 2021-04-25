@@ -42,7 +42,7 @@ public class CatDto {
         private final String photo;
         @JsonFormat(pattern = "yyyy-MM-dd")
         private final Date birth;
-        @JsonInclude(Include.NON_NULL) 
+        @JsonInclude(Include.NON_NULL)
         private final RecordDto.Response recentRecord;
 
         public static Response ofEntity(Cat cat, Record recentRecord) {

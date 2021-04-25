@@ -18,6 +18,9 @@ public class PostService {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 65ba0e40196949f576ca0196609d1ed2c1e9b1b6
     public Post save(Long userId, PostDto.Request postDto) {
         Post post = postDto.toEntity();
         post.setWriter(User.builder().id(userId).build());
