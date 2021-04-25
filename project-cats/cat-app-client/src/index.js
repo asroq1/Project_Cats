@@ -1,26 +1,30 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
-import { Provider } from 'react-redux'
-import { BrowserRouter as Router } from 'react-router-dom'
-import Store from './store/configureStore'
-import rootReducer from './reducers'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import axios from 'axios';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Store from './store/configureStore';
+import rootReducer from './reducers';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { ThemeProvider } from 'styled-components';
+import theme from './styles/theme';
 
-const store = Store(rootReducer, composeWithDevTools())
+axios.defaults.baseURL = 'https://localhost:8080';
+axios.defaults.withCredentials = true;
+const store = Store(rootReducer, composeWithDevTools());
 
 ReactDOM.render(
-	<Provider store={store}>
-		<React.StrictMode>
-			{/* React.StrictMode는 배포시 지울 코드 */}
-			<Provider store={store}>
-				<Router>
-					<App />
-				</Router>
-			</Provider>
-		</React.StrictMode>
-		,
-	</Provider>,
-	document.getElementById('root')
-)
+    <React.StrictMode>
+        {/* React.StrictMode는 배포시 지울 코드 */}
+        <Provider store={store}>
+            <ThemeProvider theme={theme}>
+                <Router>
+                    <App />
+                </Router>
+            </ThemeProvider>
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
+);

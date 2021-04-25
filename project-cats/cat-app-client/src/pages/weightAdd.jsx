@@ -1,7 +1,13 @@
-import React from 'react'
+import React from 'react';
+import AddWeight from '../components/weightAdd/AddWeight';
+import AddWeightHeader from '../components/weightAdd/AddWeightHeader';
+const WeightAdd = () => {
+    return (
+        <>
+            <AddWeightHeader />
+            <AddWeight />
+        </>
+    );
+};
 
-const weightAdd = () => {
-	return <div>weightAdd</div>
-}
-
-export default weightAdd
+export default WeightAdd;
