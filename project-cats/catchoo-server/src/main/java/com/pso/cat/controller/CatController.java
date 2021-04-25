@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value="고양이 추가, 수정, 삭제, 조회", tags = {"고양이 API"})
 @RequestMapping("/api/cats")
 public class CatController {
+    
     private final CatService catService;
 
     public CatController(CatService catService) {
