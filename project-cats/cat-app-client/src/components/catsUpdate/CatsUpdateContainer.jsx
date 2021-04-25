@@ -2,15 +2,11 @@ import React from 'react';
 
 import {useSelector} from 'react-redux';
 
-
 import styled from 'styled-components';
-
 import palette from '../../styles/palette';
+
 import CatImageUpdate from './CatImageUpdate';
-
 import CatsUpdate from './CatsUpdate';
-
-
 import CatsDelete from './CatsDelete';
 
 const Global = styled.div`
@@ -19,7 +15,6 @@ const Global = styled.div`
     width: 100vw;
     min-height: 100vh;
     margin: 0 auto;
-
     h2 {
         font-size: 1.5rem;
         text-align: center;
@@ -32,9 +27,7 @@ const Global = styled.div`
     }
 `;
 
-
 const CatsUpdateContainer = ({}) => {
-
     const {cat, currentIndex} = useSelector((state) => state.cat);
     const currentCat =cat[currentIndex - 1];
 
@@ -48,4 +41,5 @@ const CatsUpdateContainer = ({}) => {
         </>
     )
 };
+
 export default CatsUpdateContainer;

@@ -1,10 +1,9 @@
 import React from 'react';
 
 import styled from 'styled-components';
-
 import palette from '../../styles/palette';
-import CatImageUpload from './CatImageUpload';
 
+import CatImageUpload from './CatImageUpload';
 import CatsAdd from './CatsAdd';
 
 const Global = styled.div`
@@ -13,7 +12,6 @@ const Global = styled.div`
     width: 100vw;
     min-height: 100vh;
     margin: 0 auto;
-
     h2 {
         font-size: 1.5rem;
         text-align: center;
@@ -26,9 +24,7 @@ const Global = styled.div`
     }
 `;
 
-
 const CatsAddContainer = ({}) => {
-
     return (
         <>
         <Global>
@@ -38,4 +34,5 @@ const CatsAddContainer = ({}) => {
         </>
     )
 };
+
 export default CatsAddContainer;

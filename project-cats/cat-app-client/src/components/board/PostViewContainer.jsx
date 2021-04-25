@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import OverallPostsLayout from '../board/OverallPostsLayout';
 import PostView from './PostView';
-
 import ImageCarousel from './ImageCarousel';
 
 const PostViewBody = styled.div`
@@ -18,7 +17,6 @@ const PostViewBody = styled.div`
 
 const PostViewContainer = ({ match }) => {
     //마운트 시 포스트 읽기 API 요청
-
     const { postId } = match.params;
     const dispatch = useDispatch();
     const { post, error, loading } = useSelector(({ post, loading }) => ({
@@ -42,10 +40,8 @@ const PostViewContainer = ({ match }) => {
         <>
         <OverallPostsLayout>
         <PostViewBody>
-
             <ImageCarousel images={post.Images} />
-            <PostView post={post} loading={loading} error={error} />
-        
+            <PostView post={post} loading={loading} error={error} />    
         </PostViewBody>
         </OverallPostsLayout>
 
@@ -53,4 +49,5 @@ const PostViewContainer = ({ match }) => {
     );
 };
 //URL 파라미터로 온 id값을 조회해야 하므로 withRouter 사용
+
 export default withRouter(PostViewContainer);

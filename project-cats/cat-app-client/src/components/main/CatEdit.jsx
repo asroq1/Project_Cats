@@ -1,12 +1,9 @@
 import React, { useEffect, useCallback, useMemo } from 'react';
-import styled from 'styled-components';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
+import styled from 'styled-components';
 import palette from '../../styles/palette';
 
-//코드 너무 장황해지니
-//필요 딱히 없는 건 나중에 지워주기
-//짧은 건 useMemo로 넣어줌
 const Global = styled.div`
     background-color: white;
     max-width: 1200px;
@@ -51,7 +48,7 @@ const ButtonWrapper = styled.button`
     margin-top: 0.5rem;
 `;
 
-const Main = ({ cat, current_index }) => {
+const CatEdit = ({ cat, current_index }) => {
     // styled-component대신 useMemo 써줌
     const colStyle = useMemo(
         () => ({
@@ -119,4 +116,4 @@ const Main = ({ cat, current_index }) => {
     );
 };
 
-export default Main;
+export default CatEdit;

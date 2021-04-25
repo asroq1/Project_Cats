@@ -2,11 +2,9 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux'
 import palette from '../../styles/palette';
 import styled from 'styled-components';
-
 import CommentForm from './CommentForm';
 
-
-import {  REMOVE_COMMENT_REQUEST} from '../../reducers/post'
+//import { REMOVE_COMMENT_REQUEST} from '../../reducers/post'
 
 const OverallContainer = styled.div`
     color: gray;
@@ -19,7 +17,6 @@ const PostHead = styled.div`
     margin-bottom: 1.25rem;
     h1 {
         font-weight: bold;
-
         color: ${palette.navy};
         line-height: 1.5rem;
         font-size: 1.5rem;
@@ -45,29 +42,23 @@ const PostContent = styled.div`
     color: gray;
 `;
 
-
 const EachComment=styled.div`
     padding-bottom:1rem;
     padding-top:1rem; 
     & + & {
-
         border-top: 1px dotted ${palette.green};
     }
-
-
 `;
 
 const CommentWrapper = styled.div`
     margin-top: 2rem;
     font-size: 1rem;
     color: gray;
-
     h1 {
         font-weight: bold;
         text-decoration: underline;
         margin-bottom: 1rem;
     }
-
     h3 {
         font-weight: bold;
         padding-bottom: 0.25rem;
@@ -75,7 +66,6 @@ const CommentWrapper = styled.div`
 `;
 
 const PostView = ({ post, error, loading }) => {
-
     const dispatch = useDispatch();
     //에러 발생 시
     if (error) {
@@ -115,11 +105,9 @@ const PostView = ({ post, error, loading }) => {
                 </SubInfo>
                 <PostContent>{content}</PostContent>
             </PostHead>
-
             <CommentForm post={post} />
             <CommentWrapper>
                 <h1>댓글</h1>
-
                 <div>
                     {Comments.map((comment,i) => (
                         <EachComment key={comment+i}>
@@ -131,10 +119,7 @@ const PostView = ({ post, error, loading }) => {
                                 <div>
                                     <button type="button" onClick={onRemoveComment(comment+i,i)}>삭제</button>
                                 </div>
-                            ) */}
-                            
-                        
-                            
+                            ) */}                            
                         </EachComment>
                     ))}
                 </div>
@@ -142,4 +127,5 @@ const PostView = ({ post, error, loading }) => {
         </OverallContainer>
     );
 };
+
 export default PostView;

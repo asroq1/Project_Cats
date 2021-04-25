@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
 import Slider from 'react-slick';
-
 import styled, { createGlobalStyle } from 'styled-components';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const SlickWrapper = styled.div`
-
     margin-top: 1rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
@@ -20,15 +17,11 @@ const SlickWrapper = styled.div`
 
     .slider-initialized {
         overflow:hidden;
-    }
-
-    
+    }   
 `;
 
 const ImgWrapper = styled.div`
-    // padding: 2rem;
     text-align: center;
-
     & img {
         margin: 0 auto;
         max-height: 250px;
@@ -40,7 +33,6 @@ const ImgWrapper = styled.div`
 
 const Indicator = styled.div`
     text-align: center;
-
     & > div {
         width: 75px;
         height: 30px;
@@ -57,13 +49,10 @@ const Indicator = styled.div`
 const Global = createGlobalStyle`
     .slick-slide {
         display: inline-block;
-    }
-
-    
+    }  
 `;
 
 const ImageCarousel = ({ images }) => {
-
     return (
         <>
             <SlickWrapper>
@@ -84,9 +73,7 @@ const ImageCarousel = ({ images }) => {
                         ))}
                     </Slider>
                     {/* Slick이 저절로 여기 div들을 carousel로 만들어줌 */}
-                </div>
-
-                
+                </div>         
             </SlickWrapper>
         </>
     );

@@ -1,8 +1,9 @@
 import React, { useMemo, useCallback, useState, } from 'react';
 import { useHistory, BrowserRouter as Router, Link } from 'react-router-dom';
+
+import ModalMenu from '../modal/ModalMenu';
 import styled from 'styled-components';
 import palette from '../../styles/palette';
-
 import 'font-awesome/css/font-awesome.min.css';
 
 const Global = styled.div`
@@ -10,6 +11,14 @@ const Global = styled.div`
     max-width: 1200px;
     width: 100vw;
     margin: 0 auto;
+    a {
+        color: ${palette.beige};
+        text-decoration: none;
+        font-weight: normal;
+    }
+    h1, h3, span {
+        font-weight: normal;
+    }
     @media screen and (max-width: 768px) {
         width: 100vw;
     }
@@ -71,6 +80,15 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
         history.push('/cat/add');
     });
 
+    
+    const onModalMenu = useCallback(()=>{
+        setShowModalMenu(true);
+    })
+
+    const onModalClose = useCallback(() => {
+        setShowModalMenu(false);
+    })
+
     return (
         <Global>
             <div style={menuStyle}>
@@ -87,10 +105,10 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
                 <EachCol onClick={gotoAddCat}>
                     <i className="fa fa-plus"></i>
                 </EachCol>
-
                 <EachCol>
                     
-                        <i className="fa fa-cog"></i>
+                        <i className="fa fa-cog" onClick={onModalMenu}></i>
+                        {showModalMenu && <ModalMenu userNickname={"어쩌궁 저쩌궁"}onClose={onModalClose}/>}
                 </EachCol>
             </div>
         </Global>

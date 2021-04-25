@@ -1,9 +1,8 @@
-import React, { useEffect, useCallback, useMemo } from 'react';
+import React, {  useMemo } from 'react';
+import { Link } from 'react-router-dom';
+
 import styled from 'styled-components';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
-
 import 'font-awesome/css/font-awesome.min.css';
-
 import palette from '../../styles/palette';
 
 //코드 너무 장황해지니
@@ -15,7 +14,6 @@ const Global = styled.div`
     width: 100vw;
     height: 100vh;
     margin: 0 auto;
-
     @media screen and (max-width: 768px) {
         width: 100vw;
     }
@@ -40,7 +38,6 @@ const PhotoContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-
     .fa-paw {
         font-size: 10rem;
         color: ${palette.beige};
@@ -66,27 +63,23 @@ const ButtonWrapper = styled.button`
 
 
 const WeightRecordWrapper = styled.div`
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+    h1 {
+        font-size: 1rem;
 
-text-align: center;
-margin-top: 1.5rem;
-margin-bottom: 0;
-
-h1 {
-    font-size: 1rem;
-
-    margin-bottom: 1rem;
-}
-
-h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-h3 {
-    font-size: 2rem;
-
-}
-
+        margin-bottom: 1rem;
+    }
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    h3 {
+        font-size: 2rem;
+    }
 `;
+
 const Main = ({ cat, currentIndex, age }) => {
     // styled-component대신 useMemo 써줌
     const colStyle = useMemo(
@@ -105,7 +98,6 @@ const Main = ({ cat, currentIndex, age }) => {
         () => ({ fontWeight: 'bold', padding: '0.25rem' }),
         []
     );
-
     const currentCat = cat[currentIndex - 1];
 
     return (

@@ -1,16 +1,20 @@
-import React, { useState, useEffect, useMemo,useCallback } from 'react';
+import React, { useEffect, useMemo,useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import MainComponent from '../components/main/Main';
 
-import MainEmptyComponent from '../components/main/MainEmpty'
 import TopBar from '../components/main/TopBar';
+import MainComponent from '../components/main/Main';
+import MainEmptyComponent from '../components/main/MainEmpty'
+
 import { GET_CAT_REQUEST, SET_CURRENT_CAT } from '../reducers/cat';
+
 import palette from '../styles/palette';
 
 const Main = () => {
     const { cat } = useSelector((state) => state.cat);
     const { isLoading } = useSelector((state) => state.cat);
     const { currentIndex } = useSelector((state) => state.cat);
+
+    const bgColor = useMemo(() => ({backgroundColor: palette.beige}), []);
     
     const dispatch = useDispatch();
     
@@ -39,9 +43,6 @@ const Main = () => {
                 //setAge([ageYear, ageMonth]);
                 return [ageYear, ageMonth];
     },[cat]);
-
-
-    const bgColor = useMemo(() => ({backgroundColor: palette.beige}), []);
     
     useEffect(()=>{
         dispatch({
@@ -49,7 +50,6 @@ const Main = () => {
             data: localStorage.currentUser
         })
     },[]);
-
 
     return (
         <>
@@ -62,13 +62,11 @@ const Main = () => {
             {/* {(!isLoading) && */}
                 {(cat.length > 0 ? (
                     <MainComponent cat={cat} currentIndex={currentIndex} age={getAge()} />
-                ) : (
-                    
+                    ) : (
                     <MainEmptyComponent></MainEmptyComponent>
+                    )
                 )
-
-                )
-}
+                }
             {/* )} */}
         </div>
         </>
