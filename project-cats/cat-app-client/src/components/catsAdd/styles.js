@@ -5,7 +5,6 @@ import palette from '../../styles/palette';
 export const InnerGlobal = styled.div`
     width: 80%;
     margin: 0 auto;
-
     & > form > div > label {
         visibility: hidden;
     }
@@ -20,15 +19,12 @@ export const StyledInputBlock = styled.div`
         border-radius:10px;
         outline: none;
     }
-
     label {
         visibility: hidden;
     }
-
     input-placeholder {
         text-align: center;
     }
-
     & > .inputcontainer > input:focus {
         background-color: white;
     }
@@ -43,12 +39,10 @@ export const StyledInputBlock = styled.div`
         max-width: 33%;
         flex: 1 1 auto;
         text-align: center;
-
         &::placeholder {
             text-align: center;
         }
     }
-
     & + & {
         margin-top: 0.5rem;
     }

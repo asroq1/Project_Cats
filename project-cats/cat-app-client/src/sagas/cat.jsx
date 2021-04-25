@@ -8,7 +8,6 @@ import {
     ADD_CAT_REQUEST,
     ADD_CAT_SUCCESS,
     ADD_CAT_FAILURE,
-
     DELETE_CAT_REQUEST,
     DELETE_CAT_SUCCESS,
     DELETE_CAT_FAILURE,
@@ -122,12 +121,18 @@ function* addWeight(action) {
         });
     }
 }
+
 function* watchgetCat() {
     yield takeLatest(GET_CAT_REQUEST, getCat);
 }
 
 function* watchaddCat() {
     yield takeLatest(ADD_CAT_REQUEST, addCat);
+}
+
+
+function* watchdeleteCat() {
+    yield takeLatest(DELETE_CAT_REQUEST, deleteCat);
 }
 
 function* watchupdateCat() {
@@ -138,5 +143,5 @@ function* watchAddWeight() {
     yield takeLatest(ADD_WEIGHT_REQUEST, addWeight);
 }
 export default function* catSaga() {
-    yield all([fork(watchgetCat), fork(watchaddCat), fork(watchupdateCat),fork(watchAddWeight)]);
+    yield all([fork(watchgetCat), fork(watchaddCat), fork(watchdeleteCat), fork(watchupdateCat),fork(watchAddWeight)]);
 }

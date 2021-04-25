@@ -133,7 +133,6 @@ const CatsAdd = ({}) => {
                                 required
                                 min="1"
                                 max="31"
-
                             />
                         </div>
                     </StyledInputBlock>

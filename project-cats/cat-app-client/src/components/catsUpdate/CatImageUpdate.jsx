@@ -8,59 +8,57 @@ import useInput from '../../hooks/useInput';
 
 import styled from 'styled-components';
 import palette from '../../styles/palette';
+import 'font-awesome/css/font-awesome.min.css';
 
 import { SET_CURRENT_IMAGE } from '../../reducers/cat';
 
-import 'font-awesome/css/font-awesome.min.css';
-
 const InnerGlobal = styled.div`
-width: 80%;
-margin: 0 auto;
-margin-bottom:0.25rem;
-display: flex;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom:0.25rem;
+    display: flex;
 `;
 
 const ImageUploadButtons = styled.button`
-flex: 1;
-padding:1rem;
+    flex: 1;
+    padding:1rem;
 
-border-radius:10px;
-font-size: 1rem;
-font-weight: bold;
-background-color: ${palette.orange};
-border: none;
-cursor: pointer;
+    border-radius:10px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: ${palette.orange};
+    border: none;
+    cursor: pointer;
 
-color: white;
-margin-top: 0.5rem;
-& + & {
-    margin-left: 0.5rem;
-}
-&:hover {
-    background: darkred;
-}
+    color: white;
+    margin-top: 0.5rem;
+    & + & {
+        margin-left: 0.5rem;
+    }
+    &:hover {
+        background: darkred;
+    }
 `;
 
 const CenterWrapper = styled.div`
-width: 50%;
-display: flex;
-position: relative;
-justify-content: center;
+    width: 50%;
+    display: flex;
+    position: relative;
+    justify-content: center;
 `;
 
 const CropperContainer = styled.div`
-margin-top: 1rem;
-height: 200px;
-position: relative;
+    margin-top: 1rem;
+    height: 200px;
+    position: relative;
 `;
 
 const SliderContainer = styled.div`
-input[type='range'] {
-    max-width: 50%;
-    padding: 1rem;
-    margin: 0.5rem;
-}
-
+    input[type='range'] {
+        max-width: 50%;
+        padding: 1rem;
+        margin: 0.5rem;
+    }
 `;
 
 const CatImageUpdate = ({currentCat}) => {

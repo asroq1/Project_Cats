@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import ImageCarousel from './ImageCarousel'
 
 const PostImages = ({images}) => {
+    return (
+        <>
             {showImagesZoom && <ImageCarousel images = {images} onClose = {onClose} />}
-            </>
-            )
-        }
+        </>
+        )
 }
 
 PostImages.propTypes = {

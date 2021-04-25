@@ -8,10 +8,9 @@ import useInput from '../../hooks/useInput';
 
 import styled from 'styled-components';
 import palette from '../../styles/palette';
+import 'font-awesome/css/font-awesome.min.css';
 
 import { SET_CURRENT_IMAGE } from '../../reducers/cat';
-
-import 'font-awesome/css/font-awesome.min.css';
 
 const InnerGlobal = styled.div`
     width: 80%;
@@ -23,14 +22,12 @@ const InnerGlobal = styled.div`
 const ImageUploadButtons = styled.button`
     flex: 1;
     padding: 1rem;
-
     border-radius:10px;
     font-size: 1rem;
     font-weight: bold;
     background-color: ${palette.orange};
     border: none;
     cursor: pointer;
-
     color: white;
     margin-top: 0.5rem;
     & + & {
@@ -60,7 +57,6 @@ const SliderContainer = styled.div`
         padding: 1rem;
         margin: 0.5rem;
     }
-    
 `;
 
 const CatImageUpload = ({}) => {
@@ -89,7 +85,6 @@ const CatImageUpload = ({}) => {
                 imageSrc,
                 croppedAreaPixels
             );
-
             console.log('donee', { blobURL });
             setCroppedImage(blobURL);
             
@@ -97,7 +92,6 @@ const CatImageUpload = ({}) => {
                 type: SET_CURRENT_IMAGE,
                 data: toSave,
             });
-
         } catch (e) {
             console.error(e);
         }

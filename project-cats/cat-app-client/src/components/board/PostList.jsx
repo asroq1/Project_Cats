@@ -1,11 +1,9 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom'
 
 import 'font-awesome/css/font-awesome.min.css';
 import palette from '../../styles/palette';
 import styled from 'styled-components';
-
 
 const PostItemsContainer = styled.div`
     width: 80%;
@@ -30,11 +28,10 @@ const PostItemBlock = styled.div`
     }
 `;
 
-
 const PostListBody = styled.div`
     position: relative;
     min-height: 100vh;
-    padding-top: 50px;
+    //padding-top: 50px;
 `;
 
 const PhotoContainer = styled.img`
@@ -43,7 +40,6 @@ const PhotoContainer = styled.img`
     height: 100px;
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;
-    
     border-radius:5px;
     object-fit: cover;
 `;
@@ -81,7 +77,6 @@ const SubInfo = styled.div`
         color: gray;
     }
 `;
-
 
 const PreviewWrapper = styled.div`
     font-size: 0.75rem;
@@ -139,7 +134,6 @@ const PostList = ({ posts, loading, error }) => {
     }
     return (
         <>
-
             {/* 로딩 중 아니고 포스트 배열 존재할 때만 */}
             {/* {!loading && posts && ( */}
 

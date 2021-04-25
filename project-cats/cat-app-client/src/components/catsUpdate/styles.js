@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 import palette from '../../styles/palette';
 
-// 스타일링된 input block
 export const InnerGlobal = styled.div`
     width: 80%;
     margin: 0 auto;
-
     & > form > div > label {
         visibility: hidden;
     }
@@ -22,7 +20,6 @@ export const StyledInputBlock = styled.div`
         border-radius:10px;
         outline: none;
     }
-
     label {
         visibility: hidden;
     }
@@ -50,7 +47,6 @@ export const StyledInputBlock = styled.div`
             text-align: center;
         }
     }
-
     & + & {
         margin-top: 0.5rem;
     }

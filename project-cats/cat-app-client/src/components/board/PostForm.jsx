@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import useInput from '../../hooks/useInput';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { useHistory } from 'react-router-dom';
 import {
     ADD_POST_REQUEST,
@@ -16,14 +15,12 @@ import OverallPostsLayout from './OverallPostsLayout';
 
 const FormBlock = styled.div`
     position: relative;
-
     padding-top: 50px;
-
     width:80%;
     margin: 0 auto;
-
     min-height: 100vh;
 `;
+
 const EditBlock = styled.div`
     padding-top: 5rem;
     padding-bottom: 5rem;
@@ -33,7 +30,7 @@ const EditBlock = styled.div`
 const StyledBlock = styled.div`
     display: flex;
     line-height: 1.5rem;
-    
+
     textarea,
     input {
         margin-top: 1rem;
@@ -41,13 +38,11 @@ const StyledBlock = styled.div`
         font-size: 1rem;
         border: 1px solid gray;
         padding: 1rem;
-
         border-radius: 10px;
         outline: none;
     }
     textarea {
         height: 300px;
-
         padding: 1rem;
         margin-bottom: 1rem;
     }
@@ -56,7 +51,6 @@ const StyledBlock = styled.div`
         text-align: start;
     }
 `;
-
 
 const CenterWrapper = styled.div`
     width: 100%;
@@ -75,7 +69,6 @@ const StyledButton = styled.button`
     border-radius: 10px;
     color: white;
     border:none; 
-    
     background-color: ${palette.green};
     font-weight:bold;
     cursor:pointer;
@@ -98,10 +91,7 @@ const StyledButton = styled.button`
 const PreviewBox = styled.div`
     padding: 1rem;
     border: 1px dotted gray;
-
     margin: 0 auto;
-
-
     button {
         border-radius: 10px;
         border: 1px solid gray;
@@ -237,15 +227,11 @@ const PostForm = () => {
                         </StyledBlock>
                         
                         <CenterWrapper>
-
                             <StyledButton
                                 type="button"
-
                                 onClick={goBack} 
-                        
                             >
-                            
-                            취소
+                                취소
                             </StyledButton>
                             <StyledButton
                                 type="primary"
@@ -253,8 +239,8 @@ const PostForm = () => {
                             >
                                 등록
                             </StyledButton>
-                        
                         </CenterWrapper>
+                       
                         <CenterWrapper>
                             <input
                                 type="file"
@@ -265,17 +251,14 @@ const PostForm = () => {
                                 multiple
                                 onChange={onChangeImages}
                             />
-
                             <StyledButton
                                 type="button"
                                 onClick={onClickImageUpload}
                             >
-                                사진을 올려달라냥! <i className="fa fa-paw"></i>
+                                사진을 올려주세요 <i className="fa fa-paw"></i>
                             </StyledButton>
                         </CenterWrapper>
 
-
-                        
                         <ImagesContainer>
                             {imagePaths.map((v, i) => (
                                 <PreviewBox

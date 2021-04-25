@@ -197,18 +197,14 @@ const reducer = (state = initialState, action) => {
                 draft.cat = draft.cat.concat(action.data);
                 break;
             case ADD_CAT_FAILURE:
-                break;
-
-            
+                break;          
             case DELETE_CAT_REQUEST:
                 break;
-            case DELETE_CAT_SUCCESS:
-                
+            case DELETE_CAT_SUCCESS:            
                 draft.cat = draft.cat.filter((v) => v.id !== action.data);
                 break;
             case DELETE_CAT_FAILURE:
                 break;
-
             case UPDATE_CAT_REQUEST:
                 break;
             case UPDATE_CAT_SUCCESS:
@@ -220,7 +216,6 @@ const reducer = (state = initialState, action) => {
                 // draft.cat[1].Record = draft.cat[1].Record.concat(
                 //     dummyCat(action.data)
                 // );
-
                 break;
             case ADD_WEIGHT_SUCCESS:
                 draft.cat[1].Record = draft.cat[1].Record.concat({
@@ -230,27 +225,21 @@ const reducer = (state = initialState, action) => {
                 break;
             case ADD_WEIGHT_FAILURE:
                 break;
-
             case SET_CURRENT_CAT:
                 draft.currentIndex = action.data;
                 break;
-
             case SET_CURRENT_IMAGE:
                 draft.currImgUrl = action.data;
                 break;
-
             case GET_WEIGHT_REQUEST:
                 draft.isLoading = true;
                 break;
-
             // case GET_WEIGHT_SUCCESS:
             //     draft.isLoading - false;
             //     draft.cat = action.data;
             //     break;
-
             case GET_WEIGHT_FAILURE:
                 break;
-
             default:
                 break;
         }

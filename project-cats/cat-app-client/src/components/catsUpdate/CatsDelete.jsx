@@ -1,13 +1,12 @@
 import React, { useCallback } from 'react';
 import { useDispatch} from 'react-redux';
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
 import { DELETE_CAT_REQUEST } from '../../reducers/cat';
 
+import styled from 'styled-components';
 import palette from '../../styles/palette';
 
-// 스타일링된 input block
 const InnerGlobal = styled.div`
     width: 80%;
     margin: 1rem auto;
@@ -15,8 +14,6 @@ const InnerGlobal = styled.div`
 
 const ButtonWrapper = styled.button`
     width: 100%;
-
-    
     padding-top: 1rem;
     padding-bottom: 1rem;
     border: none;
@@ -25,7 +22,6 @@ const ButtonWrapper = styled.button`
     font-weight: bold;
     background-color: ${palette.orange};
     cursor: pointer;
-
     color: white;
     margin-top: 0.5rem;
     & + & {
@@ -36,7 +32,6 @@ const ButtonWrapper = styled.button`
     }
 `;
 
-
 const CatsDelete = ({currentIndex}) => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -44,8 +39,7 @@ const CatsDelete = ({currentIndex}) => {
     // 버튼 누르면 정보 전달
     const onClick = useCallback(
         (e) => {
-            e.preventDefault();
-
+            //e.preventDefault();
             dispatch({
                 type: DELETE_CAT_REQUEST,
                 data: currentIndex,
