@@ -3,6 +3,7 @@ package com.pso.cat.dto;
 import com.pso.cat.dto.CommentDto.Response;
 import com.pso.cat.dto.UserDto.WriterResponse;
 import com.pso.cat.entity.Post;
+import com.pso.cat.entity.User;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,13 +19,11 @@ public class PostDto {
 
         private String title;
         private String content;
-        private Long writerId;
 
         public Post toEntity() {
             return Post.builder()
                 .title(this.getTitle())
                 .content(this.getContent())
-                .writer(User.builder().id(this.getWriterId()).build())
                 .build();
         }
     }

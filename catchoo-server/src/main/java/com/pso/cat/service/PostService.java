@@ -2,6 +2,7 @@ package com.pso.cat.service;
 
 import com.pso.cat.dto.PostDto;
 import com.pso.cat.entity.Post;
+import com.pso.cat.entity.User;
 import com.pso.cat.repository.PostRepository;
 import java.util.List;
 import java.util.Optional;
@@ -17,18 +18,10 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 65ba0e40196949f576ca0196609d1ed2c1e9b1b6
     public Post save(Long userId, PostDto.Request postDto) {
         Post post = postDto.toEntity();
         post.setWriter(User.builder().id(userId).build());
         return postRepository.save(post);
-=======
-    public Post save(PostDto.Request post) {
-        return postRepository.save(post.toEntity());
->>>>>>> 5d4f34166559408907d3291a7bf2e12629d6b055
     }
 
     public PostDto.SingleResponse read(Long id) {
