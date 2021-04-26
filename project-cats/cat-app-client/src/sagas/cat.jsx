@@ -105,19 +105,19 @@ function* updateCat(action) {
 }
 
 function addCatWeightAPI(data) {
-    return axios.post('/api/records');
+    return axios.post('http://localhost:8080/api/records', data);
 }
 function* addWeight(action) {
     try {
-        // const result = yield call(addCatWeightAPI, action.data);
+        const result = yield call(addCatWeightAPI, action.data);
         yield put({
             type: ADD_WEIGHT_SUCCESS,
-            data: action.data,
+            data: result.data,
         });
     } catch (err) {
         yield put({
             type: ADD_WEIGHT_FAILURE,
-            data: err.response.data,
+            error: err,
         });
     }
 }
@@ -129,7 +129,6 @@ function* watchgetCat() {
 function* watchaddCat() {
     yield takeLatest(ADD_CAT_REQUEST, addCat);
 }
-
 
 function* watchdeleteCat() {
     yield takeLatest(DELETE_CAT_REQUEST, deleteCat);
@@ -143,5 +142,11 @@ function* watchAddWeight() {
     yield takeLatest(ADD_WEIGHT_REQUEST, addWeight);
 }
 export default function* catSaga() {
-    yield all([fork(watchgetCat), fork(watchaddCat), fork(watchdeleteCat), fork(watchupdateCat),fork(watchAddWeight)]);
+    yield all([
+        fork(watchgetCat),
+        fork(watchaddCat),
+        fork(watchdeleteCat),
+        fork(watchupdateCat),
+        fork(watchAddWeight),
+    ]);
 }

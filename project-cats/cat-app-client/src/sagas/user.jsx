@@ -7,8 +7,6 @@ import {
     getContext,
     delay,
 } from 'redux-saga/effects';
-import axios from 'axios';
-import jwt from 'jsonwebtoken';
 
 import {
     LOG_OUT_FAILURE,
@@ -22,16 +20,17 @@ import {
     SIGN_UP_SUCCESS,
 } from '../reducers/user';
 
+import axios from 'axios';
+import jwt from 'jsonwebtoken';
+
 function signUpAPI(data) {
-    return axios.post('http://localhost:8080/api/signup', data);
+    return axios.post('/api/signup', data);
 }
 
 function* signUp(action) {
     try {
         console.log('SAGA SIGN UP', action);
         const result = yield call(signUpAPI, action.data);
-        console.log('Res data :', action.data);
-        yield delay(1000);
         yield put({
             type: SIGN_UP_SUCCESS,
             data: result.data,
@@ -45,44 +44,43 @@ function* signUp(action) {
     }
 }
 
-// 3
 function logInAPI(data) {
     return (
         axios
             // CORS 문제 해결에 따라 줄 변경
             //.post('/user/login', data)
-            .post('http://localhost:8080/api/authenticate', data)
+            .post('/api/login', data)
             .then((res) => {
-                console.log(res.data);
+                //     console.log(`res data: ${data}`);
                 const { token } = res.data;
                 axios.defaults.headers.common[
                     'Authorization'
                 ] = `Bearer${token}`;
 
-                // 현재 유저 아이디만 로컬 스토리지에 저장
-                const { id } = jwt.decode(token);
-                //CORS 문제 해결에 따라 아래 두 줄 중 하나 사용
-                localStorage.setItem('currentUser', id);
-                //localStorage.setItem('currentUser', 1);
+                //     // 현재 유저 아이디만 로컬 스토리지에 저장
+                //     const { id } = jwt.decode(token);
+                //     //CORS 문제 해결에 따라 아래 두 줄 중 하나 사용
+                //     localStorage.setItem('currentUser', id);
+                //     //localStorage.setItem('currentUser', 1);
+                localStorage.setItem('token', token);
             })
     );
-    // 이 부분 작동 x -> 알아볼 것
-    //.then(useHistory.push('/main'));
 }
 // 2 call은 동기 await역할 fork는 비동기
 function* logIn(action) {
     try {
-        console.log('SAGA LOGIN');
-        //const result = yield call(logInAPI, action.data);
+        console.log('사가 로그인', action);
+        const result = yield call(logInAPI, action.data);
         localStorage.setItem('currentUser', 1);
-
+        console.log(`result data (이거 확인): ${result.data}`);
         yield put({
             type: LOG_IN_SUCCESS,
             //로그인 구현 되면 data: result.data로 변경할 것
-            data: action.data,
+            data: result.data,
+            token: result.token,
         });
     } catch (err) {
-        console.log('SAGA LOGIN ERR', err);
+        console.log('사가 로그인 에러', err);
         yield put({
             type: LOG_IN_FAILURE,
             error: err,

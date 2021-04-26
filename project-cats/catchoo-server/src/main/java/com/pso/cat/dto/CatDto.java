@@ -16,6 +16,7 @@ public class CatDto {
     @Getter
     @Setter
     public static class Request {
+        
         private String name;
         private char gender;
         private String photo;
@@ -29,6 +30,7 @@ public class CatDto {
                 .photo(this.getPhoto())
                 .birth(this.getBirth()).build();
         }
+
     }
 
     @Getter

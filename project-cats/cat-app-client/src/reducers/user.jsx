@@ -10,6 +10,7 @@ export const initialState = {
     signUpError: null,
 
     onUser: null,
+    token: null,
     signUpData: {},
     loginData: {},
     user: null,
@@ -39,7 +40,7 @@ const dummyUser = (data) => ({
     name: 'dummy user',
     email: 'abc@gmail.com',
     pwd: 'aaa',
-    login_type: '', //추가
+    login_type: 'normal', //추가
 });
 
 //액션 함수
@@ -125,6 +126,7 @@ const reducer = (state = initialState, action) => {
                 logInLoading: false,
                 logInDone: true,
                 onUser: action.data,
+                token: action.token,
             };
         case LOG_IN_FAILURE:
             return {

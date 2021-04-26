@@ -70,7 +70,7 @@ const SignUpForm = () => {
         if (signUpDone) {
             history.push('/');
         }
-    });
+    }, [signUpDone]);
     return (
         <>
             <SignupContainer onSubmit={handleSubmit(onSubmit)}>

@@ -27,7 +27,7 @@ function App() {
             <Route path="/cat/data" component={weightResult} />
             <Route path="/cat/record" component={weightAdd} />
             <Route path="/cat/add" component={catAdd} />
-            <Route path="/cat/update" component={catUpdate}/>
+            <Route path="/cat/update" component={catUpdate} />
             <Route path="/user/main" component={main} />
             <Route path="/user/settings" component={Settings} />
             <Route path="/post/write" component={postWrite} />

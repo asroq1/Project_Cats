@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useState, } from 'react';
+import React, { useMemo, useCallback, useState } from 'react';
 import { useHistory, BrowserRouter as Router, Link } from 'react-router-dom';
 
 import ModalMenu from '../modal/ModalMenu';
@@ -16,7 +16,9 @@ const Global = styled.div`
         text-decoration: none;
         font-weight: normal;
     }
-    h1, h3, span {
+    h1,
+    h3,
+    span {
         font-weight: normal;
     }
     @media screen and (max-width: 768px) {
@@ -33,9 +35,11 @@ const EachCol = styled.div`
     font-size: 1.25rem;
     font-weight: bold;
     flex: auto;
-    background-color: ${(props) => (props.active ? palette.beige : palette.navy)};
+    background-color: ${(props) =>
+        props.active ? palette.beige : palette.navy};
     &: hover {
-        background-color: ${(props) => (props.active ? palette.beige : 'black')};
+        background-color: ${(props) =>
+            props.active ? palette.beige : 'black'};
     }
     &:not(:last-child) {
         max-width: 150px;
@@ -80,14 +84,13 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
         history.push('/cat/add');
     });
 
-    
-    const onModalMenu = useCallback(()=>{
+    const onModalMenu = useCallback(() => {
         setShowModalMenu(true);
-    })
+    });
 
     const onModalClose = useCallback(() => {
         setShowModalMenu(false);
-    })
+    });
 
     return (
         <Global>
@@ -106,9 +109,13 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
                     <i className="fa fa-plus"></i>
                 </EachCol>
                 <EachCol>
-                    
-                        <i className="fa fa-cog" onClick={onModalMenu}></i>
-                        {showModalMenu && <ModalMenu userNickname={"어쩌궁 저쩌궁"}onClose={onModalClose}/>}
+                    <i className="fa fa-cog" onClick={onModalMenu}></i>
+                    {showModalMenu && (
+                        <ModalMenu
+                            userNickname={'어쩌궁 저쩌궁'}
+                            onClose={onModalClose}
+                        />
+                    )}
                 </EachCol>
             </div>
         </Global>
