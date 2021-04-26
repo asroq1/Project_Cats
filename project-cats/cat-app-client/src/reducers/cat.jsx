@@ -197,10 +197,10 @@ const reducer = (state = initialState, action) => {
                 draft.cat = draft.cat.concat(action.data);
                 break;
             case ADD_CAT_FAILURE:
-                break;          
+                break;
             case DELETE_CAT_REQUEST:
                 break;
-            case DELETE_CAT_SUCCESS:            
+            case DELETE_CAT_SUCCESS:
                 draft.cat = draft.cat.filter((v) => v.id !== action.data);
                 break;
             case DELETE_CAT_FAILURE:
@@ -213,15 +213,8 @@ const reducer = (state = initialState, action) => {
             case UPDATE_CAT_FAILURE:
                 break;
             case ADD_WEIGHT_REQUEST:
-                // draft.cat[1].Record = draft.cat[1].Record.concat(
-                //     dummyCat(action.data)
-                // );
                 break;
             case ADD_WEIGHT_SUCCESS:
-                draft.cat[1].Record = draft.cat[1].Record.concat({
-                    cdt: '2021-03-30',
-                    wgt: 20.1,
-                });
                 break;
             case ADD_WEIGHT_FAILURE:
                 break;

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { addWeightRequest } from '../../reducers/cat';
@@ -173,22 +173,25 @@ const AddWeight = () => {
         e.preventDefault();
         nextRef.current.style.transform = 'translateX(0vw)';
     };
-    const onGapSubmit = (e) => {
-        e.preventDefault();
-        if (weightResult <= 0) {
-            alert('등록실패');
-            setTogether(0);
-            setAlone(0);
-            nextRef.current.style.transform = 'translateX(0vw)';
-        } else {
-            alert('등록완료');
-            const body = {
-                wgt: weightResult,
-                createdDate: today,
-            };
-            dispatch(addWeightRequest(body));
-        }
-    };
+    const onGapSubmit = useCallback(
+        (e) => {
+            e.preventDefault();
+            if (weightResult <= 0) {
+                alert('등록실패');
+                setTogether(0);
+                setAlone(0);
+                nextRef.current.style.transform = 'translateX(0vw)';
+            } else {
+                alert('등록완료');
+                const body = {
+                    wgt: weightResult,
+                    createdDate: today,
+                };
+                dispatch(addWeightRequest(body));
+            }
+        },
+        [weightResult, today]
+    );
     // useEffect(() => {
     //     console.log(today);
     // });
@@ -199,7 +202,7 @@ const AddWeight = () => {
                     <CarouselContent ref={nextRef}>
                         <ContentWrapper>
                             <HeaderTitle>체중 측정 중...</HeaderTitle>
-                            <ContentImage src="/image/scale.png" alt="" />
+                            <ContentImage src="/image/scale.png" alt="logo" />
                             <ContentMain>
                                 <ContentText>
                                     주인님을 들고 체중계 위로 올라가주세요.
@@ -209,7 +212,9 @@ const AddWeight = () => {
                                         type="number"
                                         value={together}
                                         onChange={onTogetherChange}
+                                        min="1"
                                         max="1000"
+                                        required
                                     />
                                     <AddText>kg</AddText>
                                 </WeightBox>
@@ -220,11 +225,7 @@ const AddWeight = () => {
                     <CarouselContent ref={nextRef}>
                         <ContentWrapper>
                             <HeaderTitle>체중 측정 중...</HeaderTitle>
-                            <ContentImage
-                                src="/image/scale.png"
-                                alt=""
-                                // className={styles.img__scale}
-                            />
+                            <ContentImage src="/image/scale.png" alt="logo" />
                             <ContentMain>
                                 <ContentText>
                                     집사 혼자 체중계 위로 올라가주세요.
@@ -234,8 +235,9 @@ const AddWeight = () => {
                                         type="number"
                                         value={alone}
                                         onChange={onAloneChange}
-                                        min={0}
+                                        min="1"
                                         max="1000"
+                                        required
                                     />
                                     <AddText>kg</AddText>
                                 </WeightBox>

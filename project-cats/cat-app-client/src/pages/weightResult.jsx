@@ -29,10 +29,8 @@ const DataButton = styled.button`
     border-radius: 8px;
     color: white;
     font-weight: 600;
-
-    //background-color: ${(props) => (props.active ? 'black' : palette.beige)};
-    &.active {
-        background-color: 'black';
+    :hover {
+        background: ${palette.borderColor};
     }
 `;
 
