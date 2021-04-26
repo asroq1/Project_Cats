@@ -15,24 +15,24 @@ export const initialState = {
         user: 1,
     },
     cat: [
-        // {
-        //     cat_id: 0,
-        //     user_id: 1,
-        //     name: 'Garfield',
-        //     gender: 'M',
-        //     Photo: {
-        //         file: '',
-        //         url:
-        //             'https://welovekitties.com/wp-content/uploads/2015/12/cutekittenspictures-145124821648lcp.jpg',
-        //     },
-        //     birth: '2020-02-28',
-        //     Record: [
-        //         {
-        //             cdt: '2021-03-30',
-        //             wgt: 3.1,
-        //         },
-        //     ],
-        // },
+        {
+            cat_id: 0,
+            user_id: 1,
+            name: 'Garfield',
+            gender: 'M',
+            Photo: {
+                file: '',
+                url:
+                    'https://welovekitties.com/wp-content/uploads/2015/12/cutekittenspictures-145124821648lcp.jpg',
+            },
+            birth: '2020-02-28',
+            Record: [
+                {
+                    cdt: '2021-03-30',
+                    wgt: 3.1,
+                },
+            ],
+        },
     ],
     isLoading: true,
     currentIndex: 1,
@@ -186,7 +186,7 @@ const reducer = (state = initialState, action) => {
                 draft.isLoading = true;
                 break;
             case GET_CAT_SUCCESS:
-                draft.cat = action.data;
+                draft.cat = draft.cat;
                 draft.isLoading = false;
                 break;
             case GET_CAT_FAILURE:
