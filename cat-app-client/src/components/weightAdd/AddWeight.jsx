@@ -1,7 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+<<<<<<< HEAD:project-cats/cat-app-client/src/components/weightAdd/AddWeight.jsx
+import { addWeightRequestAction } from '../../reducers/cat';
+import palette from '../../styles/palette';
+=======
 import { addWeightRequest } from '../../reducers/cat';
+>>>>>>> 44be38b3b6d5b8a4c79da459013cd5a9a1e8c262:cat-app-client/src/components/weightAdd/AddWeight.jsx
 // import styles from '../../styles/AddWeight.module.css';
 
 const HeaderTitle = styled.span`
@@ -194,7 +199,7 @@ const AddWeight = () => {
                     wgt: weightResult,
                     createdDate: today,
                 };
-                dispatch(addWeightRequest(body));
+                dispatch(addWeightRequestAction(body));
             }
         },
         [weightResult, today]

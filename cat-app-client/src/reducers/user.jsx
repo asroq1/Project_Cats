@@ -9,7 +9,7 @@ export const initialState = {
     signUpDone: false,
     signUpError: null,
 
-    onUser: null,
+    me: null,
     token: null,
     signUpData: {},
     loginData: {},
@@ -57,7 +57,8 @@ export const loginSuccessAction = (data) => {
     return {
         type: LOG_IN_SUCCESS,
         data,
-        onUser: dummyUser(),
+
+        // onUser: dummyUser(),
     };
 };
 
@@ -125,8 +126,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 logInLoading: false,
                 logInDone: true,
-                onUser: action.data,
-                token: action.token,
+                me: action.data,
             };
         case LOG_IN_FAILURE:
             return {
@@ -147,7 +147,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 logOutLoading: false,
                 logInDone: false,
-                onUser: action.data,
+                me: action.data,
             };
 
         case LOG_OUT_FAILURE:
@@ -168,7 +168,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 signUpLoading: false,
                 signUpDone: true,
-                onUser: action.data,
+                me: action.data,
             };
 
         case SIGN_UP_FAILURE:

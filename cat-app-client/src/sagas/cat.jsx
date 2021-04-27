@@ -17,6 +17,9 @@ import {
     ADD_WEIGHT_REQUEST,
     ADD_WEIGHT_SUCCESS,
     ADD_WEIGHT_FAILURE,
+    DELETE_WEIGHT_FAILURE,
+    DELETE_WEIGHT_SUCCESS,
+    DELETE_WEIGHT_REQUEST,
 } from '../reducers/cat';
 
 // 해당 유저의 모든 고양이 정보 받아오기
@@ -28,10 +31,9 @@ function getCatAPI(data) {
 function* getCat(action) {
     try {
         // call은 비동기 호출, fork는 동기 호출
-
         // Call 사용 시 Promise를 반환하는 함수 호출하고 기다릴 수 있음
         // 첫 번쨰 파라미터는 함수, 나머지 파라미터는 해당 함수에 넣을 인수
-        const result = yield call(getCatAPI, action.data);
+        const result = yield call(getCatAPI);
         yield put({
             type: GET_CAT_SUCCESS,
             data: result.data,
@@ -122,6 +124,24 @@ function* addWeight(action) {
     }
 }
 
+function deleteWeightAPI(data) {
+    return axios.post(`api/records/id`, data);
+}
+function* deleteWeight(action) {
+    try {
+        const result = yield (deleteWeightAPI, action.data);
+        yield put({
+            type: DELETE_WEIGHT_REQUEST,
+            data: result.data,
+        });
+    } catch (err) {
+        yield put({
+            type: DELETE_WEIGHT_FAILURE,
+            error: err,
+        });
+    }
+}
+
 function* watchgetCat() {
     yield takeLatest(GET_CAT_REQUEST, getCat);
 }
@@ -141,6 +161,10 @@ function* watchupdateCat() {
 function* watchAddWeight() {
     yield takeLatest(ADD_WEIGHT_REQUEST, addWeight);
 }
+
+function* watchDeleteWeight() {
+    yield takeLatest(DELETE_WEIGHT_REQUEST, deleteWeight);
+}
 export default function* catSaga() {
     yield all([
         fork(watchgetCat),
@@ -148,5 +172,6 @@ export default function* catSaga() {
         fork(watchdeleteCat),
         fork(watchupdateCat),
         fork(watchAddWeight),
+        fork(watchDeleteWeight),
     ]);
 }

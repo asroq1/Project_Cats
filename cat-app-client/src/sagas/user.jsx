@@ -45,6 +45,7 @@ function* signUp(action) {
 }
 
 function logInAPI(data) {
+<<<<<<< HEAD
 
 
     return (
@@ -67,12 +68,15 @@ function logInAPI(data) {
             //     localStorage.setItem('token', token);
             // })
     );
+=======
+    return axios.post('/api/login', data);
+>>>>>>> aa532f0c32cda77a098f3aa258675c1d4c93ba14
 }
 // 2 call은 동기 await역할 fork는 비동기
 function* logIn(action) {   
     try {
-        console.log('사가 로그인', action);
         const result = yield call(logInAPI, action.data);
+<<<<<<< HEAD
         //localStorage.setItem('currentUser', 1);
         // console.log(`result data (이거 확인): ${result.data}`);
 
@@ -81,13 +85,19 @@ function* logIn(action) {
         //     'Authorization'
         // ] = `Bearer${token}`;
 
+=======
+        axios.defaults.headers.common[
+            'Authorization'
+        ] = `Bearer${result.data.token}`;
+>>>>>>> aa532f0c32cda77a098f3aa258675c1d4c93ba14
         yield put({
             type: LOG_IN_SUCCESS,
-            //로그인 구현 되면 data: result.data로 변경할 것
-            data: result.data,
-            token: result.token,
+            data: {
+                data: result.data,
+            },
         });
     } catch (err) {
+        s;
         console.log('사가 로그인 에러', err);
         yield put({
             type: LOG_IN_FAILURE,

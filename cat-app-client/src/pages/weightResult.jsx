@@ -32,6 +32,9 @@ const DataButton = styled.button`
     :hover {
         background: ${({theme}) => theme.palette.borderColor};
     }
+    &:active {
+        transform: scale(0.9);
+    }
 `;
 
 // const ListButton = styled.button`
