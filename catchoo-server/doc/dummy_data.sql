@@ -16,10 +16,10 @@ INSERT INTO record(cat_id, cdt, wgt) VALUES(2, '2020-10-26', 4.7);
 INSERT INTO record(cat_id, cdt, wgt) VALUES(2, '2020-11-21', 5.1);
 INSERT INTO record(cat_id, cdt, wgt) VALUES(2, '2020-12-20', 5.4);
 
-INSERT INTO AUTHORITY(name) VALUES("ROLE_ADMIN");
-INSERT INTO AUTHORITY(name) VALUES("ROLE_USER");
+INSERT INTO authority(name) VALUES("ROLE_ADMIN");
+INSERT INTO authority(name) VALUES("ROLE_USER");
 
-INSERT INTO USER_AUTHORITY(user_id, name) VALUES(1, "ROLE_USER");
-INSERT INTO USER_AUTHORITY(user_id, name) VALUES(1, "ROLE_ADMIN");
-INSERT INTO USER_AUTHORITY(user_id, name) VALUES(2, "ROLE_USER");
-INSERT INTO USER_AUTHORITY(user_id, name) VALUES(2, "ROLE_ADMIN");
+INSERT INTO user_authority(user_id, name) VALUES(1, "ROLE_USER");
+INSERT INTO user_authority(user_id, name) VALUES(1, "ROLE_ADMIN");
+INSERT INTO user_authority(user_id, name) VALUES(2, "ROLE_USER");
+INSERT INTO user_authority(user_id, name) VALUES(2, "ROLE_ADMIN");
