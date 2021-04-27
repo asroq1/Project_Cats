@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import palette from '../../styles/palette';
 import styled from 'styled-components';
 
 const Overlay = styled.div`
@@ -14,7 +13,7 @@ const Overlay = styled.div`
     z-index: 5000;
     padding: 3rem;
     color: ${({theme})=>theme.palette.beige};
-    background-color: ${palette.navy};
+    background-color: ${({theme})=>theme.palette.navy};
     display: flex;
     flex-direction: column;
     text-align: center;

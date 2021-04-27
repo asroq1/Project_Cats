@@ -34,7 +34,6 @@ function* getCat(action) {
         const result = yield call(getCatAPI, action.data);
         yield put({
             type: GET_CAT_SUCCESS,
-            //data: result.data,
             data: result.data,
         });
     } catch (err) {
