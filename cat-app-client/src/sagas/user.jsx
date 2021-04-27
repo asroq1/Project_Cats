@@ -45,9 +45,6 @@ function* signUp(action) {
 }
 
 function logInAPI(data) {
-<<<<<<< HEAD
-
-
     return (
         axios
             // CORS 문제 해결에 따라 줄 변경
@@ -68,15 +65,12 @@ function logInAPI(data) {
             //     localStorage.setItem('token', token);
             // })
     );
-=======
     return axios.post('/api/login', data);
->>>>>>> aa532f0c32cda77a098f3aa258675c1d4c93ba14
 }
 // 2 call은 동기 await역할 fork는 비동기
 function* logIn(action) {   
     try {
         const result = yield call(logInAPI, action.data);
-<<<<<<< HEAD
         //localStorage.setItem('currentUser', 1);
         // console.log(`result data (이거 확인): ${result.data}`);
 
@@ -85,11 +79,9 @@ function* logIn(action) {
         //     'Authorization'
         // ] = `Bearer${token}`;
 
-=======
         axios.defaults.headers.common[
             'Authorization'
         ] = `Bearer${result.data.token}`;
->>>>>>> aa532f0c32cda77a098f3aa258675c1d4c93ba14
         yield put({
             type: LOG_IN_SUCCESS,
             data: {
