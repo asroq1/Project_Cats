@@ -1,19 +1,12 @@
-# Project_Cats
-집사님들을 위한 킹냥이 웹앱 😺
-
 # Catchoo (In Progress)
+집사님들을 위한 킹냥이 웹앱 😺
 Web App for Cat Lovers.
+
+Built with [React + Redux + Redux-Saga] + [Spring Boot + MariaDB]
 
 [catchoo.netlify.app](https://catchoo.netlify.app)
 
 <br />
-
-## Team Members
-- This project is being developed by (2) Front-end engineers and (2) Back-end engineers, gathered via Korean developers' online community - OKKY.kr.
-- Project started on 03/30/21.
-- Tool decision, task distribution, debugging, etc. discussed every day via Slack. Weekly zoom meetings held for deeper discussion and catch-up.
-- **Front-end**: HS, HR
-- **Back-end**: HY, SH <br />
 
 ## Functionalities
 1. Track Weight of Your Cats
@@ -57,4 +50,11 @@ Web App for Cat Lovers.
 
 #### Deployment
 - Front-end server *temporarily* deployed on Netlify.
-- Back-end server *to be* deployed on AWS
+- Back-end server *to be* deployed on AWS <br/>
+
+## Team Members
+- This project is being developed by (2) Front-end engineers and (2) Back-end engineers, gathered via Korean developers' online community - OKKY.kr.
+- Project started on 03/30/21.
+- Tool decision, task distribution, debugging, etc. discussed every day via Slack. Weekly zoom meetings held for deeper discussion and catch-up.
+- **Front-end**: HS, HR
+- **Back-end**: HY, SH <br />
