@@ -1,14 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-<<<<<<< HEAD:project-cats/cat-app-client/src/components/weightResult/WeightResultList.jsx
 import palette from '../../styles/palette';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
-=======
-
-
->>>>>>> 44be38b3b6d5b8a4c79da459013cd5a9a1e8c262:cat-app-client/src/components/weightResult/WeightResultList.jsx
 const ListContainer = styled.div`
     display: grid;
     margin: 0 auto;

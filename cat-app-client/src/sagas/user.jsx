@@ -89,7 +89,6 @@ function* logIn(action) {
             },
         });
     } catch (err) {
-        s;
         console.log('사가 로그인 에러', err);
         yield put({
             type: LOG_IN_FAILURE,
