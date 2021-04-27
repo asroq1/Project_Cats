@@ -13,18 +13,17 @@ const LoginContainer = styled.form`
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    width: 30%;
-
+    width: 80%;
     button {
         margin: 0.5rem 0 0.5rem 0;
         height: 3rem;
         font-size: 1rem;
         border-radius: 4px;
     }
-
-    @media ${(props) => props.theme.mobile} {
-        width: 85vw;
-    }
+    // @media ${({theme}) => theme.width.mobile} {
+    //     // width: 85vw;
+    //     width: 100%;
+    // }
 `;
 const LoginInput = styled.input`
     margin: 0.5rem 0 0.5rem 0;
@@ -56,16 +55,18 @@ const ErrorMessages = styled.p`
 const SocialContainer = styled.div`
     margin: 0 auto;
     display: flex;
-    width: 30%;
+    width: 80%;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     button{
-        width:49%:
+        //width:49%:
+        flex: 1;
     }
-    @media ${(props) => props.theme.mobile} {
-        width: 85vw;
-    }
+    // @media ${({theme}) => theme.width.mobile} {
+    //     // width: 85vw;
+    //     width: 100%;
+    // }
 `;
 
 const LoginForm = ({ history }) => {

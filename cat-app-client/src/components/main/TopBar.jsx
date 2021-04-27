@@ -3,16 +3,13 @@ import { useHistory, BrowserRouter as Router, Link } from 'react-router-dom';
 
 import ModalMenu from '../modal/ModalMenu';
 import styled from 'styled-components';
-import palette from '../../styles/palette';
 import 'font-awesome/css/font-awesome.min.css';
 
-const Global = styled.div`
-    background-color: ${palette.beige};
-    max-width: 1200px;
-    width: 100vw;
-    margin: 0 auto;
+import palette from '../../styles/palette'
+
+const InnerGlobal = styled.div`
     a {
-        color: ${palette.beige};
+        color: ${({theme}) => theme.palette.beige};
         text-decoration: none;
         font-weight: normal;
     }
@@ -20,9 +17,6 @@ const Global = styled.div`
     h3,
     span {
         font-weight: normal;
-    }
-    @media screen and (max-width: 768px) {
-        width: 100vw;
     }
 `;
 
@@ -57,10 +51,10 @@ const EachCol = styled.div`
         justify-content: flex-end;
         border: 1px solid white;
         border-bottom: 1px solid black;
-        background: ${palette.beige};
+        background: ${({theme}) => theme.palette.beige};
     }
     .fa-cog {
-        color: ${palette.navy};
+        color: ${({theme}) => theme.palette.navy};
     }
 `;
 
@@ -93,7 +87,7 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
     });
 
     return (
-        <Global>
+        <InnerGlobal>
             <div style={menuStyle}>
                 {cat.map((el) => (
                     <EachCol
@@ -118,7 +112,7 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
                     )}
                 </EachCol>
             </div>
-        </Global>
+        </InnerGlobal>
     );
 };
 

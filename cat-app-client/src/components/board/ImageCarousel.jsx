@@ -46,12 +46,6 @@ const Indicator = styled.div`
     }
 `;
 
-const Global = createGlobalStyle`
-    .slick-slide {
-        display: inline-block;
-    }  
-`;
-
 const ImageCarousel = ({ images }) => {
     return (
         <>

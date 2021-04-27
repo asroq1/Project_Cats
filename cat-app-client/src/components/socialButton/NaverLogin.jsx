@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router';
 import styled from 'styled-components';
-import palette from '../../styles/palette';
 
 const NaverButton = styled.button`
     width: 49%;
-    background-color: ${palette.beige};
+    background-color: ${({theme})=>theme.palette.beige};
     border: none;
     img {
         width: 100%;

@@ -8,17 +8,6 @@ import palette from '../../styles/palette';
 //코드 너무 장황해지니
 //필요 딱히 없는 건 나중에 지워주기
 //짧은 건 useMemo로 넣어줌
-const Global = styled.div`
-    background-color: ${palette.beige};
-    max-width: 1200px;
-    width: 100vw;
-    height: 100vh;
-    margin: 0 auto;
-    @media screen and (max-width: 768px) {
-        width: 100vw;
-    }
-`;
-
 const GeneralWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -101,7 +90,7 @@ const Main = ({ cat, currentIndex, age }) => {
     const currentCat = cat[currentIndex - 1];
 
     return (
-        <Global>
+        <>
             <GeneralWrapper>
                 <div style={paddingStyle}>
                     {age[0]}년 {age[1]}개월 |{' '}
@@ -156,7 +145,7 @@ const Main = ({ cat, currentIndex, age }) => {
                     <ButtonWrapper>이전 데이터 보기</ButtonWrapper>
                 </Link>
             </div>
-        </Global>
+        </>
     );
 };
 

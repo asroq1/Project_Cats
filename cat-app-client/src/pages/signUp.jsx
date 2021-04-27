@@ -1,18 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import SignUpForm from '../components/signUp/SignUpForm';
-import palette from '../styles/palette';
+
 
 const SignupBackground = styled.div`
     background-color: #f4f1de;
 `;
 const SignupWrapper = styled.div`
     display: grid;
-    max-width: 1200px;
-    width: 100vw;
+    // max-width: 1200px;
+    // width: 100vw;
+    width: 100%;
     height: 100vh;
     margin: 0 auto;
-    background-color:  background-color: ${palette.orange};
+    background-color:  background-color: ${({theme}) => theme.palette.orange};
 `;
 
 const TitleWrapper = styled.div`
@@ -25,7 +26,7 @@ const Title = styled.h2`
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
-    color: ${palette.navy};
+    color: ${({theme}) => theme.palette.navy};
 `;
 
 const DivideLine = styled.div`
@@ -38,8 +39,9 @@ const DivideLine = styled.div`
     color: #909090;
     font-size: 1.2rem;
 
-    @media ${(props) => props.theme.mobile} {
-        width: 85vw;
+    @media ${({theme}) => theme.width.mobile} {
+        // width: 85vw;
+        width: 100%;
         font-size: 1rem;
     } ;
 `;

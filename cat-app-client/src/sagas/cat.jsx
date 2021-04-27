@@ -22,7 +22,7 @@ import {
 // 해당 유저의 모든 고양이 정보 받아오기
 // 이 부분은 논의할 것 - 로그인할 때 그냥 다 불러와도 됨
 function getCatAPI(data) {
-    return axios.get(`http://localhost:8080/api/cats?userId=${data}`);
+    return axios.get(`http://localhost:8080/api/cats`);
 }
 
 function* getCat(action) {
@@ -48,15 +48,16 @@ function* getCat(action) {
 // 해당 유저에게
 // 새로운 고양이 정보 추가
 function addCatAPI(data) {
-    return axios.post('/api/cat', data);
+    return axios.post('/api/cats', data);
 }
 
 function* addCat(action) {
     try {
+        
         const result = yield call(addCatAPI, action.data);
         yield put({
             type: ADD_CAT_SUCCESS,
-            data: action.data,
+            data: result.data,
         });
     } catch (err) {
         yield put({

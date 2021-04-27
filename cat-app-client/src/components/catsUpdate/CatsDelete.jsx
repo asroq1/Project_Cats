@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import { DELETE_CAT_REQUEST } from '../../reducers/cat';
 
 import styled from 'styled-components';
-import palette from '../../styles/palette';
 
 const InnerGlobal = styled.div`
     width: 80%;
@@ -20,7 +19,7 @@ const ButtonWrapper = styled.button`
     border-radius:10px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${palette.orange};
+    background-color: ${({theme}) => theme.palette.orange};
     cursor: pointer;
     color: white;
     margin-top: 0.5rem;

@@ -14,15 +14,17 @@ const KakaoButton = styled.button`
     font-size: 1rem;
     font-weight: bold;
     border: none;
-    @media ${(props) => props.theme.mobile} {
-        width: 49%;
-        height: 48px;
-        font-size: 0.8rem;
-    }
+    height: 48px;
+    // @media ${({theme}) => theme.width.mobile} {
+    //     width: 49%;
+    //     font-size: 0.8rem;
+    // }
 `;
 
 const KakaoLogo = styled.img`
     width: 15%;
+    height: 40px;
+
 `;
 const KakaoLogin = () => {
     const history = useHistory();

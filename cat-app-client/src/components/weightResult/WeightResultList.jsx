@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import palette from '../../styles/palette';
+
 
 const ListContainer = styled.div`
     display: grid;
@@ -8,7 +8,7 @@ const ListContainer = styled.div`
     max-width: 1200px;
     width: 100%;
     height: 100%;
-    background-color: ${palette.navy};
+    background-color: ${({theme})=>theme.palette.navy};
 `;
 
 const DataContainer = styled.div`
@@ -23,19 +23,19 @@ const DataList = styled.div`
     justify-content: space-around;
     font-size: 1.5rem;
     padding: 1.2rem;
-    border-top: 1px solid ${palette.borderColor};
+    border-top: 1px solid ${({theme})=>theme.palette.borderColor};
 
     p:nth-child(1) {
         display: grid;
         align-items: center;
         font-size: 1rem;
-        color: ${palette.white};
+        color: ${({theme})=>theme.palette.white};
     }
 
     p:nth-child(2) {
         font-size: 2rem;
         font-weight: bold;
-        color: ${palette.white};
+        color: ${({theme})=>theme.palette.white};
     }
 `;
 const data = [

@@ -45,11 +45,13 @@ function* signUp(action) {
 }
 
 function logInAPI(data) {
+
+
     return (
         axios
             // CORS 문제 해결에 따라 줄 변경
-            //.post('/user/login', data)
-            .post('/api/login', data)
+            //.post('/api/login', data)
+            .post('/api/login')
             .then((res) => {
                 //     console.log(`res data: ${data}`);
                 const { token } = res.data;

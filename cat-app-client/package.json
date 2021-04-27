@@ -2,6 +2,7 @@
     "name": "my-app",
     "version": "0.1.0",
     "private": true,
+    "proxy": "http://localhost:8080",
     "dependencies": {
         "6": "^0.0.1",
         "@fortawesome/fontawesome-svg-core": "^1.2.35",
@@ -54,7 +55,7 @@
             "react-app",
             "react-app/jest"
         ]
-    },
+    },  
     "browserslist": {
         "production": [
             ">0.2%",
@@ -70,6 +71,5 @@
     "devDependencies": {
         "@ionic/app-scripts": "^3.2.4",
         "redux-devtools-extension": "^2.13.9"
-    },
-    "proxy": "http://localhost:8080"
+    }
 }

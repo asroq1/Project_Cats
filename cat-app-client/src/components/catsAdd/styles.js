@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import palette from '../../styles/palette';
 
 // 스타일링된 input block
 export const InnerGlobal = styled.div`
@@ -75,11 +74,12 @@ export const ButtonWrapper = styled.button`
     &:hover {
         background: darkred;
     }
+    
     &:first-child {
-        background-color: ${palette.navy};
+        background-color: ${({theme}) => theme.palette.navy};
     }
     &:last-child {
-        background-color: ${palette.orange};
+        background-color: ${({theme}) => theme.palette.orange};
     }
 `;
 
@@ -105,6 +105,6 @@ export const RadioBtnWrapper = styled.div`
         margin-left: 0.5rem;
     }
     input:checked + .radiobtn {
-        background-color: ${palette.orange};
+        background-color: ${({theme}) => theme.palette.orange};
     }
 `;

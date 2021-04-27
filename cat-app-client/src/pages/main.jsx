@@ -7,14 +7,12 @@ import MainEmptyComponent from '../components/main/MainEmpty'
 
 import { GET_CAT_REQUEST, SET_CURRENT_CAT } from '../reducers/cat';
 
-import palette from '../styles/palette';
+
 
 const Main = () => {
     const { cat } = useSelector((state) => state.cat);
     const { isLoading } = useSelector((state) => state.cat);
     const { currentIndex } = useSelector((state) => state.cat);
-
-    const bgColor = useMemo(() => ({backgroundColor: palette.beige}), []);
     
     const dispatch = useDispatch();
     
@@ -53,7 +51,6 @@ const Main = () => {
 
     return (
         <>
-        <div style={bgColor}>
             <TopBar
                 cat={cat}
                 currentIndex={currentIndex}
@@ -68,7 +65,6 @@ const Main = () => {
                 )
                 }
             {/* )} */}
-        </div>
         </>
     );
 };
