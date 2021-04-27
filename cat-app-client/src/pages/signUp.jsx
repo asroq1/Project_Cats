@@ -21,6 +21,8 @@ const SignupWrapper = styled.div`
 const TitleWrapper = styled.div`
     display: grid;
     align-items: end;
+
+    position: relative; //추가
 `;
 
 const Title = styled.h2`
@@ -31,8 +33,11 @@ const Title = styled.h2`
     color: ${({theme}) => theme.palette.navy};
 `;
 const ExitButton = styled.p`
-    position: fixed;
+    //position: fixed;
+    position: absolute;
     right: 0;
+    top: 0;
+    text-align: right; //추가
     font-size: 2rem;
     padding: 0.5rem;
 
