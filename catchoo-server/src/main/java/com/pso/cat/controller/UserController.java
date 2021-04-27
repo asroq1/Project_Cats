@@ -4,6 +4,7 @@ import com.pso.cat.dto.UserDto;
 import com.pso.cat.dto.UserDto.Response;
 import com.pso.cat.service.UserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import javax.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -32,33 +33,30 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @ApiOperation("개인 정보 확인")
     @GetMapping("/user")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<UserDto.Response> getMyUserInfo() {
         return ResponseEntity.ok(UserDto.Response.ofEntity(userService.getMyUserWithAuthorities().get()));
     }
 
+    /*
     @GetMapping("/user/{email}")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<UserDto.Response> getUserInfo(@PathVariable String email) {
         return ResponseEntity.ok(UserDto.Response.ofEntity(userService.getUserWithAuthorities(email).get()));
     }
+     */
 
-
-    @GetMapping("/{id}")
-    public ResponseEntity<UserDto.Response> get(@PathVariable Long id) {
-        return ResponseEntity.ok().body(userService.read(id));
-    }
-
-    @PatchMapping("/{id}")
-    public ResponseEntity modify(@PathVariable Long id, UserDto.Request request) {
-        userService.modify(id, request);
+    @PatchMapping("/user")
+    public ResponseEntity modify(UserDto.Request request) {
+        userService.modify(request);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity remove(Long id) {
-        userService.remove(id);
+    @DeleteMapping("/user")
+    public ResponseEntity remove() {
+        userService.remove();
         return ResponseEntity.ok().build();
     }
 }

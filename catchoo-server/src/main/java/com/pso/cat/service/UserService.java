@@ -1,6 +1,5 @@
 package com.pso.cat.service;
 
-import com.pso.cat.dto.UserDto.Request;
 import com.pso.cat.entity.Authority;
 import com.pso.cat.entity.User;
 import com.pso.cat.dto.UserDto;
@@ -60,14 +59,14 @@ public class UserService {
         return UserDto.Response.ofEntity(userRepository.findById(id).get());
     }
 
-    public void modify(Long id, UserDto.Request request) {
+    public void modify(UserDto.Request request) {
         User user = request.toEntity();
-        user.setId(id);
+        user.setId(SecurityUtil.getCurrentUserId().orElseThrow(() -> new RuntimeException("로그인해주세요")));
         userRepository.save(user);
     }
 
-    public void remove(Long id) {
-        userRepository.inactive(id);
+    public void remove() {
+        userRepository.inactive(SecurityUtil.getCurrentUserId().orElseThrow(() -> new RuntimeException("로그인해주세요")));
     }
 
 }
