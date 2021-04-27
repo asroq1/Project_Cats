@@ -11,6 +11,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
 
+axios.defaults.baseURL = 'http://localhost:8080/';
+// axios.defaults.withCredentials = true;
+
 const store = Store(rootReducer, composeWithDevTools());
 
 ReactDOM.render(

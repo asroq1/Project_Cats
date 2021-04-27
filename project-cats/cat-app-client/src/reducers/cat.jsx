@@ -39,11 +39,15 @@ export const initialState = {
     currImgUrl: null,
 };
 
-// 몸무게 추가
+// 몸무게 관련
 export const ADD_WEIGHT_REQUEST = 'ADD_WEIGHT_REQUEST';
 export const ADD_WEIGHT_SUCCESS = 'ADD_WEIGHT_SUCCESS';
 export const ADD_WEIGHT_FAILURE = 'ADD_WEIGHT_FAILURE';
 
+export const DELETE_WEIGHT_REQUEST = 'DELETE_WEIGHT_REQUEST';
+export const DELETE_WEIGHT_SUCCESS = 'DELETE_WEIGHT_SUCCESS';
+export const DELETE_WEIGHT_FAILURE = 'DELETE_WEIGHT_FAILURE';
+//
 // 논의할 부분
 export const GET_CAT_REQUEST = 'GET_CAT_REQUEST';
 export const GET_CAT_SUCCESS = 'GET_CAT_SUCCESS';
@@ -120,22 +124,42 @@ export const updateCatFailureAction = (data) => ({
     type: UPDATE_CAT_FAILURE,
     data,
 });
-export const addWeightRequest = (data) => {
-    console.log('추가 액션');
+export const addWeightRequestAction = (data) => {
     return {
         type: ADD_WEIGHT_REQUEST,
         data,
     };
 };
-export const addWeightSuccess = (data) => {
+export const addWeightSuccessAction = (data) => {
     return {
         type: ADD_WEIGHT_SUCCESS,
         data,
     };
 };
-export const addWeightFailure = (data) => {
+export const addWeightFailureAction = (data) => {
     return {
         type: ADD_WEIGHT_FAILURE,
+        data,
+    };
+};
+
+export const deleteWeightRequestAction = (data) => {
+    return {
+        type: DELETE_WEIGHT_REQUEST,
+        data,
+    };
+};
+
+export const deleteWeightSuccessAction = (data) => {
+    return {
+        type: DELETE_WEIGHT_SUCCESS,
+        data,
+    };
+};
+
+export const deleteWeightFailureAction = (data) => {
+    return {
+        type: DELETE_WEIGHT_FAILURE,
         data,
     };
 };
@@ -156,19 +180,19 @@ export const setCurrentImage = (data) => {
 
 export const getWeightRequest = (data) => {
     return {
-        type: getWeightRequest,
+        type: GET_WEIGHT_REQUEST,
         data,
     };
 };
 export const getWeightSuccess = (data) => {
     return {
-        type: getWeightSuccess,
+        type: GET_WEIGHT_SUCCESS,
         data,
     };
 };
 export const getWeightFailure = (data) => {
     return {
-        type: getWeightFailure,
+        type: GET_WEIGHT_FAILURE,
         data,
     };
 };
@@ -218,6 +242,14 @@ const reducer = (state = initialState, action) => {
                 break;
             case ADD_WEIGHT_FAILURE:
                 break;
+            case DELETE_WEIGHT_REQUEST:
+                draft.cat = draft.cat.filter((v) => v.id !== action.data);
+                break;
+            case DELETE_WEIGHT_SUCCESS:
+                break;
+            case DELETE_WEIGHT_FAILURE:
+                break;
+
             case SET_CURRENT_CAT:
                 draft.currentIndex = action.data;
                 break;

@@ -35,9 +35,6 @@ const LoginInput = styled.input`
     padding: 1rem;
     border: 1px solid #909090;
     background-color: ${palette.inputColor};
-    ::placeholder {
-        text-align: right;
-    }
 `;
 const SubmitButton = styled.button`
     background: #f2cc8f;
@@ -95,12 +92,11 @@ const LoginForm = ({ history }) => {
     return (
         <>
             <LoginContainer onSubmit={handleSubmit(onSubmit)}>
-                <label>이메일</label>
                 <LoginInput
                     name="email"
                     type="text"
                     ref={register({ required: true, pattern: /^\S+@\S+$/i })}
-                    placeholder="&#xf0e0;"
+                    placeholder="Email"
                 />
                 {errors.email && (
                     <ErrorMessages>
@@ -108,12 +104,11 @@ const LoginForm = ({ history }) => {
                     </ErrorMessages>
                 )}
 
-                <label>비밀번호</label>
                 <LoginInput
                     name="password"
                     type="password"
                     ref={register({ required: true, minLength: 4 })}
-                    placeholder="&#xf09c;"
+                    placeholder="Password"
                 />
                 {errors.pwd && errors.pwd.type === 'required' && (
                     <ErrorMessages>비밀번호를 입력해주세요.</ErrorMessages>

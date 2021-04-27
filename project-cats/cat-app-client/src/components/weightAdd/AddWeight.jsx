@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { addWeightRequest } from '../../reducers/cat';
+import { addWeightRequestAction } from '../../reducers/cat';
 import palette from '../../styles/palette';
 // import styles from '../../styles/AddWeight.module.css';
 
@@ -187,7 +187,7 @@ const AddWeight = () => {
                     wgt: weightResult,
                     createdDate: today,
                 };
-                dispatch(addWeightRequest(body));
+                dispatch(addWeightRequestAction(body));
             }
         },
         [weightResult, today]

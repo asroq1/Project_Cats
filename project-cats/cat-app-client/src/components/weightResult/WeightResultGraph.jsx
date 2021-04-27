@@ -143,7 +143,8 @@ const data = [
 
 export default function WeightResultGraph() {
     //나중에 백엔드 연동해서 이렇게 최근순으로 당겨오면됌
-    const perDay = data.slice(-7);
+    //최근 데이터만 보여줌
+    const perDay = data.slice(-5);
     const comaparisonResult =
         data[data.length - 1].wgt - data[data.length - 2].wgt;
     const Result = Math.floor(comaparisonResult);
