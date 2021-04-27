@@ -2,15 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import LoginForm from '../components/index/LoginForm';
-import palette from '../styles/palette';
 
 const IndexContainer = styled.div`
     display: grid;
     max-width: 1200px;
-    width: 100vw;
+    // width: 100vw;
+    width: 100%;
     height: 100vh;
     margin: 0 auto;
-    background-color: ${palette.beige};
+    background-color: ${({theme}) => theme.palette.beige};
 `;
 
 const LogoWrapper = styled.div`
@@ -19,7 +19,8 @@ const LogoWrapper = styled.div`
 `;
 
 const SignupButton = styled.div`
-    width: 30%;
+    // width: 30%;
+    width: 80%;
     margin: 0 auto;
     margin-top: 1rem;
     display: flex;
@@ -27,7 +28,7 @@ const SignupButton = styled.div`
     align-items: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    background-color: ${palette.navy};
+    background-color: ${({theme}) => theme.palette.navy};
     border-radius: 4px;
     color: #fff;
     font-size: 1rem;
@@ -35,18 +36,20 @@ const SignupButton = styled.div`
     text-decoration: none;
 
     a {
-        color: ${palette.white};
+        color: ${({theme}) => theme.palette.white};
         text-decoration: none;
     }
-    @media ${(props) => props.theme.mobile} {
-        width: 85vw;
+    @media ${({theme}) => theme.width.mobile} {
+        // width: 85vw;
+        width: 100vw;
     }
 `;
 
 const DivdeContainer = styled.div`
     display: flex;
     justify-content: space-around;
-    width: 85%;
+    // width: 85%;
+    width: 100%;
     margin: 0 auto;
 `;
 
@@ -58,17 +61,19 @@ const DivdeLine = styled.div`
 const DivdeText = styled.div`
     width: 15%;
     text-align: center;
-    color: ${palette.borderColor};
+    color: ${({theme}) => theme.palette.borderColor};
 `;
 
 const Logo = styled.img`
     margin: 0 auto;
     display: flex;
     align-items: center;
-    width: 30%;
+    // width: 30%;
+    width: 80%;
     height: 25vh;
-    @media ${(props) => props.theme.mobile} {
-        width: 85vw;
+    @media ${({theme}) => theme.width.mobile} {
+        //width: 85vw;
+        width: 100vw;
     }
 `;
 const index = () => {

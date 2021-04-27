@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import palette from '../styles/palette';
+
 const Header = styled.header`
     position: sticky;
     top: 0;
@@ -16,7 +16,7 @@ const Header = styled.header`
     max-width: 1200px;
     width: 100%;
     height: 6vh;
-    background-color: ${palette.beige};
+    background-color: ${({theme}) => theme.palette.beige};
     align-items: center;
     border: none;
 `;
@@ -25,12 +25,15 @@ const DataButton = styled.button`
     height: 100%;
     border: none;
     font-size: 1rem;
-    background-color: ${palette.navy};
+    background-color: ${({theme}) => theme.palette.navy};
     border-radius: 8px;
     color: white;
     font-weight: 600;
     :hover {
-        background: ${palette.borderColor};
+        background: ${({theme}) => theme.palette.borderColor};
+    }
+    &:active {
+        transform: scale(0.9);
     }
 `;
 
@@ -52,7 +55,7 @@ const ExitButton = styled.span`
     font-size: 2rem;
 
     a {
-        color: ${palette.navy};
+        color: ${({theme}) => theme.palette.navy};
     }
 `;
 const WeightResult = () => {

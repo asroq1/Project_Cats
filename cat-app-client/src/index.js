@@ -8,11 +8,14 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Store from './store/configureStore';
 import rootReducer from './reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
+
+import Applayout from './components/layout/Applayout';
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
 
-axios.defaults.baseURL = 'https://localhost:8080';
-axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://localhost:8080/';
+// axios.defaults.withCredentials = true;
+
 const store = Store(rootReducer, composeWithDevTools());
 
 ReactDOM.render(
@@ -21,7 +24,9 @@ ReactDOM.render(
         <Provider store={store}>
             <ThemeProvider theme={theme}>
                 <Router>
-                    <App />
+                    <Applayout>
+                        <App />
+                    </Applayout>
                 </Router>
             </ThemeProvider>
         </Provider>

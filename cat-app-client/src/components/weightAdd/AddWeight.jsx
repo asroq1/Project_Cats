@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { addWeightRequest } from '../../reducers/cat';
-import palette from '../../styles/palette';
+import { addWeightRequestAction } from '../../reducers/cat';
 // import styles from '../../styles/AddWeight.module.css';
 
 const HeaderTitle = styled.span`
@@ -13,54 +12,61 @@ const HeaderTitle = styled.span`
 
 const CarouselContainer = styled.div`
     max-width: 100%;
+    height: 95vh;
+    //추가
     overflow-x: hidden;
-    overflow-y: auto;
+    // overflow-y: auto;
+    overflow-y:hidden;
 `;
 
 const CarouselWrapper = styled.div`
-    width: 300vw;
+    //width: 300vw;
+    width: 100%;
 `;
 
 const CarouselContent = styled.div`
     display: grid;
     align-items: center;
-    width: 100vw;
-    height: 95vh;
+    //width: 100vw;
+    width: 100%;
+    height: 100vh;
     float: left;
-    background: ${palette.beige};
+    background: ${({theme})=>theme.palette.beige};
 `;
 
 const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    width: 1200px;
-    margin: 0 auto;
-    @media ${(props) => props.theme.mobile} {
-        width: 100vw;
-        margin: 0 auto;
-    }
+    // width: 1200px;
+    // margin: 0 auto;
+    // @media ${({theme}) => theme.width.mobile} {
+    //     width: 100vw;
+    //     margin: 0 auto;
+    // }
 `;
 
 const ContentImage = styled.img`
-    width: 20%;
+    //width: 20%;
+    width: 50%;
     margin: 0 auto;
 
-    @media ${(props) => props.theme.mobile} {
-        width: 50%;
-        margin: 0 auto;
-    }
+    // @media ${({theme}) => theme.width.mobile} {
+    //     width: 50%;
+    //     margin: 0 auto;
+    // }
 `;
 
 const ContentMain = styled.div`
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    width: 30%;
+    //width: 30%;
+    width: 80%;
     text-align: center;
 
-    @media ${(props) => props.theme.mobile} {
-        width: 85%;
-    }
+    // @media ${({theme}) => theme.width.mobile} {
+    //     width: 85%;
+    // }
 `;
 
 const ContentText = styled.p`
@@ -84,9 +90,9 @@ const AddInput = styled.input`
     width: 50%;
     padding: 1rem;
     font-size: 1.6rem;
-    background-color: ${palette.inputColor};
-    border: 1px solid ${palette.borderColor};
-    @media ${(props) => props.theme.mobile} {
+    background-color: ${({theme})=>theme.palette.inputColor};
+    border: 1px solid ${({theme})=>theme.palette.borderColor};
+    @media ${({theme}) => theme.width.mobile} {
         height: 1rem;
     }
 `;
@@ -107,8 +113,8 @@ const AddButton = styled.button`
     font-size: 1rem;
     font-weight: 600;
     border: none;
-    background-color: ${palette.navy};
-    color: ${palette.white};
+    background-color: ${({theme})=>theme.palette.navy};
+    color: ${({theme})=>theme.palette.white};
     border-radius: 4px;
 `;
 
@@ -125,8 +131,8 @@ const ResultButton = styled.button`
     font-size: 1rem;
     font-weight: 600;
     border: none;
-    background-color: ${palette.navy};
-    color: ${palette.white};
+    background-color: ${({theme})=>theme.palette.navy};
+    color: ${({theme})=>theme.palette.white};
     border-radius: 4px;
 `;
 
@@ -136,8 +142,8 @@ const SubmitButton = styled.button`
     font-size: 1rem;
     font-weight: 600;
     border: none;
-    background-color: ${palette.orange};
-    color: ${palette.white};
+    background-color: ${({theme})=>theme.palette.orange};
+    color: ${({theme})=>theme.palette.white};
     border-radius: 4px;
 `;
 const AddWeight = () => {
@@ -167,28 +173,32 @@ const AddWeight = () => {
 
     const onNextPage = (e) => {
         e.preventDefault();
-        nextRef.current.style.transform += 'translateX(-100vw)';
+        // nextRef.current.style.transform += 'translateX(-100vw)';
+        nextRef.current.style.transform += 'translateY(-100vh)';
     };
     const onReset = (e) => {
         e.preventDefault();
         nextRef.current.style.transform = 'translateX(0vw)';
     };
-    const onGapSubmit = (e) => {
-        e.preventDefault();
-        if (weightResult <= 0) {
-            alert('등록실패');
-            setTogether(0);
-            setAlone(0);
-            nextRef.current.style.transform = 'translateX(0vw)';
-        } else {
-            alert('등록완료');
-            const body = {
-                wgt: weightResult,
-                createdDate: today,
-            };
-            dispatch(addWeightRequest(body));
-        }
-    };
+    const onGapSubmit = useCallback(
+        (e) => {
+            e.preventDefault();
+            if (weightResult <= 0) {
+                alert('등록실패');
+                setTogether(0);
+                setAlone(0);
+                nextRef.current.style.transform = 'translateX(0vw)';
+            } else {
+                alert('등록완료');
+                const body = {
+                    wgt: weightResult,
+                    createdDate: today,
+                };
+                dispatch(addWeightRequestAction(body));
+            }
+        },
+        [weightResult, today]
+    );
     // useEffect(() => {
     //     console.log(today);
     // });
@@ -199,7 +209,7 @@ const AddWeight = () => {
                     <CarouselContent ref={nextRef}>
                         <ContentWrapper>
                             <HeaderTitle>체중 측정 중...</HeaderTitle>
-                            <ContentImage src="/image/scale.png" alt="" />
+                            <ContentImage src="/image/scale.png" alt="logo" />
                             <ContentMain>
                                 <ContentText>
                                     주인님을 들고 체중계 위로 올라가주세요.
@@ -209,7 +219,9 @@ const AddWeight = () => {
                                         type="number"
                                         value={together}
                                         onChange={onTogetherChange}
+                                        min="1"
                                         max="1000"
+                                        required
                                     />
                                     <AddText>kg</AddText>
                                 </WeightBox>
@@ -220,11 +232,7 @@ const AddWeight = () => {
                     <CarouselContent ref={nextRef}>
                         <ContentWrapper>
                             <HeaderTitle>체중 측정 중...</HeaderTitle>
-                            <ContentImage
-                                src="/image/scale.png"
-                                alt=""
-                                // className={styles.img__scale}
-                            />
+                            <ContentImage src="/image/scale.png" alt="logo" />
                             <ContentMain>
                                 <ContentText>
                                     집사 혼자 체중계 위로 올라가주세요.
@@ -234,8 +242,9 @@ const AddWeight = () => {
                                         type="number"
                                         value={alone}
                                         onChange={onAloneChange}
-                                        min={0}
+                                        min="1"
                                         max="1000"
+                                        required
                                     />
                                     <AddText>kg</AddText>
                                 </WeightBox>

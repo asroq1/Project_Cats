@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { signUpRequest } from '../reducers/user';
-import palette from '../styles/palette';
 
 const SignupBackground = styled.div`
     background-color: #f4f1de;
@@ -16,7 +15,7 @@ const NaverSignupContainer = styled.form`
     max-width: 1200px;
     width: 100%;
     height: 100vh;
-    background-color: ${palette.beige};
+    background-color: ${({theme}) => theme.palette.beige};
     button {
         margin: 0.5rem 0 0.5rem 0;
         height: 3rem;
@@ -29,7 +28,7 @@ const NaverSignupContainer = styled.form`
         border: none;
     }
 
-    @media ${(props) => props.theme.mobile} {
+    @media ${({theme}) => theme.width.mobile} {
         width: 85vw;
     }
 `;
@@ -39,20 +38,20 @@ const SignUpInput = styled.input`
     height: 1rem;
     font-size: 1rem;
     border-radius: 4px;
-    border-color: ${palette.borderColor};
+    border-color: ${({theme}) => theme.palette.borderColor};
     font-family: FontAwesome;
     padding: 1rem;
     input::placeholder {
         text-align: right;
     }
-    background-color: ${palette.inputColor};
+    background-color: ${({theme}) => theme.palette.inputColor};
 `;
 const SubmitButton = styled.button`
     background: #f2cc8f;
     color: #fff;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${palette.navy};
+    background-color: ${({theme}) => theme.palette.navy};
 `;
 
 const ErrorMessages = styled.p`

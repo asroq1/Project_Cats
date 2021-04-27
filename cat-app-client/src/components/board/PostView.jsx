@@ -1,9 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux'
-import palette from '../../styles/palette';
+
 import styled from 'styled-components';
 import CommentForm from './CommentForm';
-
 //import { REMOVE_COMMENT_REQUEST} from '../../reducers/post'
 
 const OverallContainer = styled.div`
@@ -12,12 +11,12 @@ const OverallContainer = styled.div`
 `;
 
 const PostHead = styled.div`
-    border-bottom: 1.5px solid ${palette.green};
+    border-bottom: 1.5px solid ${({theme}) => theme.palette.green};
     padding-bottom: 1rem;
     margin-bottom: 1.25rem;
     h1 {
         font-weight: bold;
-        color: ${palette.navy};
+        color: ${({theme}) => theme.palette.navy};
         line-height: 1.5rem;
         font-size: 1.5rem;
         margin-top: 2rem;
@@ -27,7 +26,7 @@ const PostHead = styled.div`
 const SubInfo = styled.div`
     margin-top: 1rem;
     font-size: 1rem;
-    color: ${palette.green};
+    color: ${({theme}) => theme.palette.green};
     span + span:before {
         color: gray;
         padding-left: 0.25rem;
@@ -46,7 +45,7 @@ const EachComment=styled.div`
     padding-bottom:1rem;
     padding-top:1rem; 
     & + & {
-        border-top: 1px dotted ${palette.green};
+        border-top: 1px dotted ${({theme}) => theme.palette.green};
     }
 `;
 

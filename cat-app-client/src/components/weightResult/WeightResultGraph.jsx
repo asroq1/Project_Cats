@@ -13,7 +13,7 @@ import {
 } from 'recharts';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import palette from '../../styles/palette';
+
 
 const GraphContainer = styled.div`
     display: grid;
@@ -21,7 +21,7 @@ const GraphContainer = styled.div`
     max-width: 1200px;
     width: 100%;
     height: 94vh;
-    background-color: ${palette.navy};
+    background-color: ${({theme})=>theme.palette.navy};
     align-items: center;
 `;
 
@@ -38,7 +38,7 @@ const SelectorContainer = styled.div`
 `;
 
 const DateSelector = styled.button`
-    color: ${palette.white};
+    color: ${({theme})=>theme.palette.white};
     font-size: 1rem;
     background-color: ${(props) => (props.primary ? '#E07A5F' : '#d5d3d3')};
     border: none;
@@ -57,11 +57,11 @@ const DataContainer = styled.div`
 
 const WeightWrapper = styled.div`
     margin: 1rem 0 1rem 0;
-    border-top: 1px solid ${palette.borderColor};
+    border-top: 1px solid ${({theme})=>theme.palette.borderColor};
     padding: 1rem;
 
     h2{
-        color: ${palette.borderColor}
+        color: ${({theme})=>theme.palette.borderColor}
     }
     ul {
         display: flex;
@@ -69,14 +69,14 @@ const WeightWrapper = styled.div`
     }
 
     li{ 
-        color: ${palette.white};
+        color: ${({theme})=>theme.palette.white};
         font-weight: bold;
         font-size: 2rem;
     }
 
     li:nth-last-child(2) {
         margin-top: 1rem;
-        color: ${palette.borderColor};
+        color: ${({theme})=>theme.palette.borderColor};
         font-weight: bold;
         font-size: 1rem;
    
@@ -86,17 +86,17 @@ const ResultWrapper = styled.div`
     display: flex;
     justify-content: space-around;
     margin: 1rem 0 1rem 0;
-    border-top: 1px solid ${palette.borderColor};
+    border-top: 1px solid ${({theme})=>theme.palette.borderColor};
     padding: 1rem;
 
     p:nth-child(2) {
         font-weight: bold;
-        color: ${palette.white};
+        color: ${({theme})=>theme.palette.white};
         font-size: 2rem;
     }
     p:nth-child(1) {
         font-weight: bold;
-        color: ${palette.borderColor};
+        color: ${({theme})=>theme.palette.borderColor};
         margin-top: 1rem;
         font-size: 1rem;
     }
@@ -143,7 +143,8 @@ const data = [
 
 export default function WeightResultGraph() {
     //나중에 백엔드 연동해서 이렇게 최근순으로 당겨오면됌
-    const perDay = data.slice(-7);
+    //최근 데이터만 보여줌
+    const perDay = data.slice(-5);
     const comaparisonResult =
         data[data.length - 1].wgt - data[data.length - 2].wgt;
     const Result = Math.floor(comaparisonResult);

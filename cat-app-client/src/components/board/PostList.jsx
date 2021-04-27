@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 import 'font-awesome/css/font-awesome.min.css';
-import palette from '../../styles/palette';
 import styled from 'styled-components';
 
 const PostItemsContainer = styled.div`
@@ -16,7 +15,7 @@ const PostItemBlock = styled.div`
     position:relative;
     margin-top: 1rem;
     display: flex;
-    // border: 1px solid ${palette.green};
+    // border: 1px solid ${({theme}) => theme.palette.green};
     // border-radius: 10px;
 
     border-bottom: 1px solid gray;
@@ -62,7 +61,7 @@ const SubInfo = styled.div`
     h1 {
         font-size: 1rem;
         font-weight: bold;
-        color: ${palette.navy};
+        color: ${({theme}) => theme.palette.navy};
         margin: 0;
         margin-bottom: 0.25rem;
     }

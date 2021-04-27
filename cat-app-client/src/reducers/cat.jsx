@@ -15,35 +15,39 @@ export const initialState = {
         user: 1,
     },
     cat: [
-        // {
-        //     cat_id: 0,
-        //     user_id: 1,
-        //     name: 'Garfield',
-        //     gender: 'M',
-        //     Photo: {
-        //         file: '',
-        //         url:
-        //             'https://welovekitties.com/wp-content/uploads/2015/12/cutekittenspictures-145124821648lcp.jpg',
-        //     },
-        //     birth: '2020-02-28',
-        //     Record: [
-        //         {
-        //             cdt: '2021-03-30',
-        //             wgt: 3.1,
-        //         },
-        //     ],
-        // },
+        {
+            cat_id: 0,
+            user_id: 1,
+            name: 'Garfield',
+            gender: 'M',
+            Photo: {
+                file: '',
+                url:
+                    'https://welovekitties.com/wp-content/uploads/2015/12/cutekittenspictures-145124821648lcp.jpg',
+            },
+            birth: '2020-02-28',
+            Record: [
+                {
+                    cdt: '2021-03-30',
+                    wgt: 3.1,
+                },
+            ],
+        },
     ],
     isLoading: true,
     currentIndex: 1,
     currImgUrl: null,
 };
 
-// 몸무게 추가
+// 몸무게 관련
 export const ADD_WEIGHT_REQUEST = 'ADD_WEIGHT_REQUEST';
 export const ADD_WEIGHT_SUCCESS = 'ADD_WEIGHT_SUCCESS';
 export const ADD_WEIGHT_FAILURE = 'ADD_WEIGHT_FAILURE';
 
+export const DELETE_WEIGHT_REQUEST = 'DELETE_WEIGHT_REQUEST';
+export const DELETE_WEIGHT_SUCCESS = 'DELETE_WEIGHT_SUCCESS';
+export const DELETE_WEIGHT_FAILURE = 'DELETE_WEIGHT_FAILURE';
+//
 // 논의할 부분
 export const GET_CAT_REQUEST = 'GET_CAT_REQUEST';
 export const GET_CAT_SUCCESS = 'GET_CAT_SUCCESS';
@@ -120,22 +124,42 @@ export const updateCatFailureAction = (data) => ({
     type: UPDATE_CAT_FAILURE,
     data,
 });
-export const addWeightRequest = (data) => {
-    console.log('추가 액션');
+export const addWeightRequestAction = (data) => {
     return {
         type: ADD_WEIGHT_REQUEST,
         data,
     };
 };
-export const addWeightSuccess = (data) => {
+export const addWeightSuccessAction = (data) => {
     return {
         type: ADD_WEIGHT_SUCCESS,
         data,
     };
 };
-export const addWeightFailure = (data) => {
+export const addWeightFailureAction = (data) => {
     return {
         type: ADD_WEIGHT_FAILURE,
+        data,
+    };
+};
+
+export const deleteWeightRequestAction = (data) => {
+    return {
+        type: DELETE_WEIGHT_REQUEST,
+        data,
+    };
+};
+
+export const deleteWeightSuccessAction = (data) => {
+    return {
+        type: DELETE_WEIGHT_SUCCESS,
+        data,
+    };
+};
+
+export const deleteWeightFailureAction = (data) => {
+    return {
+        type: DELETE_WEIGHT_FAILURE,
         data,
     };
 };
@@ -156,19 +180,19 @@ export const setCurrentImage = (data) => {
 
 export const getWeightRequest = (data) => {
     return {
-        type: getWeightRequest,
+        type: GET_WEIGHT_REQUEST,
         data,
     };
 };
 export const getWeightSuccess = (data) => {
     return {
-        type: getWeightSuccess,
+        type: GET_WEIGHT_SUCCESS,
         data,
     };
 };
 export const getWeightFailure = (data) => {
     return {
-        type: getWeightFailure,
+        type: GET_WEIGHT_FAILURE,
         data,
     };
 };
@@ -186,7 +210,7 @@ const reducer = (state = initialState, action) => {
                 draft.isLoading = true;
                 break;
             case GET_CAT_SUCCESS:
-                draft.cat = action.data;
+                draft.cat = draft.cat;
                 draft.isLoading = false;
                 break;
             case GET_CAT_FAILURE:
@@ -197,10 +221,10 @@ const reducer = (state = initialState, action) => {
                 draft.cat = draft.cat.concat(action.data);
                 break;
             case ADD_CAT_FAILURE:
-                break;          
+                break;
             case DELETE_CAT_REQUEST:
                 break;
-            case DELETE_CAT_SUCCESS:            
+            case DELETE_CAT_SUCCESS:
                 draft.cat = draft.cat.filter((v) => v.id !== action.data);
                 break;
             case DELETE_CAT_FAILURE:
@@ -213,18 +237,19 @@ const reducer = (state = initialState, action) => {
             case UPDATE_CAT_FAILURE:
                 break;
             case ADD_WEIGHT_REQUEST:
-                // draft.cat[1].Record = draft.cat[1].Record.concat(
-                //     dummyCat(action.data)
-                // );
                 break;
             case ADD_WEIGHT_SUCCESS:
-                draft.cat[1].Record = draft.cat[1].Record.concat({
-                    cdt: '2021-03-30',
-                    wgt: 20.1,
-                });
                 break;
             case ADD_WEIGHT_FAILURE:
                 break;
+            case DELETE_WEIGHT_REQUEST:
+                draft.cat = draft.cat.filter((v) => v.id !== action.data);
+                break;
+            case DELETE_WEIGHT_SUCCESS:
+                break;
+            case DELETE_WEIGHT_FAILURE:
+                break;
+
             case SET_CURRENT_CAT:
                 draft.currentIndex = action.data;
                 break;

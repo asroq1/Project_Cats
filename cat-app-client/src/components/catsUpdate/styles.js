@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import palette from '../../styles/palette';
 
+// 스타일링된 input block
 export const InnerGlobal = styled.div`
     width: 80%;
     margin: 0 auto;
@@ -15,19 +15,15 @@ export const StyledInputBlock = styled.div`
         border: 1px solid gray;
         background-color:white;
         padding: 1rem;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
         border-radius:10px;
         outline: none;
     }
     label {
         visibility: hidden;
     }
-
     input-placeholder {
         text-align: center;
     }
-
     & > .inputcontainer > input:focus {
         background-color: white;
     }
@@ -42,7 +38,6 @@ export const StyledInputBlock = styled.div`
         max-width: 33%;
         flex: 1 1 auto;
         text-align: center;
-
         &::placeholder {
             text-align: center;
         }
@@ -79,11 +74,12 @@ export const ButtonWrapper = styled.button`
     &:hover {
         background: darkred;
     }
+    
     &:first-child {
-        background-color: ${palette.navy};
+        background-color: ${({theme}) => theme.palette.navy};
     }
     &:last-child {
-        background-color: ${palette.orange};
+        background-color: ${({theme}) => theme.palette.orange};
     }
 `;
 
@@ -109,6 +105,6 @@ export const RadioBtnWrapper = styled.div`
         margin-left: 0.5rem;
     }
     input:checked + .radiobtn {
-        background-color: ${palette.orange};
+        background-color: ${({theme}) => theme.palette.orange};
     }
 `;

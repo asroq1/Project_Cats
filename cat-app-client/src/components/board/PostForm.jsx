@@ -10,7 +10,6 @@ import {
 import styled from 'styled-components';
 
 import 'font-awesome/css/font-awesome.min.css';
-import palette from '../../styles/palette';
 import OverallPostsLayout from './OverallPostsLayout';
 
 const FormBlock = styled.div`
@@ -69,7 +68,7 @@ const StyledButton = styled.button`
     border-radius: 10px;
     color: white;
     border:none; 
-    background-color: ${palette.green};
+    background-color: ${({theme}) => theme.palette.green};
     font-weight:bold;
     cursor:pointer;
 
@@ -82,7 +81,7 @@ const StyledButton = styled.button`
         background-color: darkgreen;
     }
     &:first-child {
-        background-color: ${palette.navy};
+        background-color: ${({theme}) => theme.palette.navy};
     }
     &:first-child:hover {
         background-color: black;
@@ -177,20 +176,20 @@ const PostForm = () => {
             formData.append('title', text);
             formData.append('content', text);
 
-            // console.log("key")
-            // for (var key of formData.keys()){
-            //     console.log(key);
-            // }
+            console.log("key")
+            for (var key of formData.keys()){
+                console.log(key);
+            }
 
-            // console.log("value")
-            // for (var value of formData.values()){
-            //     console.log(value);
-            // }
+            console.log("value")
+            for (var value of formData.values()){
+                console.log(value);
+            }
 
-            // console.log("entry")
-            // for (var entry of formData.entries()){
-            //     console.log(entry);
-            // }
+            console.log("entry")
+            for (var entry of formData.entries()){
+                console.log(entry);
+            }
             return dispatch({
                 type: ADD_POST_REQUEST,
                 data: formData,

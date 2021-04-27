@@ -9,7 +9,8 @@ export const initialState = {
     signUpDone: false,
     signUpError: null,
 
-    onUser: null,
+    me: null,
+    token: null,
     signUpData: {},
     loginData: {},
     user: null,
@@ -39,7 +40,7 @@ const dummyUser = (data) => ({
     name: 'dummy user',
     email: 'abc@gmail.com',
     pwd: 'aaa',
-    login_type: '', //추가
+    login_type: 'normal', //추가
 });
 
 //액션 함수
@@ -56,7 +57,8 @@ export const loginSuccessAction = (data) => {
     return {
         type: LOG_IN_SUCCESS,
         data,
-        onUser: dummyUser(),
+
+        // onUser: dummyUser(),
     };
 };
 
@@ -124,7 +126,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 logInLoading: false,
                 logInDone: true,
-                onUser: action.data,
+                me: action.data,
             };
         case LOG_IN_FAILURE:
             return {
@@ -145,7 +147,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 logOutLoading: false,
                 logInDone: false,
-                onUser: action.data,
+                me: action.data,
             };
 
         case LOG_OUT_FAILURE:
@@ -166,7 +168,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 signUpLoading: false,
                 signUpDone: true,
-                onUser: action.data,
+                me: action.data,
             };
 
         case SIGN_UP_FAILURE:

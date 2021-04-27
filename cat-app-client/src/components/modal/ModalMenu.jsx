@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import palette from '../../styles/palette';
 import styled from 'styled-components';
 
 const Overlay = styled.div`
@@ -13,8 +12,8 @@ const Overlay = styled.div`
     position: fixed;
     z-index: 5000;
     padding: 3rem;
-    color: ${palette.beige};
-    background-color: ${palette.navy};
+    color: ${({theme})=>theme.palette.beige};
+    background-color: ${({theme})=>theme.palette.navy};
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -41,13 +40,13 @@ const MenuWrapper = styled.div`
     margin-bottom: 2rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    border-top: 1.5px solid ${palette.beige};
+    border-top: 1.5px solid ${({theme})=>theme.palette.beige};
     font-size: 2rem;
     line-height: 2;
     cursor: pointer;
 
     h2:hover{
-        color: ${palette.orange};
+        color: ${({theme})=>theme.palette.orange};
     }
 
 `;
@@ -57,7 +56,7 @@ const NightModeWrapper = styled.div`
     text-align: right;
     right: 0;
     padding: 2rem;
-    border-top: 1.5px solid ${palette.beige};
+    border-top: 1.5px solid ${({theme})=>theme.palette.beige};
     margin-top: auto;
 
     cursor: pointer;

@@ -5,13 +5,12 @@ import 'font-awesome/css/font-awesome.min.css';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
-import palette from '../../styles/palette';
 
 const SignupContainer = styled.form`
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 80%;
 
     button {
         margin: 0.5rem 0 0.5rem 0;
@@ -25,29 +24,29 @@ const SignupContainer = styled.form`
         border: none;
     }
 
-    @media ${(props) => props.theme.mobile} {
-        width: 85vw;
-    }
+    // @media ${({theme}) => theme.width.mobile} {
+    //     // width: 85vw;
+    // }
 `;
 const SignUpInput = styled.input`
     margin: 0.5rem 0 0.5rem 0;
     height: 1rem;
     font-size: 1rem;
     border-radius: 4px;
-    border: 1px solid ${palette.borderColor};
+    border: 1px solid ${({theme})=>theme.palette.borderColor};
     font-family: FontAwesome;
     padding: 1rem;
     ::placeholder {
         text-align: right;
     }
-    background-color: ${palette.inputColor};
+    background-color: ${({theme})=>theme.palette.inputColor};
 `;
 const SubmitButton = styled.button`
     background: #f2cc8f;
     color: #fff;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${palette.navy};
+    background-color: ${({theme})=>theme.palette.navy};
 `;
 
 const ErrorMessages = styled.p`
@@ -70,7 +69,7 @@ const SignUpForm = () => {
         if (signUpDone) {
             history.push('/');
         }
-    });
+    }, [signUpDone]);
     return (
         <>
             <SignupContainer onSubmit={handleSubmit(onSubmit)}>

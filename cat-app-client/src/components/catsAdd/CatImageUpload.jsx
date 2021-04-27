@@ -7,7 +7,6 @@ import { getCroppedImg } from './canvasUtils';
 import useInput from '../../hooks/useInput';
 
 import styled from 'styled-components';
-import palette from '../../styles/palette';
 import 'font-awesome/css/font-awesome.min.css';
 
 import { SET_CURRENT_IMAGE } from '../../reducers/cat';
@@ -17,6 +16,8 @@ const InnerGlobal = styled.div`
     margin: 0 auto;
     margin-bottom:0.25rem;
     display: flex;
+
+    justify-content: space-between;
 `;
 
 const ImageUploadButtons = styled.button`
@@ -25,7 +26,7 @@ const ImageUploadButtons = styled.button`
     border-radius:10px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${palette.orange};
+    background-color: ${({theme}) => theme.palette.orange};
     border: none;
     cursor: pointer;
     color: white;

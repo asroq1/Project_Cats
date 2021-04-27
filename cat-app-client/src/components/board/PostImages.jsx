@@ -1,4 +1,4 @@
-import React,{setShowImagesZoom,useCallback,useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import ImageCarousel from './ImageCarousel'
