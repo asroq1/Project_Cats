@@ -37,7 +37,7 @@ const DataButton = styled.button`
     }
 `;
 
-// const ListButton = styled.button`;
+// const ListButton = styled.button`
 //     width: 40%;
 //     height: 100%;
 //     border: none;
@@ -60,7 +60,6 @@ const ExitButton = styled.span`
 `;
 const WeightResult = () => {
     const [onList, setOnList] = useState(false);
-
     const chartHandler = () => {
         setOnList(false);
     };
@@ -71,8 +70,16 @@ const WeightResult = () => {
     return (
         <>
             <Header>
-                <DataButton onClick={chartHandler}>그래프</DataButton>
-                <DataButton onClick={listHandler}>리스트</DataButton>
+                <DataButton active activeClassName={{}} onClick={chartHandler}>
+                    그래프
+                </DataButton>
+                <DataButton
+                    active={false}
+                    activeClassName={{}}
+                    onClick={listHandler}
+                >
+                    리스트
+                </DataButton>
                 <ExitButton>
                     <Link to="/user/main">
                         <FontAwesomeIcon

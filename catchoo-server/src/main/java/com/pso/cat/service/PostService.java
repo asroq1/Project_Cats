@@ -18,35 +18,39 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
+<<<<<<< HEAD:project-cats/catchoo-server/src/main/java/com/pso/cat/service/PostService.java
+=======
+
+>>>>>>> 44be38b3b6d5b8a4c79da459013cd5a9a1e8c262:catchoo-server/src/main/java/com/pso/cat/service/PostService.java
     public Post save(Long userId, PostDto.Request postDto) {
         Post post = postDto.toEntity();
         post.setWriter(User.builder().id(userId).build());
         return postRepository.save(post);
     }
 
-    public PostDto.SingleResponse read(Long id) {
-        Optional<Post> post = postRepository.findById(id);
-        post.ifPresent(p -> {
-            postRepository.updateViewCount(p.getId());
-        });
-        return PostDto.SingleResponse.ofEntity(post.get());
-    }
+        public PostDto.SingleResponse read (Long id){
+            Optional<Post> post = postRepository.findById(id);
+            post.ifPresent(p -> {
+                postRepository.updateViewCount(p.getId());
+            });
+            return PostDto.SingleResponse.ofEntity(post.get());
+        }
 
-    @Transactional
-    public Post modify(Long id, PostDto.Request postRequest) {
-        Post post = postRequest.toEntity();
-        post.setId(id);
-        return postRepository.save(post);
-    }
+        @Transactional
+        public Post modify (Long id, PostDto.Request postRequest){
+            Post post = postRequest.toEntity();
+            post.setId(id);
+            return postRepository.save(post);
+        }
 
-    @Transactional
-    public void remove(Long id) {
-        postRepository.inactive(id);
-    }
+        @Transactional
+        public void remove (Long id){
+            postRepository.inactive(id);
+        }
 
-    public List<PostDto.ListResponse> list() {
-        return postRepository
-            .findAllByStateOrderByCreatedDateDesc(1)
-            .stream().map(post -> PostDto.ListResponse.ofEntity(post)).collect(Collectors.toList());
+        public List<PostDto.ListResponse> list () {
+            return postRepository
+                    .findAllByStateOrderByCreatedDateDesc(1)
+                    .stream().map(post -> PostDto.ListResponse.ofEntity(post)).collect(Collectors.toList());
+        }
     }
-}
