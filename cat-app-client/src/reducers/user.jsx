@@ -1,3 +1,5 @@
+import produce from 'immer';
+
 export const initialState = {
     logInLoading: false, //로그인 시도중
     logInDone: false, //로그인 완료
@@ -112,75 +114,65 @@ export const signUpFailure = (data) => {
 };
 
 //Reducer
-const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case LOG_IN_REQUEST:
-            return {
-                ...state,
-                logInLoading: true,
-                logInDone: false,
-                logInError: null,
-            };
-        case LOG_IN_SUCCESS:
-            return {
-                ...state,
-                logInLoading: false,
-                logInDone: true,
-                me: action.data,
-            };
-        case LOG_IN_FAILURE:
-            return {
-                ...state,
-                logInLoading: false,
-                logInDone: false,
-                logInError: action.error,
-            };
-        case LOG_OUT_REQUEST:
-            return {
-                ...state,
-                logOutLoading: true,
-                logOutDone: false,
-                logOutError: null,
-            };
-        case LOG_OUT_SUCCESS:
-            return {
-                ...state,
-                logOutLoading: false,
-                logInDone: false,
-                me: action.data,
-            };
+// 이전 상태를 액션을 통해 다음 상태로 만들어내는 함수(불변성 유지)
 
-        case LOG_OUT_FAILURE:
-            return {
-                ...state,
-                logOutLoading: false,
-                logOutError: action.error,
-            };
-        case SIGN_UP_REQUEST:
-            return {
-                ...state,
-                signUpLoading: true,
-                signUpDone: false,
-                signUpError: null,
-            };
-        case SIGN_UP_SUCCESS:
-            return {
-                ...state,
-                signUpLoading: false,
-                signUpDone: true,
-                me: action.data,
-            };
+const reducer = (state = initialState, action) =>
+    produce(state, (draft) => {
+        switch (action.type) {
+            case LOG_IN_REQUEST:
+                draft.logInLoading = true;
+                draft.logInDone = false;
+                draft.logInError = null;
+                break;
+            case LOG_IN_SUCCESS:
+                draft.logInLoading = false;
+                draft.logInDone = true;
+                draft.me = action.data;
+                break;
+            case LOG_IN_FAILURE:
+                draft.logInLoading = false;
+                draft.logInDone = false;
+                draft.logInError = action.error;
+                break;
 
-        case SIGN_UP_FAILURE:
-            return {
-                ...state,
-                signUpLoading: false,
-                signUpDone: false,
-                signUpError: action.error,
-            };
-        default:
-            return state;
-    }
-};
+            case LOG_OUT_REQUEST:
+                draft.logOutLoading = true;
+                draft.logOutDone = false;
+                draft.logOutError = null;
+                break;
+
+            case LOG_OUT_SUCCESS:
+                draft.logOutLoading = false;
+                draft.logInDone = false;
+                draft.me = action.data;
+                break;
+
+            case LOG_OUT_FAILURE:
+                draft.logOutLoading = false;
+                draft.logOutError = action.error;
+                break;
+
+            case SIGN_UP_REQUEST:
+                draft.signUpLoading = true;
+                draft.signUpDone = false;
+                draft.signUpError = null;
+                break;
+            case SIGN_UP_SUCCESS:
+                draft.signUpLoading = false;
+                draft.signUpDone = true;
+                draft.me = action.data;
+
+                break;
+
+            case SIGN_UP_FAILURE:
+                draft.signUpLoading = false;
+                draft.signUpDone = false;
+                draft.signUpError = action.error;
+                break;
+
+            default:
+                return state;
+        }
+    });
 
 export default reducer;
