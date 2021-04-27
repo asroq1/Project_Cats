@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback, useMemo } from 'react';
 
 import styled from 'styled-components';
+import palette from '../../styles/palette';
 import 'font-awesome/css/font-awesome.min.css'
 
 const InnerGlobal = styled.div`

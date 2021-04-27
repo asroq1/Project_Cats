@@ -3,7 +3,6 @@ package com.pso.cat.dto;
 import com.pso.cat.dto.CommentDto.Response;
 import com.pso.cat.dto.UserDto.WriterResponse;
 import com.pso.cat.entity.Post;
-import com.pso.cat.entity.User;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
