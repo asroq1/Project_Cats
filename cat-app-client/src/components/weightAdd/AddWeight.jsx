@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { addWeightRequestAction } from '../../reducers/cat';
+import palette from '../../styles/palette';
 // import styles from '../../styles/AddWeight.module.css';
 
 const HeaderTitle = styled.span`
@@ -16,7 +17,7 @@ const CarouselContainer = styled.div`
     //추가
     overflow-x: hidden;
     // overflow-y: auto;
-    overflow-y:hidden;
+    overflow-y: hidden;
 `;
 
 const CarouselWrapper = styled.div`
@@ -31,7 +32,7 @@ const CarouselContent = styled.div`
     width: 100%;
     height: 100vh;
     float: left;
-    background: ${({theme})=>theme.palette.beige};
+    background: ${({ theme }) => theme.palette.beige};
 `;
 
 const ContentWrapper = styled.div`
@@ -39,7 +40,7 @@ const ContentWrapper = styled.div`
     flex-direction: column;
     // width: 1200px;
     // margin: 0 auto;
-    // @media ${({theme}) => theme.width.mobile} {
+    // @media ${({ theme }) => theme.width.mobile} {
     //     width: 100vw;
     //     margin: 0 auto;
     // }
@@ -50,7 +51,7 @@ const ContentImage = styled.img`
     width: 50%;
     margin: 0 auto;
 
-    // @media ${({theme}) => theme.width.mobile} {
+    // @media ${({ theme }) => theme.width.mobile} {
     //     width: 50%;
     //     margin: 0 auto;
     // }
@@ -64,7 +65,7 @@ const ContentMain = styled.div`
     width: 80%;
     text-align: center;
 
-    // @media ${({theme}) => theme.width.mobile} {
+    // @media ${({ theme }) => theme.width.mobile} {
     //     width: 85%;
     // }
 `;
@@ -90,9 +91,9 @@ const AddInput = styled.input`
     width: 50%;
     padding: 1rem;
     font-size: 1.6rem;
-    background-color: ${({theme})=>theme.palette.inputColor};
-    border: 1px solid ${({theme})=>theme.palette.borderColor};
-    @media ${({theme}) => theme.width.mobile} {
+    background-color: ${({ theme }) => theme.palette.inputColor};
+    border: 1px solid ${({ theme }) => theme.palette.borderColor};
+    @media ${({ theme }) => theme.width.mobile} {
         height: 1rem;
     }
 `;
@@ -113,8 +114,8 @@ const AddButton = styled.button`
     font-size: 1rem;
     font-weight: 600;
     border: none;
-    background-color: ${({theme})=>theme.palette.navy};
-    color: ${({theme})=>theme.palette.white};
+    background-color: ${({ theme }) => theme.palette.navy};
+    color: ${({ theme }) => theme.palette.white};
     border-radius: 4px;
 `;
 
@@ -131,8 +132,8 @@ const ResultButton = styled.button`
     font-size: 1rem;
     font-weight: 600;
     border: none;
-    background-color: ${({theme})=>theme.palette.navy};
-    color: ${({theme})=>theme.palette.white};
+    background-color: ${({ theme }) => theme.palette.navy};
+    color: ${({ theme }) => theme.palette.white};
     border-radius: 4px;
 `;
 
@@ -142,16 +143,16 @@ const SubmitButton = styled.button`
     font-size: 1rem;
     font-weight: 600;
     border: none;
-    background-color: ${({theme})=>theme.palette.orange};
-    color: ${({theme})=>theme.palette.white};
+    background-color: ${({ theme }) => theme.palette.orange};
+    color: ${({ theme }) => theme.palette.white};
     border-radius: 4px;
 `;
 const AddWeight = () => {
     const [alone, setAlone] = useState('');
-    const [together, setTogether] = useState(0);
+    const [togepther, setTogether] = useState(0);
     const weightResult = together - alone;
     const nextRef = useRef(null);
-    const dispatch = useDispatch();
+    const dispatch = useDisatch();
     const date = new Date();
 
     const today = date.toLocaleString();

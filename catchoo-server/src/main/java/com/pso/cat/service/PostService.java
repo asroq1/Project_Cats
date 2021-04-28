@@ -18,10 +18,6 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-<<<<<<< HEAD:project-cats/catchoo-server/src/main/java/com/pso/cat/service/PostService.java
-=======
-
->>>>>>> 44be38b3b6d5b8a4c79da459013cd5a9a1e8c262:catchoo-server/src/main/java/com/pso/cat/service/PostService.java
     public Post save(Long userId, PostDto.Request postDto) {
         Post post = postDto.toEntity();
         post.setWriter(User.builder().id(userId).build());
