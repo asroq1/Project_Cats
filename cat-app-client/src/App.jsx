@@ -14,25 +14,31 @@ import postView from './pages/postView';
 import Settings from './components/settings/setting';
 import KakaLogin from './pages/kakaoLogin';
 import NaverLogin from './pages/naverLogin';
+import styled from 'styled-components';
 
+const Container = styled.div`
+    backgroud: black;
+`;
 function App() {
     return (
         <>
-            {/* ResetCSS  */}
-            <Reset />
-            <Route path="/" component={index} exact />
-            <Route path="/user/signup" component={signUp} exact />
-            <Route path="/user/signup/naver" component={NaverLogin} />
-            <Route path="/user/signup/kakao" component={KakaLogin} />
-            <Route path="/cat/data" component={weightResult} />
-            <Route path="/cat/record" component={weightAdd} />
-            <Route path="/cat/add" component={catAdd} />
-            <Route path="/cat/update" component={catUpdate} />
-            <Route path="/user/main" component={main} />
-            <Route path="/user/settings" component={Settings} />
-            <Route path="/post/write" component={postWrite} />
-            <Route path="/post/list" component={postList} />
-            <Route path="/post/view" component={postView} />
+            <Container>
+                {/* ResetCSS  */}
+                <Reset />
+                <Route path="/" component={index} exact />
+                <Route path="/user/signup" component={signUp} exact />
+                <Route path="/user/signup/naver" component={NaverLogin} />
+                <Route path="/user/signup/kakao" component={KakaLogin} />
+                <Route path="/cat/data" component={weightResult} />
+                <Route path="/cat/record" component={weightAdd} />
+                <Route path="/cat/add" component={catAdd} />
+                <Route path="/cat/update" component={catUpdate} />
+                <Route path="/user/main" component={main} />
+                <Route path="/user/settings" component={Settings} />
+                <Route path="/post/write" component={postWrite} />
+                <Route path="/post/list" component={postList} />
+                <Route path="/post/view" component={postView} />
+            </Container>
         </>
     );
 }

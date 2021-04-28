@@ -1,7 +1,5 @@
 import React, { useCallback, useState } from 'react';
-
 import { Link } from 'react-router-dom';
-
 import palette from '../../styles/palette';
 import styled from 'styled-components';
 
@@ -13,7 +11,7 @@ const Overlay = styled.div`
     position: fixed;
     z-index: 5000;
     padding: 3rem;
-    color: ${({theme})=>theme.palette.beige};
+    color: ${({ theme }) => theme.palette.beige};
     background-color: ${palette.navy};
     display: flex;
     flex-direction: column;
@@ -25,13 +23,12 @@ const Header = styled.div`
         font-size: 1.25rem;
         text-align: left;
 
-
         line-height: 1.25;
     }
     h3 {
         font-size: 1.75rem;
-        cursor:pointer;
-        margin-bottom:1rem;
+        cursor: pointer;
+        margin-bottom: 1rem;
         text-align: right;
     }
 `;
@@ -41,15 +38,14 @@ const MenuWrapper = styled.div`
     margin-bottom: 2rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    border-top: 1.5px solid ${({theme})=>theme.palette.beige};
+    border-top: 1.5px solid ${({ theme }) => theme.palette.beige};
     font-size: 2rem;
     line-height: 2;
     cursor: pointer;
 
-    h2:hover{
-        color: ${({theme})=>theme.palette.orange};
+    h2:hover {
+        color: ${({ theme }) => theme.palette.orange};
     }
-
 `;
 
 const NightModeWrapper = styled.div`
@@ -57,27 +53,35 @@ const NightModeWrapper = styled.div`
     text-align: right;
     right: 0;
     padding: 2rem;
-    border-top: 1.5px solid ${({theme})=>theme.palette.beige};
+    border-top: 1.5px solid ${({ theme }) => theme.palette.beige};
     margin-top: auto;
 
     cursor: pointer;
 `;
 
+const NightWrapper = styled.button`
+    background: ${({ theme }) => theme.light.mainBackground};
+`;
 const ModalMenu = ({ userNickname, onClose }) => {
     //나중에 redux 상태 만들어줄 것
     const [isNightMode, setNightMode] = useState(false);
 
     const toggleNightMode = useCallback(() => {
-        setNightMode(!isNightMode)
-    })
-    
+        setNightMode(!isNightMode);
+    });
+
     return (
         <Overlay>
             <Header>
                 <h3>
                     <i onClick={onClose} className="fa fa-times"></i>
                 </h3>
-                <h1> <i className="fa fa-black-tie"></i> {userNickname} 집사님, <br/>안녕하세요!</h1>
+                <h1>
+                    {' '}
+                    <i className="fa fa-black-tie"></i> {userNickname} 집사님,{' '}
+                    <br />
+                    안녕하세요!
+                </h1>
             </Header>
 
             <MenuWrapper>
@@ -100,9 +104,13 @@ const ModalMenu = ({ userNickname, onClose }) => {
 
             <NightModeWrapper>
                 {!isNightMode ? (
-                    <span onClick={toggleNightMode}> 야간 모드 <i className="fa fa-toggle-off"></i></span>
+                    <span onClick={toggleNightMode}>
+                        야간 모드 <i className="fa fa-toggle-off"></i>
+                    </span>
                 ) : (
-                    <span onClick={toggleNightMode}>야간 모드 <i className="fa fa-toggle-on"></i></span>
+                    <span onClick={toggleNightMode}>
+                        야간 모드 <i className="fa fa-toggle-on"></i>
+                    </span>
                 )}
             </NightModeWrapper>
         </Overlay>

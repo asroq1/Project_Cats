@@ -7,7 +7,6 @@ export const initialState = {
     deleteWeightLoading: false,
     deleteWeightDone: false,
     deleteWeightError: null,
-
     getWeightLoading: false,
     getWeightDone: false,
     getWeighError: null,
@@ -252,23 +251,23 @@ const reducer = (state = initialState, action) => {
             case ADD_WEIGHT_FAILURE:
                 draft.addWeightLoading = false;
                 draft.addWeightDone = false;
-                draft.addWeightError = null;
+                draft.addWeightError = action.error;
                 break;
             case DELETE_WEIGHT_REQUEST:
                 draft.deleteWeightDone = false;
                 draft.deleteWeightLoading = true;
                 draft.deleteWeightError = null;
-                // draft.draft.cat = draft.cat.filter((v) => v.id !== action.data);
+                draft.cat.Record.filter((v) => v.id !== action.data);
                 break;
             case DELETE_WEIGHT_SUCCESS:
                 draft.deleteWeightDone = true;
                 draft.deleteWeightLoading = false;
-                draft.cat.Record.wgt.filter((v) => v.id !== action.data);
+
                 break;
             case DELETE_WEIGHT_FAILURE:
                 draft.deleteWeightLoading = false;
                 draft.deleteWeightDone = false;
-                draft.deleteWeightError = null;
+                draft.deleteWeightError = action.error;
                 break;
             case SET_CURRENT_CAT:
                 draft.currentIndex = action.data;
@@ -277,13 +276,18 @@ const reducer = (state = initialState, action) => {
                 draft.currImgUrl = action.data;
                 break;
             case GET_WEIGHT_REQUEST:
-                draft.isLoading = true;
+                draft.getWeightLoading = true;
+                draft.getWeightDone = false;
+                draft.addWeightError = null;
                 break;
-            // case GET_WEIGHT_SUCCESS:
-            //     draft.isLoading - false;
-            //     draft.cat = action.data;
-            //     break;
+            case GET_WEIGHT_SUCCESS:
+                draft.getWeightDone = true;
+                draft.getWeightLoading = false;
+                draft.getWeighError = null;
             case GET_WEIGHT_FAILURE:
+                draft.getWeightLoading = false;
+                draft.getWeightDone = false;
+                draft.getWeighError = action.error;
                 break;
             default:
                 break;

@@ -2,7 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import WeightResultGraph from '../components/weightResult/WeightResultGraph';
 import WeightResultList from '../components/weightResult/WeightResultList';
-import styles from '../styles/weightResult.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -16,7 +15,7 @@ const Header = styled.header`
     max-width: 1200px;
     width: 100%;
     height: 6vh;
-    background-color: ${({theme}) => theme.palette.beige};
+    background-color: ${({ theme }) => theme.palette.beige};
     align-items: center;
     border: none;
 `;
@@ -25,12 +24,12 @@ const DataButton = styled.button`
     height: 100%;
     border: none;
     font-size: 1rem;
-    background-color: ${({theme}) => theme.palette.navy};
+    background-color: ${({ theme }) => theme.palette.navy};
     border-radius: 8px;
     color: white;
     font-weight: 600;
     :hover {
-        background: ${({theme}) => theme.palette.borderColor};
+        background: ${({ theme }) => theme.palette.borderColor};
     }
     &:active {
         transform: scale(0.9);
@@ -55,7 +54,7 @@ const ExitButton = styled.span`
     font-size: 2rem;
 
     a {
-        color: ${({theme}) => theme.palette.navy};
+        color: ${({ theme }) => theme.palette.navy};
     }
 `;
 const WeightResult = () => {
@@ -82,10 +81,7 @@ const WeightResult = () => {
                 </DataButton>
                 <ExitButton>
                     <Link to="/user/main">
-                        <FontAwesomeIcon
-                            icon={faArrowRight}
-                            className={styles.icon}
-                        />
+                        <FontAwesomeIcon icon={faArrowRight} />
                     </Link>
                 </ExitButton>
             </Header>

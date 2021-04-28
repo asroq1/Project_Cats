@@ -6,12 +6,10 @@ import palette from '../styles/palette';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 const SignupBackground = styled.div`
-    background-color: #f4f1de;
+    // background-color: #f4f1de;
 `;
 const SignupWrapper = styled.div`
     display: grid;
-    // max-width: 1200px;
-    // width: 100vw;
     width: 100%;
     height: 100vh;
     margin: 0 auto;

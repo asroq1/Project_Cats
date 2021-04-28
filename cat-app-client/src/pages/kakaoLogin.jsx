@@ -12,8 +12,8 @@ const KakaoSignupContainer = styled.form`
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    max-width: 1200px;
-    width: 100%;
+    justify-content: center;
+    width: 80%;
     height: 100vh;
     background-color: ${({ theme }) => theme.palette.beige};
     button {
@@ -59,6 +59,13 @@ const ErrorMessages = styled.p`
     margin: 0.5rem 0 0.5rem 0;
     color: #db4455;
 `;
+const Title = styled.h2`
+    margin-bottom: 2.5rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: ${({ theme }) => theme.palette.navy};
+`;
 
 const KakaLogin = () => {
     const dispatch = useDispatch();
@@ -70,6 +77,7 @@ const KakaLogin = () => {
     return (
         <SignupBackground>
             <KakaoSignupContainer onSubmit={handleSubmit(onSubmit)}>
+                <Title>회원가입</Title>
                 <label>이메일</label>
                 <SignUpInput
                     name="email"

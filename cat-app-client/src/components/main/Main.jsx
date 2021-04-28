@@ -1,4 +1,4 @@
-import React, {  useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -23,7 +23,7 @@ const PhotoContainer = styled.div`
     margin-top: 0.5rem;
     border-radius: 10px;
     background-size: cover;
-    box-shadow:3px 5px 5px rgba(0,0,0,0.5);
+    box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,21 +35,20 @@ const PhotoContainer = styled.div`
 
 const ButtonWrapper = styled.button`
     width: 100%;
-    padding-top:1rem;
+    padding-top: 1rem;
     padding-bottom: 1rem;
-    margin-bottom:0.75rem;
+    margin-bottom: 0.75rem;
     border-radius: 5px;
     font-size: 1rem;
     font-weight: bold;
     background-color: ${palette.navy};
-    color:white;
+    color: white;
     cursor: pointer;
     border: 1px solid black;
     &:hover {
         background: black;
     }
 `;
-
 
 const WeightRecordWrapper = styled.div`
     text-align: center;
@@ -95,20 +94,29 @@ const Main = ({ cat, currentIndex, age }) => {
                 <div style={paddingStyle}>
                     {age[0]}년 {age[1]}개월 |{' '}
                     {currentCat.gender === 'M' ? '수컷' : '암컷'}
-                    <Link to = "/cat/update">
+                    <Link to="/cat/update">
                         <i class="fa fa-edit"></i>
                     </Link>
                 </div>
-                {currentCat.photo ? (<PhotoContainer
-                    style={{backgroundImage: `url(${currentCat.photo})`}}
-                />)
-                : (<PhotoContainer><i class="fa fa-paw"></i></PhotoContainer>)
-                }
+                {currentCat.photo ? (
+                    <PhotoContainer
+                        style={{ backgroundImage: `url(${currentCat.photo})` }}
+                    />
+                ) : (
+                    <PhotoContainer>
+                        <i class="fa fa-paw"></i>
+                    </PhotoContainer>
+                )}
                 <WeightRecordWrapper>
                     <h1>마지막 체중 기록</h1>
-                    <h2>{currentCat.Record ? currentCat.Record.cdt : '체중을'}</h2>
-                    <h3>{currentCat.Record ? currentCat.Record.wgt : '기록해주세용'}</h3>
-
+                    <h2>
+                        {currentCat.Record ? currentCat.Record.cdt : '체중을'}
+                    </h2>
+                    <h3>
+                        {currentCat.Record
+                            ? currentCat.Record.wgt
+                            : '기록해주세용'}
+                    </h3>
                 </WeightRecordWrapper>
                 {/* <div style={boldStyle}>
                     {currentCat.Record.length > 0

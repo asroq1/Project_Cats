@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { addWeightRequestAction } from '../../reducers/cat';
 import palette from '../../styles/palette';
-// import styles from '../../styles/AddWeight.module.css';
 
 const HeaderTitle = styled.span`
     margin: 0 auto;
@@ -149,10 +148,10 @@ const SubmitButton = styled.button`
 `;
 const AddWeight = () => {
     const [alone, setAlone] = useState('');
-    const [togepther, setTogether] = useState(0);
+    const [together, setTogether] = useState(0);
     const weightResult = together - alone;
     const nextRef = useRef(null);
-    const dispatch = useDisatch();
+    const dispatch = useDispatch();
     const date = new Date();
 
     const today = date.toLocaleString();

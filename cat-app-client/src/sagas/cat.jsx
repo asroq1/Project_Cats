@@ -20,6 +20,9 @@ import {
     DELETE_WEIGHT_FAILURE,
     DELETE_WEIGHT_SUCCESS,
     DELETE_WEIGHT_REQUEST,
+    GET_WEIGHT_REQUEST,
+    GET_WEIGHT_SUCCESS,
+    GET_WEIGHT_FAILURE,
 } from '../reducers/cat';
 
 // 해당 유저의 모든 고양이 정보 받아오기
@@ -129,14 +132,33 @@ function deleteWeightAPI(data) {
 }
 function* deleteWeight(action) {
     try {
-        const result = yield (deleteWeightAPI, action.data);
+        // const result = yield (deleteWeightAPI, action.data);
         yield put({
-            type: DELETE_WEIGHT_REQUEST,
-            data: result.data,
+            type: DELETE_WEIGHT_SUCCESS,
+            data: action.data,
         });
     } catch (err) {
         yield put({
             type: DELETE_WEIGHT_FAILURE,
+            error: err,
+        });
+    }
+}
+
+function getWeightAPI(data) {
+    return axios.get('api/data/{id}', data);
+}
+function* getWeight(action) {
+    const result = yield (getWeightAPI, action.data);
+    console.log(result);
+    try {
+        yield put({
+            type: GET_WEIGHT_SUCCESS,
+            data: result.data,
+        });
+    } catch (err) {
+        yield put({
+            type: GET_WEIGHT_FAILURE,
             error: err,
         });
     }
@@ -165,6 +187,10 @@ function* watchAddWeight() {
 function* watchDeleteWeight() {
     yield takeLatest(DELETE_WEIGHT_REQUEST, deleteWeight);
 }
+
+function* watchGetWeight() {
+    yield takeLatest(GET_WEIGHT_REQUEST, getWeight);
+}
 export default function* catSaga() {
     yield all([
         fork(watchgetCat),
@@ -173,5 +199,6 @@ export default function* catSaga() {
         fork(watchupdateCat),
         fork(watchAddWeight),
         fork(watchDeleteWeight),
+        fork(watchGetWeight),
     ]);
 }

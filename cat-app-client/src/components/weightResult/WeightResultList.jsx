@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import palette from '../../styles/palette';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch } from 'react-redux';
-import { deleteWeightRequestAction } from '../../reducers/cat';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    deleteWeightRequestAction,
+    getWeightRequest,
+} from '../../reducers/cat';
 const ListContainer = styled.div`
     display: grid;
     margin: 0 auto;
@@ -59,92 +62,76 @@ const DeleteButton = styled.button`
 `;
 const data = [
     {
-        id: 1,
-        name: '2020-08-02',
-        wgt: 22.2,
-    },
-    {
-        name: '2020-08-02',
-        wgt: 22.2,
-    },
-
-    {
-        name: '2020-08-02',
-        wgt: 22.2,
-    },
-    {
-        name: '2020-08-02',
-        wgt: 22.2,
-    },
-    {
-        name: '2020-08-02',
-        wgt: 22.2,
-    },
-    {
-        name: '2020-08-02',
-        wgt: 22.2,
-    },
-    {
-        name: '2020-08-02',
-        wgt: 22.2,
-    },
-    {
-        name: '2020-08-03',
-        wgt: 22.4,
-    },
-    {
-        name: '2020-09-12',
-        wgt: 25.2,
-    },
-    {
-        name: '2020-09-22',
-        wgt: 25.0,
-    },
-    {
-        name: '2020-10-22',
-        wgt: 28.2,
-    },
-    {
-        name: '2020-12-22',
-        wgt: 30.2,
-    },
-    {
-        name: '2020-12-30',
-        wgt: 22.2,
-    },
-    {
-        name: '2020-01-30',
-        wgt: 25.2,
-    },
-    {
-        name: '2020-03-30',
+        name: '01-20',
         wgt: 29.2,
     },
     {
-        name: '2020-04-20',
+        name: '02-20',
         wgt: 29.2,
     },
     {
-        name: '2020-05-12',
+        name: '03-20',
+        wgt: 29.2,
+    },
+    {
+        name: '04-20',
+        wgt: 29.2,
+    },
+    {
+        name: '05-20',
+        wgt: 29.2,
+    },
+    {
+        name: '06-20',
+        wgt: 29.2,
+    },
+    {
+        name: '07-20',
+        wgt: 29.2,
+    },
+    {
+        name: '08-20',
+        wgt: 29.2,
+    },
+    {
+        name: '09-20',
+        wgt: 29.2,
+    },
+    {
+        name: '10-20',
+        wgt: 29.2,
+    },
+    {
+        name: '11-12',
         wgt: 29.2,
     },
 ];
+
 const WeightResultTable = () => {
     const dispatch = useDispatch();
+    const { cat, currentIndex } = useSelector((state) => state.cat);
     const onDelete = (id) => {
         dispatch(deleteWeightRequestAction(id));
     };
+    useEffect(() => {
+        dispatch(getWeightRequest());
+    }, []);
+
     const date = new Date().toLocaleDateString();
+    // const test = data.map((date) => console.log(date.name));
     // 연동하면 여기에서 바로 조회하면 끝
     // const test = axios.get('</백엔드 주소>');
+
     return (
         <ListContainer>
+            {/* {test} */}
             {data.map((data) => {
                 return (
                     <DataContainer>
                         <DataList key={date}>
                             <p>{data.name}</p>
                             <p>{data.wgt}kg</p>
+                            <p>{cat.record}</p>
                             <DeleteButton>
                                 <FontAwesomeIcon
                                     onClick={onDelete}
