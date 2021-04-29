@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {all, fork, takeLatetest, put, takeLatest, take} from 'redux-saga/effects'
+import {all, fork, takeLatetest, put, takeLatest, call} from 'redux-saga/effects'
 import shortId from 'shortid';
 
 import {
@@ -61,16 +61,16 @@ function* removePost(action){
     }
 }
 
-function readPostAPI(id, data){
-    return axios.get(`/api/post/${id}`, data);
+function readPostAPI(id){
+    return axios.get(`/api/posts/${id}`);
 }
 
 function* readPost(action){
     try {
-        //const result = yield call(readPostAPI,action.data);
+        const result = yield call(readPostAPI,action.data);
         yield put({
             type: READ_POST_SUCCESS,
-            data: action.data
+            data: result.data
         })
     } catch(err){
         yield put({
@@ -80,16 +80,16 @@ function* readPost(action){
     }
 }
 
-function listPostAPI(page){
-    return axios.get(`/api/post/${page}`);
+function listPostAPI(){
+    return axios.get("/api/posts");
 }
 
 function* listPost(action){
     try {
-        //const result= yield call(listPostAPI, action.data);
+        const result= yield call(listPostAPI);
         yield put({
             type: LIST_POST_SUCCESS,
-            data: action.data,
+            data: result.data,
         }) 
     } catch(err){
         yield put({
@@ -144,6 +144,7 @@ export default function* postSaga(){
         fork(watchAddPost),   
         fork(watchRemovePost),
         fork(watchReadPost),
+        fork(watchListPost),
         fork(watchAddComment),
     ]);
 }

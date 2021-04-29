@@ -15,15 +15,8 @@ const PostViewBody = styled.div`
     padding-top: 50px;
 `;
 
-const PostViewContainer = ({ match }) => {
-    //마운트 시 포스트 읽기 API 요청
-    const { postId } = match.params;
-    const dispatch = useDispatch();
-    const { post, error, loading } = useSelector(({ post, loading }) => ({
-        post: post.mainPosts[0],
-        error: post.error,
-        loading: '로딩하고 있어용',
-    }));
+const PostViewContainer = ({ }) => {
+    const { currentPost, readPostError } = useSelector((state) => state.post);
 
     // useEffect(() => {
     //     dispatch({
@@ -40,8 +33,8 @@ const PostViewContainer = ({ match }) => {
         <>
         <OverallPostsLayout>
         <PostViewBody>
-            <ImageCarousel images={post.Images} />
-            <PostView post={post} loading={loading} error={error} />    
+            {/* <ImageCarousel images={currentPost.Images} /> */}
+            <PostView post={currentPost} error={readPostError}/>    
         </PostViewBody>
         </OverallPostsLayout>
 

@@ -54,6 +54,8 @@ export const initialState = {
     isLoading: true,
     currentIndex: 1,
     currImgUrl: null,
+
+    currentCatWeights: null,
 };
 
 // 몸무게 관련
@@ -285,7 +287,12 @@ const reducer = (state = initialState, action) => {
             case ADD_WEIGHT_SUCCESS:
                 draft.addWeightLoading = false;
                 draft.addWeightDone = true;
-                draft.cat.Record.wgt.concat(action.data);
+                draft.currentCatWeights.unshift(action.data);
+                // 복사해주는 게 리덕스 개념 상 ('추적'에 중점을 둠) 맞는데
+                // 제로초님도 그러면 코드가 너무 복잡해져서
+                // 이런식으로 하셨더라구요! (맘껏 바꿔주세요)
+                // unshift가 'in-place' 함수이기 때문에 - 배열 그 자체를 바꿈. 배열을 복사해 바꾸는 게 아니라
+                // 이런식으로 코드가 들어가는 듯 합니다.
                 break;
             case ADD_WEIGHT_FAILURE:
                 draft.addWeightLoading = false;
@@ -296,11 +303,11 @@ const reducer = (state = initialState, action) => {
                 draft.deleteWeightDone = false;
                 draft.deleteWeightLoading = true;
                 draft.deleteWeightError = null;
-                draft.cat.Record.filter((v) => v.id !== action.data);
                 break;
             case DELETE_WEIGHT_SUCCESS:
                 draft.deleteWeightDone = true;
                 draft.deleteWeightLoading = false;
+                draft.currentCatWeights.filter((v) => v.id !== action.data);
 
                 break;
             case DELETE_WEIGHT_FAILURE:
@@ -318,11 +325,15 @@ const reducer = (state = initialState, action) => {
                 draft.getWeightLoading = true;
                 draft.getWeightDone = false;
                 draft.addWeightError = null;
+
+                draft.currentCatWeights = null;
                 break;
             case GET_WEIGHT_SUCCESS:
                 draft.getWeightDone = true;
                 draft.getWeightLoading = false;
                 draft.getWeighError = null;
+                draft.currentCatWeights = action.data;
+                break;
             case GET_WEIGHT_FAILURE:
                 draft.getWeightLoading = false;
                 draft.getWeightDone = false;

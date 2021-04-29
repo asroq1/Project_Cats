@@ -79,7 +79,7 @@ const PostView = ({ post, error, loading }) => {
     if (!post) {
         return <h2>로딩중</h2>;
     }
-    const { title, content, User, date, Images, Comments } = post;
+    const { title, content, writer, createdDate, comments } = post;
 
     // const onRemoveComment = useCallback(
     //     (key, i)=> () =>{
@@ -91,6 +91,8 @@ const PostView = ({ post, error, loading }) => {
     //             }
     //         })
     // }, []);
+
+    
     
     return (
         <OverallContainer>
@@ -98,9 +100,10 @@ const PostView = ({ post, error, loading }) => {
                 <h1>{title}</h1>
                 <SubInfo>
                     <span>
-                        <b>{User.nickname}</b>
+                        <b>{writer.nickname}</b>
                     </span>
-                    <span>{date}</span>
+                    
+                    <span>{createdDate.slice(0,10)}</span>
                 </SubInfo>
                 <PostContent>{content}</PostContent>
             </PostHead>
@@ -108,11 +111,11 @@ const PostView = ({ post, error, loading }) => {
             <CommentWrapper>
                 <h1>댓글</h1>
                 <div>
-                    {Comments.map((comment,i) => (
-                        <EachComment key={comment+i}>
+                    {comments.map((c,i) => (
+                        <EachComment key={c+i}>
                             <div>
-                                <h3>{comment.User.nickname}</h3>
-                                <div>{comment.content}</div>
+                                <h3>{c.User.nickname}</h3>
+                                <div>{c.content}</div>
                             </div>
                             {/* {comment.User == localStorage.currentUser && (
                                 <div>

@@ -147,8 +147,10 @@ function* deleteWeight(action) {
     }
 }
 
-function getWeightAPI(data) {
-    return axios.get('api/data/{id}', data);
+function getWeightAPI(id) {
+    return axios.get(`api/records?catId=${id}`);
+    // 백엔드 팀이랑 api 주소 더 깔끔하게 만드는 것 의논해봐도 될 것 같아요.
+    // `api/records/${id}` 이런 식으로 들어가게
 }
 function* getWeight(action) {
     const result = yield (getWeightAPI, action.data);

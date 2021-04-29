@@ -4,161 +4,23 @@ import shortId from 'shortid';
 
 const initialState = {
     mainPosts: [
-        {
-            _id: 1,
-            User: {
-                id: 1,
-                nickname: '고양이제국만세',
-            },
-            title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content:
-                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
-            date: '2020-01-03',
-
-            Images: [
-                {
-                    id: shortId.generate(),
-                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
-                },
-                {
-                    id: shortId.generate(),
-                    src:
-                        'https://imgnn.seoul.co.kr/img/upload/2019/01/30/SSI_20190130171000_V.jpg',
-                },
-                {
-                    id: shortId.generate(),
-                    src:
-                        'https://i.pinimg.com/originals/ca/c0/a0/cac0a030fa07099fef5ad6d9c1df6fdc.jpg',
-                },
-            ],
-
-            Comments: [
-                {
-                    id: shortId.generate(),
-                    User: {
-                        nickname: 'ㅇㅇ',
-                    },
-                    content:
-                        '주인님을 사랑하고 공경하는 건 집사의 당연한 도리입니당',
-                },
-                {
-                    id: shortId.generate(),
-                    User: {
-                        nickname: '저두용',
-                    },
-                    content: '동의합니당!',
-                },
-            ],
-        },
-        {
-            _id: 2,
-            User: {
-                id: 1,
-                nickname: '고양이제국만세',
-            },
-            title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content:
-                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
-            date: '2020-01-03',
-            Images: [
-                {
-                    id: shortId.generate(),
-                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
-                },
-            ],
-
-            Comments: [],
-        },
-        {
-            _id: 3,
-            User: {
-                id: 1,
-                nickname: '고양이제국만세',
-            },
-            title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content:
-                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
-            date: '2020-01-03',
-            Images: [
-                {
-                    id: shortId.generate(),
-                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
-                },
-            ],
-
-            Comments: [],
-        },
-        {
-            _id: 4,
-            User: {
-                id: 1,
-                nickname: '고양이제국만세',
-            },
-            title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content:
-                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
-            date: '2020-01-03',
-            Images: [
-                {
-                    id: shortId.generate(),
-                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
-                },
-            ],
-
-            Comments: [],
-        },
-        {
-            _id: 5,
-            User: {
-                id: 1,
-                nickname: '고양이제국만세',
-            },
-            title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content:
-                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
-            date: '2020-01-03',
-            Images: [
-                {
-                    id: shortId.generate(),
-                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
-                },
-            ],
-
-            Comments: [],
-        },
-        {
-            _id: 6,
-            User: {
-                id: 1,
-                nickname: '고양이제국만세',
-            },
-            title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content:
-                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
-            date: '2020-01-03',
-            Images: [
-                {
-                    id: shortId.generate(),
-                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
-                },
-            ],
-
-            Comments: [],
-        },
     ],
     imagePaths: [],
     currentPost: null,
-    listPosts: null,
+    //listPosts: null,
     error: null,
 
     addCommentLoading: false,
     addCommentDone: false,
     addCommentError: null,
 
-    loadPostLoading: false,
+    readPostLoading: false,
+    readPostDone: false,
+    readPostError:null,
 
-    loadPostDone: false,
-    loadPostError: null,
+    listPostLoading: false,
+    listPostDone: false,
+    listPostError: null,
 
     hasMorePosts: true,
 };
@@ -233,6 +95,11 @@ const reducer = (state = initialState, action) => {
             case ADD_POST_FAILURE:
                 break;
             case READ_POST_REQUEST:
+
+                draft.readPostLoading = true;
+
+                draft.readPostDone = false;
+                draft.readPostError = null;
                 break;
             case READ_POST_SUCCESS:
                 draft.currentPost = action.data;
@@ -241,18 +108,17 @@ const reducer = (state = initialState, action) => {
                 draft.error = action.data;
                 break;
             case LIST_POST_REQUEST:
-                draft.loadPostLoading = true;
+                draft.listPostLoading = true;
                 break;
             case LIST_POST_SUCCESS:
-                draft.loadPostLoading = false;
-                draft.loadPostDone = true;
-                draft.mainPosts = action.data.concat(draft.mainPosts);
+                draft.listPostLoading = false;
+                draft.listPostDone = true;
+                draft.mainPosts = action.data;
                 draft.hasMorePost = draft.mainPosts.length < 50;
                 break;
             case LIST_POST_FAILURE:
-
-                draft.loadPostLoading = false;
-                draft.loadPostError = action.data;
+                draft.listPostLoading = false;
+                draft.listPostError = action.data;
                 break;
             case UNLOAD_POST:
                 draft.currentPost = [];
