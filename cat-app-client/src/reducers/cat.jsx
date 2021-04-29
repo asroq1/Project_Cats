@@ -255,9 +255,9 @@ const reducer = (state = initialState, action) => {
                 break;
             case DELETE_CAT_SUCCESS:
                 draft.cat = draft.cat.filter((v) => v.id !== action.data);
+                draft.currentIndex = draft.cat[0].id;
                 draft.deleteCatLoading = false;
                 draft.deleteCatDone = true;
-                draft.currentIndex = draft.cat[0].id;
                 break;
             case DELETE_CAT_FAILURE:
 

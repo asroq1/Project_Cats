@@ -46,7 +46,7 @@ const Main = () => {
                 }
                 //setAge([ageYear, ageMonth]);
                 return [ageYear, ageMonth];
-    },[cat]);
+    },[cat, currentIndex]);
     
     useEffect(()=>{
         if (!logInDone){

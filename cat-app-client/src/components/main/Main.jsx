@@ -103,7 +103,7 @@ const Main = ({ cat, currentIndex, age }) => {
                         <i class="fa fa-edit"></i>
                     </Link>
                 </div>
-                {currentCat.photo ? (<PhotoContainer
+                {(currentCat.photo && currentCat.photo !== "null") ? (<PhotoContainer
                     style={{backgroundImage: `url(${currentCat.photo})`}}
                 />)
                 : (<PhotoContainer><i class="fa fa-paw"></i></PhotoContainer>)

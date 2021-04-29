@@ -1,7 +1,6 @@
-import React, { useCallback, useState, useRef, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { v4 as uuidv4} from 'uuid';
 
 import useInput from '../../hooks/useInput';
 import { SET_CURRENT_IMAGE, ADD_CAT_REQUEST } from '../../reducers/cat';
@@ -57,12 +56,17 @@ const CatsAdd = ({}) => {
                 type: ADD_CAT_REQUEST,
                 data: formData,
             });
-            if (addCatDone){
-                history.push('/user/main');
-            }
+            
         },
         [currImgUrl, name, birthyear, birthmonth, birthdate, gender,addCatDone]
     );
+
+    useEffect(() => {
+
+        if (addCatDone){
+            history.push('/user/main');
+        }
+    }, [addCatDone]);
 
     const goBack = useCallback(() => {
         history.goBack();
