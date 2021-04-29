@@ -10,7 +10,7 @@ const IndexContainer = styled.div`
     width: 100%;
     height: 100vh;
     margin: 0 auto;
-    // background-color: ${({ theme }) => theme.palette.beige};
+    background-color: ${({ theme }) => theme.body};
 `;
 
 const LogoWrapper = styled.div`
@@ -28,7 +28,7 @@ const SignupButton = styled.div`
     align-items: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    background-color: ${({ theme }) => theme.palette.navy};
+    background-color: ${({ theme }) => theme.button};
     border-radius: 4px;
     color: #fff;
     font-size: 1rem;

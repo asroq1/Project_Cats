@@ -13,7 +13,7 @@ const SignupWrapper = styled.div`
     width: 100%;
     height: 100vh;
     margin: 0 auto;
-    background-color:  background-color: ${({ theme }) => theme.palette.orange};
+    background-color: ${({ theme }) => theme.body};
 `;
 
 const TitleWrapper = styled.div`
@@ -27,7 +27,7 @@ const Title = styled.h2`
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
-    color: ${({ theme }) => theme.palette.navy};
+    color: ${({ theme }) => theme.text};
 `;
 const ExitButton = styled.p`
     //position: fixed;
@@ -39,7 +39,7 @@ const ExitButton = styled.p`
     padding: 0.5rem;
 
     a{
-        color: ${palette.navy}
+        color: ${({ theme }) => theme.text};
     }
     
 }

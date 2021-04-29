@@ -22,7 +22,7 @@ const GraphContainer = styled.div`
     //max-width: 1200px;
     width: 100%;
     height: 94vh;
-    background-color: ${({ theme }) => theme.palette.navy};
+    background-color: ${({ theme }) => theme.graph};
     align-items: center;
 `;
 
@@ -39,7 +39,7 @@ const SelectorContainer = styled.div`
 `;
 
 const DateSelector = styled.button`
-    color: ${({ theme }) => theme.palette.white};
+    color: ${({ theme }) => theme.text};
     font-size: 1rem;
     background-color: ${(props) => (props.primary ? '#E07A5F' : '#d5d3d3')};
     border: none;
@@ -70,14 +70,14 @@ const WeightWrapper = styled.div`
     }
 
     li{ 
-        color: ${({ theme }) => theme.palette.white};
+        color: ${({ theme }) => theme.resultText};
         font-weight: bold;
         font-size: 2rem;
     }
 
     li:nth-last-child(2) {
         margin-top: 1rem;
-        color: ${({ theme }) => theme.palette.borderColor};
+        color: ${({ theme }) => theme.resultText};
         font-weight: bold;
         font-size: 1rem;
    
@@ -92,12 +92,12 @@ const ResultWrapper = styled.div`
 
     p:nth-child(2) {
         font-weight: bold;
-        color: ${({ theme }) => theme.palette.white};
+        color: ${({ theme }) => theme.resultText};
         font-size: 2rem;
     }
     p:nth-child(1) {
         font-weight: bold;
-        color: ${({ theme }) => theme.palette.borderColor};
+        color: ${({ theme }) => theme.resultText};
         margin-top: 1rem;
         font-size: 1rem;
     }

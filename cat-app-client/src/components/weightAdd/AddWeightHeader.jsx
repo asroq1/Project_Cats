@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const Header = styled.header`
     height: 10vh;
-    background-color: ${({theme})=>theme.palette.beige};
+    background-color: ${({ theme }) => theme.body};
 `;
 const ExitButton = styled.p`
     //position: fixed;
@@ -16,7 +16,7 @@ const ExitButton = styled.p`
     padding: 0.5rem;
 
     a{
-        color: ${({theme})=>theme.palette.navy}
+        color: ${({ theme }) => theme.text}
     }
     
 }

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { signUpRequest } from '../reducers/user';
 
 const SignupBackground = styled.div`
-    background-color: ${({ theme }) => theme.palette.beige};
+    background-color: ${({ theme }) => theme.body};
 `;
 
 const KakaoSignupContainer = styled.form`
@@ -15,7 +15,7 @@ const KakaoSignupContainer = styled.form`
     justify-content: center;
     width: 80%;
     height: 100vh;
-    background-color: ${({ theme }) => theme.palette.beige};
+    background-color: ${({ theme }) => theme.body};
     button {
         margin: 0.5rem 0 0.5rem 0;
         height: 3rem;
@@ -38,21 +38,21 @@ const SignUpInput = styled.input`
     height: 1rem;
     font-size: 1rem;
     border-radius: 4px;
-    border-color: ${({ theme }) => theme.palette.borderColor};
+    border: 1px solid ${({ theme }) => theme.palette.borderColor};
     font-family: FontAwesome;
     padding: 1rem;
 
     ::placeholder {
         text-align: right;
     }
-    background-color: ${({ theme }) => theme.palette.inputColor};
+    background-color: ${({ theme }) => theme.input};
 `;
 const SubmitButton = styled.button`
     background: #f2cc8f;
     color: #fff;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${({ theme }) => theme.palette.navy};
+    background-color: ${({ theme }) => theme.button};
 `;
 
 const ErrorMessages = styled.p`
@@ -64,7 +64,7 @@ const Title = styled.h2`
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
-    color: ${({ theme }) => theme.palette.navy};
+    color: ${({ theme }) => theme.text};
 `;
 
 const KakaLogin = () => {

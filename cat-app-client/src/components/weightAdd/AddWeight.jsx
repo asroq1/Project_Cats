@@ -31,7 +31,7 @@ const CarouselContent = styled.div`
     width: 100%;
     height: 100vh;
     float: left;
-    background: ${({ theme }) => theme.palette.beige};
+    background: ${({ theme }) => theme.body};
 `;
 
 const ContentWrapper = styled.div`
@@ -90,8 +90,9 @@ const AddInput = styled.input`
     width: 50%;
     padding: 1rem;
     font-size: 1.6rem;
-    background-color: ${({ theme }) => theme.palette.inputColor};
+    background-color: ${({ theme }) => theme.input};
     border: 1px solid ${({ theme }) => theme.palette.borderColor};
+    color: ${({ theme }) => theme.text};
     @media ${({ theme }) => theme.width.mobile} {
         height: 1rem;
     }
@@ -113,7 +114,7 @@ const AddButton = styled.button`
     font-size: 1rem;
     font-weight: 600;
     border: none;
-    background-color: ${({ theme }) => theme.palette.navy};
+    background-color: ${({ theme }) => theme.button};
     color: ${({ theme }) => theme.palette.white};
     border-radius: 4px;
 `;

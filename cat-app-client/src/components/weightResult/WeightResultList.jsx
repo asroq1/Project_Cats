@@ -14,7 +14,7 @@ const ListContainer = styled.div`
     max-width: 1200px;
     width: 100%;
     height: 100%;
-    background-color: ${({ theme }) => theme.palette.navy};
+    background-color: ${({ theme }) => theme.resultBackground};
 `;
 
 const DataContainer = styled.div`
@@ -35,13 +35,13 @@ const DataList = styled.div`
         display: grid;
         align-items: center;
         font-size: 1rem;
-        color: ${({ theme }) => theme.palette.white};
+        color: ${({ theme }) => theme.resultText};
     }
 
     p:nth-child(2) {
         font-size: 2rem;
         font-weight: bold;
-        color: ${({ theme }) => theme.palette.white};
+        color: ${({ theme }) => theme.resultText};
     }
 `;
 const DeleteButton = styled.button`

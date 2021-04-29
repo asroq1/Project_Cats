@@ -15,7 +15,7 @@ const Header = styled.header`
     //max-width: 1200px;
     width: 100%;
     height: 6vh;
-    background-color: ${({ theme }) => theme.palette.beige};
+    background-color: ${({ theme }) => theme.resultBackground};
     align-items: center;
     border: none;
 `;
@@ -24,7 +24,7 @@ const DataButton = styled.button`
     height: 100%;
     border: none;
     font-size: 1rem;
-    background-color: ${({ theme }) => theme.palette.navy};
+    background-color: ${({ theme }) => theme.resultHeader};
     border-radius: 8px;
     color: white;
     font-weight: 600;
@@ -36,17 +36,6 @@ const DataButton = styled.button`
     }
 `;
 
-// const ListButton = styled.button`
-//     width: 40%;
-//     height: 100%;
-//     border: none;
-//     font-size: 1rem;
-//     background-color: ${palette.navy};
-//     border-radius: 8px;
-//     color: white;
-//     font-weight: 600;
-// `;
-
 const ExitButton = styled.span`
     position: absolute;
     right: 1rem;
@@ -54,7 +43,7 @@ const ExitButton = styled.span`
     font-size: 2rem;
 
     a {
-        color: ${({ theme }) => theme.palette.navy};
+        color: ${({ theme }) => theme.resultExit};
     }
 `;
 const WeightResult = () => {
