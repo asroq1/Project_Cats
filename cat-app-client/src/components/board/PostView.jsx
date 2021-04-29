@@ -114,7 +114,7 @@ const PostView = ({ post, error, loading }) => {
                     {comments.map((c,i) => (
                         <EachComment key={c+i}>
                             <div>
-                                <h3>{c.User.nickname}</h3>
+                                <h3>{c.writer.nickname}</h3>
                                 <div>{c.content}</div>
                             </div>
                             {/* {comment.User == localStorage.currentUser && (
