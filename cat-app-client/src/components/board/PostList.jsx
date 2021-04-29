@@ -108,17 +108,17 @@ const PostItem = ({ post }) => {
 
     const dispatch = useDispatch();
 
-    const setCurrentPost = useCallback((id)=>{
-        dispatch({
-            type: READ_POST_REQUEST,
-            data: id,
+    // const setCurrentPost = useCallback((id)=>{
+    //     dispatch({
+    //         type: READ_POST_REQUEST,
+    //         data: id,
 
-        })
-    }, []);
+    //     })
+    // }, []);
 
     return (
         <StyledLink to={`/post/view/${id}`}>
-            <PostItemBlock onClick={() => setCurrentPost(post.id)}>
+            <PostItemBlock>
             {/* {"id": 1,
             "title": "눈누난나",
             "viewCount": 0,

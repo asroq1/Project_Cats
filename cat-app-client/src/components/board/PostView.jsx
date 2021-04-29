@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 
 import styled from 'styled-components';
 import CommentForm from './CommentForm';
@@ -11,12 +11,12 @@ const OverallContainer = styled.div`
 `;
 
 const PostHead = styled.div`
-    border-bottom: 1.5px solid ${({theme}) => theme.palette.green};
+    border-bottom: 1.5px solid ${({ theme }) => theme.palette.green};
     padding-bottom: 1rem;
     margin-bottom: 1.25rem;
     h1 {
         font-weight: bold;
-        color: ${({theme}) => theme.palette.navy};
+        color: ${({ theme }) => theme.palette.navy};
         line-height: 1.5rem;
         font-size: 1.5rem;
         margin-top: 2rem;
@@ -26,7 +26,7 @@ const PostHead = styled.div`
 const SubInfo = styled.div`
     margin-top: 1rem;
     font-size: 1rem;
-    color: ${({theme}) => theme.palette.green};
+    color: ${({ theme }) => theme.palette.green};
     span + span:before {
         color: gray;
         padding-left: 0.25rem;
@@ -41,11 +41,11 @@ const PostContent = styled.div`
     color: gray;
 `;
 
-const EachComment=styled.div`
-    padding-bottom:1rem;
-    padding-top:1rem; 
+const EachComment = styled.div`
+    padding-bottom: 1rem;
+    padding-top: 1rem;
     & + & {
-        border-top: 1px dotted ${({theme}) => theme.palette.green};
+        border-top: 1px dotted ${({ theme }) => theme.palette.green};
     }
 `;
 
@@ -65,7 +65,6 @@ const CommentWrapper = styled.div`
 `;
 
 const PostView = ({ post, error }) => {
-    
     //에러 발생 시
     if (error) {
         if ((error.response && error.response.status) === 404) {
@@ -74,8 +73,12 @@ const PostView = ({ post, error }) => {
         return <h2>에러가 발생했습니다.</h2>;
     }
 
-    const { id, title, content, writer, createdDate, comments } = post;
+    if (!post){
+        return null;
+    }
 
+    console.log(post);
+    const { id, title, content, writer, createdDate, comments } = post;
     // const onRemoveComment = useCallback(
     //     (key, i)=> () =>{
     //         dispatch({
@@ -87,8 +90,6 @@ const PostView = ({ post, error }) => {
     //         })
     // }, []);
 
-    
-    
     return (
         <OverallContainer>
             <PostHead>
@@ -97,32 +98,33 @@ const PostView = ({ post, error }) => {
                     <span>
                         <b>{writer.nickname}</b>
                     </span>
-                    
-                    <span>{createdDate.slice(0,10)}</span>
+
+                    <span>{createdDate.slice(0, 10)}</span>
                 </SubInfo>
                 <PostContent>{content}</PostContent>
             </PostHead>
-            <CommentForm id= {id} />
+            <CommentForm id={id} />
             <CommentWrapper>
                 <h1>댓글</h1>
                 <div>
-                    {comments.map((c,i) => (
-                        <EachComment key={c+i}>
+                    {comments.map((c, i) => (
+                        <EachComment key={c + i}>
                             <div>
                                 <h3>{c.writer.nickname}</h3>
                                 <div>{c.content}</div>
                             </div>
                             {/* {comment.User == localStorage.currentUser && (
-                                <div>
-                                    <button type="button" onClick={onRemoveComment(comment+i,i)}>삭제</button>
-                                </div>
-                            ) */}                            
+                            <div>
+                                <button type="button" onClick={onRemoveComment(comment+i,i)}>삭제</button>
+                            </div>
+                        ) */}
                         </EachComment>
                     ))}
                 </div>
             </CommentWrapper>
         </OverallContainer>
     );
+
 };
 
 export default PostView;

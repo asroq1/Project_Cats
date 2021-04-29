@@ -18,9 +18,11 @@ import { GlobalStyles, lightTheme, darkTheme } from './styles/globalStyles';
 import Toggle from './components/toggle/Toggle';
 import { useDarkMode } from './styles/useDarkMode ';
 import styled, { ThemeProvider } from 'styled-components';
+
 const Container = styled.div`
     backgroud: black;
 `;
+
 function App() {
     const [theme, toggleTheme] = useDarkMode();
     const themeMode = theme === 'light' ? lightTheme : darkTheme;
@@ -44,7 +46,7 @@ function App() {
                     <Route path="/user/settings" component={Settings} />
                     <Route path="/post/write" component={postWrite} />
                     <Route path="/post/list" component={postList} />
-                    <Route path="/post/view" component={postView} />
+                    <Route path="/post/view/:postId" component={postView} />
                 </Container>
             </ThemeProvider>
         </>

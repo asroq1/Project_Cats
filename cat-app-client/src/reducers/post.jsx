@@ -121,7 +121,7 @@ const reducer = (state = initialState, action) => {
                 draft.listPostError = action.data;
                 break;
             case UNLOAD_POST:
-                draft.currentPost = [];
+                draft.currentPost = null;
                 break;
             case UPDATE_POST_REQUEST:
                 break;

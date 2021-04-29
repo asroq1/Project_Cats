@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import OverallPostsLayout from '../board/OverallPostsLayout';
 import PostView from './PostView';
 import ImageCarousel from './ImageCarousel';
+import { READ_POST_REQUEST, UNLOAD_POST } from '../../reducers/post';
 
 const PostViewBody = styled.div`
     position: relative;
@@ -15,29 +16,36 @@ const PostViewBody = styled.div`
     padding-top: 50px;
 `;
 
-const PostViewContainer = ({ }) => {
+const PostViewContainer = ({ match }) => {
     const { currentPost, readPostError } = useSelector((state) => state.post);
 
-    // useEffect(() => {
-    //     dispatch({
-    //         type: READ_POST_REQUEST,
-    //         data: postId
-    //     })
-    //     //언마운트 시 리덕스에서 포스트 데이터 없애기
-    //     dispatch({
-    //         type: UNLOAD_POST,
-    //     })
-    // }, [postId])
+    const { postId } = match.params;
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({
+            type: READ_POST_REQUEST,
+            data: parseInt(postId),
+        });
+
+        //언마운트 시 리덕스에서 포스트 데이터 없애기
+
+        return () => {
+            dispatch({
+                type: UNLOAD_POST,
+            });
+        };
+    }, [dispatch, postId]);
 
     return (
         <>
-        <OverallPostsLayout>
-        <PostViewBody>
-            {/* <ImageCarousel images={currentPost.Images} /> */}
-            <PostView post={currentPost} error={readPostError}/>    
-        </PostViewBody>
-        </OverallPostsLayout>
-
+            <OverallPostsLayout>
+                <PostViewBody>
+                    {/* <ImageCarousel images={currentPost.Images} /> */}
+                    <PostView post={currentPost} error={readPostError} />
+                </PostViewBody>
+            </OverallPostsLayout>
         </>
     );
 };
