@@ -1,5 +1,6 @@
-import React, { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React  from 'react';
+
+import {Link} from 'react-router-dom'
 
 import styled from 'styled-components';
 
@@ -84,6 +85,9 @@ const PostView = ({ post, error }) => {
                     <span>{createdDate.slice(0, 10)}</span>
                 </SubInfo>
                 <PostContent>{content}</PostContent>
+                <Link to = {`/post/edit/${id}`}>
+                    <button type="button">수정</button>
+                </Link>
             </PostHead>
             <CommentForm id={id} />
             <CommentsWrapper comments= {comments} />

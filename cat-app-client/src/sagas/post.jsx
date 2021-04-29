@@ -6,6 +6,7 @@ import {
     ADD_POST_REQUEST, ADD_POST_SUCCESS,ADD_POST_FAILURE,
     REMOVE_POST_REQUEST, REMOVE_POST_SUCCESS, REMOVE_POST_FAILURE,
     READ_POST_REQUEST, READ_POST_SUCCESS, READ_POST_FAILURE,
+    UPDATE_POST_REQUEST, UPDATE_POST_SUCCESS,UPDATE_POST_FAILURE,
     LIST_POST_REQUEST,LIST_POST_SUCCESS, LIST_POST_FAILURE,
     ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE,
 } from '../reducers/post';
@@ -80,6 +81,25 @@ function* readPost(action){
     }
 }
 
+function updatePostAPI(id){
+    return axios.patch(`/api/posts/${id}`);
+}
+
+function* updatePost(action){
+    try {
+        const result = yield call(listPostAPI,action.data);
+        yield put({
+            type: UPDATE_POST_SUCCESS,
+            data: result.data
+        })
+    } catch(err){
+        yield put({
+            type: UPDATE_POST_FAILURE,
+            data: err.response.data,
+        })
+    }
+}
+
 function listPostAPI(){
     return axios.get("/api/posts");
 }
@@ -133,6 +153,11 @@ function* watchReadPost(){
     yield takeLatest(READ_POST_REQUEST, readPost);
 }
 
+function* watchUpdatePost(){
+    
+    yield takeLatest(UPDATE_POST_REQUEST, updatePost);
+}
+
 function* watchListPost(){
     yield takeLatest(LIST_POST_REQUEST, listPost);
 }
@@ -146,6 +171,7 @@ export default function* postSaga(){
         fork(watchAddPost),   
         fork(watchRemovePost),
         fork(watchReadPost),
+        fork(watchUpdatePost),
         fork(watchListPost),
         fork(watchAddComment),
     ]);

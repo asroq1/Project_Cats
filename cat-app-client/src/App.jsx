@@ -10,6 +10,7 @@ import catUpdate from './pages/catUpdate';
 import main from './pages/main';
 import postWrite from './pages/postWrite';
 import postList from './pages/postList';
+import postEdit from './pages/postEdit';
 import postView from './pages/postView';
 import Settings from './components/settings/setting';
 import KakaLogin from './pages/kakaoLogin';
@@ -47,6 +48,7 @@ function App() {
                     <Route path="/post/write" component={postWrite} />
                     <Route path="/post/list" component={postList} />
                     <Route path="/post/view/:postId" component={postView} />
+                    <Route path="/post/edit/:postId" component={postEdit}/>
                 </Container>
             </ThemeProvider>
         </>

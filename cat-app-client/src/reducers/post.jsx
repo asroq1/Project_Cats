@@ -73,6 +73,11 @@ export const readPost = (data) => ({
     data,
 });
 
+export const updatePost = (data) => ({
+    type: UPDATE_POST_REQUEST,
+    data,
+});
+
 export const listPost = (data) => ({
     type: LIST_POST_REQUEST,
     data,
@@ -103,6 +108,7 @@ const reducer = (state = initialState, action) => {
                 break;
             case READ_POST_SUCCESS:
                 draft.currentPost = action.data;
+                // draft.imagePaths = draft.currentPost.images;
                 break;
             case READ_POST_FAILURE:
                 draft.error = action.data;
@@ -126,18 +132,18 @@ const reducer = (state = initialState, action) => {
             case UPDATE_POST_REQUEST:
                 break;
             case UPDATE_POST_SUCCESS:
-                draft.mainPosts.find(
-                    (v) => v.id === action.data.PostId
-                ).content = action.data.content;
+                // draft.mainPosts.find(
+                //     (v) => v.id === action.data.PostId
+                // ).content = action.data.content;
                 break;
             case UPDATE_POST_FAILURE:
                 break;
             case REMOVE_POST_REQUEST:
                 break;
             case REMOVE_POST_SUCCESS:
-                draft.mainPosts = draft.mainPosts.filter(
-                    (v) => v.id !== action.data.PostId
-                );
+                // draft.mainPosts = draft.mainPosts.filter(
+                //     (v) => v.id !== action.data.PostId
+                // );
                 break;
             case REMOVE_POST_FAILURE:
                 break;

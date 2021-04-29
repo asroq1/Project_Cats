@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import useInput from '../../hooks/useInput';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory,withRouter } from 'react-router-dom';
 import {
-    ADD_POST_REQUEST,
+    READ_POST_REQUEST,
+    UPDATE_POST_REQUEST,
     UPLOAD_IMAGES_SUCCESS,
     REMOVE_IMAGE,
 } from '../../reducers/post';
@@ -102,14 +103,28 @@ const PreviewBox = styled.div`
     }
 `;
 
-const PostForm = () => {
+const PostUpdate = ({match}) => {
+
+    const { currentPost } = useSelector((state) => state.post);
+    const { postId } = match.params;
+
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({
+            type: READ_POST_REQUEST,
+            data: parseInt(postId),
+        });
+    
+    }, [postId]);
+
+
     const imageInput = useRef();
     const history=useHistory();
 
     // 각 form 내용은 useState이용한 커스텀 훅으로 관리
-    const [title, onChangeTitle, setTitle] = useInput('');
-    const [text, onChangeText, setText] = useInput('');
+    const [title, onChangeTitle] =useInput(currentPost.title);
+    const [text, onChangeText] = useInput(currentPost.content);
 
     // 게시판에 올리는 사진들은 redux에서 상태 관리
     const { imagePaths } = useSelector((state) => state.post);
@@ -191,7 +206,7 @@ const PostForm = () => {
                 console.log(entry);
             }
             return dispatch({
-                type: ADD_POST_REQUEST,
+                type: UPDATE_POST_REQUEST,
                 data: formData,
             });
         },
@@ -212,7 +227,7 @@ const PostForm = () => {
                                 value={title}
                                 onChange={onChangeTitle}
                                 maxLength="20"
-                                placeholder="제목을 입력하세용"
+                                
                             />
                         </StyledBlock>
 
@@ -221,7 +236,7 @@ const PostForm = () => {
                                 value={text}
                                 onChange={onChangeText}
                                 maxLength={200}
-                                placeholder="글을 작성해주세용"
+                                
                             />
                         </StyledBlock>
                         
@@ -289,4 +304,4 @@ const PostForm = () => {
     );
 };
 
-export default PostForm;
+export default withRouter(PostUpdate);
