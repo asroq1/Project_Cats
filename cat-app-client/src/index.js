@@ -13,7 +13,7 @@ import Applayout from './components/layout/Applayout';
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
 
-axios.defaults.baseURL = 'http://localhost:8080/';
+axios.defaults.baseURL = 'http://ec2-3-36-163-150.ap-northeast-2.compute.amazonaws.com:8080/';
 // axios.defaults.withCredentials = true;
 
 const store = Store(rootReducer, composeWithDevTools());

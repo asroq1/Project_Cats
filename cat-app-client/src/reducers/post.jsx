@@ -154,6 +154,13 @@ const initialState = {
     addCommentLoading: false,
     addCommentDone: false,
     addCommentError: null,
+
+    loadPostLoading: false,
+
+    loadPostDone: false,
+    loadPostError: null,
+
+    hasMorePosts: true,
 };
 
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
@@ -234,11 +241,18 @@ const reducer = (state = initialState, action) => {
                 draft.error = action.data;
                 break;
             case LIST_POST_REQUEST:
+                draft.loadPostLoading = true;
                 break;
             case LIST_POST_SUCCESS:
-                // draft.listPosts = action.data;
+                draft.loadPostLoading = false;
+                draft.loadPostDone = true;
+                draft.mainPosts = action.data.concat(draft.mainPosts);
+                draft.hasMorePost = draft.mainPosts.length < 50;
                 break;
             case LIST_POST_FAILURE:
+
+                draft.loadPostLoading = false;
+                draft.loadPostError = action.data;
                 break;
             case UNLOAD_POST:
                 draft.currentPost = [];

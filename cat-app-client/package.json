@@ -2,7 +2,7 @@
     "name": "my-app",
     "version": "0.1.0",
     "private": true,
-    "proxy": "http://localhost:8080",
+    "proxy": "http://ec2-3-36-163-150.ap-northeast-2.compute.amazonaws.com:8080/",
     "dependencies": {
         "6": "^0.0.1",
         "@fortawesome/fontawesome-svg-core": "^1.2.35",

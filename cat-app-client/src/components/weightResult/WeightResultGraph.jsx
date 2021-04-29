@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const GraphContainer = styled.div`
     display: grid;
     margin: 0 auto;
-    max-width: 1200px;
+    //max-width: 1200px;
     width: 100%;
     height: 94vh;
     background-color: ${({ theme }) => theme.palette.navy};

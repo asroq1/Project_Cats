@@ -9,13 +9,12 @@ import CatsDelete from './CatsDelete';
 
 const CatsUpdateContainer = ({}) => {
     const {cat, currentIndex} = useSelector((state) => state.cat);
-    const currentCat =cat[currentIndex - 1];
 
     return (
         <>
 
-                <CatImageUpdate currentCat={currentCat}/>
-                <CatsUpdate currentCat={currentCat}/>
+                <CatImageUpdate cat={cat} currentIndex={currentIndex}/>
+                <CatsUpdate cat = {cat} currentIndex = {currentIndex}/>
                 <CatsDelete currentIndex={currentIndex}/>
         </>
     )
