@@ -45,8 +45,7 @@ const CommentForm = ({ id }) => {
         }
     }, [addCommentDone]);
 
-    const onSubmitComment = useCallback((e) => {
-        e.preventDefault();
+    const onSubmitComment = useCallback(() => {
         dispatch({
             type: ADD_COMMENT_REQUEST,
             data: { content: commentText, postId: id},
@@ -55,7 +54,7 @@ const CommentForm = ({ id }) => {
 
     return (
         <>
-            <form onFinish={onSubmitComment}>
+            <form onSubmit={onSubmitComment}>
                 <CommentFormWrapper>
                     <textarea
                         value={commentText}

@@ -102,7 +102,7 @@ function* listPost(action){
 
 
 function addCommentAPI(data){
-    return axios.post(`/api/comment?content=${data.content}&postId=${data.id}`);
+    return axios.post(`/api/comment?content=${data.content}&postId=${data.postId}`);
 }
 
 
@@ -111,7 +111,7 @@ function* addComment(action){
         const result= yield call(addCommentAPI, action.data);
         yield put({
             type: ADD_COMMENT_SUCCESS,
-            data: result.data,
+            //data:  //result가 void
         })
     } catch(err){
         yield put({

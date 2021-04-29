@@ -153,7 +153,7 @@ const reducer = (state = initialState, action) => {
                 // );
                 // post.Comments.unshift(action.data);
 
-                draft.currentPost.comments = draft.currentPost.comments.concat(action.data);
+                //draft.currentPost.comments = draft.currentPost.comments.concat(action.data);
                 draft.addCommentLoading = false;
                 draft.addCommentDone = true;
                 break;
@@ -165,7 +165,7 @@ const reducer = (state = initialState, action) => {
             case REMOVE_COMMENT_REQUEST:
                 break;
             case REMOVE_COMMENT_SUCCESS:
-                draft.mainPosts.Comments[
+                draft.mainPosts.comments[
                     action.data.i
                 ] = draft.mainPosts.Commments[action.data.i].filter(
                     (v) => v.key !== action.data.key

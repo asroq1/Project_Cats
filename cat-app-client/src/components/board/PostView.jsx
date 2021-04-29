@@ -2,7 +2,10 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import styled from 'styled-components';
+
 import CommentForm from './CommentForm';
+
+import CommentsWrapper from './CommentsWrapper'
 //import { REMOVE_COMMENT_REQUEST} from '../../reducers/post'
 
 const OverallContainer = styled.div`
@@ -41,30 +44,9 @@ const PostContent = styled.div`
     color: gray;
 `;
 
-const EachComment = styled.div`
-    padding-bottom: 1rem;
-    padding-top: 1rem;
-    & + & {
-        border-top: 1px dotted ${({ theme }) => theme.palette.green};
-    }
-`;
-
-const CommentWrapper = styled.div`
-    margin-top: 2rem;
-    font-size: 1rem;
-    color: gray;
-    h1 {
-        font-weight: bold;
-        text-decoration: underline;
-        margin-bottom: 1rem;
-    }
-    h3 {
-        font-weight: bold;
-        padding-bottom: 0.25rem;
-    }
-`;
-
+    
 const PostView = ({ post, error }) => {
+
     //에러 발생 시
     if (error) {
         if ((error.response && error.response.status) === 404) {
@@ -104,24 +86,7 @@ const PostView = ({ post, error }) => {
                 <PostContent>{content}</PostContent>
             </PostHead>
             <CommentForm id={id} />
-            <CommentWrapper>
-                <h1>댓글</h1>
-                <div>
-                    {comments.map((c, i) => (
-                        <EachComment key={c + i}>
-                            <div>
-                                <h3>{c.writer.nickname}</h3>
-                                <div>{c.content}</div>
-                            </div>
-                            {/* {comment.User == localStorage.currentUser && (
-                            <div>
-                                <button type="button" onClick={onRemoveComment(comment+i,i)}>삭제</button>
-                            </div>
-                        ) */}
-                        </EachComment>
-                    ))}
-                </div>
-            </CommentWrapper>
+            <CommentsWrapper comments= {comments} />
         </OverallContainer>
     );
 
