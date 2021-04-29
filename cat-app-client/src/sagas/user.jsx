@@ -81,7 +81,7 @@ function* logIn(action) {
 
         axios.defaults.headers.common[
             'Authorization'
-        ] = `Bearer${result.data.token}`;
+        ] = `Bearer ${result.data.token}`;
         yield put({
             type: LOG_IN_SUCCESS,
             data: {

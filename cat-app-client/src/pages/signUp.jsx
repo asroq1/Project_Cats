@@ -21,7 +21,6 @@ const SignupWrapper = styled.div`
 const TitleWrapper = styled.div`
     display: grid;
     align-items: end;
-
     position: relative; //추가
 `;
 
@@ -44,11 +43,8 @@ const ExitButton = styled.p`
     a{
         color: ${palette.navy}
     }
-<<<<<<< HEAD
-=======
     
 }
->>>>>>> develop
 `;
 // const DivideLine = styled.div`
 //     width: 30%;

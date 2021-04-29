@@ -14,7 +14,7 @@ const CatsAdd = ({}) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const {currImgUrl} = useSelector((state) => state.cat);
+    const {currImgUrl, addCatDone} = useSelector((state) => state.cat);
     const [name, onChangeName] = useInput('');
     const [birthyear, onChangeBirthYear] = useInput('');
     const [birthmonth, onChangeBirthMonth] = useInput('');
@@ -29,25 +29,24 @@ const CatsAdd = ({}) => {
             formData.append('birth', birthyear+"-"+birthmonth+"-"+birthdate);
             formData.append('gender',gender);
             // POST API가 id를 요구하기 때문
-            formData.append('id', uuidv4());
             formData.append('name',name);
             console.log(currImgUrl);
             formData.append('photo', currImgUrl);
 
-            // console.log("key")
-            // for (var key of formData.keys()){
-            //     console.log(key);
-            // }
+            console.log("key")
+            for (var key of formData.keys()){
+                console.log(key);
+            }
 
-            // console.log("value")
-            // for (var value of formData.values()){
-            //     console.log(value);
-            // }
+            console.log("value")
+            for (var value of formData.values()){
+                console.log(value);
+            }
 
-            // console.log("entry")
-            // for (var entry of formData.entries()){
-            //     console.log(entry);
-            // }
+            console.log("entry")
+            for (var entry of formData.entries()){
+                console.log(entry);
+            }
 
             dispatch({
                 type: SET_CURRENT_IMAGE,
@@ -58,9 +57,11 @@ const CatsAdd = ({}) => {
                 type: ADD_CAT_REQUEST,
                 data: formData,
             });
-            history.push('/user/main');
+            if (addCatDone){
+                history.push('/user/main');
+            }
         },
-        [currImgUrl, name, birthyear, birthmonth, birthdate, gender]
+        [currImgUrl, name, birthyear, birthmonth, birthdate, gender,addCatDone]
     );
 
     const goBack = useCallback(() => {
@@ -168,7 +169,7 @@ const CatsAdd = ({}) => {
                     {/* 버튼 */}
                     <CenterWrapper>
                         <ButtonWrapper onClick={goBack}  type="button">취소</ButtonWrapper>
-                        <ButtonWrapper htmlType="submit">등록</ButtonWrapper>
+                        <ButtonWrapper type="submit">등록</ButtonWrapper>
                     </CenterWrapper>
                 </form>
                 </InnerGlobal>
