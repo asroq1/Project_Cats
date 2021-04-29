@@ -49,7 +49,7 @@ function logInAPI(data) {
         axios
             // CORS 문제 해결에 따라 줄 변경
             //.post('/api/login', data)
-            .post('/api/login')
+            .post('/api/login', data)
             // .then((res) => {
             //     //     console.log(`res data: ${data}`);
             //     const { token } = res.data;

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef, useMemo } from 'react';
+import React, { useCallback, useState, useRef, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -63,11 +63,8 @@ const CatsUpdate = ({cat, currentIndex}) => {
                 type: UPDATE_CAT_REQUEST,
                 data: data,
             });
-            if (updateCatDone){
-                history.push('/user/main');
-            }
         },
-        [currImgUrl, name, birthyear, birthmonth, birthdate,gender, updateCatDone]
+        [currImgUrl, name, birthyear, birthmonth, birthdate,gender]
     );
 
     const goBack = useCallback(() => {
@@ -76,6 +73,13 @@ const CatsUpdate = ({cat, currentIndex}) => {
 
     const paddingStyle = useMemo(() => ({ paddingTop: '2rem' }), []);
     const marginTopStyle = useMemo(() =>({ marginTop: '0.5rem' }), []);
+
+    useEffect(() => {
+
+        if (updateCatDone){
+            history.push('/user/main');
+        }
+    }, [updateCatDone]);
 
     return (
         <>

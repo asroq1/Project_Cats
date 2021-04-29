@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -46,15 +46,20 @@ const CatsDelete = ({currentIndex}) => {
                 data: currentIndex,
             });
             
-            if(deleteCatDone){
-                history.push('/user/main');
-            }
-        }, [deleteCatDone]);
+            
+        }, []);
         
 
     const goBack = useCallback(() => {
         history.goBack();
     });
+
+
+    useEffect(() => {
+        if(deleteCatDone){
+            history.push('/user/main');
+        }
+    }, [deleteCatDone]);
 
     return (
         <>
