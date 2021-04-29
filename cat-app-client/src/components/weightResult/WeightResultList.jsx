@@ -4,13 +4,14 @@ import palette from '../../styles/palette';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
+import { deleteWeightRequestAction } from '../../reducers/cat';
 const ListContainer = styled.div`
     display: grid;
     margin: 0 auto;
     max-width: 1200px;
     width: 100%;
     height: 100%;
-    background-color: ${({theme})=>theme.palette.navy};
+    background-color: ${({ theme }) => theme.palette.navy};
 `;
 
 const DataContainer = styled.div`
@@ -25,19 +26,19 @@ const DataList = styled.div`
     justify-content: space-between;
     font-size: 1.5rem;
     padding: 1.2rem;
-    border-top: 1px solid ${({theme})=>theme.palette.borderColor};
+    border-top: 1px solid ${({ theme }) => theme.palette.borderColor};
 
     p:nth-child(1) {
         display: grid;
         align-items: center;
         font-size: 1rem;
-        color: ${({theme})=>theme.palette.white};
+        color: ${({ theme }) => theme.palette.white};
     }
 
     p:nth-child(2) {
         font-size: 2rem;
         font-weight: bold;
-        color: ${({theme})=>theme.palette.white};
+        color: ${({ theme }) => theme.palette.white};
     }
 `;
 const DeleteButton = styled.button`
@@ -131,7 +132,7 @@ const data = [
 const WeightResultTable = () => {
     const dispatch = useDispatch();
     const onDelete = (id) => {
-        dispatch(id);
+        dispatch(deleteWeightRequestAction(id));
     };
     const date = new Date().toLocaleDateString();
     // 연동하면 여기에서 바로 조회하면 끝

@@ -11,14 +11,14 @@ const initialState = {
                 nickname: '고양이제국만세',
             },
             title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content: '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
+            content:
+                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
             date: '2020-01-03',
 
             Images: [
                 {
                     id: shortId.generate(),
-                    src:
-                        'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
+                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
                 },
                 {
                     id: shortId.generate(),
@@ -38,8 +38,8 @@ const initialState = {
                     User: {
                         nickname: 'ㅇㅇ',
                     },
-                    content: '주인님을 사랑하고 공경하는 건 집사의 당연한 도리입니당',
-                    
+                    content:
+                        '주인님을 사랑하고 공경하는 건 집사의 당연한 도리입니당',
                 },
                 {
                     id: shortId.generate(),
@@ -47,7 +47,6 @@ const initialState = {
                         nickname: '저두용',
                     },
                     content: '동의합니당!',
-                    
                 },
             ],
         },
@@ -58,18 +57,17 @@ const initialState = {
                 nickname: '고양이제국만세',
             },
             title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content: '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
+            content:
+                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
             date: '2020-01-03',
             Images: [
                 {
                     id: shortId.generate(),
-                    src:
-                        'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
+                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
                 },
             ],
 
-            Comments: [
-            ],
+            Comments: [],
         },
         {
             _id: 3,
@@ -78,18 +76,17 @@ const initialState = {
                 nickname: '고양이제국만세',
             },
             title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content: '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
+            content:
+                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
             date: '2020-01-03',
             Images: [
                 {
                     id: shortId.generate(),
-                    src:
-                        'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
+                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
                 },
             ],
 
-            Comments: [
-            ],
+            Comments: [],
         },
         {
             _id: 4,
@@ -98,18 +95,17 @@ const initialState = {
                 nickname: '고양이제국만세',
             },
             title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content: '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
+            content:
+                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
             date: '2020-01-03',
             Images: [
                 {
                     id: shortId.generate(),
-                    src:
-                        'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
+                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
                 },
             ],
 
-            Comments: [
-            ],
+            Comments: [],
         },
         {
             _id: 5,
@@ -118,18 +114,17 @@ const initialState = {
                 nickname: '고양이제국만세',
             },
             title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content: '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
+            content:
+                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
             date: '2020-01-03',
             Images: [
                 {
                     id: shortId.generate(),
-                    src:
-                        'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
+                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
                 },
             ],
 
-            Comments: [
-            ],
+            Comments: [],
         },
         {
             _id: 6,
@@ -138,28 +133,27 @@ const initialState = {
                 nickname: '고양이제국만세',
             },
             title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content: '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
+            content:
+                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
             date: '2020-01-03',
             Images: [
                 {
                     id: shortId.generate(),
-                    src:
-                        'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
+                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
                 },
             ],
 
-            Comments: [
-            ],
+            Comments: [],
         },
     ],
     imagePaths: [],
     currentPost: null,
     listPosts: null,
     error: null,
-    
+
     addCommentLoading: false,
     addCommentDone: false,
-    addCommentError: null, 
+    addCommentError: null,
 };
 
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
@@ -194,9 +188,9 @@ export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
 export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
 
-export const REMOVE_COMMENT_REQUEST = 'REMOVE_COMMENT_REQUEST'
-export const REMOVE_COMMENT_SUCCESS = 'REMOVE_COMMENT_SUCCESS'
-export const REMOVE_COMMENT_FAILURE = 'REMOVE_COMMENT_FAILURE'
+export const REMOVE_COMMENT_REQUEST = 'REMOVE_COMMENT_REQUEST';
+export const REMOVE_COMMENT_SUCCESS = 'REMOVE_COMMENT_SUCCESS';
+export const REMOVE_COMMENT_FAILURE = 'REMOVE_COMMENT_FAILURE';
 
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 
@@ -213,13 +207,12 @@ export const readPost = (data) => ({
 export const listPost = (data) => ({
     type: LIST_POST_REQUEST,
     data,
-})
-
+});
 
 export const addComment = (data) => ({
     type: ADD_COMMENT_REQUEST,
     data,
-})
+});
 
 const reducer = (state = initialState, action) => {
     return produce(state, (draft) => {
@@ -271,11 +264,13 @@ const reducer = (state = initialState, action) => {
 
             case ADD_COMMENT_REQUEST:
                 draft.addCommentLoading = true;
-                draft.addCommentDone =  false;
-                draft.addCommentError =  null
+                draft.addCommentDone = false;
+                draft.addCommentError = null;
                 break;
-            case ADD_COMMENT_SUCCESS:                
-                const post = draft.mainPosts.find((v) => v.id === action.data.postId);
+            case ADD_COMMENT_SUCCESS:
+                const post = draft.mainPosts.find(
+                    (v) => v.id === action.data.postId
+                );
                 post.Comments.unshift(action.data);
                 draft.addCommentLoading = false;
                 draft.addCommentDone = true;
@@ -288,9 +283,11 @@ const reducer = (state = initialState, action) => {
             case REMOVE_COMMENT_REQUEST:
                 break;
             case REMOVE_COMMENT_SUCCESS:
-                draft.mainPosts.Comments[action.data.i] = draft.mainPosts.Commments[action.data.i].filter(
+                draft.mainPosts.Comments[
+                    action.data.i
+                ] = draft.mainPosts.Commments[action.data.i].filter(
                     (v) => v.key !== action.data.key
-                );    
+                );
                 break;
             case REMOVE_COMMENT_FAILURE:
                 break;

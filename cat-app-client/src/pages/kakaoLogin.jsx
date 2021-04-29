@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { signUpRequest } from '../reducers/user';
 
 const SignupBackground = styled.div`
-    background-color: ${({theme}) => theme.palette.beige};
+    background-color: ${({ theme }) => theme.palette.beige};
 `;
 
 const KakaoSignupContainer = styled.form`
@@ -15,7 +15,7 @@ const KakaoSignupContainer = styled.form`
     max-width: 1200px;
     width: 100%;
     height: 100vh;
-    background-color: ${({theme}) => theme.palette.beige};
+    background-color: ${({ theme }) => theme.palette.beige};
     button {
         margin: 0.5rem 0 0.5rem 0;
         height: 3rem;
@@ -28,7 +28,7 @@ const KakaoSignupContainer = styled.form`
         border: none;
     }
 
-    @media ${({theme}) => theme.width.mobile} {
+    @media ${({ theme }) => theme.width.mobile} {
         width: 85vw;
     }
 `;
@@ -38,20 +38,21 @@ const SignUpInput = styled.input`
     height: 1rem;
     font-size: 1rem;
     border-radius: 4px;
-    border-color: ${({theme}) => theme.palette.borderColor};
+    border-color: ${({ theme }) => theme.palette.borderColor};
     font-family: FontAwesome;
     padding: 1rem;
-    input::placeholder {
+
+    ::placeholder {
         text-align: right;
     }
-    background-color: ${({theme}) => theme.palette.inputColor};
+    background-color: ${({ theme }) => theme.palette.inputColor};
 `;
 const SubmitButton = styled.button`
     background: #f2cc8f;
     color: #fff;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${({theme}) => theme.palette.navy};
+    background-color: ${({ theme }) => theme.palette.navy};
 `;
 
 const ErrorMessages = styled.p`
@@ -69,6 +70,19 @@ const KakaLogin = () => {
     return (
         <SignupBackground>
             <KakaoSignupContainer onSubmit={handleSubmit(onSubmit)}>
+                <label>이메일</label>
+                <SignUpInput
+                    name="email"
+                    type="text"
+                    ref={register({ required: true, pattern: /^\S+@\S+$/i })}
+                    placeholder="&#xf0e0;"
+                />
+                {errors.email && (
+                    <ErrorMessages>
+                        올바른 이메일 양식을 입력해주세요.
+                    </ErrorMessages>
+                )}
+
                 <label>닉네임</label>
                 <SignUpInput
                     name="nickname"
