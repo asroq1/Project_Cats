@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @Api(value="회원 추가, 수정, 삭제, 조회", tags = {"회원 API"})
 @RequestMapping("/api")
@@ -38,6 +40,13 @@ public class UserController {
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<UserDto.Response> getMyUserInfo() {
         return ResponseEntity.ok(UserDto.Response.ofEntity(userService.getMyUserWithAuthorities().get()));
+    }
+
+    @ApiOperation("테스트를 위한 전체 회원 정보 확인 기능: 로그인 필요 없음")
+    @GetMapping("/users/")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<List<Response>> list() {
+        return ResponseEntity.ok(userService.list());
     }
 
     /*
