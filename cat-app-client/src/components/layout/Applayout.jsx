@@ -14,8 +14,9 @@ const Global = styled.div`
     background-color: ${({theme}) => theme.palette.beige};
     max-width: ${({theme}) => theme.width.mobile};
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0 auto;
+    position: relative;
 
     h2 {
         font-size: 1.5rem;

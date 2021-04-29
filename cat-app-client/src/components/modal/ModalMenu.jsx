@@ -10,7 +10,7 @@ const Overlay = styled.div`
     bottom: 0;
     left: 0;
     right: 0;
-    position: fixed;
+    position: absolute;
     z-index: 5000;
     padding: 3rem;
     color: ${({theme})=>theme.palette.beige};

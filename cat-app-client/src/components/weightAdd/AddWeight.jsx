@@ -13,7 +13,7 @@ const HeaderTitle = styled.span`
 
 const CarouselContainer = styled.div`
     max-width: 100%;
-    height: 95vh;
+    height: 90vh;
     //추가
     overflow-x: hidden;
     // overflow-y: auto;
@@ -149,10 +149,10 @@ const SubmitButton = styled.button`
 `;
 const AddWeight = () => {
     const [alone, setAlone] = useState('');
-    const [togepther, setTogether] = useState(0);
+    const [together, setTogether] = useState(0);
     const weightResult = together - alone;
     const nextRef = useRef(null);
-    const dispatch = useDisatch();
+    const dispatch = useDispatch();
     const date = new Date();
 
     const today = date.toLocaleString();
