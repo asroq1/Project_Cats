@@ -64,8 +64,8 @@ const CommentWrapper = styled.div`
     }
 `;
 
-const PostView = ({ post, error, loading }) => {
-    const dispatch = useDispatch();
+const PostView = ({ post, error }) => {
+    
     //에러 발생 시
     if (error) {
         if ((error.response && error.response.status) === 404) {
@@ -74,12 +74,7 @@ const PostView = ({ post, error, loading }) => {
         return <h2>에러가 발생했습니다.</h2>;
     }
 
-    // 로딩 중이거나 포스트 데이터 없을 때
-    // if (loading || !post){
-    if (!post) {
-        return <h2>로딩중</h2>;
-    }
-    const { title, content, writer, createdDate, comments } = post;
+    const { id, title, content, writer, createdDate, comments } = post;
 
     // const onRemoveComment = useCallback(
     //     (key, i)=> () =>{
@@ -107,7 +102,7 @@ const PostView = ({ post, error, loading }) => {
                 </SubInfo>
                 <PostContent>{content}</PostContent>
             </PostHead>
-            <CommentForm post={post} />
+            <CommentForm id= {id} />
             <CommentWrapper>
                 <h1>댓글</h1>
                 <div>

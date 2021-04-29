@@ -14,6 +14,7 @@ const PostList = () => {
             type: LIST_POST_REQUEST,
         })
     }, []);
+    
 
     // useEffect(() => {
     //     function onScroll(){

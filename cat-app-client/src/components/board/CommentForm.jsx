@@ -32,9 +32,8 @@ const CommentSubmitButton = styled.button`
     font-size: 1rem;
 `;
 
-const CommentForm = ({ post }) => {
-    const id = localStorage.currentUser;
-    const { addCommentDone, addCommentLoading } = useSelector(
+const CommentForm = ({ id }) => {
+    const { addCommentDone } = useSelector(
         (state) => state.post
     );
     const dispatch = useDispatch();
@@ -46,12 +45,13 @@ const CommentForm = ({ post }) => {
         }
     }, [addCommentDone]);
 
-    const onSubmitComment = useCallback(() => {
+    const onSubmitComment = useCallback((e) => {
+        e.preventDefault();
         dispatch({
             type: ADD_COMMENT_REQUEST,
-            data: { content: commentText, postId: post.id, userId: id },
+            data: { content: commentText, postId: id},
         });
-    }, [commentText, id]);
+    }, [commentText]);
 
     return (
         <>
@@ -66,8 +66,7 @@ const CommentForm = ({ post }) => {
                 </CommentFormWrapper>
 
                 <CommentSubmitButton
-                    type="primary"
-                    htmlType="submit"
+                    type="submit"
                     // loading ={addCommentLoading}
                 >
                     달기

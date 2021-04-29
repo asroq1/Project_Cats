@@ -99,17 +99,19 @@ function* listPost(action){
     }
 }
 
-function addCommentAPI(page){
-    return axios.get(`/api/post/${page}`);
+
+
+function addCommentAPI(data){
+    return axios.post(`/api/comment?content=${data.content}&postId=${data.id}`);
 }
 
 
 function* addComment(action){
     try {
-        //const result= yield call(listPostAPI, action.data);
+        const result= yield call(addCommentAPI, action.data);
         yield put({
             type: ADD_COMMENT_SUCCESS,
-            data: action.data,
+            data: result.data,
         })
     } catch(err){
         yield put({

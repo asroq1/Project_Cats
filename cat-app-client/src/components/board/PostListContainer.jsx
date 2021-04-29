@@ -12,10 +12,12 @@ const PostListContainer = ({ location, match }) => {
     const dispatch = useDispatch();
     const { mainPosts, listPostLoading, listPostError } = useSelector((state) => state.post);
 
+    
+    
     return (
         <>
         <OverallPostsLayout>  
-            <PostList loading={listPostLoading} error={listPostError} posts={mainPosts} />
+            <PostList loading={listPostLoading} error={listPostError} posts={mainPosts}  />
         </OverallPostsLayout>
         </>
     );

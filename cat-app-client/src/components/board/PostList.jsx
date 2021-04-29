@@ -108,18 +108,17 @@ const PostItem = ({ post }) => {
 
     const dispatch = useDispatch();
 
-    
     const setCurrentPost = useCallback((id)=>{
         dispatch({
             type: READ_POST_REQUEST,
             data: id,
 
         })
-    })
+    }, []);
 
     return (
         <StyledLink to={`/post/view/${id}`}>
-            <PostItemBlock onClick={setCurrentPost(id)}>
+            <PostItemBlock onClick={() => setCurrentPost(post.id)}>
             {/* {"id": 1,
             "title": "눈누난나",
             "viewCount": 0,
@@ -157,6 +156,9 @@ const PostList = ({ posts, loading, error }) => {
     if (error) {
         return <h2>에러 발생함</h2>;
     }
+
+    
+
     return (
         <>
             {/* 로딩 중 아니고 포스트 배열 존재할 때만 */}
