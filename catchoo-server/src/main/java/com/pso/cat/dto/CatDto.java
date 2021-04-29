@@ -25,10 +25,10 @@ public class CatDto {
 
         public Cat toEntity() {
             return Cat.builder()
-                .name(this.getName())
-                .gender(this.getGender())
-                .photo(this.getPhoto())
-                .birth(this.getBirth()).build();
+                .name(name)
+                .gender(gender)
+                .photo(photo)
+                .birth(birth).build();
         }
 
     }

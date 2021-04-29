@@ -57,7 +57,7 @@ public class CatController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity remove(Long id) {
+    public ResponseEntity remove(@PathVariable Long id) {
         catService.remove(id);
         return ResponseEntity.ok().build();
     }
