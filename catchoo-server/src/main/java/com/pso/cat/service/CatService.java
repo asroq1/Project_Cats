@@ -35,6 +35,7 @@ public class CatService {
     public Cat modify(Long id, CatDto.Request catRequest) {
         Cat cat = catRequest.toEntity();
         cat.setId(id);
+        cat.setState(1);
         return catRepository.save(cat);
     }
 

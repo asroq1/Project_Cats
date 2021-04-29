@@ -50,14 +50,14 @@ public class CatController {
         return ResponseEntity.ok().body(catService.read(id));
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity modify(@PathVariable Long catId, @RequestBody CatDto.Request catRequest) {
-        catService.modify(catId, catRequest);
+    @PatchMapping
+    public ResponseEntity modify(Long id, CatDto.Request cat) {
+        catService.modify(id, cat);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity remove(Long id) {
+    public ResponseEntity remove(@PathVariable Long id) {
         catService.remove(id);
         return ResponseEntity.ok().build();
     }

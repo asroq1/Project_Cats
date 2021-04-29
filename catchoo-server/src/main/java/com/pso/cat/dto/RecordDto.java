@@ -11,10 +11,14 @@ public class RecordDto {
     @Setter
     @Getter
     public static class Request {
+        private Long catId;
         private float weight;
 
         public Record toEntity() {
-            return Record.builder().weight(this.getWeight()).build();
+            return Record.builder()
+                    .catId(this.getCatId())
+                    .weight(this.getWeight())
+                    .build();
         }
     }
 
