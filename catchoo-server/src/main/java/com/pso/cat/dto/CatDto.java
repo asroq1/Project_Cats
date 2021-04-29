@@ -16,7 +16,7 @@ public class CatDto {
     @Getter
     @Setter
     public static class Request {
-        
+
         private String name;
         private char gender;
         private String photo;

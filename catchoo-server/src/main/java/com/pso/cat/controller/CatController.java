@@ -50,9 +50,9 @@ public class CatController {
         return ResponseEntity.ok().body(catService.read(id));
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity modify(@PathVariable Long catId, @RequestBody CatDto.Request catRequest) {
-        catService.modify(catId, catRequest);
+    @PatchMapping
+    public ResponseEntity modify(Long id, CatDto.Request cat) {
+        catService.modify(id, cat);
         return ResponseEntity.ok().build();
     }
 
