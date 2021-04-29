@@ -64,7 +64,8 @@ const OverallPostsLayout = ({ children }) => {
                     <i onClick={onModalMenu} className="fa fa-bars"></i>
                     {showModalMenu && (
                         <ModalMenu
-                            userNickname={'어쩌구 저쩌궁'}
+
+                            
                             onClose={onModalClose}
                         />
                     )}

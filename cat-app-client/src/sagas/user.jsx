@@ -8,6 +8,7 @@ import {
     delay,
 } from 'redux-saga/effects';
 
+
 import {
     LOG_OUT_FAILURE,
     LOG_OUT_REQUEST,
@@ -18,6 +19,9 @@ import {
     SIGN_UP_FAILURE,
     SIGN_UP_REQUEST,
     SIGN_UP_SUCCESS,
+    GET_USER_REQUEST,
+    GET_USER_SUCCESS,
+    GET_USER_FAILURE,
 } from '../reducers/user';
 
 import axios from 'axios';
@@ -65,8 +69,8 @@ function logInAPI(data) {
             //     localStorage.setItem('token', token);
             // })
     );
-    return axios.post('/api/login', data);
 }
+
 // 2 call은 동기 await역할 fork는 비동기
 function* logIn(action) {   
     try {
@@ -82,12 +86,15 @@ function* logIn(action) {
         axios.defaults.headers.common[
             'Authorization'
         ] = `Bearer ${result.data.token}`;
+        
         yield put({
             type: LOG_IN_SUCCESS,
             data: {
                 data: result.data,
             },
         });
+        
+            
     } catch (err) {
         console.log('사가 로그인 에러', err);
         yield put({
@@ -95,6 +102,7 @@ function* logIn(action) {
             error: err,
         });
     }
+    
 }
 
 function logOutAPI() {
@@ -121,6 +129,28 @@ function* logOut() {
     }
 }
 
+function getUserAPI(){
+    return axios.get('/api/user');
+}
+
+function* getUser(){
+    try {
+        const result = yield call(getUserAPI);
+
+        yield put({
+            type: GET_USER_SUCCESS,
+            data: result.data
+        
+        })
+    } catch (err) {
+        yield put({
+            type: GET_USER_FAILURE,
+            error: err,
+        });
+    }
+    
+}
+
 // signup 후 login된 상태로 홈페이지에 가기 위함
 function* goToHome() {
     const history = yield getContext('history');
@@ -140,9 +170,14 @@ function* watchSignUp() {
     yield takeLatest(SIGN_UP_REQUEST, signUp);
 }
 
+function* watchGetUser() {
+
+    yield takeLatest(GET_USER_REQUEST, getUser);
+}
+
 export default function* userSaga() {
     yield all(
-        [fork(watchLogIn), fork(watchLogOut), fork(watchSignUp)],
+        [fork(watchLogIn), fork(watchLogOut), fork(watchSignUp), fork(watchGetUser)],
         fork(goToHome)
     );
 }

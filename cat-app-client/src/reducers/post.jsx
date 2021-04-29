@@ -3,8 +3,7 @@ import produce from 'immer';
 import shortId from 'shortid';
 
 const initialState = {
-    mainPosts: [
-    ],
+    mainPosts:[],  
     imagePaths: [],
     currentPost: null,
     //listPosts: null,
@@ -17,6 +16,11 @@ const initialState = {
     readPostLoading: false,
     readPostDone: false,
     readPostError:null,
+
+    
+    addPostLoading:false,
+    addPostDone: false,
+    addPostError: null,
 
     listPostLoading: false,
     listPostDone: false,
@@ -92,12 +96,20 @@ const reducer = (state = initialState, action) => {
     return produce(state, (draft) => {
         switch (action.type) {
             case ADD_POST_REQUEST:
+                draft.addPostLoading = true;
+                draft.addPostDone = false;
+                draft.addPostError = null;
                 break;
             case ADD_POST_SUCCESS:
                 draft.mainPosts.unshift(action.data);
                 draft.imagePaths = [];
+
+                draft.addPostLoading = false;
+                draft.addPostDone = true;
                 break;
             case ADD_POST_FAILURE:
+                draft.addPostLoading = false;
+                draft.addPostErrror = action.data;    
                 break;
             case READ_POST_REQUEST:
 

@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import {useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
 import palette from '../../styles/palette';
 import styled from 'styled-components';
@@ -63,9 +64,14 @@ const NightModeWrapper = styled.div`
 const NightWrapper = styled.button`
     background: ${({ theme }) => theme.light.mainBackground};
 `;
-const ModalMenu = ({ userNickname, onClose }) => {
+
+const ModalMenu = ({ onClose }) => {
     //나중에 redux 상태 만들어줄 것
     const [isNightMode, setNightMode] = useState(false);
+
+
+
+    const { me } = useSelector((state)=>state.user);
 
     const toggleNightMode = useCallback(() => {
         setNightMode(!isNightMode);
@@ -79,7 +85,7 @@ const ModalMenu = ({ userNickname, onClose }) => {
                 </h3>
                 <h1>
                     {' '}
-                    <i className="fa fa-black-tie"></i> {userNickname} 집사님,{' '}
+                    <i className="fa fa-black-tie"></i> {me.nickname} 집사님,{' '}
                     <br />
                     안녕하세요!
                 </h1>

@@ -12,19 +12,15 @@ import {
 } from '../reducers/post';
 
 function addPostAPI(data){
-    return axios.post('/api/post', data)
+    return axios.post('/api/posts', data)
 }
 
 function* addPost(action){
     try{
-        //const result = yield call(addPostAPI,action.data);
-        const id = shortId.generate();
+        const result = yield call(addPostAPI,action.data);
         yield put({
             type: ADD_POST_SUCCESS,
-            data: {
-                id,
-                content: action.data
-            }
+            data: result.data
         });
         // yield put({
         //     type: ADD_POST_TO_ME,

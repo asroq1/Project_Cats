@@ -112,7 +112,7 @@ const PostForm = () => {
     const [text, onChangeText, setText] = useInput('');
 
     // 게시판에 올리는 사진들은 redux에서 상태 관리
-    const { imagePaths } = useSelector((state) => state.post);
+    const { addPostDone, imagePaths } = useSelector((state) => state.post);
 
     // 이미지 올리는 input은 숨기고, 버튼을 input과 연결하기 위함
     const onClickImageUpload = useCallback(() => {
@@ -190,14 +190,22 @@ const PostForm = () => {
             for (var entry of formData.entries()){
                 console.log(entry);
             }
-            return dispatch({
+            dispatch({
                 type: ADD_POST_REQUEST,
                 data: formData,
             });
+
+            
         },
         [text, imagePaths]
     );
 
+    useEffect(() =>{
+        if(addPostDone){
+            history.push('/post/list');
+        }
+    },[addPostDone]);
+    
     return (
         <>
             <OverallPostsLayout>
