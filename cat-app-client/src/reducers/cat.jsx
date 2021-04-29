@@ -12,30 +12,45 @@ export const initialState = {
     getWeightDone: false,
     getWeighError: null,
 
+    addCatLoading: false,
+    addCatDone: false,
+    addCatError: null,
+
+    deleteCatLoading: false,
+    deleteCatDone: false,
+
+    deleteCatError: null,
+
+
+    updateCatLoading: false,
+    updateCatDone: false,
+    updateCatError: null,
+
+
     catWeight: null,
     user: {
         isLoggedIn: true,
         user: 1,
     },
     cat: [
-        {
-            cat_id: 0,
-            user_id: 1,
-            name: 'Garfield',
-            gender: 'M',
-            Photo: {
-                file: '',
-                url:
-                    'https://welovekitties.com/wp-content/uploads/2015/12/cutekittenspictures-145124821648lcp.jpg',
-            },
-            birth: '2020-02-28',
-            Record: [
-                {
-                    cdt: '2021-03-30',
-                    wgt: 3.1,
-                },
-            ],
-        },
+        // {
+        //     cat_id: 0,
+        //     user_id: 1,
+        //     name: 'Garfield',
+        //     gender: 'M',
+        //     Photo: {
+        //         file: '',
+        //         url:
+        //             'https://welovekitties.com/wp-content/uploads/2015/12/cutekittenspictures-145124821648lcp.jpg',
+        //     },
+        //     birth: '2020-02-28',
+        //     Record: [
+        //         {
+        //             cdt: '2021-03-30',
+        //             wgt: 3.1,
+        //         },
+        //     ],
+        // },
     ],
     isLoading: true,
     currentIndex: 1,
@@ -213,31 +228,55 @@ const reducer = (state = initialState, action) => {
                 draft.isLoading = true;
                 break;
             case GET_CAT_SUCCESS:
-                draft.cat = draft.cat;
+                draft.cat = action.data;
+                draft.currentIndex = action.data[0].id;
                 draft.isLoading = false;
                 break;
             case GET_CAT_FAILURE:
                 break;
             case ADD_CAT_REQUEST:
+                draft.addCatLoading = true;
+                draft.addCatDone = false;
+                draft.addCatError = null;
                 break;
             case ADD_CAT_SUCCESS:
+                draft.addCatLoading = false;
                 draft.cat = draft.cat.concat(action.data);
+                draft.addCatDone = true;
                 break;
             case ADD_CAT_FAILURE:
+                draft.addCatLoading = false;
+                draft.addCatError = action.data;
                 break;
             case DELETE_CAT_REQUEST:
+                draft.deleteCatLoading = true;
+                draft.deleteCatDone = false;
+                draft.deleteCatError = null;
                 break;
             case DELETE_CAT_SUCCESS:
                 draft.cat = draft.cat.filter((v) => v.id !== action.data);
+                draft.deleteCatLoading = false;
+                draft.deleteCatDone = true;
+                draft.currentIndex = draft.cat[0].id;
                 break;
             case DELETE_CAT_FAILURE:
+
+
+
+                draft.deleteCatLoading = false;
+                draft.deleteCatError = action.data;
                 break;
             case UPDATE_CAT_REQUEST:
+                draft.updateCatLoading = true;
+                draft.updateCatDone = false;
+                draft.updateCatError = null;
                 break;
             case UPDATE_CAT_SUCCESS:
                 draft.cat[draft.currentIndex - 1] = action.data;
+                draft.updateCatDone = true;
                 break;
             case UPDATE_CAT_FAILURE:
+                draft.updateCatError = action.data;
                 break;
             case ADD_WEIGHT_REQUEST:
                 draft.addWeightLoading = true;

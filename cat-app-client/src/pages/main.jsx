@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo,useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import TopBar from '../components/main/TopBar';
 import MainComponent from '../components/main/Main';
@@ -13,8 +14,12 @@ const Main = () => {
     const { cat } = useSelector((state) => state.cat);
     const { isLoading } = useSelector((state) => state.cat);
     const { currentIndex } = useSelector((state) => state.cat);
+
+    const { logInDone } = useSelector((state) => state.user);
     
     const dispatch = useDispatch();
+
+    const history = useHistory();
     
     const onSelect = useCallback((index) => {
         dispatch({
@@ -26,7 +31,8 @@ const Main = () => {
     const today = new Date();
     
     const getAge = useCallback(()=>{
-        const currentCat = cat[currentIndex - 1];
+        const currentCat = cat.find((v) => v.id === currentIndex)
+
         const [birthYear, birthMonth, birthDate] = currentCat.birth.split("-");
                 let ageYear = today.getFullYear() - parseInt(birthYear);
                 let ageMonth =today.getMonth()+1 -parseInt(birthMonth);
@@ -43,9 +49,11 @@ const Main = () => {
     },[cat]);
     
     useEffect(()=>{
+        if (!logInDone){
+            history.push('/');
+        }
         dispatch({
             type: GET_CAT_REQUEST,
-            data: localStorage.currentUser
         })
     },[]);
 

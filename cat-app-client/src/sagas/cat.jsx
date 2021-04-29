@@ -24,8 +24,8 @@ import {
 
 // 해당 유저의 모든 고양이 정보 받아오기
 // 이 부분은 논의할 것 - 로그인할 때 그냥 다 불러와도 됨
-function getCatAPI(data) {
-    return axios.get(`http://localhost:8080/api/cats`);
+function getCatAPI() {
+    return axios.get('/api/cats');
 }
 
 function* getCat(action) {
@@ -36,7 +36,6 @@ function* getCat(action) {
         const result = yield call(getCatAPI);
         yield put({
             type: GET_CAT_SUCCESS,
-            //data: result.data,
             data: result.data,
         });
     } catch (err) {
@@ -60,6 +59,7 @@ function* addCat(action) {
             type: ADD_CAT_SUCCESS,
             data: result.data,
         });
+        
     } catch (err) {
         yield put({
             type: ADD_CAT_FAILURE,
@@ -68,13 +68,15 @@ function* addCat(action) {
     }
 }
 
-function deleteCatAPI(data) {
-    return axios.delete('/api/cats/{id}', data);
+
+function deleteCatAPI(id) {
+    return axios.delete(`/api/cats/{id}?id=${id}`);
 }
+
 
 function* deleteCat(action) {
     try {
-        //const result = yield call(deleteCatAPI, action.data);
+        const result = yield call(deleteCatAPI, action.data);
         yield put({
             type: DELETE_CAT_SUCCESS,
             data: action.data,
@@ -88,7 +90,7 @@ function* deleteCat(action) {
 }
 
 function updateCatAPI(data) {
-    return axios.patch('/api/cat', data);
+    return axios.patch(`/api/cats/${data.id}`, data.data);
 }
 
 function* updateCat(action) {

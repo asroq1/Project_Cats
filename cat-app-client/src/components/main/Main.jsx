@@ -91,7 +91,7 @@ const Main = ({ cat, currentIndex, age }) => {
         () => ({ width:'80%', textAlign:'center',marginTop: '1.5em', padding: '0' }),
         []
     );
-    const currentCat = cat[currentIndex - 1];
+    const currentCat = cat.find((v) => v.id === currentIndex)
 
     return (
         <InnerGlobal>

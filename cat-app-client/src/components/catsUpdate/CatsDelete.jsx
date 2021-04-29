@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { DELETE_CAT_REQUEST } from '../../reducers/cat';
@@ -35,18 +35,22 @@ const CatsDelete = ({currentIndex}) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const { deleteCatDone } = useSelector((state) => state.cat);
+
     // 버튼 누르면 정보 전달
     const onClick = useCallback(
         (e) => {
-            //e.preventDefault();
+            e.preventDefault();
             dispatch({
                 type: DELETE_CAT_REQUEST,
                 data: currentIndex,
             });
-            history.push('/user/main');
-        },
-        []
-    );
+            
+            if(deleteCatDone){
+                history.push('/user/main');
+            }
+        }, [deleteCatDone]);
+        
 
     const goBack = useCallback(() => {
         history.goBack();
