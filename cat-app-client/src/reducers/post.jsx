@@ -6,8 +6,6 @@ const initialState = {
     mainPosts:[],  
     imagePaths: [],
     currentPost: null,
-    //listPosts: null,
-    error: null,
 
     addCommentLoading: false,
     addCommentDone: false,
@@ -17,10 +15,17 @@ const initialState = {
     readPostDone: false,
     readPostError:null,
 
-    
     addPostLoading:false,
     addPostDone: false,
     addPostError: null,
+
+    udpatePostLoading:false,
+    updatePostDone: false,
+    updatePostError: null,
+
+    removePostLoading: false,
+    removePostDone: false,
+    removePostError: null,
 
     listPostLoading: false,
     listPostDone: false,
@@ -101,7 +106,7 @@ const reducer = (state = initialState, action) => {
                 draft.addPostError = null;
                 break;
             case ADD_POST_SUCCESS:
-                draft.mainPosts.unshift(action.data);
+                //draft.mainPosts.unshift(action.data);
                 draft.imagePaths = [];
 
                 draft.addPostLoading = false;
@@ -112,14 +117,13 @@ const reducer = (state = initialState, action) => {
                 draft.addPostErrror = action.data;    
                 break;
             case READ_POST_REQUEST:
-
                 draft.readPostLoading = true;
-
                 draft.readPostDone = false;
                 draft.readPostError = null;
                 break;
             case READ_POST_SUCCESS:
                 draft.currentPost = action.data;
+                draft.updatePostDone = false;
                 // draft.imagePaths = draft.currentPost.images;
                 break;
             case READ_POST_FAILURE:
@@ -133,6 +137,7 @@ const reducer = (state = initialState, action) => {
                 draft.listPostDone = true;
                 draft.mainPosts = action.data;
                 draft.hasMorePost = draft.mainPosts.length < 50;
+                draft.removePostDone = false;
                 break;
             case LIST_POST_FAILURE:
                 draft.listPostLoading = false;
@@ -142,22 +147,37 @@ const reducer = (state = initialState, action) => {
                 draft.currentPost = null;
                 break;
             case UPDATE_POST_REQUEST:
+                draft.updatePostLoading = true;
+                draft.updatePostDone= false;
+                draft.updatePostError = null;
                 break;
             case UPDATE_POST_SUCCESS:
                 // draft.mainPosts.find(
                 //     (v) => v.id === action.data.PostId
                 // ).content = action.data.content;
+                draft.updatePostLoading = false;
+                draft.updatePostDone = true;
                 break;
             case UPDATE_POST_FAILURE:
+                
+                draft.updatePostLoading = false;
+                draft.updatePostError = action.data;
                 break;
             case REMOVE_POST_REQUEST:
+                draft.removePostLoading = true;
+                draft.removePostDone = false;
+                draft.removePostError = null;
                 break;
             case REMOVE_POST_SUCCESS:
                 // draft.mainPosts = draft.mainPosts.filter(
                 //     (v) => v.id !== action.data.PostId
                 // );
+                draft.removePostLoading = false;
+                draft.removePostDone= true;
                 break;
             case REMOVE_POST_FAILURE:
+                draft.removePostLoading = false;
+                draft.removePostError = action.data;
                 break;
 
             case ADD_COMMENT_REQUEST:
@@ -171,7 +191,7 @@ const reducer = (state = initialState, action) => {
                 // );
                 // post.Comments.unshift(action.data);
 
-                //draft.currentPost.comments = draft.currentPost.comments.concat(action.data);
+                draft.currentPost.comments.unshift(action.data);
                 draft.addCommentLoading = false;
                 draft.addCommentDone = true;
                 break;

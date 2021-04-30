@@ -24,20 +24,26 @@ const CommentSubmitButton = styled.button`
     position: absolute;
     right: 0;
     bottom: -40;
-
     border: none;
-    background-color: lightgray;
     border-radius: 10px;
 
-    font-size: 1rem;
+    background-color:  lightgray;
+     
+
+    //font-size: 1rem;
+    padding: 0.5rem;
+
+    cursor: pointer;
 `;
 
 const CommentForm = ({ id }) => {
-    const { addCommentDone } = useSelector(
-        (state) => state.post
-    );
+    const { addCommentDone } = useSelector((state) => state.post);
+    const {me} = useSelector((state) => state.user);
+
+    
     const dispatch = useDispatch();
     const [commentText, onChangeCommentText, setCommentText] = useInput('');
+
 
     useEffect(() => {
         if (addCommentDone) {
@@ -45,10 +51,12 @@ const CommentForm = ({ id }) => {
         }
     }, [addCommentDone]);
 
-    const onSubmitComment = useCallback(() => {
+    const onSubmitComment = useCallback((e) => {
+        e.preventDefault();
         dispatch({
             type: ADD_COMMENT_REQUEST,
-            data: { content: commentText, postId: id},
+            // API와 연동 위해 추가 작업
+            data: { content: commentText, postId: id, writer: {nickname: me.nickname}},
         });
     }, [commentText]);
 

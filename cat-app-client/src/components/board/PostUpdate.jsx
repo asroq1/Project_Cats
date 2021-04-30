@@ -103,9 +103,9 @@ const PreviewBox = styled.div`
     }
 `;
 
-const PostUpdate = ({match}) => {
 
-    const { currentPost } = useSelector((state) => state.post);
+const PostUpdate = ({match, location}) => {
+    const { updatePostDone } = useSelector((state) => state.post);
     const { postId } = match.params;
 
     const dispatch = useDispatch();
@@ -119,12 +119,19 @@ const PostUpdate = ({match}) => {
     }, [postId]);
 
 
+    useEffect(()=>{
+        if (updatePostDone){
+            history.push(`/post/view/${postId}`)
+        }
+    },[updatePostDone]);
+
     const imageInput = useRef();
     const history=useHistory();
 
     // 각 form 내용은 useState이용한 커스텀 훅으로 관리
-    const [title, onChangeTitle] =useInput(currentPost.title);
-    const [text, onChangeText] = useInput(currentPost.content);
+    const [title, onChangeTitle] =useInput(location.state.originalTitle);
+    const [text, onChangeText] =  useInput(location.state.originalContent);
+
 
     // 게시판에 올리는 사진들은 redux에서 상태 관리
     const { imagePaths } = useSelector((state) => state.post);

@@ -9,7 +9,7 @@ import OverallPostsLayout from '../board/OverallPostsLayout';
 import PostList from './PostList';
 
 const PostListContainer = ({ location, match }) => {
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     const { mainPosts, listPostLoading, listPostError } = useSelector((state) => state.post);
 
     

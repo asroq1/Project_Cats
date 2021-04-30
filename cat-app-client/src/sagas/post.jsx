@@ -20,7 +20,7 @@ function* addPost(action){
         const result = yield call(addPostAPI,action.data);
         yield put({
             type: ADD_POST_SUCCESS,
-            data: result.data
+            // data: result.data  // API에서 아무 것도 반환되지 않음
         });
         // yield put({
         //     type: ADD_POST_TO_ME,
@@ -35,16 +35,19 @@ function* addPost(action){
     }
 }
 
-function removePostAPI(data){
-    return axios.delete('/api/post', data);
+function removePostAPI(id){
+
+    return axios.delete(`api/posts/{id}?id=${id}`);
 }
 
 function* removePost(action){
     try {
-        //const result = yield call(addPostAPI, action.data);
+        
+        const result = yield call(removePostAPI, action.data);
+        console.log(result)
         yield put({
             type: REMOVE_POST_SUCCESS,
-            data: action.data, //여기에 id 포함
+            //data: action.data, 
         })
         // yield put({
         //     type: REMOVE_POST_FROM_ME,
@@ -83,7 +86,7 @@ function updatePostAPI(id){
 
 function* updatePost(action){
     try {
-        const result = yield call(listPostAPI,action.data);
+        const result = yield call(updatePostAPI,action.data);
         yield put({
             type: UPDATE_POST_SUCCESS,
             data: result.data
@@ -118,16 +121,19 @@ function* listPost(action){
 
 
 function addCommentAPI(data){
+    
     return axios.post(`/api/comment?content=${data.content}&postId=${data.postId}`);
 }
 
 
 function* addComment(action){
     try {
+        //console.log(`/api/comment?content=${action.data.content}&postId=${action.data.postId}`)
         const result= yield call(addCommentAPI, action.data);
+
         yield put({
             type: ADD_COMMENT_SUCCESS,
-            //data:  //result가 void
+            data: action.data
         })
     } catch(err){
         yield put({

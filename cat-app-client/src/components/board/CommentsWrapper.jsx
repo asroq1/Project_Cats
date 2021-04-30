@@ -28,7 +28,12 @@ const CommentsLayout = styled.div`
 const CommentsWrapper = ({comments}) => {
     return (
         <CommentsLayout>
-            <h1>댓글</h1>
+            
+            
+            
+            
+            
+            <h1>{comments.length>0?'댓글':''}</h1>
             <div>
                 {comments.map((c, i) => (
                     <EachComment key={c + i}>

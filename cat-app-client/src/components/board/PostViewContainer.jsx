@@ -29,12 +29,12 @@ const PostViewContainer = ({ match }) => {
             data: parseInt(postId),
         });
 
-        // //언마운트 시 리덕스에서 포스트 데이터 없애기
-        // return () => {
-        //     dispatch({
-        //         type: UNLOAD_POST,
-        //     });
-        // };
+        //언마운트 시 리덕스에서 포스트 데이터 없애기
+        return () => {
+            dispatch({
+                type: UNLOAD_POST,
+            });
+        };
     }, [dispatch, postId]);
 
     return (
@@ -42,7 +42,7 @@ const PostViewContainer = ({ match }) => {
             <OverallPostsLayout>
                 <PostViewBody>
                     {/* <ImageCarousel images={currentPost.Images} /> */}
-                    <PostView post={currentPost} error={readPostError} />
+                    <PostView postId={parseInt(postId)}post={currentPost} error={readPostError} />
                 </PostViewBody>
             </OverallPostsLayout>
         </>

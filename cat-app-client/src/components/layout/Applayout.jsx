@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const BodyWrapper = styled.div`
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
+    background-size: 100% 100%;
     //background-color: ${({theme}) => theme.palette.orange};
 	//animation: gradient 30s ease infinite;
     width: 100%;
