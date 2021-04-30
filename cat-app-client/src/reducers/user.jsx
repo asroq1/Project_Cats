@@ -15,7 +15,6 @@ export const initialState = {
     token: null,
     signUpData: {},
     loginData: {},
-    user: null,
 };
 
 // 기본적인 액션 이름들
@@ -32,6 +31,10 @@ export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
+
+export const GET_USER_REQUEST = 'GET_USER_REQUEST';
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+export const GET_USER_FAILURE = 'GET_USER_FAILURE';
 
 //백엔드 연동 전
 //더미데이터
@@ -113,6 +116,12 @@ export const signUpFailure = (data) => {
     };
 };
 
+// export const getUserRequest = () => {
+//     return {
+//         type: GET_USER_REQUEST,
+//     };
+// };
+
 //Reducer
 // 이전 상태를 액션을 통해 다음 상태로 만들어내는 함수(불변성 유지)
 
@@ -168,6 +177,16 @@ const reducer = (state = initialState, action) =>
                 draft.signUpLoading = false;
                 draft.signUpDone = false;
                 draft.signUpError = action.error;
+                break;
+
+            case GET_USER_REQUEST:
+                break;
+            case GET_USER_SUCCESS:
+            
+                draft.me = action.data;
+                break;
+            
+            case GET_USER_FAILURE:
                 break;
 
             default:

@@ -104,7 +104,6 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
                     <i className="fa fa-cog" onClick={onModalMenu}></i>
                     {showModalMenu && (
                         <ModalMenu
-                            userNickname={'어쩌궁 저쩌궁'}
                             onClose={onModalClose}
                         />
                     )}
