@@ -1,6 +1,13 @@
 
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
+import {useSelector,useDispatch} from 'react-redux';
 import styled from 'styled-components'
+
+
+
+
+
+import { REMOVE_COMMENT_REQUEST, GET_COMMENTS_REQUEST} from  '../../reducers/post'
 
 const EachComment = styled.div`
     padding-bottom: 1rem;
@@ -25,7 +32,29 @@ const CommentsLayout = styled.div`
     }
 `;
 
-const CommentsWrapper = ({comments}) => {
+const CommentsWrapper = ({postId}) => {
+    
+    const {me} = useSelector((state) => state.user)
+    const {currentPost} = useSelector((state) => state.post)
+    
+    const dispatch=useDispatch();
+    const onRemoveComment = useCallback(
+        
+        (commentId)=> () =>{
+            dispatch({
+                type: REMOVE_COMMENT_REQUEST,
+                
+                data: commentId
+                })
+    }, []);
+
+    useEffect(()=> {
+        dispatch({
+            type: GET_COMMENTS_REQUEST,
+            data: postId
+        })
+    }, [currentPost])
+    
     return (
         <CommentsLayout>
             
@@ -33,19 +62,23 @@ const CommentsWrapper = ({comments}) => {
             
             
             
-            <h1>{comments.length>0?'댓글':''}</h1>
+            
+            <h1>{currentPost.comments.length>0?'댓글':''}</h1>
             <div>
-                {comments.map((c, i) => (
-                    <EachComment key={c + i}>
+                {currentPost.comments.map((c, i) => (
+                    <EachComment key={c.content + i}>
                         <div>
                             <h3>{c.writer.nickname}</h3>
                             <div>{c.content}</div>
                         </div>
-                        {/* {comment.User == localStorage.currentUser && (
+                        {c.writer.nickname == me.nickname && c.id && (
                         <div>
-                            <button type="button" onClick={onRemoveComment(comment+i,i)}>삭제</button>
+                            {/* 새로 만든 댓글은 삭제 못한다는 단점 있음 (id값 서버에서 불러와야 하기 때문) */}
+                            {/* 리로드해야 가능 */}
+                            <button type="button" onClick={onRemoveComment(c.id)}>삭제</button>
                         </div>
-                    ) */}
+                    )
+                    }
                     </EachComment>
                 ))}
             </div>

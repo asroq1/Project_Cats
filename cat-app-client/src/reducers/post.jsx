@@ -70,6 +70,10 @@ export const REMOVE_COMMENT_REQUEST = 'REMOVE_COMMENT_REQUEST';
 export const REMOVE_COMMENT_SUCCESS = 'REMOVE_COMMENT_SUCCESS';
 export const REMOVE_COMMENT_FAILURE = 'REMOVE_COMMENT_FAILURE';
 
+export const GET_COMMENTS_REQUEST = 'GET_COMMENTS_REQUEST';
+export const GET_COMMENTS_SUCCESS = 'GET_COMMENTS_SUCCESS';
+export const GET_COMMENTS_FAILURE = 'GET_COMMENTS_FAILURE';
+
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 
 export const addPost = (data) => ({
@@ -96,6 +100,7 @@ export const addComment = (data) => ({
     type: ADD_COMMENT_REQUEST,
     data,
 });
+
 
 const reducer = (state = initialState, action) => {
     return produce(state, (draft) => {
@@ -203,14 +208,19 @@ const reducer = (state = initialState, action) => {
             case REMOVE_COMMENT_REQUEST:
                 break;
             case REMOVE_COMMENT_SUCCESS:
-                draft.mainPosts.comments[
-                    action.data.i
-                ] = draft.mainPosts.Commments[action.data.i].filter(
-                    (v) => v.key !== action.data.key
-                );
+                // draft.currentPost.comments = draft.currentPost.commments.filter(
+                //     (v) => v.id !== action
+                // );
                 break;
             case REMOVE_COMMENT_FAILURE:
                 break;
+            case GET_COMMENTS_REQUEST:
+                break;
+            case GET_COMMENTS_SUCCESS:
+                break;
+            case GET_COMMENTS_FAILURE:
+                break;
+            
             case UPLOAD_IMAGES_REQUEST:
                 break;
             case UPLOAD_IMAGES_SUCCESS:

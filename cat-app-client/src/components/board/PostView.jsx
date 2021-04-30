@@ -107,17 +107,7 @@ const PostView = ({ postId, post, error }) => {
 
     
     const { id, title, content, writer, createdDate, comments } = post;
-    // const onRemoveComment = useCallback(
-    //     (key, i)=> () =>{
-    //         dispatch({
-    //             type: REMOVE_COMMENT_REQUEST,
-    //             data: {
-    //                 key: key,
-    //                 i: i
-    //             }
-    //         })
-    // }, []);
-            
+     
     return (
         <OverallContainer>
             <h1 onClick={goBack}><i className = "fa fa-arrow-left"></i> 전체게시글 </h1>
@@ -148,10 +138,9 @@ const PostView = ({ postId, post, error }) => {
                 </ButtonWrapper>
             </PostHead>
             <CommentForm id={id} />
-            <CommentsWrapper comments= {comments} />
+            <CommentsWrapper postId={id} />
         </OverallContainer>
     );
-
 };
 
 export default PostView;

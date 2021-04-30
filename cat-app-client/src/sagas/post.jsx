@@ -9,6 +9,9 @@ import {
     UPDATE_POST_REQUEST, UPDATE_POST_SUCCESS,UPDATE_POST_FAILURE,
     LIST_POST_REQUEST,LIST_POST_SUCCESS, LIST_POST_FAILURE,
     ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE,
+    REMOVE_COMMENT_REQUEST, REMOVE_COMMENT_SUCCESS, REMOVE_COMMENT_FAILURE,
+
+    GET_COMMENTS_REQUEST, GET_COMMENTS_SUCCESS, GET_COMMENTS_FAILURE,
 } from '../reducers/post';
 
 function addPostAPI(data){
@@ -119,9 +122,7 @@ function* listPost(action){
 }
 
 
-
 function addCommentAPI(data){
-    
     return axios.post(`/api/comment?content=${data.content}&postId=${data.postId}`);
 }
 
@@ -143,6 +144,56 @@ function* addComment(action){
     }
 }
 
+function removeCommentAPI(id){
+    return axios.delete(`/api/comment/{id}?id=${id}`);
+}
+
+function* removeComment(action){
+    try {
+
+        const result= yield call(removeCommentAPI, action.data);
+        console.log(result);
+
+        yield put({
+            type: REMOVE_COMMENT_SUCCESS,
+            data: action.data
+        })
+    } catch(err){
+        yield put({
+            type: REMOVE_COMMENT_FAILURE,
+            data: err.response.data
+
+
+        })
+    }
+};
+
+function getPostCommentsAPI(postId){
+    return axios.delete(`/api/comment/${postId}`);
+}
+
+function* getPostComments(action){
+    try {
+
+        const result= yield call(getPostCommentsAPI, action.data);
+        console.log(result);
+
+        yield put({
+            type: GET_COMMENTS_SUCCESS,
+            data: result.data
+        })
+    } catch(err){
+        yield put({
+            
+            
+            type: GET_COMMENTS_FAILURE,
+            data: err.response.data
+
+
+        })
+    }
+};
+ 
 function* watchAddPost(){
     yield takeLatest(ADD_POST_REQUEST, addPost);
 }
@@ -168,6 +219,18 @@ function* watchAddComment(){
     yield takeLatest(ADD_COMMENT_REQUEST,addComment);
 }
 
+function* watchGetComments(){
+    yield takeLatest(GET_COMMENTS_REQUEST, getPostComments);
+}
+
+
+function* watchRemoveComment(){
+
+
+    
+    yield takeLatest(REMOVE_COMMENT_REQUEST, removeComment);
+}
+
 export default function* postSaga(){
     yield all([
         fork(watchAddPost),   
@@ -176,5 +239,7 @@ export default function* postSaga(){
         fork(watchUpdatePost),
         fork(watchListPost),
         fork(watchAddComment),
+        fork(watchRemoveComment),
+        fork(watchGetComments)
     ]);
 }
