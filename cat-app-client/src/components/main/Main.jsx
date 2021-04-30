@@ -3,11 +3,19 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 import 'font-awesome/css/font-awesome.min.css';
-import palette from '../../styles/palette';
 
 //코드 너무 장황해지니
 //필요 딱히 없는 건 나중에 지워주기
 //짧은 건 useMemo로 넣어줌
+const InnerGlobal = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+    margin: 0;
+    padding: 0;
+`;
 const GeneralWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -29,7 +37,7 @@ const PhotoContainer = styled.div`
     align-items: center;
     .fa-paw {
         font-size: 10rem;
-        color: ${palette.beige};
+        color: ${({theme}) => theme.palette.beige};
     }
 `;
 
@@ -41,7 +49,7 @@ const ButtonWrapper = styled.button`
     border-radius: 5px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${palette.navy};
+    background-color: ${({theme}) => theme.palette.navy};
     color:white;
     cursor: pointer;
     border: 1px solid black;
@@ -80,17 +88,13 @@ const Main = ({ cat, currentIndex, age }) => {
         []
     );
     const paddingStyle = useMemo(
-        () => ({ marginTop: '1.5em', padding: '0.5rem  1.75rem' }),
-        []
-    );
-    const boldStyle = useMemo(
-        () => ({ fontWeight: 'bold', padding: '0.25rem' }),
+        () => ({ width:'80%', textAlign:'center',marginTop: '1.5em', padding: '0' }),
         []
     );
     const currentCat = cat[currentIndex - 1];
 
     return (
-        <>
+        <InnerGlobal>
             <GeneralWrapper>
                 <div style={paddingStyle}>
                     {age[0]}년 {age[1]}개월 |{' '}
@@ -145,7 +149,7 @@ const Main = ({ cat, currentIndex, age }) => {
                     <ButtonWrapper>이전 데이터 보기</ButtonWrapper>
                 </Link>
             </div>
-        </>
+        </InnerGlobal>
     );
 };
 

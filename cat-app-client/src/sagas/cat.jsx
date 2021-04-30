@@ -54,7 +54,6 @@ function addCatAPI(data) {
 
 function* addCat(action) {
     try {
-        
         const result = yield call(addCatAPI, action.data);
         yield put({
             type: ADD_CAT_SUCCESS,
@@ -125,7 +124,7 @@ function* addWeight(action) {
 }
 
 function deleteWeightAPI(data) {
-    return axios.post(`api/records/id`, data);
+    return axios.delete(`api/records/{id}`, data);
 }
 function* deleteWeight(action) {
     try {

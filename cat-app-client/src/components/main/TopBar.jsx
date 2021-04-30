@@ -5,8 +5,6 @@ import ModalMenu from '../modal/ModalMenu';
 import styled from 'styled-components';
 import 'font-awesome/css/font-awesome.min.css';
 
-import palette from '../../styles/palette'
-
 const InnerGlobal = styled.div`
     a {
         color: ${({theme}) => theme.palette.beige};
@@ -30,15 +28,15 @@ const EachCol = styled.div`
     font-weight: bold;
     flex: auto;
     background-color: ${(props) =>
-        props.active ? palette.beige : palette.navy};
+        props.active ? ({theme})=>theme.palette.beige : ({theme})=>theme.palette.navy};
     &: hover {
         background-color: ${(props) =>
-            props.active ? palette.beige : 'black'};
+            props.active ? ({theme})=>theme.palette.beige : 'black'};
     }
     &:not(:last-child) {
         max-width: 150px;
         justify-content: center;
-        color: ${(props) => (props.active ? 'black' : palette.beige)};
+        color: ${(props) => (props.active ? 'black' : ({theme})=>theme.palette.beige)};
         border-radius: 5px 5px 0 0;
         border: 1px solid ${(props) => (props.active ? 'lightgray' : 'black')};
         border-bottom: ${(props) =>

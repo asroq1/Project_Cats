@@ -13,7 +13,7 @@ const Header = styled.header`
     top: 0;
     background: #f2cc8f;
     margin: 0 auto;
-    max-width: 1200px;
+    //max-width: 1200px;
     width: 100%;
     height: 6vh;
     background-color: ${({theme}) => theme.palette.beige};

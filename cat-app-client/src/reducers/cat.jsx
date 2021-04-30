@@ -1,13 +1,16 @@
 import product, { produce } from 'immer';
 
 export const initialState = {
-    addWeightRequest: false,
-    addWeightSuccess: false,
-    addWeightFailure: null,
+    addWeightLoading: false,
+    addWeightDone: false,
+    addWeightError: null,
+    deleteWeightLoading: false,
+    deleteWeightDone: false,
+    deleteWeightError: null,
 
-    getWeightSuccess: false,
-    getWeightFailure: false,
-    getWeighRequest: false,
+    getWeightLoading: false,
+    getWeightDone: false,
+    getWeighError: null,
 
     catWeight: null,
     user: {
@@ -237,19 +240,36 @@ const reducer = (state = initialState, action) => {
             case UPDATE_CAT_FAILURE:
                 break;
             case ADD_WEIGHT_REQUEST:
+                draft.addWeightLoading = true;
+                draft.addWeightDone = false;
+                draft.addWeightError = null;
                 break;
             case ADD_WEIGHT_SUCCESS:
+                draft.addWeightLoading = false;
+                draft.addWeightDone = true;
+                draft.cat.Record.wgt.concat(action.data);
                 break;
             case ADD_WEIGHT_FAILURE:
+                draft.addWeightLoading = false;
+                draft.addWeightDone = false;
+                draft.addWeightError = null;
                 break;
             case DELETE_WEIGHT_REQUEST:
-                draft.cat = draft.cat.filter((v) => v.id !== action.data);
+                draft.deleteWeightDone = false;
+                draft.deleteWeightLoading = true;
+                draft.deleteWeightError = null;
+                // draft.draft.cat = draft.cat.filter((v) => v.id !== action.data);
                 break;
             case DELETE_WEIGHT_SUCCESS:
+                draft.deleteWeightDone = true;
+                draft.deleteWeightLoading = false;
+                draft.cat.Record.wgt.filter((v) => v.id !== action.data);
                 break;
             case DELETE_WEIGHT_FAILURE:
+                draft.deleteWeightLoading = false;
+                draft.deleteWeightDone = false;
+                draft.deleteWeightError = null;
                 break;
-
             case SET_CURRENT_CAT:
                 draft.currentIndex = action.data;
                 break;
