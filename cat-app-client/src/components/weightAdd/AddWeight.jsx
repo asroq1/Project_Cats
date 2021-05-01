@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { addWeightRequestAction } from '../../reducers/cat';
 import palette from '../../styles/palette';
@@ -154,7 +154,7 @@ const AddWeight = () => {
     const nextRef = useRef(null);
     const dispatch = useDispatch();
     const date = new Date();
-
+    const { currentIndex } = useSelector((state) => state.cat);
     const today = date.toLocaleString();
 
     const onTogetherChange = (e) => {
@@ -192,8 +192,9 @@ const AddWeight = () => {
             } else {
                 alert('등록완료');
                 const body = {
-                    wgt: weightResult,
-                    createdDate: today,
+                    weight: weightResult,
+                    id: currentIndex,
+                    // createdDate: today,
                 };
                 dispatch(addWeightRequestAction(body));
             }

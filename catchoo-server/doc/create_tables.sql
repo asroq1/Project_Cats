@@ -57,6 +57,7 @@ CREATE TABLE cat
     `state`     INT            NOT NULL    DEFAULT 1 COMMENT '활성상태',
     `cdt`       DATETIME       NOT NULL    DEFAULT now() COMMENT '등록일',
     `goal_wgt`  FLOAT          NULL        COMMENT '목표체중',
+    `rct_wgt`   FLOAT          NULL        COMMENT '최근체중',
     CONSTRAINT PRIMARY KEY (cat_id)
 );
 

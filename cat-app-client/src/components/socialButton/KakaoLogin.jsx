@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
+import { loginRequestAction } from '../../reducers/user';
 // import styles from '../../styles/KakaoLogin.module.css';
 
 const KakaoButton = styled.button`
@@ -15,7 +17,7 @@ const KakaoButton = styled.button`
     font-weight: bold;
     border: none;
     height: 48px;
-    // @media ${({theme}) => theme.width.mobile} {
+    // @media ${({ theme }) => theme.width.mobile} {
     //     width: 49%;
     //     font-size: 0.8rem;
     // }
@@ -24,41 +26,71 @@ const KakaoButton = styled.button`
 const KakaoLogo = styled.img`
     width: 15%;
     height: 40px;
-
 `;
 const KakaoLogin = () => {
+    const dispatch = useDispatch();
     const history = useHistory();
     const { Kakao } = window;
 
     const onKakaoLogin = () => {
+        // Kakao.Auth.login({
+        //     success: function (authObj) {
+        //         //여기에 백엔드 주소 넣어주기
+        //         fetch(
+        //             'http://ec2-3-36-163-150.ap-northeast-2.compute.amazonaws.com:8080/api/login',
+        //             {
+        //                 method: 'POST',
+        //                 body: JSON.stringify({
+        //                     access_token: authObj.access_token,
+        //                 }),
+        //                 type: 'kakao',
+        //                 headers: {
+        //                     'Content-Type': 'application/json',
+        //                     Accept: 'application/json',
+        //                 },
+        //             }
+        //         )
+        //             .then((res) => res.json())
+        //             .then((res) => {
+        //                 localStorage.setItem('Kakao_token', res.token);
+        //                 // 현재 백에서 토큰이 안날라오는듯
+        //                 // if (res.token) {
+        //                 history.push('/user/signup/kakao');
+        //                 // }
+        //             });
+        //         console.log(authObj);
+        //     },
+        //     fail: function (err) {
+        //         console.log('백엔드가 없어용');
+        //         alert(JSON.stringify(err));
+        //     },
+        // });
         Kakao.Auth.login({
+            scope: 'profile, account_email',
             success: function (authObj) {
-                //여기에 백엔드 주소 넣어주기
-                fetch('http://localhost:8080/api/signup', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        access_token: authObj.access_token,
-                    }),
-                    type: 'kakao',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Accept: 'application/json',
+                console.log(`계정 정보:${authObj}`);
+                Kakao.API.request({
+                    url: '/v2/user/me',
+                    data: {
+                        property_keys: [
+                            'kakao_account.email',
+                            'kakao_account.profile',
+                        ],
                     },
-                })
-                    .then((res) => res.json())
-                    .then((res) => {
-                        localStorage.setItem('Kakao_token', res.token);
-                        // 현재 백에서 토큰이 안날라오는듯
-                        // if (res.token) {
-                        history.push('/user/signup/kakao');
-                        // }
-                    });
-
-                console.log(authObj);
-            },
-            fail: function (err) {
-                console.log('백엔드가 없어용');
-                alert(JSON.stringify(err));
+                    success: function (response) {
+                        console.log(response.kakao_account.email);
+                        console.log(response.kakao_account.profile.nickname);
+                        const loginType = 'kakao';
+                        const email = response.kakao_account.email;
+                        const nickname =
+                            response.kakao_account.profile.nickname;
+                        const data = { email, nickname, loginType };
+                        dispatch(loginRequestAction(data));
+                    },
+                    fail: function (error) {
+                        console.log(error);
+                    },
+                });
             },
         });
     };

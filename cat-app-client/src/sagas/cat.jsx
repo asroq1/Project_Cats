@@ -24,6 +24,7 @@ import {
     GET_WEIGHT_SUCCESS,
     GET_WEIGHT_FAILURE,
 } from '../reducers/cat';
+import { useSelector } from 'react-redux';
 
 // 해당 유저의 모든 고양이 정보 받아오기
 // 이 부분은 논의할 것 - 로그인할 때 그냥 다 불러와도 됨
@@ -62,7 +63,6 @@ function* addCat(action) {
             type: ADD_CAT_SUCCESS,
             data: result.data,
         });
-        
     } catch (err) {
         yield put({
             type: ADD_CAT_FAILURE,
@@ -71,12 +71,10 @@ function* addCat(action) {
     }
 }
 
-
 function deleteCatAPI(id) {
     
     return axios.delete(`/api/cats/${id}`);
 }
-
 
 function* deleteCat(action) {
     try {
@@ -94,7 +92,8 @@ function* deleteCat(action) {
 }
 
 function updateCatAPI(data) {
-    return axios.patch('/api/cats/', data);
+    console.log(`data ID = ${data.id}`);
+    return axios.patch(`/api/cats/${data.id}`, data.data);
 }
 
 function* updateCat(action) {
@@ -113,14 +112,19 @@ function* updateCat(action) {
 }
 
 function addCatWeightAPI(data) {
-    return axios.post('http://localhost:8080/api/records', data);
+    console.log(`id`, data);
+    return axios.post(`/api/records?catId=${data.id}&weight=${data.weight}`);
 }
 function* addWeight(action) {
     try {
-        const result = yield call(addCatWeightAPI, action.data);
+        yield call(addCatWeightAPI, action.data);
+        // console.log('action', action);
+        // console.log('action data', action.data);
+        // console.log('result', result);
+        // console.log('result.data.weight', result.data.weight);
         yield put({
             type: ADD_WEIGHT_SUCCESS,
-            data: result.data,
+            data: action.data,
         });
     } catch (err) {
         yield put({

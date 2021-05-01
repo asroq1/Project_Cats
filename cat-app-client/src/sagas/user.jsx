@@ -8,7 +8,6 @@ import {
     delay,
 } from 'redux-saga/effects';
 
-
 import {
     LOG_OUT_FAILURE,
     LOG_OUT_REQUEST,
@@ -49,52 +48,23 @@ function* signUp(action) {
 }
 
 function logInAPI(data) {
-    return (
-        axios
-            // CORS 문제 해결에 따라 줄 변경
-            //.post('/api/login', data)
-            .post('/api/login', data)
-            // .then((res) => {
-            //     //     console.log(`res data: ${data}`);
-            //     const { token } = res.data;
-            //     axios.defaults.headers.common[
-            //         'Authorization'
-            //     ] = `Bearer${token}`;
-
-            //     //     // 현재 유저 아이디만 로컬 스토리지에 저장
-            //     //     const { id } = jwt.decode(token);
-            //     //     //CORS 문제 해결에 따라 아래 두 줄 중 하나 사용
-            //     //     localStorage.setItem('currentUser', id);
-            //     //     //localStorage.setItem('currentUser', 1);
-            //     localStorage.setItem('token', token);
-            // })
-    );
+    return axios.post('/api/login', data);
 }
 
 // 2 call은 동기 await역할 fork는 비동기
-function* logIn(action) {   
+function* logIn(action) {
     try {
         const result = yield call(logInAPI, action.data);
-        //localStorage.setItem('currentUser', 1);
-        // console.log(`result data (이거 확인): ${result.data}`);
-
-        // const { token } = result.data;
-        // axios.defaults.headers.common[
-        //     'Authorization'
-        // ] = `Bearer${token}`;
-
         axios.defaults.headers.common[
             'Authorization'
         ] = `Bearer ${result.data.token}`;
-        
+
         yield put({
             type: LOG_IN_SUCCESS,
             data: {
                 data: result.data,
             },
         });
-        
-            
     } catch (err) {
         console.log('사가 로그인 에러', err);
         yield put({
@@ -102,7 +72,6 @@ function* logIn(action) {
             error: err,
         });
     }
-    
 }
 
 function logOutAPI() {
@@ -129,26 +98,24 @@ function* logOut() {
     }
 }
 
-function getUserAPI(){
+function getUserAPI() {
     return axios.get('/api/user');
 }
 
-function* getUser(){
+function* getUser() {
     try {
         const result = yield call(getUserAPI);
 
         yield put({
             type: GET_USER_SUCCESS,
-            data: result.data
-        
-        })
+            data: result.data,
+        });
     } catch (err) {
         yield put({
             type: GET_USER_FAILURE,
             error: err,
         });
     }
-    
 }
 
 // signup 후 login된 상태로 홈페이지에 가기 위함
@@ -171,13 +138,17 @@ function* watchSignUp() {
 }
 
 function* watchGetUser() {
-
     yield takeLatest(GET_USER_REQUEST, getUser);
 }
 
 export default function* userSaga() {
     yield all(
-        [fork(watchLogIn), fork(watchLogOut), fork(watchSignUp), fork(watchGetUser)],
+        [
+            fork(watchLogIn),
+            fork(watchLogOut),
+            fork(watchSignUp),
+            fork(watchGetUser),
+        ],
         fork(goToHome)
     );
 }
