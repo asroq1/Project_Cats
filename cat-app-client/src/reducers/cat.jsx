@@ -231,6 +231,8 @@ const reducer = (state = initialState, action) => {
             case GET_CAT_SUCCESS:
                 draft.cat = action.data;
                 draft.currentIndex = action.data[0].id;
+                draft.addCatDone = false;
+                draft.updateCatDone = false;
                 draft.isLoading = false;
                 break;
             case GET_CAT_FAILURE:

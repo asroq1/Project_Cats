@@ -73,7 +73,8 @@ function* addCat(action) {
 
 
 function deleteCatAPI(id) {
-    return axios.delete(`/api/cats/{id}?id=${id}`);
+    
+    return axios.delete(`/api/cats/${id}`);
 }
 
 
@@ -93,7 +94,7 @@ function* deleteCat(action) {
 }
 
 function updateCatAPI(data) {
-    return axios.patch(`/api/cats/${data.id}`, data.data);
+    return axios.patch('/api/cats/', data);
 }
 
 function* updateCat(action) {
@@ -101,7 +102,7 @@ function* updateCat(action) {
         const result = yield call(updateCatAPI, action.data);
         yield put({
             type: UPDATE_CAT_SUCCESS,
-            data: result.data,
+            data: action.data,
         });
     } catch (err) {
         yield put({

@@ -89,7 +89,7 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
             <div style={menuStyle}>
                 {cat.map((el) => (
                     <EachCol
-                        key={el.id}
+                        key={el.id + el.name}
                         active={currentIndex === el.id}
                         onClick={() => onSelect(el.id)}
                         id={el.id}

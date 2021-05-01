@@ -30,14 +30,10 @@ const CatsUpdate = ({cat, currentIndex}) => {
             const formData = new FormData();
             formData.append('birth', birthyear+"-"+birthmonth+"-"+birthdate);
             formData.append('gender',gender);
+            formData.append('id', parseInt(currentIndex));
             formData.append('name',name);
             console.log(currImgUrl);
             formData.append('photo', currImgUrl);
-
-            const data = {
-                id: currentIndex,
-                data: formData,
-            }
 
             console.log("key")
             for (var key of formData.keys()){
@@ -61,7 +57,7 @@ const CatsUpdate = ({cat, currentIndex}) => {
 
             dispatch({
                 type: UPDATE_CAT_REQUEST,
-                data: data,
+                data: formData,
             });
         },
         [currImgUrl, name, birthyear, birthmonth, birthdate,gender]

@@ -71,7 +71,7 @@ const CommentsWrapper = ({postId}) => {
     
     return (
         <CommentsLayout>
-            <h1>{currentComments?'댓글':''}</h1>
+            <h1>{currentComments.length>0?'댓글':''}</h1>
             <div>
                 {currentComments && currentComments.map((c, i) => (
                     <EachComment key={c.content + i}>
