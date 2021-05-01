@@ -22,6 +22,8 @@ Built with [React + Redux + Redux-Saga] + [Spring Boot + MariaDB]
 - Whether it be to show off your cat's beauty or to ask questions, this app is here for you! <br />
 
 ## Tech Stack
+![Catchoo_Tech_Stack](./cat-app-client/public/readMeImg/Catchoo_tech_stack.png)
+
 - Front-end: React + Redux (State Management) + Redux-Saga (Async Actions Management)
 - Back-end: SpringBoot + MariaDB
 
