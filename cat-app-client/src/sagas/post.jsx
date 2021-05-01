@@ -169,7 +169,7 @@ function* removeComment(action){
 };
 
 function getPostCommentsAPI(postId){
-    return axios.delete(`/api/comment/${postId}`);
+    return axios.get(`/api/comment/${postId}`);
 }
 
 function* getPostComments(action){

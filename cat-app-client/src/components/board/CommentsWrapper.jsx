@@ -1,5 +1,5 @@
 
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import styled from 'styled-components'
 
@@ -15,7 +15,16 @@ const EachComment = styled.div`
     & + & {
         border-top: 1px dotted ${({ theme }) => theme.palette.green};
     }
-`;
+
+    button {
+        margin-left: 0.75rem;
+        padding: 0.25rem;
+
+        border: none;
+        border-radius: 10px;
+        background-color: lightgray;
+    }
+    `;
 
 const CommentsLayout = styled.div`
     margin-top: 2rem;
@@ -35,12 +44,14 @@ const CommentsLayout = styled.div`
 const CommentsWrapper = ({postId}) => {
     
     const {me} = useSelector((state) => state.user)
-    const {currentPost} = useSelector((state) => state.post)
+    const { addCommentDone, removeCommentDone, currentComments} = useSelector((state) => state.post)
+
     
     const dispatch=useDispatch();
     const onRemoveComment = useCallback(
         
         (commentId)=> () =>{
+        
             dispatch({
                 type: REMOVE_COMMENT_REQUEST,
                 
@@ -48,37 +59,32 @@ const CommentsWrapper = ({postId}) => {
                 })
     }, []);
 
+    // Whenever any change happens (comment added / deleted)
+    // Call GET_COMMENTS_REQUEST
+    // And re-render Comments
     useEffect(()=> {
         dispatch({
             type: GET_COMMENTS_REQUEST,
             data: postId
         })
-    }, [currentPost])
+    }, [addCommentDone, removeCommentDone])
     
     return (
         <CommentsLayout>
-            
-            
-            
-            
-            
-            
-            <h1>{currentPost.comments.length>0?'댓글':''}</h1>
+            <h1>{currentComments?'댓글':''}</h1>
             <div>
-                {currentPost.comments.map((c, i) => (
+                {currentComments && currentComments.map((c, i) => (
                     <EachComment key={c.content + i}>
                         <div>
-                            <h3>{c.writer.nickname}</h3>
+                            <h3>{c.writer.nickname}
+                                {c.writer.nickname == me.nickname && c.id && (
+                                <button type="button" onClick={onRemoveComment(c.id)}>댓글 삭제</button>
+                            
+                                )}    
+                                </h3>
                             <div>{c.content}</div>
                         </div>
-                        {c.writer.nickname == me.nickname && c.id && (
-                        <div>
-                            {/* 새로 만든 댓글은 삭제 못한다는 단점 있음 (id값 서버에서 불러와야 하기 때문) */}
-                            {/* 리로드해야 가능 */}
-                            <button type="button" onClick={onRemoveComment(c.id)}>삭제</button>
-                        </div>
-                    )
-                    }
+
                     </EachComment>
                 ))}
             </div>

@@ -56,7 +56,8 @@ const CommentForm = ({ id }) => {
         dispatch({
             type: ADD_COMMENT_REQUEST,
             // API와 연동 위해 추가 작업
-            data: { content: commentText, postId: id, writer: {nickname: me.nickname}},
+            // 댓글 추가할 때마다 댓글 부분 reload되도록 처리
+            data: { content: commentText, postId: id},
         });
     }, [commentText]);
 

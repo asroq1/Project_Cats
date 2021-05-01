@@ -6,10 +6,21 @@ const initialState = {
     mainPosts:[],  
     imagePaths: [],
     currentPost: null,
+    currentComments: [],
 
     addCommentLoading: false,
     addCommentDone: false,
     addCommentError: null,
+
+    getCommentsLoading: false,
+
+    getCommentsDone: false,
+    getCommentsError:null,
+
+
+    removeCommentLoading: false,
+    removeCommentDone: false,
+    removeCommentError: null,
 
     readPostLoading: false,
     readPostDone: false,
@@ -196,7 +207,12 @@ const reducer = (state = initialState, action) => {
                 // );
                 // post.Comments.unshift(action.data);
 
-                draft.currentPost.comments.unshift(action.data);
+                // draft.currentPost.comments.unshift(action.data);
+                // 어차피 댓글 전체를 다시 불러오는 식으로 설계돼서
+                // 아래와 같은 코드 필요 x
+                
+                
+                // draft.currentComments.unshift(action.data);
                 draft.addCommentLoading = false;
                 draft.addCommentDone = true;
                 break;
@@ -206,19 +222,42 @@ const reducer = (state = initialState, action) => {
                 break;
 
             case REMOVE_COMMENT_REQUEST:
+                draft.removeCommentLoading = true;
+                draft.removeCommentDone = false;
                 break;
             case REMOVE_COMMENT_SUCCESS:
                 // draft.currentPost.comments = draft.currentPost.commments.filter(
                 //     (v) => v.id !== action
                 // );
+                // 어차피 댓글 전체를 불러오는 식으로 구성되어서
+                // 아래와 같은 코드 필요 x
+                // draft.currentComments = draft.currentComments.filter((v) => v.id == action.data);
+                
+                draft.removeCommentLoading = false;
+                draft.removeCommentDone = true;
                 break;
             case REMOVE_COMMENT_FAILURE:
+                draft.removeCommentLoading = false;
+                draft.removeCommentError = action.data;
                 break;
             case GET_COMMENTS_REQUEST:
+                // 댓글 변화가 게시글 내의 댓글 (GET /api/posts/{id} 시 반환되는)에는 반영이 현재 되지 않아
+                // 댓글 부분은 현재 게시글과 따로 구현 (GET /api/comment/{postId})
+                draft.currentComments =[];    
+                draft.getCommentsLoading = true;
+                draft.getCommentsDone = false;
+                draft.getCommentsError = null;
                 break;
             case GET_COMMENTS_SUCCESS:
+                
+            
+                draft.currentComments = action.data;
+                draft.getCommentsLoading = false;
+                draft.getCommentsDone = true;
                 break;
             case GET_COMMENTS_FAILURE:
+                draft.getCommentsLoading = false;
+                draft.getCommentsError = action.data;
                 break;
             
             case UPLOAD_IMAGES_REQUEST:
