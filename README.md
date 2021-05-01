@@ -7,11 +7,10 @@ Built with [React + Redux + Redux-Saga] + [Spring Boot + MariaDB]
 [catchoo.netlify.app](https://catchoo.netlify.app)
 
 
-|||
-|:---:|:---:|:---:|
-|![home](./cat-app-client/public/readMeImg/Catchoo_home.png)|![main](./cat-app-client/public/readMeImg/Catchoo_main.png)|![add](./cat-app-client/public/readMeImg/Catchoo_add.png)|
-|![post-list](./cat-app-client/public/readMeImg/Catchoo_post_list.png)|![post-view](./cat-app-client/public/readMeImg/Catchoo_post_view.png)|![post_write](./cat-app-client/public/readMeImg/Catchoo_post_write.png)|
-|![weight-add](./cat-app-client/public/readMeImg/Catchoo_weight.png)|![weight-graph](./cat-app-client/public/readMeImg/Catchoo_weight-graph.png)|![weight-list](./cat-app-client/public/readMeImg/Catchoo_weight_list.png)|
+![home](./cat-app-client/public/readMeImg/Catchoo_home.png)|![main](./cat-app-client/public/readMeImg/Catchoo_main.png)|![add](./cat-app-client/public/readMeImg/Catchoo_add.png)
+:---:|:---:|:---:
+![post-list](./cat-app-client/public/readMeImg/Catchoo_post_list.png)|![post-view](./cat-app-client/public/readMeImg/Catchoo_post_view.png)|![post_write](./cat-app-client/public/readMeImg/Catchoo_post_write.png)
+![weight-add](./cat-app-client/public/readMeImg/Catchoo_weight.png)|![weight-graph](./cat-app-client/public/readMeImg/Catchoo_weight-graph.png)|![weight-list](./cat-app-client/public/readMeImg/Catchoo_weight_list.png)
 
 <br />
 
