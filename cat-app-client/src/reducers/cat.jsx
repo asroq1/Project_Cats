@@ -282,8 +282,8 @@ const reducer = (state = initialState, action) => {
             case ADD_WEIGHT_SUCCESS:
                 draft.addWeightLoading = false;
                 draft.addWeightDone = true;
-                console.log(`리덕스 성공${action.data}`);
-                draft.cat.Record.weight.concat(action.data);
+                console.log(`리덕스 성공${action.data.weight}`);
+                draft.cat.Record.weight.concat(action.data.weight);
                 break;
             case ADD_WEIGHT_FAILURE:
                 draft.addWeightLoading = false;
