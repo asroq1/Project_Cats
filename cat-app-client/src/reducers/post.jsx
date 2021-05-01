@@ -3,162 +3,44 @@ import produce from 'immer';
 import shortId from 'shortid';
 
 const initialState = {
-    mainPosts: [
-        {
-            _id: 1,
-            User: {
-                id: 1,
-                nickname: '고양이제국만세',
-            },
-            title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content:
-                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
-            date: '2020-01-03',
-
-            Images: [
-                {
-                    id: shortId.generate(),
-                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
-                },
-                {
-                    id: shortId.generate(),
-                    src:
-                        'https://imgnn.seoul.co.kr/img/upload/2019/01/30/SSI_20190130171000_V.jpg',
-                },
-                {
-                    id: shortId.generate(),
-                    src:
-                        'https://i.pinimg.com/originals/ca/c0/a0/cac0a030fa07099fef5ad6d9c1df6fdc.jpg',
-                },
-            ],
-
-            Comments: [
-                {
-                    id: shortId.generate(),
-                    User: {
-                        nickname: 'ㅇㅇ',
-                    },
-                    content:
-                        '주인님을 사랑하고 공경하는 건 집사의 당연한 도리입니당',
-                },
-                {
-                    id: shortId.generate(),
-                    User: {
-                        nickname: '저두용',
-                    },
-                    content: '동의합니당!',
-                },
-            ],
-        },
-        {
-            _id: 2,
-            User: {
-                id: 1,
-                nickname: '고양이제국만세',
-            },
-            title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content:
-                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
-            date: '2020-01-03',
-            Images: [
-                {
-                    id: shortId.generate(),
-                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
-                },
-            ],
-
-            Comments: [],
-        },
-        {
-            _id: 3,
-            User: {
-                id: 1,
-                nickname: '고양이제국만세',
-            },
-            title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content:
-                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
-            date: '2020-01-03',
-            Images: [
-                {
-                    id: shortId.generate(),
-                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
-                },
-            ],
-
-            Comments: [],
-        },
-        {
-            _id: 4,
-            User: {
-                id: 1,
-                nickname: '고양이제국만세',
-            },
-            title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content:
-                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
-            date: '2020-01-03',
-            Images: [
-                {
-                    id: shortId.generate(),
-                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
-                },
-            ],
-
-            Comments: [],
-        },
-        {
-            _id: 5,
-            User: {
-                id: 1,
-                nickname: '고양이제국만세',
-            },
-            title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content:
-                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
-            date: '2020-01-03',
-            Images: [
-                {
-                    id: shortId.generate(),
-                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
-                },
-            ],
-
-            Comments: [],
-        },
-        {
-            _id: 6,
-            User: {
-                id: 1,
-                nickname: '고양이제국만세',
-            },
-            title: '전 고양이가 너무 좋아요... 어떡하죠?',
-            content:
-                '고양이가 세상을 지배해야 된다고 생각해요. 비판은 거절합니다.',
-            date: '2020-01-03',
-            Images: [
-                {
-                    id: shortId.generate(),
-                    src: 'https://t1.daumcdn.net/cfile/blog/110C0E0349706F77F5',
-                },
-            ],
-
-            Comments: [],
-        },
-    ],
+    mainPosts:[],  
     imagePaths: [],
     currentPost: null,
-    listPosts: null,
-    error: null,
+    currentComments: [],
 
     addCommentLoading: false,
     addCommentDone: false,
     addCommentError: null,
 
-    loadPostLoading: false,
+    getCommentsLoading: false,
 
-    loadPostDone: false,
-    loadPostError: null,
+    getCommentsDone: false,
+    getCommentsError:null,
+
+
+    removeCommentLoading: false,
+    removeCommentDone: false,
+    removeCommentError: null,
+
+    readPostLoading: false,
+    readPostDone: false,
+    readPostError:null,
+
+    addPostLoading:false,
+    addPostDone: false,
+    addPostError: null,
+
+    udpatePostLoading:false,
+    updatePostDone: false,
+    updatePostError: null,
+
+    removePostLoading: false,
+    removePostDone: false,
+    removePostError: null,
+
+    listPostLoading: false,
+    listPostDone: false,
+    listPostError: null,
 
     hasMorePosts: true,
 };
@@ -199,6 +81,10 @@ export const REMOVE_COMMENT_REQUEST = 'REMOVE_COMMENT_REQUEST';
 export const REMOVE_COMMENT_SUCCESS = 'REMOVE_COMMENT_SUCCESS';
 export const REMOVE_COMMENT_FAILURE = 'REMOVE_COMMENT_FAILURE';
 
+export const GET_COMMENTS_REQUEST = 'GET_COMMENTS_REQUEST';
+export const GET_COMMENTS_SUCCESS = 'GET_COMMENTS_SUCCESS';
+export const GET_COMMENTS_FAILURE = 'GET_COMMENTS_FAILURE';
+
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 
 export const addPost = (data) => ({
@@ -208,6 +94,11 @@ export const addPost = (data) => ({
 
 export const readPost = (data) => ({
     type: READ_POST_REQUEST,
+    data,
+});
+
+export const updatePost = (data) => ({
+    type: UPDATE_POST_REQUEST,
     data,
 });
 
@@ -221,59 +112,88 @@ export const addComment = (data) => ({
     data,
 });
 
+
 const reducer = (state = initialState, action) => {
     return produce(state, (draft) => {
         switch (action.type) {
             case ADD_POST_REQUEST:
+                draft.addPostLoading = true;
+                draft.addPostDone = false;
+                draft.addPostError = null;
                 break;
             case ADD_POST_SUCCESS:
-                draft.mainPosts.unshift(action.data);
+                //draft.mainPosts.unshift(action.data);
                 draft.imagePaths = [];
+
+                draft.addPostLoading = false;
+                draft.addPostDone = true;
                 break;
             case ADD_POST_FAILURE:
+                draft.addPostLoading = false;
+                draft.addPostErrror = action.data;    
                 break;
             case READ_POST_REQUEST:
+                draft.readPostLoading = true;
+                draft.readPostDone = false;
+                draft.readPostError = null;
                 break;
             case READ_POST_SUCCESS:
                 draft.currentPost = action.data;
+                draft.updatePostDone = false;
+                // draft.imagePaths = draft.currentPost.images;
                 break;
             case READ_POST_FAILURE:
                 draft.error = action.data;
                 break;
             case LIST_POST_REQUEST:
-                draft.loadPostLoading = true;
+                draft.listPostLoading = true;
                 break;
             case LIST_POST_SUCCESS:
-                draft.loadPostLoading = false;
-                draft.loadPostDone = true;
-                draft.mainPosts = action.data.concat(draft.mainPosts);
+                draft.listPostLoading = false;
+                draft.listPostDone = true;
+                draft.mainPosts = action.data;
                 draft.hasMorePost = draft.mainPosts.length < 50;
+                draft.removePostDone = false;
                 break;
             case LIST_POST_FAILURE:
-
-                draft.loadPostLoading = false;
-                draft.loadPostError = action.data;
+                draft.listPostLoading = false;
+                draft.listPostError = action.data;
                 break;
             case UNLOAD_POST:
-                draft.currentPost = [];
+                draft.currentPost = null;
                 break;
             case UPDATE_POST_REQUEST:
+                draft.updatePostLoading = true;
+                draft.updatePostDone= false;
+                draft.updatePostError = null;
                 break;
             case UPDATE_POST_SUCCESS:
-                draft.mainPosts.find(
-                    (v) => v.id === action.data.PostId
-                ).content = action.data.content;
+                // draft.mainPosts.find(
+                //     (v) => v.id === action.data.PostId
+                // ).content = action.data.content;
+                draft.updatePostLoading = false;
+                draft.updatePostDone = true;
                 break;
             case UPDATE_POST_FAILURE:
+                
+                draft.updatePostLoading = false;
+                draft.updatePostError = action.data;
                 break;
             case REMOVE_POST_REQUEST:
+                draft.removePostLoading = true;
+                draft.removePostDone = false;
+                draft.removePostError = null;
                 break;
             case REMOVE_POST_SUCCESS:
-                draft.mainPosts = draft.mainPosts.filter(
-                    (v) => v.id !== action.data.PostId
-                );
+                // draft.mainPosts = draft.mainPosts.filter(
+                //     (v) => v.id !== action.data.PostId
+                // );
+                draft.removePostLoading = false;
+                draft.removePostDone= true;
                 break;
             case REMOVE_POST_FAILURE:
+                draft.removePostLoading = false;
+                draft.removePostError = action.data;
                 break;
 
             case ADD_COMMENT_REQUEST:
@@ -282,10 +202,17 @@ const reducer = (state = initialState, action) => {
                 draft.addCommentError = null;
                 break;
             case ADD_COMMENT_SUCCESS:
-                const post = draft.mainPosts.find(
-                    (v) => v.id === action.data.postId
-                );
-                post.Comments.unshift(action.data);
+                // const post = draft.mainPosts.find(
+                //     (v) => v.id === action.data.postId
+                // );
+                // post.Comments.unshift(action.data);
+
+                // draft.currentPost.comments.unshift(action.data);
+                // 어차피 댓글 전체를 다시 불러오는 식으로 설계돼서
+                // 아래와 같은 코드 필요 x
+                
+                
+                // draft.currentComments.unshift(action.data);
                 draft.addCommentLoading = false;
                 draft.addCommentDone = true;
                 break;
@@ -295,16 +222,44 @@ const reducer = (state = initialState, action) => {
                 break;
 
             case REMOVE_COMMENT_REQUEST:
+                draft.removeCommentLoading = true;
+                draft.removeCommentDone = false;
                 break;
             case REMOVE_COMMENT_SUCCESS:
-                draft.mainPosts.Comments[
-                    action.data.i
-                ] = draft.mainPosts.Commments[action.data.i].filter(
-                    (v) => v.key !== action.data.key
-                );
+                // draft.currentPost.comments = draft.currentPost.commments.filter(
+                //     (v) => v.id !== action
+                // );
+                // 어차피 댓글 전체를 불러오는 식으로 구성되어서
+                // 아래와 같은 코드 필요 x
+                // draft.currentComments = draft.currentComments.filter((v) => v.id == action.data);
+                
+                draft.removeCommentLoading = false;
+                draft.removeCommentDone = true;
                 break;
             case REMOVE_COMMENT_FAILURE:
+                draft.removeCommentLoading = false;
+                draft.removeCommentError = action.data;
                 break;
+            case GET_COMMENTS_REQUEST:
+                // 댓글 변화가 게시글 내의 댓글 (GET /api/posts/{id} 시 반환되는)에는 반영이 현재 되지 않아
+                // 댓글 부분은 현재 게시글과 따로 구현 (GET /api/comment/{postId})
+                draft.currentComments =[];    
+                draft.getCommentsLoading = true;
+                draft.getCommentsDone = false;
+                draft.getCommentsError = null;
+                break;
+            case GET_COMMENTS_SUCCESS:
+                
+            
+                draft.currentComments = action.data;
+                draft.getCommentsLoading = false;
+                draft.getCommentsDone = true;
+                break;
+            case GET_COMMENTS_FAILURE:
+                draft.getCommentsLoading = false;
+                draft.getCommentsError = action.data;
+                break;
+            
             case UPLOAD_IMAGES_REQUEST:
                 break;
             case UPLOAD_IMAGES_SUCCESS:

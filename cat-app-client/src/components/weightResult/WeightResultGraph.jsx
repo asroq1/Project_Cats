@@ -161,7 +161,8 @@ const data = [
 
 export default function WeightResultGraph() {
     const dispatch = useDispatch();
-    const { Record } = useSelector((state) => state.cat);
+    const { Record, currentIndex } = useSelector((state) => state.cat);
+    // ** 현재 고양이 id를, currentIndex에 저장하고 있어요 ** //
 
     //나중에 백엔드 연동해서 이렇게 최근순으로 당겨오면됌
     //최근 데이터만 보여줌
@@ -202,7 +203,7 @@ export default function WeightResultGraph() {
         console.log('매달');
     };
     useEffect(() => {
-        dispatch(getWeightRequest());
+        dispatch(getWeightRequest(currentIndex));
     }, []);
 
     return (

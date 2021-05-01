@@ -24,6 +24,7 @@ import org.springframework.web.filter.CorsFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+
     private final TokenProvider tokenProvider;
     //private final CorsFilter corsFilter;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -64,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         "/webjars/**",
 
         // user
-        "/api/login",
+        "/api/login/**",
         "/api/signup",
 
         // test

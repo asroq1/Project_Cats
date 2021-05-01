@@ -10,15 +10,18 @@ const Header = styled.div`
     height: 50px;
     display: flex;
     position: sticky;
-    top: 0;
-    
+    top: 0; 
     z-index: 1;
     font-size: 1rem;
     background-color: ${({theme}) => theme.palette.green};
     .plus {
         flex-direction: row-reverse;
+        cursor: pointer;
     }
-`;
+    .plus:hover{
+        color:${({theme})=>theme.palette.navy}
+    }
+}`;
 
 const NavCol = styled.div`
     padding: 1rem;
@@ -27,11 +30,10 @@ const NavCol = styled.div`
     color: white;
     flex: 1;
     a {
-        text-decoration: none;
-        color: white;
+        color: ${({theme}) => theme.palette.beige};
     }
     a:hover {
-        color: ${({theme}) => theme.palette.navy};
+        color:${({theme}) => theme.palette.navy};
     }
 `;
 
@@ -58,25 +60,25 @@ const OverallPostsLayout = ({ children }) => {
 
     return (
         <>
+            {showModalMenu && (
+                        <ModalMenu
+                            onClose={onModalClose}
+                        />
+                    )}
             <Header>
                 <NavCol>커뮤니티</NavCol>
                 <NavCol className="plus">
                     <i onClick={onModalMenu} className="fa fa-bars"></i>
-                    {showModalMenu && (
-                        <ModalMenu
-                            userNickname={'어쩌구 저쩌궁'}
-                            onClose={onModalClose}
-                        />
-                    )}
+                    
                 </NavCol>
             </Header>
 
             {children}
 
             <Footer>
-                <NavCol className="center">
+                {/* <NavCol className="center">
                     <i className="fa fa-search"></i>
-                </NavCol>
+                </NavCol> */}
                 <NavCol className="center">
                     <Link to="/post/write">
                         <i className="fa fa-plus-square"></i>

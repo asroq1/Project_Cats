@@ -52,6 +52,8 @@ export const initialState = {
     isLoading: true,
     currentIndex: 1,
     currImgUrl: null,
+
+    currentCatWeights: null,
 };
 
 // 몸무게 관련
@@ -315,11 +317,15 @@ const reducer = (state = initialState, action) => {
                 draft.getWeightLoading = true;
                 draft.getWeightDone = false;
                 draft.addWeightError = null;
+
+                draft.currentCatWeights = null;
                 break;
             case GET_WEIGHT_SUCCESS:
                 draft.getWeightDone = true;
                 draft.getWeightLoading = false;
                 draft.getWeighError = null;
+                draft.currentCatWeights = action.data;
+                break;
             case GET_WEIGHT_FAILURE:
                 draft.getWeightLoading = false;
                 draft.getWeightDone = false;

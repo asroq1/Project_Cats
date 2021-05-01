@@ -1,15 +1,29 @@
 import React, { useCallback, useState } from 'react';
+import {useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
 import palette from '../../styles/palette';
 import styled from 'styled-components';
 
-const Overlay = styled.div`
+const BackgroundWrapper = styled.div`
+    position: fixed;
+
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    position: fixed;
     z-index: 5000;
+
+    background-color: none;
+
+`;
+
+const Overlay = styled.div`
+    
+    width: 100%;
+    max-width: ${({theme}) => theme.width.mobile};
+    box-sizing: border-box;
+    height: 100vh;
+    margin: 0 auto;
     padding: 3rem;
     color: ${({ theme }) => theme.palette.beige};
     background-color: ${palette.navy};
@@ -43,6 +57,15 @@ const MenuWrapper = styled.div`
     line-height: 2;
     cursor: pointer;
 
+    a {
+        text-decoration: none;
+    }
+
+    h2 {
+
+        color: ${({theme}) => theme.palette.beige}
+    }
+    
     h2:hover {
         color: ${({ theme }) => theme.palette.orange};
     }
@@ -62,15 +85,21 @@ const NightModeWrapper = styled.div`
 const NightWrapper = styled.button`
     background: ${({ theme }) => theme.light.mainBackground};
 `;
-const ModalMenu = ({ userNickname, onClose }) => {
+
+const ModalMenu = ({ onClose }) => {
     //나중에 redux 상태 만들어줄 것
     const [isNightMode, setNightMode] = useState(false);
+
+
+
+    const { me } = useSelector((state)=>state.user);
 
     const toggleNightMode = useCallback(() => {
         setNightMode(!isNightMode);
     });
 
     return (
+        <BackgroundWrapper>
         <Overlay>
             <Header>
                 <h3>
@@ -78,7 +107,7 @@ const ModalMenu = ({ userNickname, onClose }) => {
                 </h3>
                 <h1>
                     {' '}
-                    <i className="fa fa-black-tie"></i> {userNickname} 집사님,{' '}
+                    <i className="fa fa-black-tie"></i> {me.nickname} 집사님,{' '}
                     <br />
                     안녕하세요!
                 </h1>
@@ -114,6 +143,7 @@ const ModalMenu = ({ userNickname, onClose }) => {
                 )}
             </NightModeWrapper>
         </Overlay>
+        </BackgroundWrapper>
     );
 };
 

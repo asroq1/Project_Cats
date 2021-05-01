@@ -1,8 +1,11 @@
-import React from 'react';
+
+import React, {useCallback} from 'react';
+import {useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom'
 
 import 'font-awesome/css/font-awesome.min.css';
 import styled from 'styled-components';
+import { READ_POST_REQUEST } from '../../reducers/post';
 
 const PostItemsContainer = styled.div`
     width: 80%;
@@ -101,24 +104,46 @@ const StyledLink = styled(Link)`
 `;
 
 const PostItem = ({ post }) => {
-    const { date, User, title, Comments, _id, Images } = post;
+    const {id, title, viewCount, writer, createdDate} = post;
+
+    const dispatch = useDispatch();
+
+    // const setCurrentPost = useCallback((id)=>{
+    //     dispatch({
+    //         type: READ_POST_REQUEST,
+    //         data: id,
+
+    //     })
+    // }, []);
+
     return (
-        <StyledLink to={`/post/view/${_id}`}>
+        <StyledLink to={`/post/view/${id}`}>
             <PostItemBlock>
-                <PhotoContainer src={Images[0].src} alt="post" />
+            {/* {"id": 1,
+            "title": "눈누난나",
+            "viewCount": 0,
+            "writer": {
+                "id": 3,
+                "nickname": "펭슈"
+            },
+            "createdDate": "2021-04-29T07:03:16.000+00:00"} */}
+                
+                {/* <PhotoContainer src={Images[0].src} alt="post" /> */}
 
                 <SubInfo>
                     <h1>{title}</h1>
                     <div>
                         <span>
-                            <b>{User.nickname}</b>
+                            <b>{writer.nickname}</b>
                         </span>
                         {/* <span>{new Date(date)}</span> */}
-                        <span>{date}</span>
+                        <span>{createdDate.slice(0,10)}</span>
                     </div>
                     <PreviewWrapper>
-                        <i className="fa fa-comment"></i>
-                        <span>{Comments.length}</span>
+                        {/* <i className="fa fa-comment"></i>
+                        <span>{Comments.length}</span> */}
+                        <i className="fa fa-eye"></i>
+                        <span> {viewCount}</span>
                     </PreviewWrapper>
                 </SubInfo>
             </PostItemBlock>
@@ -131,6 +156,9 @@ const PostList = ({ posts, loading, error }) => {
     if (error) {
         return <h2>에러 발생함</h2>;
     }
+
+    
+
     return (
         <>
             {/* 로딩 중 아니고 포스트 배열 존재할 때만 */}
@@ -143,7 +171,7 @@ const PostList = ({ posts, loading, error }) => {
                 <div>
                     {posts.map((post) => (
                         <>
-                        <PostItem post={post} key={post._id} />
+                        <PostItem post={post} key={post.id} />
                         </>
                     ))}
                 </div>

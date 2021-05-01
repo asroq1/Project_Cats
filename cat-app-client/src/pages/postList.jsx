@@ -1,5 +1,5 @@
-import React, {useDispatch, useEffect} from 'react';
-import {useSelector} from 'react-redux';
+import React, {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 
 import PostListContainer from '../components/board/PostListContainer';
 
@@ -7,13 +7,14 @@ import {LIST_POST_REQUEST}from '../reducers/post';
 
 const PostList = () => {
     const dispatch = useDispatch();
-    const {mainPosts,hasMorePosts,loadPostLoading} = useSelector((state) => state.post);
+    //const {mainPosts,hasMorePosts,listPostLoading} = useSelector((state) => state.post);
     
     useEffect(() => {
         dispatch({
             type: LIST_POST_REQUEST,
         })
     }, []);
+    
 
     // useEffect(() => {
     //     function onScroll(){
@@ -27,7 +28,7 @@ const PostList = () => {
     //         console.log(window.scrollY, document.documentElement.clientHeight, document.documentElement.scrollHeight);
         
     //         if (window.scrollY + document.documentElement.clientHeight > document.documentElement.scrollHeight  -300) {
-    //             if (hasMorePost && !loadPostLoading){
+    //             if (hasMorePost && !listPostLoading){
     //                 dispatch({
     //                     type: LIST_POST_REQUEST,
     //                 });
@@ -41,7 +42,7 @@ const PostList = () => {
     //     return() => {
     //         window.removeEventListener('scroll', onScroll);
     //     };
-    // },  [hasMorePosts, loadPostLoading]);
+    // },  [hasMorePosts, listPostLoading]);
 
     return (
         <>
