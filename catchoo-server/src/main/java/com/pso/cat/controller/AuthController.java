@@ -55,4 +55,20 @@ public class AuthController {
 
         return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
     }
+
+    @PostMapping("/login/social")
+    public ResponseEntity<TokenDto> authorize(String email) {
+
+        final User user = customUserDetailsService.findByEmail(email);
+
+        authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(email, ""));
+
+        String jwt = tokenProvider.createToken(user);
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+
+        return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+    }
 }
