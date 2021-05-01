@@ -6,6 +6,9 @@ import com.pso.cat.entity.User;
 import com.pso.cat.jwt.JwtFilter;
 import com.pso.cat.jwt.TokenProvider;
 import com.pso.cat.service.CustomUserDetailsService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,13 +59,14 @@ public class AuthController {
         return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
     }
 
+    @ApiOperation("불완전한 기능. 아직 구현중.")
     @PostMapping("/login/social")
-    public ResponseEntity<TokenDto> authorize(String email) {
+    public ResponseEntity<TokenDto> authorize(@Valid @RequestBody String email) {
 
-        final User user = customUserDetailsService.findByEmail(email);
+        User user = customUserDetailsService.findByEmail(email);
 
         authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(email, ""));
+                new UsernamePasswordAuthenticationToken(email, ""));
 
         String jwt = tokenProvider.createToken(user);
 

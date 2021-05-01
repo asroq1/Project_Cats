@@ -7,10 +7,24 @@ export const initialState = {
     deleteWeightLoading: false,
     deleteWeightDone: false,
     deleteWeightError: null,
-
     getWeightLoading: false,
     getWeightDone: false,
     getWeighError: null,
+
+    addCatLoading: false,
+    addCatDone: false,
+    addCatError: null,
+
+    deleteCatLoading: false,
+    deleteCatDone: false,
+
+    deleteCatError: null,
+
+
+    updateCatLoading: false,
+    updateCatDone: false,
+    updateCatError: null,
+
 
     catWeight: null,
     user: {
@@ -18,28 +32,30 @@ export const initialState = {
         user: 1,
     },
     cat: [
-        {
-            cat_id: 0,
-            user_id: 1,
-            name: 'Garfield',
-            gender: 'M',
-            Photo: {
-                file: '',
-                url:
-                    'https://welovekitties.com/wp-content/uploads/2015/12/cutekittenspictures-145124821648lcp.jpg',
-            },
-            birth: '2020-02-28',
-            Record: [
-                {
-                    cdt: '2021-03-30',
-                    wgt: 3.1,
-                },
-            ],
-        },
+        // {
+        //     cat_id: 0,
+        //     user_id: 1,
+        //     name: 'Garfield',
+        //     gender: 'M',
+        //     Photo: {
+        //         file: '',
+        //         url:
+        //             'https://welovekitties.com/wp-content/uploads/2015/12/cutekittenspictures-145124821648lcp.jpg',
+        //     },
+        //     birth: '2020-02-28',
+        //     Record: [
+        //         {
+        //             cdt: '2021-03-30',
+        //             wgt: 3.1,
+        //         },
+        //     ],
+        // },
     ],
     isLoading: true,
     currentIndex: 1,
     currImgUrl: null,
+
+    currentCatWeights: null,
 };
 
 // 몸무게 관련
@@ -213,31 +229,55 @@ const reducer = (state = initialState, action) => {
                 draft.isLoading = true;
                 break;
             case GET_CAT_SUCCESS:
-                draft.cat = draft.cat;
+                draft.cat = action.data;
+                draft.currentIndex = action.data[0].id;
                 draft.isLoading = false;
                 break;
             case GET_CAT_FAILURE:
                 break;
             case ADD_CAT_REQUEST:
+                draft.addCatLoading = true;
+                draft.addCatDone = false;
+                draft.addCatError = null;
                 break;
             case ADD_CAT_SUCCESS:
+                draft.addCatLoading = false;
                 draft.cat = draft.cat.concat(action.data);
+                draft.addCatDone = true;
                 break;
             case ADD_CAT_FAILURE:
+                draft.addCatLoading = false;
+                draft.addCatError = action.data;
                 break;
             case DELETE_CAT_REQUEST:
+                draft.deleteCatLoading = true;
+                draft.deleteCatDone = false;
+                draft.deleteCatError = null;
                 break;
             case DELETE_CAT_SUCCESS:
                 draft.cat = draft.cat.filter((v) => v.id !== action.data);
+                draft.currentIndex = draft.cat[0].id;
+                draft.deleteCatLoading = false;
+                draft.deleteCatDone = true;
                 break;
             case DELETE_CAT_FAILURE:
+
+
+
+                draft.deleteCatLoading = false;
+                draft.deleteCatError = action.data;
                 break;
             case UPDATE_CAT_REQUEST:
+                draft.updateCatLoading = true;
+                draft.updateCatDone = false;
+                draft.updateCatError = null;
                 break;
             case UPDATE_CAT_SUCCESS:
                 draft.cat[draft.currentIndex - 1] = action.data;
+                draft.updateCatDone = true;
                 break;
             case UPDATE_CAT_FAILURE:
+                draft.updateCatError = action.data;
                 break;
             case ADD_WEIGHT_REQUEST:
                 draft.addWeightLoading = true;
@@ -247,28 +287,33 @@ const reducer = (state = initialState, action) => {
             case ADD_WEIGHT_SUCCESS:
                 draft.addWeightLoading = false;
                 draft.addWeightDone = true;
-                draft.cat.Record.wgt.concat(action.data);
+                draft.currentCatWeights.unshift(action.data);
+                // 복사해주는 게 리덕스 개념 상 ('추적'에 중점을 둠) 맞는데
+                // 제로초님도 그러면 코드가 너무 복잡해져서
+                // 이런식으로 하셨더라구요! (맘껏 바꿔주세요)
+                // unshift가 'in-place' 함수이기 때문에 - 배열 그 자체를 바꿈. 배열을 복사해 바꾸는 게 아니라
+                // 이런식으로 코드가 들어가는 듯 합니다.
                 break;
             case ADD_WEIGHT_FAILURE:
                 draft.addWeightLoading = false;
                 draft.addWeightDone = false;
-                draft.addWeightError = null;
+                draft.addWeightError = action.error;
                 break;
             case DELETE_WEIGHT_REQUEST:
                 draft.deleteWeightDone = false;
                 draft.deleteWeightLoading = true;
                 draft.deleteWeightError = null;
-                // draft.draft.cat = draft.cat.filter((v) => v.id !== action.data);
                 break;
             case DELETE_WEIGHT_SUCCESS:
                 draft.deleteWeightDone = true;
                 draft.deleteWeightLoading = false;
-                draft.cat.Record.wgt.filter((v) => v.id !== action.data);
+                draft.currentCatWeights.filter((v) => v.id !== action.data);
+
                 break;
             case DELETE_WEIGHT_FAILURE:
                 draft.deleteWeightLoading = false;
                 draft.deleteWeightDone = false;
-                draft.deleteWeightError = null;
+                draft.deleteWeightError = action.error;
                 break;
             case SET_CURRENT_CAT:
                 draft.currentIndex = action.data;
@@ -277,13 +322,22 @@ const reducer = (state = initialState, action) => {
                 draft.currImgUrl = action.data;
                 break;
             case GET_WEIGHT_REQUEST:
-                draft.isLoading = true;
+                draft.getWeightLoading = true;
+                draft.getWeightDone = false;
+                draft.addWeightError = null;
+
+                draft.currentCatWeights = null;
                 break;
-            // case GET_WEIGHT_SUCCESS:
-            //     draft.isLoading - false;
-            //     draft.cat = action.data;
-            //     break;
+            case GET_WEIGHT_SUCCESS:
+                draft.getWeightDone = true;
+                draft.getWeightLoading = false;
+                draft.getWeighError = null;
+                draft.currentCatWeights = action.data;
+                break;
             case GET_WEIGHT_FAILURE:
+                draft.getWeightLoading = false;
+                draft.getWeightDone = false;
+                draft.getWeighError = action.error;
                 break;
             default:
                 break;

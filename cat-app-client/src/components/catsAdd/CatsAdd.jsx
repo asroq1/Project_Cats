@@ -1,7 +1,6 @@
-import React, { useCallback, useState, useRef, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { v4 as uuidv4} from 'uuid';
 
 import useInput from '../../hooks/useInput';
 import { SET_CURRENT_IMAGE, ADD_CAT_REQUEST } from '../../reducers/cat';
@@ -14,7 +13,7 @@ const CatsAdd = ({}) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const {currImgUrl} = useSelector((state) => state.cat);
+    const {currImgUrl, addCatDone} = useSelector((state) => state.cat);
     const [name, onChangeName] = useInput('');
     const [birthyear, onChangeBirthYear] = useInput('');
     const [birthmonth, onChangeBirthMonth] = useInput('');
@@ -29,25 +28,24 @@ const CatsAdd = ({}) => {
             formData.append('birth', birthyear+"-"+birthmonth+"-"+birthdate);
             formData.append('gender',gender);
             // POST API가 id를 요구하기 때문
-            formData.append('id', uuidv4());
             formData.append('name',name);
             console.log(currImgUrl);
             formData.append('photo', currImgUrl);
 
-            // console.log("key")
-            // for (var key of formData.keys()){
-            //     console.log(key);
-            // }
+            console.log("key")
+            for (var key of formData.keys()){
+                console.log(key);
+            }
 
-            // console.log("value")
-            // for (var value of formData.values()){
-            //     console.log(value);
-            // }
+            console.log("value")
+            for (var value of formData.values()){
+                console.log(value);
+            }
 
-            // console.log("entry")
-            // for (var entry of formData.entries()){
-            //     console.log(entry);
-            // }
+            console.log("entry")
+            for (var entry of formData.entries()){
+                console.log(entry);
+            }
 
             dispatch({
                 type: SET_CURRENT_IMAGE,
@@ -58,10 +56,17 @@ const CatsAdd = ({}) => {
                 type: ADD_CAT_REQUEST,
                 data: formData,
             });
-            history.push('/user/main');
+            
         },
-        [currImgUrl, name, birthyear, birthmonth, birthdate, gender]
+        [currImgUrl, name, birthyear, birthmonth, birthdate, gender,addCatDone]
     );
+
+    useEffect(() => {
+
+        if (addCatDone){
+            history.push('/user/main');
+        }
+    }, [addCatDone]);
 
     const goBack = useCallback(() => {
         history.goBack();
@@ -168,7 +173,7 @@ const CatsAdd = ({}) => {
                     {/* 버튼 */}
                     <CenterWrapper>
                         <ButtonWrapper onClick={goBack}  type="button">취소</ButtonWrapper>
-                        <ButtonWrapper htmlType="submit">등록</ButtonWrapper>
+                        <ButtonWrapper type="submit">등록</ButtonWrapper>
                     </CenterWrapper>
                 </form>
                 </InnerGlobal>

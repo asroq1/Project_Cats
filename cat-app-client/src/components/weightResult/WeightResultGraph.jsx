@@ -13,15 +13,16 @@ import {
 } from 'recharts';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-
+import { getWeightRequest } from '../../reducers/cat';
+import { useDispatch, useSelector } from 'react-redux';
 
 const GraphContainer = styled.div`
     display: grid;
     margin: 0 auto;
-    max-width: 1200px;
+    //max-width: 1200px;
     width: 100%;
     height: 94vh;
-    background-color: ${({theme})=>theme.palette.navy};
+    background-color: ${({ theme }) => theme.graph};
     align-items: center;
 `;
 
@@ -38,7 +39,7 @@ const SelectorContainer = styled.div`
 `;
 
 const DateSelector = styled.button`
-    color: ${({theme})=>theme.palette.white};
+    color: ${({ theme }) => theme.text};
     font-size: 1rem;
     background-color: ${(props) => (props.primary ? '#E07A5F' : '#d5d3d3')};
     border: none;
@@ -57,11 +58,11 @@ const DataContainer = styled.div`
 
 const WeightWrapper = styled.div`
     margin: 1rem 0 1rem 0;
-    border-top: 1px solid ${({theme})=>theme.palette.borderColor};
+    border-top: 1px solid ${({ theme }) => theme.palette.borderColor};
     padding: 1rem;
 
     h2{
-        color: ${({theme})=>theme.palette.borderColor}
+        color: ${({ theme }) => theme.palette.borderColor}
     }
     ul {
         display: flex;
@@ -69,14 +70,14 @@ const WeightWrapper = styled.div`
     }
 
     li{ 
-        color: ${({theme})=>theme.palette.white};
+        color: ${({ theme }) => theme.resultText};
         font-weight: bold;
         font-size: 2rem;
     }
 
     li:nth-last-child(2) {
         margin-top: 1rem;
-        color: ${({theme})=>theme.palette.borderColor};
+        color: ${({ theme }) => theme.resultText};
         font-weight: bold;
         font-size: 1rem;
    
@@ -86,17 +87,17 @@ const ResultWrapper = styled.div`
     display: flex;
     justify-content: space-around;
     margin: 1rem 0 1rem 0;
-    border-top: 1px solid ${({theme})=>theme.palette.borderColor};
+    border-top: 1px solid ${({ theme }) => theme.palette.borderColor};
     padding: 1rem;
 
     p:nth-child(2) {
         font-weight: bold;
-        color: ${({theme})=>theme.palette.white};
+        color: ${({ theme }) => theme.resultText};
         font-size: 2rem;
     }
     p:nth-child(1) {
         font-weight: bold;
-        color: ${({theme})=>theme.palette.borderColor};
+        color: ${({ theme }) => theme.resultText};
         margin-top: 1rem;
         font-size: 1rem;
     }
@@ -104,44 +105,65 @@ const ResultWrapper = styled.div`
 
 const data = [
     {
-        name: '2020-08-02',
+        name: '2020-01-20',
         wgt: 22.2,
     },
     {
-        name: '2020-08-03',
-        wgt: 22.4,
+        name: '2020-20',
+        wgt: 21.2,
     },
     {
-        name: '2020-09-12',
-        wgt: 25.2,
-    },
-    {
-        name: '2020-09-22',
-        wgt: 25.0,
-    },
-    {
-        name: '2020-10-22',
-        wgt: 28.2,
-    },
-    {
-        name: '2020-12-22',
-        wgt: 30.2,
-    },
-    {
-        name: '2020-12-30',
+        name: '2020-03-20',
         wgt: 22.2,
     },
     {
-        name: '2020-01-30',
-        wgt: 25.2,
-    },
-    {
-        name: '2020-03-30',
+        name: '2020-04-20',
         wgt: 29.2,
+    },
+    {
+        name: '2020-05-20',
+        wgt: 25.2,
+    },
+    {
+        name: '2020-06-20',
+        wgt: 29.2,
+    },
+    {
+        name: '2020-07-20',
+        wgt: 21.2,
+    },
+    {
+        name: '2020-08-20',
+        wgt: 25.2,
+    },
+    {
+        name: '2020-09-20',
+        wgt: 21.2,
+    },
+    {
+        name: '2020-10-20',
+        wgt: 24.2,
+    },
+    {
+        name: '2020-11-12',
+        wgt: 25.2,
+    },
+    {
+        name: '2020-12-24',
+        wgt: 26.2,
     },
 ];
 
+// const dateParser = (text) => {
+//     const { 0: year, 1: month, 2: day } = text.split('-');
+//     return { year, month, day };
+// };
+
 export default function WeightResultGraph() {
+    const dispatch = useDispatch();
+    const { Record, currentIndex } = useSelector((state) => state.cat);
+    // ** 현재 고양이 id를, currentIndex에 저장하고 있어요 ** //
+
     //나중에 백엔드 연동해서 이렇게 최근순으로 당겨오면됌
     //최근 데이터만 보여줌
     const perDay = data.slice(-5);
@@ -181,10 +203,8 @@ export default function WeightResultGraph() {
         console.log('매달');
     };
     useEffect(() => {
-        // const data = axios.get('<주소> ');
-        // console.log(test);
-        // console.log(data.length - 3);
-    });
+        dispatch(getWeightRequest(currentIndex));
+    }, []);
 
     return (
         <GraphContainer>
@@ -251,6 +271,14 @@ export default function WeightResultGraph() {
                 <ResultWrapper>
                     <p>체중 변화</p>
                     <p>{Result < 0 ? `${Result}` : `+ ${Result}`} kg</p>
+
+                    {/* 테스트 코드 */}
+                    {/* {data.map((data) => {
+                        return (
+                            console.log(dateParser(data.name)),
+                            console.log(data.wgt)
+                        );
+                    })} */}
                 </ResultWrapper>
             </DataContainer>
         </GraphContainer>

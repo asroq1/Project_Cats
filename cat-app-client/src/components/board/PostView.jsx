@@ -1,32 +1,60 @@
-import React, { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux'
+import React,{useCallback, useEffect}  from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+
+import {Link, useHistory} from 'react-router-dom'
 
 import styled from 'styled-components';
+import 'font-awesome/css/font-awesome.min.css';
+
 import CommentForm from './CommentForm';
-//import { REMOVE_COMMENT_REQUEST} from '../../reducers/post'
+
+import CommentsWrapper from './CommentsWrapper'
+import { REMOVE_POST_REQUEST } from '../../reducers/post';
 
 const OverallContainer = styled.div`
     color: gray;
     line-height: 1.25rem;
+    h1 {
+        cursor: pointer;
+    }
 `;
 
 const PostHead = styled.div`
-    border-bottom: 1.5px solid ${({theme}) => theme.palette.green};
+    border-bottom: 1.5px solid ${({ theme }) => theme.palette.green};
+    border-top:1px solid lightgray;
     padding-bottom: 1rem;
     margin-bottom: 1.25rem;
+    margin-top:0.75rem;
     h1 {
         font-weight: bold;
-        color: ${({theme}) => theme.palette.navy};
+        color: ${({ theme }) => theme.palette.navy};
         line-height: 1.5rem;
         font-size: 1.5rem;
         margin-top: 2rem;
     }
 `;
 
+const ButtonWrapper = styled.div`
+    margin-top: 1rem;
+    button {
+        background-color: ${({theme}) => theme.palette.orange};
+        color: ${({theme}) => theme.palette.beige};
+        padding: 0.5rem;
+        border: none;
+        border-radius: 10px;
+        margin-left: 0.5rem;
+        cursor: pointer;
+    }
+    .EditButton{
+        margin-left: 0;
+        background-color: ${({theme})=>theme.palette.green};
+    }
+    `;
+
 const SubInfo = styled.div`
     margin-top: 1rem;
     font-size: 1rem;
-    color: ${({theme}) => theme.palette.green};
+    color: ${({ theme }) => theme.palette.green};
     span + span:before {
         color: gray;
         padding-left: 0.25rem;
@@ -40,32 +68,31 @@ const PostContent = styled.div`
     font-size: 1rem;
     color: gray;
 `;
-
-const EachComment=styled.div`
-    padding-bottom:1rem;
-    padding-top:1rem; 
-    & + & {
-        border-top: 1px dotted ${({theme}) => theme.palette.green};
-    }
-`;
-
-const CommentWrapper = styled.div`
-    margin-top: 2rem;
-    font-size: 1rem;
-    color: gray;
-    h1 {
-        font-weight: bold;
-        text-decoration: underline;
-        margin-bottom: 1rem;
-    }
-    h3 {
-        font-weight: bold;
-        padding-bottom: 0.25rem;
-    }
-`;
-
-const PostView = ({ post, error, loading }) => {
+   
+const PostView = ({ postId, post, error }) => {
+    const history = useHistory();
+    const goBack = useCallback(()=>{
+        history.goBack();
+    })
     const dispatch = useDispatch();
+    const { removePostDone } = useSelector((state) => state.post);
+
+    const onRemovePost = useCallback(
+        (e)=>{
+            e.preventDefault();
+            dispatch({
+                type: REMOVE_POST_REQUEST,
+                data: postId
+            })
+    },[])
+
+    useEffect(() => {
+        if (removePostDone){
+
+            history.push('/post/list');
+        }
+    }, [ removePostDone]);
+    
     //에러 발생 시
     if (error) {
         if ((error.response && error.response.status) === 404) {
@@ -74,55 +101,44 @@ const PostView = ({ post, error, loading }) => {
         return <h2>에러가 발생했습니다.</h2>;
     }
 
-    // 로딩 중이거나 포스트 데이터 없을 때
-    // if (loading || !post){
-    if (!post) {
-        return <h2>로딩중</h2>;
+    if (!post){
+        return null;
     }
-    const { title, content, User, date, Images, Comments } = post;
 
-    // const onRemoveComment = useCallback(
-    //     (key, i)=> () =>{
-    //         dispatch({
-    //             type: REMOVE_COMMENT_REQUEST,
-    //             data: {
-    //                 key: key,
-    //                 i: i
-    //             }
-    //         })
-    // }, []);
     
+    const { id, title, content, writer, createdDate, comments } = post;
+     
     return (
         <OverallContainer>
+            <h1 onClick={goBack}><i className = "fa fa-arrow-left"></i> 전체게시글 </h1>
             <PostHead>
                 <h1>{title}</h1>
                 <SubInfo>
                     <span>
-                        <b>{User.nickname}</b>
+                        <b>{writer.nickname}</b>
                     </span>
-                    <span>{date}</span>
+
+                    <span>{createdDate.slice(0, 10)}</span>
                 </SubInfo>
                 <PostContent>{content}</PostContent>
+                
+                <ButtonWrapper>
+                    <Link to ={{
+                        pathname: `/post/edit/${id}`,
+                        state: {
+
+                            originalTitle: title,
+                            originalContent: content,
+                        }
+                    }}>
+                        <button className="EditButton"type="button">수정</button>
+                    </Link>
+                    
+                    <button type="button"onClick={onRemovePost}>삭제</button>
+                </ButtonWrapper>
             </PostHead>
-            <CommentForm post={post} />
-            <CommentWrapper>
-                <h1>댓글</h1>
-                <div>
-                    {Comments.map((comment,i) => (
-                        <EachComment key={comment+i}>
-                            <div>
-                                <h3>{comment.User.nickname}</h3>
-                                <div>{comment.content}</div>
-                            </div>
-                            {/* {comment.User == localStorage.currentUser && (
-                                <div>
-                                    <button type="button" onClick={onRemoveComment(comment+i,i)}>삭제</button>
-                                </div>
-                            ) */}                            
-                        </EachComment>
-                    ))}
-                </div>
-            </CommentWrapper>
+            <CommentForm id={id} />
+            <CommentsWrapper postId={id} />
         </OverallContainer>
     );
 };

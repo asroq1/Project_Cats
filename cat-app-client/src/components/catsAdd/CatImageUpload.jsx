@@ -169,10 +169,11 @@ const CatImageUpload = ({}) => {
                             <CenterWrapper>
                                 <ImageUploadButtons
                                     onClick={onClickImageUpload}
+                                    type="button"
                                 >
                                     <i className="fa fa-upload"></i>
                                 </ImageUploadButtons>
-                                <ImageUploadButtons onClick={showCroppedImage}>
+                                <ImageUploadButtons type="button"onClick={showCroppedImage}>
                                     <i className="fa fa-check"></i>
                                 </ImageUploadButtons>
                             </CenterWrapper>
@@ -192,7 +193,7 @@ const CatImageUpload = ({}) => {
                             }}
                         ></div>
                         <InnerGlobal>
-                            <ImageUploadButtons onClick={resetCroppedImage}>
+                            <ImageUploadButtons type="button"onClick={resetCroppedImage}>
                                 <i className ="fa fa-undo"></i>
                             </ImageUploadButtons>
                         </InnerGlobal>

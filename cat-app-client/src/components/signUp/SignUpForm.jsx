@@ -24,7 +24,7 @@ const SignupContainer = styled.form`
         border: none;
     }
 
-    // @media ${({theme}) => theme.width.mobile} {
+    // @media ${({ theme }) => theme.width.mobile} {
     //     // width: 85vw;
     // }
 `;
@@ -33,20 +33,20 @@ const SignUpInput = styled.input`
     height: 1rem;
     font-size: 1rem;
     border-radius: 4px;
-    border: 1px solid ${({theme})=>theme.palette.borderColor};
+    border: 1px solid ${({ theme }) => theme.palette.borderColor};
     font-family: FontAwesome;
     padding: 1rem;
     ::placeholder {
         text-align: right;
     }
-    background-color: ${({theme})=>theme.palette.inputColor};
+    background-color: ${({ theme }) => theme.input};
 `;
 const SubmitButton = styled.button`
     background: #f2cc8f;
     color: #fff;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${({theme})=>theme.palette.navy};
+    background-color: ${({ theme }) => theme.button};
 `;
 
 const ErrorMessages = styled.p`

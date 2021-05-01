@@ -6,22 +6,19 @@ import palette from '../styles/palette';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 const SignupBackground = styled.div`
-    background-color: #f4f1de;
+    // background-color: #f4f1de;
 `;
 const SignupWrapper = styled.div`
     display: grid;
-    // max-width: 1200px;
-    // width: 100vw;
     width: 100%;
     height: 100vh;
     margin: 0 auto;
-    background-color:  background-color: ${({ theme }) => theme.palette.orange};
+    background-color: ${({ theme }) => theme.body};
 `;
 
 const TitleWrapper = styled.div`
     display: grid;
     align-items: end;
-
     position: relative; //추가
 `;
 
@@ -30,7 +27,7 @@ const Title = styled.h2`
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
-    color: ${({ theme }) => theme.palette.navy};
+    color: ${({ theme }) => theme.text};
 `;
 const ExitButton = styled.p`
     //position: fixed;
@@ -42,13 +39,10 @@ const ExitButton = styled.p`
     padding: 0.5rem;
 
     a{
-        color: ${palette.navy}
+        color: ${({ theme }) => theme.text};
     }
-<<<<<<< HEAD
-=======
     
 }
->>>>>>> develop
 `;
 // const DivideLine = styled.div`
 //     width: 30%;

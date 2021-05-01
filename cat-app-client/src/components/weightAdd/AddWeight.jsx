@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { addWeightRequestAction } from '../../reducers/cat';
 import palette from '../../styles/palette';
-// import styles from '../../styles/AddWeight.module.css';
 
 const HeaderTitle = styled.span`
     margin: 0 auto;
@@ -13,7 +12,7 @@ const HeaderTitle = styled.span`
 
 const CarouselContainer = styled.div`
     max-width: 100%;
-    height: 95vh;
+    height: 90vh;
     //추가
     overflow-x: hidden;
     // overflow-y: auto;
@@ -32,7 +31,7 @@ const CarouselContent = styled.div`
     width: 100%;
     height: 100vh;
     float: left;
-    background: ${({ theme }) => theme.palette.beige};
+    background: ${({ theme }) => theme.body};
 `;
 
 const ContentWrapper = styled.div`
@@ -91,8 +90,9 @@ const AddInput = styled.input`
     width: 50%;
     padding: 1rem;
     font-size: 1.6rem;
-    background-color: ${({ theme }) => theme.palette.inputColor};
+    background-color: ${({ theme }) => theme.input};
     border: 1px solid ${({ theme }) => theme.palette.borderColor};
+    color: ${({ theme }) => theme.text};
     @media ${({ theme }) => theme.width.mobile} {
         height: 1rem;
     }
@@ -114,7 +114,7 @@ const AddButton = styled.button`
     font-size: 1rem;
     font-weight: 600;
     border: none;
-    background-color: ${({ theme }) => theme.palette.navy};
+    background-color: ${({ theme }) => theme.button};
     color: ${({ theme }) => theme.palette.white};
     border-radius: 4px;
 `;
@@ -149,10 +149,10 @@ const SubmitButton = styled.button`
 `;
 const AddWeight = () => {
     const [alone, setAlone] = useState('');
-    const [togepther, setTogether] = useState(0);
+    const [together, setTogether] = useState(0);
     const weightResult = together - alone;
     const nextRef = useRef(null);
-    const dispatch = useDisatch();
+    const dispatch = useDispatch();
     const date = new Date();
 
     const today = date.toLocaleString();

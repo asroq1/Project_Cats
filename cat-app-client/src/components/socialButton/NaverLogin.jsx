@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const NaverButton = styled.button`
     width: 49%;
-    background-color: ${({theme})=>theme.palette.beige};
+    background-color: ${({ theme }) => theme.body};
     border: none;
     img {
         width: 100%;

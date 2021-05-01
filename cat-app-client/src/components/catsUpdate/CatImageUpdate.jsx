@@ -62,7 +62,10 @@ const SliderContainer = styled.div`
     }
 `;
 
-const CatImageUpdate = ({currentCat}) => {
+const CatImageUpdate = ({cat, currentIndex}) => {
+
+    const currentCat = cat.find((v) => v.id === currentIndex);
+    
     const [imageSrc, setImageSrc] = useState(null);
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useInput(1.0);
@@ -84,15 +87,16 @@ const CatImageUpdate = ({currentCat}) => {
 
     const showCroppedImage = useCallback(async () => {
         try {
-            const croppedImage = await getCroppedImg(
+            const [toSave, blobURL] = await getCroppedImg(
                 imageSrc,
                 croppedAreaPixels
             );
-            console.log('donee', { croppedImage });
-            setCroppedImage(croppedImage);
+            console.log('donee', { blobURL });
+            setCroppedImage(blobURL);
+            
             dispatch({
                 type: SET_CURRENT_IMAGE,
-                data: croppedImage,
+                data: toSave,
             });
         } catch (e) {
             console.error(e);
@@ -118,6 +122,7 @@ const CatImageUpdate = ({currentCat}) => {
     const onFileChange = async (e) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
+            console.log(file);
             let imageDataUrl = await readFile(file);
 
             setImageSrc(imageDataUrl);

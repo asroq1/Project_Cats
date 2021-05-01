@@ -20,7 +20,7 @@ const LoginContainer = styled.form`
         font-size: 1rem;
         border-radius: 4px;
     }
-    // @media ${({theme}) => theme.width.mobile} {
+    // @media ${({ theme }) => theme.width.mobile} {
     //     // width: 85vw;
     //     width: 100%;
     // }
@@ -33,7 +33,7 @@ const LoginInput = styled.input`
     height: 1rem;
     padding: 1rem;
     border: 1px solid #909090;
-    background-color: ${palette.inputColor};
+    background-color: ${({ theme }) => theme.input};
 `;
 const SubmitButton = styled.button`
     background: #f2cc8f;
@@ -41,7 +41,7 @@ const SubmitButton = styled.button`
     font-size: 1rem;
     font-weight: bold;
     border: none;
-    background-color: ${palette.navy};
+    background-color: ${({ theme }) => theme.button};
 `;
 
 const ErrorMessages = styled.p`
@@ -56,11 +56,11 @@ const SocialContainer = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    button{
+    button {
         //width:49%:
         flex: 1;
     }
-    // @media ${({theme}) => theme.width.mobile} {
+    // @media ${({ theme }) => theme.width.mobile} {
     //     // width: 85vw;
     //     width: 100%;
     // }

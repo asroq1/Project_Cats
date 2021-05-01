@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef, useMemo } from 'react';
+import React, { useCallback, useState, useRef, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -9,11 +9,13 @@ import 'font-awesome/css/font-awesome.min.css';
 
 import {InnerGlobal, StyledInputBlock, CenterWrapper, ButtonWrapper, RadioBtnWrapper}from './styles.js';
 
-const CatsUpdate = ({currentCat}) => {
+const CatsUpdate = ({cat, currentIndex}) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const {currImgUrl} = useSelector((state) => state.cat);
+    const currentCat = cat.find((v) => v.id === currentIndex);
+
+    const {currImgUrl, updateCatDone} = useSelector((state) => state.cat);
     const [currbirthyear, currbirthmonth, currbirthdate] = currentCat.birth.split("-");
     const [name, onChangeName] =useInput(currentCat.name);
     const [birthyear, onChangeBirthYear] = useInput(currbirthyear);
@@ -28,26 +30,29 @@ const CatsUpdate = ({currentCat}) => {
             const formData = new FormData();
             formData.append('birth', birthyear+"-"+birthmonth+"-"+birthdate);
             formData.append('gender',gender);
-            // POST API가 id를 요구하기 때문
-            //formData.append('id', uuidv4());
             formData.append('name',name);
             console.log(currImgUrl);
             formData.append('photo', currImgUrl);
 
-            // console.log("key")
-            // for (var key of formData.keys()){
-            //     console.log(key);
-            // }
+            const data = {
+                id: currentIndex,
+                data: formData,
+            }
 
-            // console.log("value")
-            // for (var value of formData.values()){
-            //     console.log(value);
-            // }
+            console.log("key")
+            for (var key of formData.keys()){
+                console.log(key);
+            }
 
-            // console.log("entry")
-            // for (var entry of formData.entries()){
-            //     console.log(entry);
-            // }
+            console.log("value")
+            for (var value of formData.values()){
+                console.log(value);
+            }
+
+            console.log("entry")
+            for (var entry of formData.entries()){
+                console.log(entry);
+            }
 
             dispatch({
                 type: SET_CURRENT_IMAGE,
@@ -56,11 +61,10 @@ const CatsUpdate = ({currentCat}) => {
 
             dispatch({
                 type: UPDATE_CAT_REQUEST,
-                data: formData,
+                data: data,
             });
-            history.push('/user/main');
         },
-        [currImgUrl, name, birthyear, birthmonth, birthdate, gender]
+        [currImgUrl, name, birthyear, birthmonth, birthdate,gender]
     );
 
     const goBack = useCallback(() => {
@@ -69,6 +73,13 @@ const CatsUpdate = ({currentCat}) => {
 
     const paddingStyle = useMemo(() => ({ paddingTop: '2rem' }), []);
     const marginTopStyle = useMemo(() =>({ marginTop: '0.5rem' }), []);
+
+    useEffect(() => {
+
+        if (updateCatDone){
+            history.push('/user/main');
+        }
+    }, [updateCatDone]);
 
     return (
         <>

@@ -6,7 +6,11 @@ import com.pso.cat.dto.UserDto;
 import com.pso.cat.repository.UserRepository;
 import com.pso.cat.util.SecurityUtil;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,12 +39,15 @@ public class UserService {
 
         User user = User.builder()
             .email(request.getEmail())
-            .password(passwordEncoder.encode(request.getPassword()))
             .nickname(request.getNickname())
             .loginType(request.getLoginType())
             .authorities(Collections.singleton(authority))
             .state(1)
             .build();
+
+        if (!StringUtils.isEmpty(request.getPassword())) {
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
+        }
 
         return userRepository.save(user);
     }
@@ -67,6 +74,12 @@ public class UserService {
 
     public void remove() {
         userRepository.inactive(SecurityUtil.getCurrentUserId().orElseThrow(() -> new RuntimeException("로그인해주세요")));
+    }
+
+    public List<UserDto.Response> list() {
+        return userRepository.findAll().stream().map(
+                user -> UserDto.Response.ofEntity(user)
+        ).collect(Collectors.toList());
     }
 
 }

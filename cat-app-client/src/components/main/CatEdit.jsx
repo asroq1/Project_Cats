@@ -1,8 +1,7 @@
-import React, { useEffect, useCallback, useMemo } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import React, { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
-import palette from '../../styles/palette';
 
 const Global = styled.div`
     background-color: white;
@@ -28,7 +27,7 @@ const PhotoContainer = styled.img`
     width: 200px;
     height: 200px;
     margin-top: 2rem;
-    border: 2px solid ${palette.navy};
+    border: 2px solid ${({theme}) => theme.palette.navy};
     object-fit: cover;
 `;
 
@@ -38,8 +37,8 @@ const ButtonWrapper = styled.button`
     border-radius: 5px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${palette.navy};
-    color: ${palette.beige};
+    background-color: ${({theme}) => theme.palette.navy};
+    color: ${({theme}) => theme.palette.beige};
     cursor: pointer;
     border: 1px solid black;
     &:hover {

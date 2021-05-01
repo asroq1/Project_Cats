@@ -24,21 +24,26 @@ const CommentSubmitButton = styled.button`
     position: absolute;
     right: 0;
     bottom: -40;
-
     border: none;
-    background-color: lightgray;
     border-radius: 10px;
 
-    font-size: 1rem;
+    background-color:  lightgray;
+     
+
+    //font-size: 1rem;
+    padding: 0.5rem;
+
+    cursor: pointer;
 `;
 
-const CommentForm = ({ post }) => {
-    const id = localStorage.currentUser;
-    const { addCommentDone, addCommentLoading } = useSelector(
-        (state) => state.post
-    );
+const CommentForm = ({ id }) => {
+    const { addCommentDone } = useSelector((state) => state.post);
+    const {me} = useSelector((state) => state.user);
+
+    
     const dispatch = useDispatch();
     const [commentText, onChangeCommentText, setCommentText] = useInput('');
+
 
     useEffect(() => {
         if (addCommentDone) {
@@ -46,16 +51,19 @@ const CommentForm = ({ post }) => {
         }
     }, [addCommentDone]);
 
-    const onSubmitComment = useCallback(() => {
+    const onSubmitComment = useCallback((e) => {
+        e.preventDefault();
         dispatch({
             type: ADD_COMMENT_REQUEST,
-            data: { content: commentText, postId: post.id, userId: id },
+            // API와 연동 위해 추가 작업
+            // 댓글 추가할 때마다 댓글 부분 reload되도록 처리
+            data: { content: commentText, postId: id},
         });
-    }, [commentText, id]);
+    }, [commentText]);
 
     return (
         <>
-            <form onFinish={onSubmitComment}>
+            <form onSubmit={onSubmitComment}>
                 <CommentFormWrapper>
                     <textarea
                         value={commentText}
@@ -66,8 +74,7 @@ const CommentForm = ({ post }) => {
                 </CommentFormWrapper>
 
                 <CommentSubmitButton
-                    type="primary"
-                    htmlType="submit"
+                    type="submit"
                     // loading ={addCommentLoading}
                 >
                     달기

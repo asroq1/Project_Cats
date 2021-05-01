@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         "/webjars/**",
 
         // user
-        "/api/login",
+        "/api/login/**",
         "/api/signup",
 
         // test

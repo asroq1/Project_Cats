@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import OverallPostsLayout from '../board/OverallPostsLayout';
 import PostView from './PostView';
 import ImageCarousel from './ImageCarousel';
+import { READ_POST_REQUEST, UNLOAD_POST } from '../../reducers/post';
 
 const PostViewBody = styled.div`
     position: relative;
@@ -16,35 +17,34 @@ const PostViewBody = styled.div`
 `;
 
 const PostViewContainer = ({ match }) => {
-    //마운트 시 포스트 읽기 API 요청
-    const { postId } = match.params;
-    const dispatch = useDispatch();
-    const { post, error, loading } = useSelector(({ post, loading }) => ({
-        post: post.mainPosts[0],
-        error: post.error,
-        loading: '로딩하고 있어용',
-    }));
+    const { currentPost, readPostError } = useSelector((state) => state.post);
 
-    // useEffect(() => {
-    //     dispatch({
-    //         type: READ_POST_REQUEST,
-    //         data: postId
-    //     })
-    //     //언마운트 시 리덕스에서 포스트 데이터 없애기
-    //     dispatch({
-    //         type: UNLOAD_POST,
-    //     })
-    // }, [postId])
+    const { postId } = match.params;
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({
+            type: READ_POST_REQUEST,
+            data: parseInt(postId),
+        });
+
+        //언마운트 시 리덕스에서 포스트 데이터 없애기
+        return () => {
+            dispatch({
+                type: UNLOAD_POST,
+            });
+        };
+    }, [dispatch, postId]);
 
     return (
         <>
-        <OverallPostsLayout>
-        <PostViewBody>
-            <ImageCarousel images={post.Images} />
-            <PostView post={post} loading={loading} error={error} />    
-        </PostViewBody>
-        </OverallPostsLayout>
-
+            <OverallPostsLayout>
+                <PostViewBody>
+                    {/* <ImageCarousel images={currentPost.Images} /> */}
+                    <PostView postId={parseInt(postId)}post={currentPost} error={readPostError} />
+                </PostViewBody>
+            </OverallPostsLayout>
         </>
     );
 };

@@ -10,7 +10,7 @@ const IndexContainer = styled.div`
     width: 100%;
     height: 100vh;
     margin: 0 auto;
-    background-color: ${({theme}) => theme.palette.beige};
+    background-color: ${({ theme }) => theme.body};
 `;
 
 const LogoWrapper = styled.div`
@@ -28,7 +28,7 @@ const SignupButton = styled.div`
     align-items: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    background-color: ${({theme}) => theme.palette.navy};
+    background-color: ${({ theme }) => theme.button};
     border-radius: 4px;
     color: #fff;
     font-size: 1rem;
@@ -36,10 +36,10 @@ const SignupButton = styled.div`
     text-decoration: none;
 
     a {
-        color: ${({theme}) => theme.palette.white};
+        color: ${({ theme }) => theme.palette.white};
         text-decoration: none;
     }
-    @media ${({theme}) => theme.width.mobile} {
+    @media ${({ theme }) => theme.width.mobile} {
         // width: 85vw;
         width: 100vw;
     }
@@ -61,7 +61,7 @@ const DivdeLine = styled.div`
 const DivdeText = styled.div`
     width: 15%;
     text-align: center;
-    color: ${({theme}) => theme.palette.borderColor};
+    color: ${({ theme }) => theme.palette.borderColor};
 `;
 
 const Logo = styled.img`
@@ -71,7 +71,7 @@ const Logo = styled.img`
     // width: 30%;
     width: 80%;
     height: 25vh;
-    @media ${({theme}) => theme.width.mobile} {
+    @media ${({ theme }) => theme.width.mobile} {
         //width: 85vw;
         width: 100vw;
     }
