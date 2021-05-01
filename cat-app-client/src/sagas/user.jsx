@@ -45,40 +45,12 @@ function* signUp(action) {
 }
 
 function logInAPI(data) {
-    return (
-        axios
-            // CORS 문제 해결에 따라 줄 변경
-            //.post('/api/login', data)
-            .post('/api/login', data)
-            // .then((res) => {
-            //     //     console.log(`res data: ${data}`);
-            //     const { token } = res.data;
-            //     axios.defaults.headers.common[
-            //         'Authorization'
-            //     ] = `Bearer${token}`;
-
-            //     //     // 현재 유저 아이디만 로컬 스토리지에 저장
-            //     //     const { id } = jwt.decode(token);
-            //     //     //CORS 문제 해결에 따라 아래 두 줄 중 하나 사용
-            //     //     localStorage.setItem('currentUser', id);
-            //     //     //localStorage.setItem('currentUser', 1);
-            //     localStorage.setItem('token', token);
-            // })
-    );
     return axios.post('/api/login', data);
 }
 // 2 call은 동기 await역할 fork는 비동기
-function* logIn(action) {   
+function* logIn(action) {
     try {
         const result = yield call(logInAPI, action.data);
-        //localStorage.setItem('currentUser', 1);
-        // console.log(`result data (이거 확인): ${result.data}`);
-
-        // const { token } = result.data;
-        // axios.defaults.headers.common[
-        //     'Authorization'
-        // ] = `Bearer${token}`;
-
         axios.defaults.headers.common[
             'Authorization'
         ] = `Bearer ${result.data.token}`;

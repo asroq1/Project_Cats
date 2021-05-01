@@ -20,11 +20,9 @@ export const initialState = {
 
     deleteCatError: null,
 
-
     updateCatLoading: false,
     updateCatDone: false,
     updateCatError: null,
-
 
     catWeight: null,
     user: {
@@ -259,9 +257,6 @@ const reducer = (state = initialState, action) => {
                 draft.deleteCatDone = true;
                 break;
             case DELETE_CAT_FAILURE:
-
-
-
                 draft.deleteCatLoading = false;
                 draft.deleteCatError = action.data;
                 break;
@@ -281,11 +276,14 @@ const reducer = (state = initialState, action) => {
                 draft.addWeightLoading = true;
                 draft.addWeightDone = false;
                 draft.addWeightError = null;
+                console.log(`리덕스 요청 weight : ${action.data.weight}`);
+
                 break;
             case ADD_WEIGHT_SUCCESS:
                 draft.addWeightLoading = false;
                 draft.addWeightDone = true;
-                draft.cat.Record.wgt.concat(action.data);
+                console.log(`리덕스 성공${action.data}`);
+                draft.cat.Record.weight.concat(action.data);
                 break;
             case ADD_WEIGHT_FAILURE:
                 draft.addWeightLoading = false;
@@ -296,12 +294,11 @@ const reducer = (state = initialState, action) => {
                 draft.deleteWeightDone = false;
                 draft.deleteWeightLoading = true;
                 draft.deleteWeightError = null;
-                draft.cat.Record.filter((v) => v.id !== action.data);
+                draft.cat[0].Record.filter((v) => v.id !== action.data);
                 break;
             case DELETE_WEIGHT_SUCCESS:
                 draft.deleteWeightDone = true;
                 draft.deleteWeightLoading = false;
-
                 break;
             case DELETE_WEIGHT_FAILURE:
                 draft.deleteWeightLoading = false;
