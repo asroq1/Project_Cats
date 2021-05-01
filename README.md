@@ -6,6 +6,13 @@ Built with [React + Redux + Redux-Saga] + [Spring Boot + MariaDB]
 
 [catchoo.netlify.app](https://catchoo.netlify.app)
 
+
+|||
+:---:|:---:|:---:
+![home](.cat-app-client/public/readMeImg/Catchoo_home.png)|![main](.cat-app-client/public/readMeImg/Catchoo_main.png)|![add](.cat-app-client/public/readMeImg/Catchoo_add.png)
+![post-list](.cat-app-client/public/readMeImg/Catchoo_post_list.png)|![post-view](.cat-app-client/public/readMeImg/Catchoo_post_view.png)|![post_write](.cat-app-client/public/readMeImg/Catchoo_post_write.png)
+![weight-add](.cat-app-client/public/readMeImg/Catchoo_weight.png)|![weight-graph](.cat-app-client/public/readMeImg/Catchoo_weight-graph.png)|![weight-list](.cat-app-client/public/readMeImg/Catchoo_weight_list.png)
+
 <br />
 
 ## Functionalities
@@ -41,7 +48,8 @@ Built with [React + Redux + Redux-Saga] + [Spring Boot + MariaDB]
   * _immer_ to ensure immutability of states.
   * _Axios_ to handle HTTP requests based on promises.
   * _qs_ to parse query strings.
-  * _Styled-component_ to style components without triggering unnecessary rerenders.
+  * _Styled-component_ to style components without triggering unnecessary rerenders, to store the shared design elements, and to provide dark/light mode options.
+  * _React-Easy-Crop_ to crop uploaded images.
   * _React-Slick_ to create image carousels.
   * _Recharts_ to create charts.
   * _Font-Awesome_  to use various icons.
