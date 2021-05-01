@@ -4,7 +4,12 @@ import shortId from 'shortid';
 
 const initialState = {
     mainPosts:[],  
-    imagePaths: [],
+    imagePaths: [
+
+        // 'https://images.unsplash.com/photo-1572097664187-7b183a6bda78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=675&q=80',
+        // 'https://lh3.googleusercontent.com/proxy/zf7oU6Dpf3eVygxcgjUyt0zQMUiH7mO1Hvr9ygse9b_PhGgrD7iPj7cR9aFBNy53_JGupIhtNOpRCKTv7eHT0sqfzggWM5lpzcD5gT-E0kkoB5QAkhM5-r6euWU4zEpxCH022ksHXbyGQ3J91-09cSYiG_E1gxbdMc-sZc6Y3mXvLrCf',
+        // 'https://image.fmkorea.com/files/attach/new/20190825/486616/1352801771/2125438472/03b3d5be5accbcbdc1d3c5ab990e8e88.jpg'
+    ],
     currentPost: null,
     currentComments: [],
 

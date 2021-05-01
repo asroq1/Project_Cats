@@ -61,8 +61,11 @@ const ImageCarousel = ({ images }) => {
                         slidesToScroll={1}
                     >
                         {images.map((v) => (
-                            <ImgWrapper key={v.src}>
-                                <img src={v.src} alt={v.src} />
+                            // <ImgWrapper key={v.src}>
+                            //     <img src={v.src} alt={v.src} />
+                            // </ImgWrapper>
+                            <ImgWrapper key={v.slice(0,10)}>
+                                 <img src={v} alt={v} />
                             </ImgWrapper>
                         ))}
                     </Slider>
