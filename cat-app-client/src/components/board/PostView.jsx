@@ -9,6 +9,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import CommentForm from './CommentForm';
 
 import CommentsWrapper from './CommentsWrapper'
+import ImageCarousel from './ImageCarousel';
 import { REMOVE_POST_REQUEST } from '../../reducers/post';
 
 const OverallContainer = styled.div`
@@ -75,7 +76,7 @@ const PostView = ({ postId, post, error }) => {
         history.goBack();
     })
     const dispatch = useDispatch();
-    const { removePostDone } = useSelector((state) => state.post);
+    const { removePostDone, imagePaths } = useSelector((state) => state.post);
 
     const onRemovePost = useCallback(
         (e)=>{
@@ -112,6 +113,10 @@ const PostView = ({ postId, post, error }) => {
         <OverallContainer>
             <h1 onClick={goBack}><i className = "fa fa-arrow-left"></i> 전체게시글 </h1>
             <PostHead>
+                
+                
+                {/* <ImageCarousel images={currentPost.Images} /> */}
+                <ImageCarousel images={imagePaths}/>
                 <h1>{title}</h1>
                 <SubInfo>
                     <span>

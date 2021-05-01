@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import OverallPostsLayout from '../board/OverallPostsLayout';
 import PostView from './PostView';
-import ImageCarousel from './ImageCarousel';
 import { READ_POST_REQUEST, UNLOAD_POST } from '../../reducers/post';
 
 const PostViewBody = styled.div`
@@ -41,7 +40,7 @@ const PostViewContainer = ({ match }) => {
         <>
             <OverallPostsLayout>
                 <PostViewBody>
-                    {/* <ImageCarousel images={currentPost.Images} /> */}
+
                     <PostView postId={parseInt(postId)}post={currentPost} error={readPostError} />
                 </PostViewBody>
             </OverallPostsLayout>
