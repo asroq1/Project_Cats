@@ -20,11 +20,9 @@ export const initialState = {
 
     deleteCatError: null,
 
-
     updateCatLoading: false,
     updateCatDone: false,
     updateCatError: null,
-
 
     catWeight: null,
     user: {
@@ -261,9 +259,6 @@ const reducer = (state = initialState, action) => {
                 draft.deleteCatDone = true;
                 break;
             case DELETE_CAT_FAILURE:
-
-
-
                 draft.deleteCatLoading = false;
                 draft.deleteCatError = action.data;
                 break;
@@ -283,16 +278,14 @@ const reducer = (state = initialState, action) => {
                 draft.addWeightLoading = true;
                 draft.addWeightDone = false;
                 draft.addWeightError = null;
+                console.log(`리덕스 요청 weight : ${action.data.weight}`);
+
                 break;
             case ADD_WEIGHT_SUCCESS:
                 draft.addWeightLoading = false;
                 draft.addWeightDone = true;
-                draft.currentCatWeights.unshift(action.data);
-                // 복사해주는 게 리덕스 개념 상 ('추적'에 중점을 둠) 맞는데
-                // 제로초님도 그러면 코드가 너무 복잡해져서
-                // 이런식으로 하셨더라구요! (맘껏 바꿔주세요)
-                // unshift가 'in-place' 함수이기 때문에 - 배열 그 자체를 바꿈. 배열을 복사해 바꾸는 게 아니라
-                // 이런식으로 코드가 들어가는 듯 합니다.
+                console.log(`리덕스 성공${action.data.weight}`);
+                draft.cat.Record.weight.concat(action.data.weight);
                 break;
             case ADD_WEIGHT_FAILURE:
                 draft.addWeightLoading = false;
@@ -303,12 +296,11 @@ const reducer = (state = initialState, action) => {
                 draft.deleteWeightDone = false;
                 draft.deleteWeightLoading = true;
                 draft.deleteWeightError = null;
+                draft.cat[0].Record.filter((v) => v.id !== action.data);
                 break;
             case DELETE_WEIGHT_SUCCESS:
                 draft.deleteWeightDone = true;
                 draft.deleteWeightLoading = false;
-                draft.currentCatWeights.filter((v) => v.id !== action.data);
-
                 break;
             case DELETE_WEIGHT_FAILURE:
                 draft.deleteWeightLoading = false;

@@ -69,8 +69,7 @@ const SocialContainer = styled.div`
 const LoginForm = ({ history }) => {
     const dispatch = useDispatch();
     const { register, errors, handleSubmit } = useForm();
-    const { logInDone } = useSelector((state) => state.user);
-
+    const { logInDone, logInError } = useSelector((state) => state.user);
     const onSubmit = useCallback((data) => {
         console.log('LoginForm', data);
         return dispatch(loginRequestAction(data));
@@ -117,6 +116,12 @@ const LoginForm = ({ history }) => {
                 {errors.pwd && errors.pwd.type === 'minLength' && (
                     <ErrorMessages>
                         비밀번호는 최소 6자 이상을 입력해주세요.
+                    </ErrorMessages>
+                )}
+                {logInError && (
+                    <ErrorMessages>
+                        계정 혹은 비밀번호가 일치하지 않습니다. 입력한 내용을
+                        다시 확인해 주세요.
                     </ErrorMessages>
                 )}
                 <SubmitButton type="submit">로그인</SubmitButton>

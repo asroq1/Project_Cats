@@ -1,6 +1,7 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { signUpRequest } from '../reducers/user';
 
@@ -69,11 +70,19 @@ const Title = styled.h2`
 
 const KakaLogin = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
+    const { signUpDone } = useSelector((state) => state.user);
     const { register, errors, handleSubmit } = useForm();
     const onSubmit = useCallback((data) => {
         console.log('success', data);
         dispatch(signUpRequest(data));
     }, []);
+
+    useEffect(() => {
+        if (signUpDone) {
+            history.push('/user/main');
+        }
+    }, [signUpDone]);
     return (
         <SignupBackground>
             <KakaoSignupContainer onSubmit={handleSubmit(onSubmit)}>
