@@ -5,6 +5,7 @@ import SignUpForm from '../components/signUp/SignUpForm';
 import palette from '../styles/palette';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import KakaoSignup from '../components/socialButton/KakaoSignup';
 const SignupBackground = styled.div`
     // background-color: #f4f1de;
 `;
@@ -43,7 +44,9 @@ const ExitButton = styled.p`
     }
     
 }
+
 `;
+
 // const DivideLine = styled.div`
 //     width: 30%;
 //     margin: 0 auto;
@@ -73,6 +76,7 @@ const signUp = () => {
                 </TitleWrapper>
                 <article>
                     <SignUpForm />
+                    <KakaoSignup />
                 </article>
             </SignupWrapper>
         </SignupBackground>

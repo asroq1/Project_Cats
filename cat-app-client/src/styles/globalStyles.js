@@ -9,7 +9,7 @@ body{
 `;
 
 export const lightTheme = {
-    body: '#F4F1DE',
+    body: '#F4F1DE', //배경색
     text: '#484848',
     primary: '#fff',
     input: '#f2f1ee',
@@ -32,4 +32,5 @@ export const darkTheme = {
     resultHeader: '#1e1e1e',
     resultBackground: '#121212',
     resultExit: '#484848',
+    test: 'dark',
 };
