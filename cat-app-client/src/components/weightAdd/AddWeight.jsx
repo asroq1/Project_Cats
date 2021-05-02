@@ -202,7 +202,8 @@ const AddWeight = () => {
     );
 
     useEffect(() => {
-        if (!logInDone) {
+        //if (!logInDone) {
+        if (!localStorage.token){
             history.push('/');
         }
     }, [logInDone]);

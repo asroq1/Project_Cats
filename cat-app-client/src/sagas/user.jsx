@@ -24,6 +24,7 @@ import {
 } from '../reducers/user';
 
 import axios from 'axios';
+import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 function signUpAPI(data) {
     return axios.post('/api/signup', data);
@@ -54,9 +55,10 @@ function logInAPI(data) {
 function* logIn(action) {
     try {
         const result = yield call(logInAPI, action.data);
-        axios.defaults.headers.common[
-            'Authorization'
-        ] = `Bearer ${result.data.token}`;
+        const token = result.data.token;
+        localStorage.setItem('token', token);
+
+        setAuthorizationToken(token);
 
         yield put({
             type: LOG_IN_SUCCESS,
@@ -72,20 +74,23 @@ function* logIn(action) {
     }
 }
 
-function logOutAPI() {
-    return axios
-        .post('/api/logout')
-        .then(localStorage.removeItem('currentUser'));
-}
+// function logOutAPI() {
+//     return axios
+//         .post('/api/logout')
+//         .then(localStorage.removeItem('token'));
+// }
 
 function* logOut() {
     try {
-        const result = yield call(logOutAPI);
+        //const result = yield call(logOutAPI);
         yield delay(1000);
+
+        localStorage.removeItem('token');
+        
         yield all([
             put({
                 type: LOG_OUT_SUCCESS,
-                data: result.data,
+                //data: result.data,
             }),
         ]);
     } catch (err) {

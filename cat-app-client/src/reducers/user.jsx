@@ -141,8 +141,8 @@ const reducer = (state = initialState, action) =>
                 break;
             case LOG_OUT_SUCCESS:
                 draft.logOutLoading = false;
-                draft.logInDone = false;
-                draft.me = action.data;
+                draft.logOutDone = true;
+                draft.me = null;
                 break;
             case LOG_OUT_FAILURE:
                 draft.logOutLoading = false;

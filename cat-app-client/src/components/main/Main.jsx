@@ -170,7 +170,7 @@ const Main = ({ cat, currentIndex, age }) => {
 };
 
 Main.propTypes = {
-    cat: PropTypes.object.isRequired,
+    cat: PropTypes.array.isRequired,
     currentIndex: PropTypes.number.isRequired,
     age: PropTypes.array.isRequired,
 }

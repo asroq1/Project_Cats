@@ -1,9 +1,11 @@
-import React, { useCallback, useState } from 'react';
-import {useSelector} from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useEffect,useCallback, useState } from 'react';
+import { useSelector,   useDispatch} from 'react-redux';
+import { useHistory,Link } from 'react-router-dom';
 import palette from '../../styles/palette';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
+import { LOG_OUT_REQUEST } from '../../reducers/user';
 
 const BackgroundWrapper = styled.div`
     position: fixed;
@@ -60,6 +62,7 @@ const MenuWrapper = styled.div`
     h2 {
 
         color: ${({theme}) => theme.palette.beige}
+        
     }
     h2:hover {
         color: ${({ theme }) => theme.palette.orange};
@@ -89,6 +92,22 @@ const ModalMenu = ({ onClose }) => {
         setNightMode(!isNightMode);
     });
 
+    const dispatch = useDispatch();
+
+            
+    const onLogOut = useCallback(() => {
+        dispatch({
+            type: LOG_OUT_REQUEST,
+        })
+    })
+
+    const history = useHistory();
+    useEffect(() => {
+        if (!localStorage.token){
+            history.push("/");
+        }
+    }, [me])
+
     return (
         <BackgroundWrapper>
         <Overlay>
@@ -117,8 +136,8 @@ const ModalMenu = ({ onClose }) => {
                 <Link to="/user/settings" onClick={onClose}>
                     <h2>문의하기</h2>
                 </Link>
-                <Link to="/user/settings" onClick={onClose}>
-                    <h2>로그아웃</h2>
+                <Link to="#" onClick={onClose}>
+                    <h2> <span onClick={onLogOut}>로그아웃</span></h2>
                 </Link>
             </MenuWrapper>
 

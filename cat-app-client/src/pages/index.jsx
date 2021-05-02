@@ -96,13 +96,14 @@ const Title = styled.h1`
     color: ${({ theme }) => theme.text};
 `;
 const Index = () => {
-    const { me, logInDone } = useSelector((state) => state.user);
+    const { me, logInDone, logOutDone } = useSelector((state) => state.user);
     const history = useHistory();
-    // useEffect(() => {
-    //     if (logInDone) {
-    //         history.push('/user/main');
-    //     }
-    // }, []);
+    useEffect(() => {
+        //if (logInDone) {
+        if (localStorage.token){
+            history.push('/user/main');
+        }
+    }, [logInDone, logOutDone]);
 
     return (
         <div>
