@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import 'font-awesome/css/font-awesome.min.css';
 
+import PropTypes from 'prop-types';
+
 //코드 너무 장황해지니
 //필요 딱히 없는 건 나중에 지워주기
 //짧은 건 useMemo로 넣어줌
@@ -16,6 +18,7 @@ const InnerGlobal = styled.div`
     margin: 0;
     padding: 0;
 `;
+
 const GeneralWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -104,7 +107,7 @@ const Main = ({ cat, currentIndex, age }) => {
                     {age[0]}년 {age[1]}개월 |{' '}
                     {currentCat.gender === 'M' ? '수컷' : '암컷'}
                     <Link to="/cat/update">
-                        <i className = "fa fa-edit"></i>
+                        <i className="fa fa-edit"></i>
                     </Link>
                 </div>
                 {currentCat.photo && currentCat.photo !== 'null' ? (
@@ -113,7 +116,7 @@ const Main = ({ cat, currentIndex, age }) => {
                     />
                 ) : (
                     <PhotoContainer>
-                        <i className = "fa fa-paw"></i>
+                        <i className="fa fa-paw"></i>
                     </PhotoContainer>
                 )}
                 <WeightRecordWrapper>
@@ -165,5 +168,11 @@ const Main = ({ cat, currentIndex, age }) => {
         </InnerGlobal>
     );
 };
+
+Main.propTypes = {
+    cat: PropTypes.array.isRequired,
+    currentIndex: PropTypes.number.isRequired,
+    age: PropTypes.array.isRequired,
+}
 
 export default Main;

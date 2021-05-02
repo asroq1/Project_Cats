@@ -62,7 +62,6 @@ function* addCat(action) {
             type: ADD_CAT_SUCCESS,
             data: result.data,
         });
-        
     } catch (err) {
         yield put({
             type: ADD_CAT_FAILURE,
@@ -71,11 +70,9 @@ function* addCat(action) {
     }
 }
 
-
 function deleteCatAPI(id) {
-    return axios.delete(`/api/cats/{id}?id=${id}`);
+    return axios.delete(`/api/cats/${id}`);
 }
-
 
 function* deleteCat(action) {
     try {
@@ -93,6 +90,7 @@ function* deleteCat(action) {
 }
 
 function updateCatAPI(data) {
+    console.log(`data ID = ${data.id}`);
     return axios.patch(`/api/cats/${data.id}`, data.data);
 }
 
@@ -101,7 +99,7 @@ function* updateCat(action) {
         const result = yield call(updateCatAPI, action.data);
         yield put({
             type: UPDATE_CAT_SUCCESS,
-            data: result.data,
+            data: action.data,
         });
     } catch (err) {
         yield put({
@@ -112,14 +110,15 @@ function* updateCat(action) {
 }
 
 function addCatWeightAPI(data) {
-    return axios.post('http://localhost:8080/api/records', data);
+    console.log(`id`, data);
+    return axios.post(`/api/records?catId=${data.id}&weight=${data.weight}`);
 }
 function* addWeight(action) {
     try {
-        const result = yield call(addCatWeightAPI, action.data);
+        yield call(addCatWeightAPI, action.data);
         yield put({
             type: ADD_WEIGHT_SUCCESS,
-            data: result.data,
+            data: action.data,
         });
     } catch (err) {
         yield put({
@@ -148,14 +147,16 @@ function* deleteWeight(action) {
 }
 
 function getWeightAPI(id) {
-    return axios.get(`api/records?catId=${id}`);
+    return axios.get(`/api/records?catId=${id}`);
+
     // 백엔드 팀이랑 api 주소 더 깔끔하게 만드는 것 의논해봐도 될 것 같아요.
     // `api/records/${id}` 이런 식으로 들어가게
 }
 function* getWeight(action) {
     const result = yield (getWeightAPI, action.data);
-    console.log(result);
+    console.log('result', result);
     try {
+        //yield (deleteWeightAPI, action.data);
         yield put({
             type: GET_WEIGHT_SUCCESS,
             data: result.data,

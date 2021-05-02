@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Global = styled.div`
     background-color: white;
@@ -47,7 +48,7 @@ const ButtonWrapper = styled.button`
     margin-top: 0.5rem;
 `;
 
-const CatEdit = ({ cat, current_index }) => {
+const CatEdit = ({ cat, currentIndex }) => {
     // styled-component대신 useMemo 써줌
     const colStyle = useMemo(
         () => ({
@@ -66,7 +67,7 @@ const CatEdit = ({ cat, current_index }) => {
         []
     );
 
-    const currentCat = cat[current_index];
+    const currentCat = cat[currentIndex];
 
     return (
         <Global>
@@ -97,7 +98,7 @@ const CatEdit = ({ cat, current_index }) => {
                 <Link
                     to={{
                         pathname: '/cat/addWeight',
-                        cat_id: current_index,
+                        cat_id: currentIndex,
                     }}
                 >
                     <ButtonWrapper>오늘 체중 기록하기</ButtonWrapper>
@@ -105,7 +106,7 @@ const CatEdit = ({ cat, current_index }) => {
                 <Link
                     to={{
                         pathname: '/cat/record',
-                        cat_id: current_index,
+                        cat_id: currentIndex,
                     }}
                 >
                     <ButtonWrapper>이전 데이터 보기</ButtonWrapper>
@@ -114,5 +115,10 @@ const CatEdit = ({ cat, current_index }) => {
         </Global>
     );
 };
+
+CatEdit.propTypes = {
+    cat: PropTypes.object.isRequired,
+    currentIndex: PropTypes.number.isRequired,
+}
 
 export default CatEdit;

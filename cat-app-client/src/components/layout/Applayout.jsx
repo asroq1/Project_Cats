@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styled from 'styled-components';
-
+import PropTypes from 'prop-types';
 
 const BodyWrapper = styled.div`
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
@@ -58,5 +58,7 @@ const Applayout = ({children}) => {
 
     )
 }
-
+Applayout.propTypes = {
+    children: PropTypes.node.isRequired,
+}
 export default Applayout;

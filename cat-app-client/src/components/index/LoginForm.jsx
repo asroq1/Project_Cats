@@ -33,6 +33,7 @@ const LoginInput = styled.input`
     height: 1rem;
     padding: 1rem;
     border: 1px solid #909090;
+    color: ${({ theme }) => theme.text};
     background-color: ${({ theme }) => theme.input};
 `;
 const SubmitButton = styled.button`
@@ -69,27 +70,28 @@ const SocialContainer = styled.div`
 const LoginForm = ({ history }) => {
     const dispatch = useDispatch();
     const { register, errors, handleSubmit } = useForm();
-    const { logInDone } = useSelector((state) => state.user);
-
+    const { logInDone, logInError, me } = useSelector((state) => state.user);
     const onSubmit = useCallback((data) => {
         console.log('LoginForm', data);
         return dispatch(loginRequestAction(data));
     }, []);
 
-    // const onSubmit = (data) => {
-    //     dispatch(loginRequestAction(data));
-    // };
+    // useEffect(() => {
+    //     if (me) {
+    //         history.push('/user/main');
+            // try {
+            //     localStorage.setItem('user', JSON.stringify(me));
+            // } catch (e) {
+            //     alert('로그인에 실패하였습니다.');
+            // }
+        //}
+    // }, [me, history]);
 
-    useEffect(() => {
-        if (logInDone) {
-            history.push('/user/main');
-        }
-    }, [logInDone]);
-    useEffect(() => {
-        if (!logInDone) {
-            history.push('/');
-        }
-    }, [logInDone]);
+    // useEffect(() => {
+    //     if (!localStorage.token) {
+    //         history.push('/');
+    //     }
+    // }, [logInDone]);
     return (
         <>
             <LoginContainer onSubmit={handleSubmit(onSubmit)}>
@@ -117,6 +119,12 @@ const LoginForm = ({ history }) => {
                 {errors.pwd && errors.pwd.type === 'minLength' && (
                     <ErrorMessages>
                         비밀번호는 최소 6자 이상을 입력해주세요.
+                    </ErrorMessages>
+                )}
+                {logInError && (
+                    <ErrorMessages>
+                        계정 혹은 비밀번호가 일치하지 않습니다. 입력한 내용을
+                        다시 확인해 주세요.
                     </ErrorMessages>
                 )}
                 <SubmitButton type="submit">로그인</SubmitButton>

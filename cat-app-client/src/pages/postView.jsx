@@ -1,12 +1,10 @@
-import React from 'react';
-
+import React from 'react'; 
 import PostViewContainer from  '../components/board/PostViewContainer';
 
-const PostView = ({}) => {    
-    
+const PostView = () => {    
     return (
         <>
-            <PostViewContainer />
+            <PostViewContainer/> 
         </>
     );
 };

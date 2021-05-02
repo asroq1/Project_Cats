@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import WeightResultGraph from '../components/weightResult/WeightResultGraph';
 import WeightResultList from '../components/weightResult/WeightResultList';
@@ -6,6 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { getWeightRequest } from '../reducers/cat';
+import axios from 'axios';
 
 const Header = styled.header`
     position: sticky;
@@ -47,7 +50,11 @@ const ExitButton = styled.span`
     }
 `;
 const WeightResult = () => {
+    const { currentCatWeights, currentIndex } = useSelector(
+        (state) => state.cat
+    );
     const [onList, setOnList] = useState(false);
+    const dispatch = useDispatch();
     const chartHandler = () => {
         setOnList(false);
     };
@@ -55,12 +62,18 @@ const WeightResult = () => {
         setOnList(true);
     };
 
+    useEffect(() => {
+        console.log('커런 인덱', currentIndex);
+        dispatch(getWeightRequest(currentIndex));
+    }, []);
+
+    useEffect(() => {
+        console.log('CurCatWeights', currentCatWeights);
+    });
     return (
         <>
             <Header>
-                <DataButton active activeClassName={{}} onClick={chartHandler}>
-                    그래프
-                </DataButton>
+                <DataButton onClick={chartHandler}>그래프</DataButton>
                 <DataButton
                     active={false}
                     activeClassName={{}}

@@ -2,6 +2,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import styled from 'styled-components'
+import PropTypes from 'prop-types';
 
 
 
@@ -71,7 +72,7 @@ const CommentsWrapper = ({postId}) => {
     
     return (
         <CommentsLayout>
-            <h1>{currentComments?'댓글':''}</h1>
+            <h1>{currentComments.length>0?'댓글':''}</h1>
             <div>
                 {currentComments && currentComments.map((c, i) => (
                     <EachComment key={c.content + i}>
@@ -92,6 +93,10 @@ const CommentsWrapper = ({postId}) => {
         </CommentsLayout>
     )
 };
+
+CommentsWrapper.propTypes = {
+    postId: PropTypes.number.isRequired,
+}
 
 
 export default CommentsWrapper;

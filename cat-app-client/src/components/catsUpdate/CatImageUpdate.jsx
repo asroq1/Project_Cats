@@ -9,6 +9,8 @@ import useInput from '../../hooks/useInput';
 import styled from 'styled-components';
 import 'font-awesome/css/font-awesome.min.css';
 
+import PropTypes from  'prop-types';
+
 import { SET_CURRENT_IMAGE } from '../../reducers/cat';
 
 const InnerGlobal = styled.div`
@@ -23,14 +25,12 @@ const InnerGlobal = styled.div`
 const ImageUploadButtons = styled.button`
     flex: 1;
     padding:1rem;
-
     border-radius:10px;
     font-size: 1rem;
     font-weight: bold;
     background-color: ${({theme}) => theme.palette.orange};
     border: none;
     cursor: pointer;
-
     color: white;
     margin-top: 0.5rem;
     & + & {
@@ -63,9 +63,7 @@ const SliderContainer = styled.div`
 `;
 
 const CatImageUpdate = ({cat, currentIndex}) => {
-
     const currentCat = cat.find((v) => v.id === currentIndex);
-    
     const [imageSrc, setImageSrc] = useState(null);
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useInput(1.0);
@@ -74,11 +72,9 @@ const CatImageUpdate = ({cat, currentIndex}) => {
 
     // 파일 업로드 창 숨기기 위함
     const imageInput = useRef();
-
     const onClickImageUpload = useCallback(() => {
         imageInput.current.click();
     }, [imageInput.current]);
-
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels);
     }, []);
@@ -130,12 +126,6 @@ const CatImageUpdate = ({cat, currentIndex}) => {
     };
 
     const headerStyle = useMemo(() => ({ fontWeight: 'bold',paddingTop: '30px' , lineHeight: '1.5'}), []);
-
-    const flexStyle = useMemo(
-        () => ({ display: 'flex', justifyContent: 'center', height: '80px' }),
-        []
-    );
-    const centerStyle = useMemo(() => ({ margin: '0 auto' }), []);
 
     return (
         <>
@@ -223,6 +213,11 @@ function readFile(file) {
         reader.addEventListener('load', () => resolve(reader.result), false);
         reader.readAsDataURL(file);
     });
+}
+
+CatImageUpdate.propTypes = {
+    cat: PropTypes.object.isRequired,
+    currentIndex: PropTypes.number
 }
 
 export default CatImageUpdate;

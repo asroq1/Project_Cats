@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { DELETE_CAT_REQUEST } from '../../reducers/cat';
 
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const InnerGlobal = styled.div`
     width: 80%;
@@ -69,5 +70,9 @@ const CatsDelete = ({currentIndex}) => {
         </>
     );
 };
+
+CatsDelete.propTypes = {
+    currentIndex: PropTypes.number.isRequired
+}
 
 export default CatsDelete;

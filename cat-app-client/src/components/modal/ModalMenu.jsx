@@ -1,24 +1,23 @@
-import React, { useCallback, useState } from 'react';
-import {useSelector} from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useEffect,useCallback, useState } from 'react';
+import { useSelector,   useDispatch} from 'react-redux';
+import { useHistory,Link } from 'react-router-dom';
 import palette from '../../styles/palette';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+
+import { LOG_OUT_REQUEST } from '../../reducers/user';
 
 const BackgroundWrapper = styled.div`
     position: fixed;
-
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 5000;
-
     background-color: none;
-
 `;
 
 const Overlay = styled.div`
-    
     width: 100%;
     max-width: ${({theme}) => theme.width.mobile};
     box-sizing: border-box;
@@ -60,12 +59,11 @@ const MenuWrapper = styled.div`
     a {
         text-decoration: none;
     }
-
     h2 {
 
         color: ${({theme}) => theme.palette.beige}
+        
     }
-    
     h2:hover {
         color: ${({ theme }) => theme.palette.orange};
     }
@@ -78,7 +76,6 @@ const NightModeWrapper = styled.div`
     padding: 2rem;
     border-top: 1.5px solid ${({ theme }) => theme.palette.beige};
     margin-top: auto;
-
     cursor: pointer;
 `;
 
@@ -88,15 +85,28 @@ const NightWrapper = styled.button`
 
 const ModalMenu = ({ onClose }) => {
     //나중에 redux 상태 만들어줄 것
+    // 야간모드 토글 위치 협의 사항
     const [isNightMode, setNightMode] = useState(false);
-
-
-
     const { me } = useSelector((state)=>state.user);
-
     const toggleNightMode = useCallback(() => {
         setNightMode(!isNightMode);
     });
+
+    const dispatch = useDispatch();
+
+            
+    const onLogOut = useCallback(() => {
+        dispatch({
+            type: LOG_OUT_REQUEST,
+        })
+    })
+
+    const history = useHistory();
+    useEffect(() => {
+        if (!localStorage.token){
+            history.push("/");
+        }
+    }, [me])
 
     return (
         <BackgroundWrapper>
@@ -126,8 +136,8 @@ const ModalMenu = ({ onClose }) => {
                 <Link to="/user/settings" onClick={onClose}>
                     <h2>문의하기</h2>
                 </Link>
-                <Link to="/user/settings" onClick={onClose}>
-                    <h2>로그아웃</h2>
+                <Link to="#" onClick={onClose}>
+                    <h2> <span onClick={onLogOut}>로그아웃</span></h2>
                 </Link>
             </MenuWrapper>
 
@@ -146,5 +156,9 @@ const ModalMenu = ({ onClose }) => {
         </BackgroundWrapper>
     );
 };
+
+ModalMenu.propTypes = {
+    onClose: PropTypes.func.isRequired,
+}
 
 export default ModalMenu;

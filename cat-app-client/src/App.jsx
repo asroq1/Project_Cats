@@ -19,6 +19,9 @@ import { GlobalStyles, lightTheme, darkTheme } from './styles/globalStyles';
 import Toggle from './components/toggle/Toggle';
 import { useDarkMode } from './styles/useDarkMode ';
 import styled, { ThemeProvider } from 'styled-components';
+import { useEffect } from 'react';
+import { loginCheck } from './reducers/user';
+import { useDispatch } from 'react-redux';
 
 const Container = styled.div`
     backgroud: black;
@@ -26,6 +29,7 @@ const Container = styled.div`
 
 function App() {
     const [theme, toggleTheme] = useDarkMode();
+    const dispatch = useDispatch();
     const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
     return (
@@ -48,7 +52,7 @@ function App() {
                     <Route path="/post/write" component={postWrite} />
                     <Route path="/post/list" component={postList} />
                     <Route path="/post/view/:postId" component={postView} />
-                    <Route path="/post/edit/:postId" component={postEdit}/>
+                    <Route path="/post/edit/:postId" component={postEdit} />
                 </Container>
             </ThemeProvider>
         </>

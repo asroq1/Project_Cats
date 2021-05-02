@@ -12,24 +12,26 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import Applayout from './components/layout/Applayout';
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
-
+// import { persistStore } from 'redux-persist';
+// import { PersistGate } from 'redux-persist/integration/react';
 axios.defaults.baseURL =
     'http://ec2-3-36-163-150.ap-northeast-2.compute.amazonaws.com:8080/';
-// axios.defaults.withCredentials = true;
 
 const store = Store(rootReducer, composeWithDevTools());
-
+// const persistor = persistStore(store);
 ReactDOM.render(
     <React.StrictMode>
         {/* React.StrictMode는 배포시 지울 코드 */}
         <Provider store={store}>
-            <ThemeProvider theme={theme}>
-                <Router>
-                    <Applayout>
-                        <App />
-                    </Applayout>
-                </Router>
-            </ThemeProvider>
+            {/* <PersistGate loading={null} persistor={persistor}> */}
+                <ThemeProvider theme={theme}>
+                    <Router>
+                        <Applayout>
+                            <App />
+                        </Applayout>
+                    </Router>
+                </ThemeProvider>
+            {/* </PersistGate> */}
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')

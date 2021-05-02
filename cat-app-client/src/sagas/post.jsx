@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {all, fork, takeLatetest, put, takeLatest, call} from 'redux-saga/effects'
-import shortId from 'shortid';
+//import shortId from 'shortid';
 
 import {
     ADD_POST_REQUEST, ADD_POST_SUCCESS,ADD_POST_FAILURE,
@@ -10,7 +10,6 @@ import {
     LIST_POST_REQUEST,LIST_POST_SUCCESS, LIST_POST_FAILURE,
     ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE,
     REMOVE_COMMENT_REQUEST, REMOVE_COMMENT_SUCCESS, REMOVE_COMMENT_FAILURE,
-
     GET_COMMENTS_REQUEST, GET_COMMENTS_SUCCESS, GET_COMMENTS_FAILURE,
 } from '../reducers/post';
 
@@ -39,15 +38,12 @@ function* addPost(action){
 }
 
 function removePostAPI(id){
-
     return axios.delete(`api/posts/{id}?id=${id}`);
 }
 
 function* removePost(action){
     try {
-        
         const result = yield call(removePostAPI, action.data);
-        console.log(result)
         yield put({
             type: REMOVE_POST_SUCCESS,
             //data: action.data, 
@@ -121,16 +117,14 @@ function* listPost(action){
     }
 }
 
-
 function addCommentAPI(data){
     return axios.post(`/api/comment?content=${data.content}&postId=${data.postId}`);
 }
 
-
 function* addComment(action){
     try {
         //console.log(`/api/comment?content=${action.data.content}&postId=${action.data.postId}`)
-        const result= yield call(addCommentAPI, action.data);
+        const result= yield call(addCommentAPI, action.data); // No data returned
 
         yield put({
             type: ADD_COMMENT_SUCCESS,
@@ -150,7 +144,6 @@ function removeCommentAPI(id){
 
 function* removeComment(action){
     try {
-
         const result= yield call(removeCommentAPI, action.data);
         console.log(result);
 
@@ -162,8 +155,6 @@ function* removeComment(action){
         yield put({
             type: REMOVE_COMMENT_FAILURE,
             data: err.response.data
-
-
         })
     }
 };
@@ -174,7 +165,6 @@ function getPostCommentsAPI(postId){
 
 function* getPostComments(action){
     try {
-
         const result= yield call(getPostCommentsAPI, action.data);
         console.log(result);
 
@@ -183,13 +173,9 @@ function* getPostComments(action){
             data: result.data
         })
     } catch(err){
-        yield put({
-            
-            
+        yield put({      
             type: GET_COMMENTS_FAILURE,
             data: err.response.data
-
-
         })
     }
 };
@@ -207,7 +193,6 @@ function* watchReadPost(){
 }
 
 function* watchUpdatePost(){
-    
     yield takeLatest(UPDATE_POST_REQUEST, updatePost);
 }
 
@@ -223,11 +208,7 @@ function* watchGetComments(){
     yield takeLatest(GET_COMMENTS_REQUEST, getPostComments);
 }
 
-
 function* watchRemoveComment(){
-
-
-    
     yield takeLatest(REMOVE_COMMENT_REQUEST, removeComment);
 }
 

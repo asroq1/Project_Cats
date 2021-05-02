@@ -46,8 +46,8 @@ const PostList = () => {
 
     return (
         <>
-        <PostListContainer/>
-    </>
+            <PostListContainer/>
+        </>
     )
 }
 

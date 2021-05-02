@@ -4,9 +4,11 @@ export const initialState = {
     addWeightLoading: false,
     addWeightDone: false,
     addWeightError: null,
+
     deleteWeightLoading: false,
     deleteWeightDone: false,
     deleteWeightError: null,
+
     getWeightLoading: false,
     getWeightDone: false,
     getWeighError: null,
@@ -17,20 +19,14 @@ export const initialState = {
 
     deleteCatLoading: false,
     deleteCatDone: false,
-
     deleteCatError: null,
-
 
     updateCatLoading: false,
     updateCatDone: false,
     updateCatError: null,
 
-
     catWeight: null,
-    user: {
-        isLoggedIn: true,
-        user: 1,
-    },
+
     cat: [
         // {
         //     cat_id: 0,
@@ -55,7 +51,7 @@ export const initialState = {
     currentIndex: 1,
     currImgUrl: null,
 
-    currentCatWeights: null,
+    currentCatWeights: [],
 };
 
 // 몸무게 관련
@@ -66,8 +62,7 @@ export const ADD_WEIGHT_FAILURE = 'ADD_WEIGHT_FAILURE';
 export const DELETE_WEIGHT_REQUEST = 'DELETE_WEIGHT_REQUEST';
 export const DELETE_WEIGHT_SUCCESS = 'DELETE_WEIGHT_SUCCESS';
 export const DELETE_WEIGHT_FAILURE = 'DELETE_WEIGHT_FAILURE';
-//
-// 논의할 부분
+
 export const GET_CAT_REQUEST = 'GET_CAT_REQUEST';
 export const GET_CAT_SUCCESS = 'GET_CAT_SUCCESS';
 export const GET_CAT_FAILURE = 'GET_CAT_FAILURE';
@@ -93,56 +88,6 @@ export const GET_WEIGHT_REQUEST = 'GET_WEIGHT_REQUEST';
 export const GET_WEIGHT_SUCCESS = 'GET_WEIGHT_SUCCESS';
 export const GET_WEIGHT_FAILURE = 'GET_WEIGHT_FAILURE';
 
-export const getCatRequestAction = (data) => ({
-    type: GET_CAT_REQUEST,
-    data,
-});
-
-export const getCatSuccessAction = (data) => ({
-    type: GET_CAT_SUCCESS,
-    data,
-});
-export const getCatFailureAction = (data) => ({
-    type: GET_CAT_FAILURE,
-    data,
-});
-
-export const addCatRequestAction = (data) => ({
-    type: ADD_CAT_REQUEST,
-    data,
-});
-export const addCatSuccessAction = (data) => ({
-    type: ADD_CAT_SUCCESS,
-    data,
-});
-export const addCatFailureAction = (data) => ({
-    type: ADD_CAT_FAILURE,
-    data,
-});
-export const deleteCatRequestAction = (data) => ({
-    type: DELETE_CAT_REQUEST,
-    data,
-});
-export const deleteCatSuccessAction = (data) => ({
-    type: DELETE_CAT_SUCCESS,
-    data,
-});
-export const deleteCatFailureAction = (data) => ({
-    type: DELETE_CAT_FAILURE,
-    data,
-});
-export const updateCatRequestAction = (data) => ({
-    type: UPDATE_CAT_REQUEST,
-    data,
-});
-export const updateCatSuccessAction = (data) => ({
-    type: UPDATE_CAT_SUCCESS,
-    data,
-});
-export const updateCatFailureAction = (data) => ({
-    type: UPDATE_CAT_FAILURE,
-    data,
-});
 export const addWeightRequestAction = (data) => {
     return {
         type: ADD_WEIGHT_REQUEST,
@@ -183,19 +128,6 @@ export const deleteWeightFailureAction = (data) => {
     };
 };
 
-export const setCurrentCat = (data) => {
-    return {
-        type: SET_CURRENT_CAT,
-        data,
-    };
-};
-
-export const setCurrentImage = (data) => {
-    return {
-        type: SET_CURRENT_IMAGE,
-        data,
-    };
-};
 
 export const getWeightRequest = (data) => {
     return {
@@ -231,9 +163,12 @@ const reducer = (state = initialState, action) => {
             case GET_CAT_SUCCESS:
                 draft.cat = action.data;
                 draft.currentIndex = action.data[0].id;
+                draft.addCatDone = false;
+                draft.updateCatDone = false;
                 draft.isLoading = false;
                 break;
             case GET_CAT_FAILURE:
+                draft.isLoading = false;
                 break;
             case ADD_CAT_REQUEST:
                 draft.addCatLoading = true;
@@ -261,9 +196,6 @@ const reducer = (state = initialState, action) => {
                 draft.deleteCatDone = true;
                 break;
             case DELETE_CAT_FAILURE:
-
-
-
                 draft.deleteCatLoading = false;
                 draft.deleteCatError = action.data;
                 break;
@@ -287,12 +219,6 @@ const reducer = (state = initialState, action) => {
             case ADD_WEIGHT_SUCCESS:
                 draft.addWeightLoading = false;
                 draft.addWeightDone = true;
-                draft.currentCatWeights.unshift(action.data);
-                // 복사해주는 게 리덕스 개념 상 ('추적'에 중점을 둠) 맞는데
-                // 제로초님도 그러면 코드가 너무 복잡해져서
-                // 이런식으로 하셨더라구요! (맘껏 바꿔주세요)
-                // unshift가 'in-place' 함수이기 때문에 - 배열 그 자체를 바꿈. 배열을 복사해 바꾸는 게 아니라
-                // 이런식으로 코드가 들어가는 듯 합니다.
                 break;
             case ADD_WEIGHT_FAILURE:
                 draft.addWeightLoading = false;
@@ -303,12 +229,11 @@ const reducer = (state = initialState, action) => {
                 draft.deleteWeightDone = false;
                 draft.deleteWeightLoading = true;
                 draft.deleteWeightError = null;
+                draft.cat[0].Record.filter((v) => v.id !== action.data);
                 break;
             case DELETE_WEIGHT_SUCCESS:
                 draft.deleteWeightDone = true;
                 draft.deleteWeightLoading = false;
-                draft.currentCatWeights.filter((v) => v.id !== action.data);
-
                 break;
             case DELETE_WEIGHT_FAILURE:
                 draft.deleteWeightLoading = false;
@@ -325,7 +250,6 @@ const reducer = (state = initialState, action) => {
                 draft.getWeightLoading = true;
                 draft.getWeightDone = false;
                 draft.addWeightError = null;
-
                 draft.currentCatWeights = null;
                 break;
             case GET_WEIGHT_SUCCESS:
