@@ -27,26 +27,26 @@ const Main = () => {
     }, []);
 
     const today = new Date();
-    const getAge = useCallback(()=>{
-        const currentCat = cat.find((v) => v.id === currentIndex)
-        const [birthYear, birthMonth, birthDate] = currentCat.birth.split("-");
-                let ageYear = today.getFullYear() - parseInt(birthYear);
-                let ageMonth =today.getMonth()+1 -parseInt(birthMonth);
-                let ageDate = today.getDate() - parseInt(birthDate);
-                if (ageDate < 0) {
-                    ageMonth -=1;
-                } 
-                if (ageMonth < 0){
-                    ageMonth +=12;
-                    ageYear -= 1;
-                }
-                //setAge([ageYear, ageMonth]);
-                return [ageYear, ageMonth];
-    },[cat, currentIndex]);
-    
-    useEffect(()=>{
+    const getAge = useCallback(() => {
+        const currentCat = cat.find((v) => v.id === currentIndex);
+        const [birthYear, birthMonth, birthDate] = currentCat.birth.split('-');
+        let ageYear = today.getFullYear() - parseInt(birthYear);
+        let ageMonth = today.getMonth() + 1 - parseInt(birthMonth);
+        let ageDate = today.getDate() - parseInt(birthDate);
+        if (ageDate < 0) {
+            ageMonth -= 1;
+        }
+        if (ageMonth < 0) {
+            ageMonth += 12;
+            ageYear -= 1;
+        }
+        //setAge([ageYear, ageMonth]);
+        return [ageYear, ageMonth];
+    }, [cat, currentIndex]);
+
+    useEffect(() => {
         //if (!logInDone){
-        if (!localStorage.token){
+        if (!localStorage.token) {
             history.push('/');
         }
         dispatch({

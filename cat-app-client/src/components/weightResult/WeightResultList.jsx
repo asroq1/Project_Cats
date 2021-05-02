@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import palette from '../../styles/palette';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +11,8 @@ import {
 const ListContainer = styled.div`
     display: grid;
     margin: 0 auto;
-    max-width: 1200px;
+    max-height: 100vh;
+    overflow-y: auto;
     width: 100%;
     height: 100%;
     background-color: ${({ theme }) => theme.resultBackground};
@@ -60,83 +61,40 @@ const DeleteButton = styled.button`
         transform: scale(0.95);
     }
 `;
-const data = [
-    {
-        name: '01-20',
-        wgt: 29.2,
-    },
-    {
-        name: '02-20',
-        wgt: 29.2,
-    },
-    {
-        name: '03-20',
-        wgt: 29.2,
-    },
-    {
-        name: '04-20',
-        wgt: 29.2,
-    },
-    {
-        name: '05-20',
-        wgt: 29.2,
-    },
-    {
-        name: '06-20',
-        wgt: 29.2,
-    },
-    {
-        name: '07-20',
-        wgt: 29.2,
-    },
-    {
-        name: '08-20',
-        wgt: 29.2,
-    },
-    {
-        name: '09-20',
-        wgt: 29.2,
-    },
-    {
-        name: '10-20',
-        wgt: 29.2,
-    },
-    {
-        name: '11-12',
-        wgt: 29.2,
-    },
-];
 
-const WeightResultTable = () => {
+const WeightResultList = ({}) => {
     const dispatch = useDispatch();
-    const { cat, currentIndex } = useSelector((state) => state.cat);
-    const onDelete = (id) => {
-        dispatch(deleteWeightRequestAction(id));
-    };
+    const { currentIndex, currentCatWeights } = useSelector(
+        (state) => state.cat
+    );
+    // const onDelete = (id) => {
+    //     console.log('아이디', id);
+    //     dispatch(deleteWeightRequestAction(id));
+    // };
     useEffect(() => {
-        dispatch(getWeightRequest());
+        console.log(currentCatWeights);
     }, []);
 
-    const date = new Date().toLocaleDateString();
-    // const test = data.map((date) => console.log(date.name));
-    // 연동하면 여기에서 바로 조회하면 끝
-    // const test = axios.get('</백엔드 주소>');
+    const onRemove = useCallback((e) => {
+        e.preventDefault();
 
+        dispatch(deleteWeightRequestAction(currentCatWeights[0].id));
+
+        console.log(`확인 : ${currentCatWeights[0].id}`);
+        console.log(`값 확인 : ${currentCatWeights[0]}`);
+    }, []);
     return (
         <ListContainer>
             {/* {test} */}
-            {data.map((data) => {
+            {currentCatWeights.map((data) => {
                 return (
                     <DataContainer>
-                        <DataList key={date}>
-                            <p>{data.name}</p>
-                            <p>{data.wgt}kg</p>
-                            <p>{cat.record}</p>
-                            <DeleteButton>
-                                <FontAwesomeIcon
-                                    onClick={onDelete}
-                                    icon={faTrashAlt}
-                                />
+                        <DataList key={data.id}>
+                            <p>{data.createdDate.substr(0, 10)}</p>
+                            <p>{data.weight}kg</p>
+                            <p>{data.id}</p>
+                            <DeleteButton onClick={onRemove}>
+                                <FontAwesomeIcon icon={faTrashAlt} />
                             </DeleteButton>
                         </DataList>
                     </DataContainer>
@@ -146,4 +104,4 @@ const WeightResultTable = () => {
     );
 };
 
-export default WeightResultTable;
+export default WeightResultList;
