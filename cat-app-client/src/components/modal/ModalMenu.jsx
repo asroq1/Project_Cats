@@ -24,8 +24,8 @@ const Overlay = styled.div`
     height: 100vh;
     margin: 0 auto;
     padding: 3rem;
-    color: ${({ theme }) => theme.palette.beige};
-    background-color: ${palette.navy};
+    color: ${({ theme }) => theme.beige};
+    background-color: ${({ theme }) => theme.navy};
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -51,7 +51,8 @@ const MenuWrapper = styled.div`
     margin-bottom: 2rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    border-top: 1.5px solid ${({ theme }) => theme.palette.beige};
+    
+    border-top: 1.5px solid ${({ theme }) => theme.beige};
     font-size: 2rem;
     line-height: 2;
     cursor: pointer;
@@ -60,10 +61,17 @@ const MenuWrapper = styled.div`
         text-decoration: none;
     }
     h2 {
+<<<<<<< HEAD
         color: ${({ theme }) => theme.palette.beige};
+=======
+
+        color: ${({ theme }) => theme.beige}
+        
+>>>>>>> master
     }
+    
     h2:hover {
-        color: ${({ theme }) => theme.palette.orange};
+        color: ${({ theme }) => theme.cOrange}
     }
 `;
 
@@ -72,7 +80,7 @@ const NightModeWrapper = styled.div`
     text-align: right;
     right: 0;
     padding: 2rem;
-    border-top: 1.5px solid ${({ theme }) => theme.palette.beige};
+    border-top: 1.5px solid ${({ theme }) => theme.beige};
     margin-top: auto;
     cursor: pointer;
 `;

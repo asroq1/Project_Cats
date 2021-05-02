@@ -2,8 +2,10 @@ package com.pso.cat.service;
 
 import com.pso.cat.entity.Cat;
 import com.pso.cat.dto.CatDto;
+import com.pso.cat.entity.Post;
 import com.pso.cat.repository.CatRepository;
 import com.pso.cat.repository.RecordRepository;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
@@ -32,11 +34,14 @@ public class CatService {
     }
 
     @Transactional
-    public Cat modify(Long id, CatDto.Request catRequest) {
-        Cat cat = catRequest.toEntity();
-        cat.setId(id);
-        cat.setState(1);
-        return catRepository.save(cat);
+    public void modify(Long id, CatDto.Request newCat) {
+        Cat cat = catRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("해당하는 게시글이 없습니다."));
+        cat.setName(newCat.getName());
+        cat.setBirth(newCat.getBirth());
+        cat.setGender(newCat.getGender());
+        cat.setPhoto(newCat.getPhoto());
+        catRepository.save(cat);
     }
 
     @Transactional

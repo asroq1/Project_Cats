@@ -7,8 +7,9 @@ import 'font-awesome/css/font-awesome.min.css';
 import PropTypes from 'prop-types';
 
 const InnerGlobal = styled.div`
+    background-color: ${({theme})=>theme.navy};
     a {
-        color: ${({theme}) => theme.palette.beige};
+        color: ${({theme}) => theme.beige};
         text-decoration: none;
         font-weight: normal;
     }
@@ -29,17 +30,19 @@ const EachCol = styled.div`
     font-weight: bold;
     flex: auto;
     background-color: ${(props) =>
-        props.active ? ({theme})=>theme.palette.beige : ({theme})=>theme.palette.navy};
-    &: hover {
+        props.active ? ({theme})=>theme.beige : ({theme})=>theme.navy};
+    &:hover {
         background-color: ${(props) =>
-            props.active ? ({theme})=>theme.palette.beige : 'black'};
+            props.active ? ({theme})=>theme.beige : 'black'};
     }
     &:not(:last-child) {
         max-width: 150px;
         justify-content: center;
-        color: ${(props) => (props.active ? 'black' : ({theme})=>theme.palette.beige)};
-        border-radius: 5px 5px 0 0;
-        border: 1px solid ${(props) => (props.active ? 'lightgray' : 'black')};
+        color: ${(props) => (props.active ? ({theme})=>theme.text : ({theme})=>theme.beige)};
+        border-radius:  ${(props)=>(props.active? '15px 15px 0 0' : 'none')}; 
+        border-top: 1px solid ${(props) => (props.active ? ({theme})=>theme.beige : 'none')};
+        border-left:  1px solid ${(props)=>(props.active ? ({theme})=>theme.beige : 'none')};
+        border-right: 1px solid ${(props) => (props.active ? ({theme})=>theme.beige : 'none')};
         border-bottom: ${(props) =>
             props.active ? 'none' : '1px solid black'};
         cursor: pointer;
@@ -48,12 +51,13 @@ const EachCol = styled.div`
         font-size: 2rem;
         text-align: right;
         justify-content: flex-end;
-        border: 1px solid white;
+        border: none;
         border-bottom: 1px solid black;
-        background: ${({theme}) => theme.palette.beige};
+        background: ${({theme}) => theme.navy};
     }
     .fa-cog {
-        color: ${({theme}) => theme.palette.navy};
+        padding-right: 0.5rem;
+        color: ${({theme}) =>  theme.beige};
     }
 `;
 

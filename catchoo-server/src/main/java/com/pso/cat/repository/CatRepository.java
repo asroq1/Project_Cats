@@ -1,6 +1,7 @@
 package com.pso.cat.repository;
 
 import com.pso.cat.entity.Cat;
+import com.pso.cat.entity.Post;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -15,4 +16,5 @@ public interface CatRepository extends JpaRepository<Cat, Long> {
     int inactive(@Param("id") Long id);
 
     List<Cat> findAllByUserIdAndStateOrderByCreatedDateDesc(@Param("userId") Long userId, @Param("state") int state);
+
 }

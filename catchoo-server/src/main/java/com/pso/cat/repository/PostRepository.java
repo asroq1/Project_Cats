@@ -6,6 +6,9 @@ import com.pso.cat.entity.User;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -24,4 +27,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     void updateViewCount(Long id);
 
     List<Post> findAllByStateOrderByCreatedDateDesc(@Param("state") int state);
+
+    Page<Post> findByIdLessThanAndStateOrderByIdDesc(
+        @Param("id") Long lastPostId,
+        @Param("state") int state,
+        Pageable pageRequest);
 }

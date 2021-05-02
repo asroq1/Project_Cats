@@ -28,7 +28,7 @@ const ImageUploadButtons = styled.button`
     border-radius:10px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${({theme}) => theme.palette.orange};
+    background-color: ${({theme}) => theme.orange};
     border: none;
     cursor: pointer;
     color: white;

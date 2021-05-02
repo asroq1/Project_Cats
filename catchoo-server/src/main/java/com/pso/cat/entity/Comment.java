@@ -29,21 +29,21 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cmt_id")
+    @Column(name = "cmt_id", updatable = false)
     private Long id;
 
-    @Column(name = "post_id")
+    @Column(name = "post_id", updatable = false)
     private Long postId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", updatable = false)
     private User writer;
 
     @Column(name = "content")
     private String content;
 
     @CreationTimestamp
-    @Column(name = "cdt")
+    @Column(name = "cdt", updatable = false)
     private Date createdDate;
 
     @UpdateTimestamp
