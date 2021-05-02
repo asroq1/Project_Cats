@@ -9,6 +9,7 @@ import {
     REMOVE_IMAGE,
 } from '../../reducers/post';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import 'font-awesome/css/font-awesome.min.css';
 import OverallPostsLayout from './OverallPostsLayout';
@@ -46,7 +47,6 @@ const StyledBlock = styled.div`
         padding: 1rem;
         margin-bottom: 1rem;
     }
-
     input::placeholder {
         text-align: start;
     }
@@ -72,9 +72,7 @@ const StyledButton = styled.button`
     background-color: ${({theme}) => theme.palette.green};
     font-weight:bold;
     cursor:pointer;
-
     margin-bottom: 1rem;
-    
     & + & {
         margin-left: 0.5rem;
     }
@@ -310,5 +308,10 @@ const PostUpdate = ({match, location}) => {
         </>
     );
 };
+
+PostUpdate.propTypes = {
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
+}
 
 export default withRouter(PostUpdate);

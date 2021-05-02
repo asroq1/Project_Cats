@@ -24,7 +24,6 @@ import {
     GET_WEIGHT_SUCCESS,
     GET_WEIGHT_FAILURE,
 } from '../reducers/cat';
-import { useSelector } from 'react-redux';
 
 // 해당 유저의 모든 고양이 정보 받아오기
 // 이 부분은 논의할 것 - 로그인할 때 그냥 다 불러와도 됨
@@ -72,7 +71,6 @@ function* addCat(action) {
 }
 
 function deleteCatAPI(id) {
-    
     return axios.delete(`/api/cats/${id}`);
 }
 

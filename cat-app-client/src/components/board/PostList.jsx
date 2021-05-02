@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import 'font-awesome/css/font-awesome.min.css';
 import styled from 'styled-components';
-import { READ_POST_REQUEST } from '../../reducers/post';
+import PropTypes from 'prop-types';
 
 const PostItemsContainer = styled.div`
     width: 80%;
@@ -151,7 +151,7 @@ const PostItem = ({ post }) => {
     );
 };
 
-const PostList = ({ posts, loading, error }) => {
+const PostList = ({ posts, error }) => {
     //에러
     if (error) {
         return <h2>에러 발생함</h2>;
@@ -181,5 +181,14 @@ const PostList = ({ posts, loading, error }) => {
         </>
     );
 };
+
+PostItem.propTypes = {
+    post: PropTypes.object,
+}
+
+PostList.propTypes = {
+    posts: PropTypes.arrayOf(PropTypes.object),
+    error: PropTypes.object
+}
 
 export default PostList;
