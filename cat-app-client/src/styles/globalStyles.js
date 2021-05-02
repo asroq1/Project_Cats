@@ -9,16 +9,22 @@ body{
 `;
 
 export const lightTheme = {
-    body: '#F4F1DE', //배경색
+    body: '#F4F1DE', //배경색(beige)
     text: '#484848',
     primary: '#fff',
     input: '#f2f1ee',
-    button: '#3D405B',
+    button: '#3D405B',//navy
     graph: '#3D405B',
     resultText: '#ffffff',
     resultHeader: '#3D405B',
     resultBackground: '#3D405B',
     resultExit: '#d8d8d8',
+
+    textlight: '#F4F1DE',
+    beige: '#F4F1DE',
+    orange: '#E07A5F',
+    navy: '#3D405B',
+    green: '#81B29A',
 };
 
 export const darkTheme = {
@@ -33,4 +39,11 @@ export const darkTheme = {
     resultBackground: '#121212',
     resultExit: '#484848',
     test: 'dark',
+
+    // alt colors for dark mode
+    textlight:'#d8d8d8',
+    beige: '#121212',
+    orange: '#3D405B',
+    navy: '#3D405B',
+    green: '#000',
 };
