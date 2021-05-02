@@ -27,7 +27,7 @@ const BodyWrapper = styled.div`
 `;
 
 const Global = styled.div`
-    background-color: ${({theme}) => theme.palette.beige};
+
     max-width: ${({theme}) => theme.width.mobile};
     width: 100vw;
     min-height: 100vh;
