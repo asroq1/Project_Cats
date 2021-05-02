@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 // 스타일링된 input block
 export const InnerGlobal = styled.div`
+    background-color:${({theme})=>theme.beige};
     width: 80%;
     margin: 0 auto;
     & > form > div > label {
