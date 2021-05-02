@@ -1,11 +1,10 @@
 // import {createAction, handleActions} from 'redux-actions';
 import produce from 'immer';
-import shortId from 'shortid';
+//import shortId from 'shortid';
 
 const initialState = {
     mainPosts:[],  
     imagePaths: [
-
         // 'https://images.unsplash.com/photo-1572097664187-7b183a6bda78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=675&q=80',
         // 'https://lh3.googleusercontent.com/proxy/zf7oU6Dpf3eVygxcgjUyt0zQMUiH7mO1Hvr9ygse9b_PhGgrD7iPj7cR9aFBNy53_JGupIhtNOpRCKTv7eHT0sqfzggWM5lpzcD5gT-E0kkoB5QAkhM5-r6euWU4zEpxCH022ksHXbyGQ3J91-09cSYiG_E1gxbdMc-sZc6Y3mXvLrCf',
         // 'https://image.fmkorea.com/files/attach/new/20190825/486616/1352801771/2125438472/03b3d5be5accbcbdc1d3c5ab990e8e88.jpg'
@@ -18,10 +17,8 @@ const initialState = {
     addCommentError: null,
 
     getCommentsLoading: false,
-
     getCommentsDone: false,
     getCommentsError:null,
-
 
     removeCommentLoading: false,
     removeCommentDone: false,
@@ -92,31 +89,6 @@ export const GET_COMMENTS_FAILURE = 'GET_COMMENTS_FAILURE';
 
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 
-export const addPost = (data) => ({
-    type: ADD_POST_REQUEST,
-    data,
-});
-
-export const readPost = (data) => ({
-    type: READ_POST_REQUEST,
-    data,
-});
-
-export const updatePost = (data) => ({
-    type: UPDATE_POST_REQUEST,
-    data,
-});
-
-export const listPost = (data) => ({
-    type: LIST_POST_REQUEST,
-    data,
-});
-
-export const addComment = (data) => ({
-    type: ADD_COMMENT_REQUEST,
-    data,
-});
-
 
 const reducer = (state = initialState, action) => {
     return produce(state, (draft) => {
@@ -129,7 +101,6 @@ const reducer = (state = initialState, action) => {
             case ADD_POST_SUCCESS:
                 //draft.mainPosts.unshift(action.data);
                 draft.imagePaths = [];
-
                 draft.addPostLoading = false;
                 draft.addPostDone = true;
                 break;
@@ -180,7 +151,6 @@ const reducer = (state = initialState, action) => {
                 draft.updatePostDone = true;
                 break;
             case UPDATE_POST_FAILURE:
-                
                 draft.updatePostLoading = false;
                 draft.updatePostError = action.data;
                 break;
@@ -200,7 +170,6 @@ const reducer = (state = initialState, action) => {
                 draft.removePostLoading = false;
                 draft.removePostError = action.data;
                 break;
-
             case ADD_COMMENT_REQUEST:
                 draft.addCommentLoading = true;
                 draft.addCommentDone = false;
@@ -216,7 +185,6 @@ const reducer = (state = initialState, action) => {
                 // 어차피 댓글 전체를 다시 불러오는 식으로 설계돼서
                 // 아래와 같은 코드 필요 x
                 
-                
                 // draft.currentComments.unshift(action.data);
                 draft.addCommentLoading = false;
                 draft.addCommentDone = true;
@@ -225,7 +193,6 @@ const reducer = (state = initialState, action) => {
                 draft.addCommentLoading = false;
                 draft.addCommentError = action.error;
                 break;
-
             case REMOVE_COMMENT_REQUEST:
                 draft.removeCommentLoading = true;
                 draft.removeCommentDone = false;
@@ -237,7 +204,6 @@ const reducer = (state = initialState, action) => {
                 // 어차피 댓글 전체를 불러오는 식으로 구성되어서
                 // 아래와 같은 코드 필요 x
                 // draft.currentComments = draft.currentComments.filter((v) => v.id == action.data);
-                
                 draft.removeCommentLoading = false;
                 draft.removeCommentDone = true;
                 break;
@@ -254,8 +220,6 @@ const reducer = (state = initialState, action) => {
                 draft.getCommentsError = null;
                 break;
             case GET_COMMENTS_SUCCESS:
-                
-            
                 draft.currentComments = action.data;
                 draft.getCommentsLoading = false;
                 draft.getCommentsDone = true;
@@ -263,8 +227,7 @@ const reducer = (state = initialState, action) => {
             case GET_COMMENTS_FAILURE:
                 draft.getCommentsLoading = false;
                 draft.getCommentsError = action.data;
-                break;
-            
+                break; 
             case UPLOAD_IMAGES_REQUEST:
                 break;
             case UPLOAD_IMAGES_SUCCESS:

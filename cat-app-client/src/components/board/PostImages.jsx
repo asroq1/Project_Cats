@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import ImageCarousel from './ImageCarousel'
 
 const PostImages = ({images}) => {
@@ -12,6 +11,6 @@ const PostImages = ({images}) => {
 }
 
 PostImages.propTypes = {
-    images: PropTypes.arrayOf (PropTypes.object)
+    images: PropTypes.arrayOf(PropTypes.object)
 }
 export default PostImages;

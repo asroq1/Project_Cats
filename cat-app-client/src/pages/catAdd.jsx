@@ -1,6 +1,4 @@
-import React from 'react';
-
-
+import React from 'react'; 
 import CatsAddContainer from '../components/catsAdd/CatsAddContainer';
 
 const CatAdd = () => {

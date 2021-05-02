@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import ModalMenu from '../modal/ModalMenu';
 
@@ -72,9 +73,7 @@ const OverallPostsLayout = ({ children }) => {
                     
                 </NavCol>
             </Header>
-
             {children}
-
             <Footer>
                 {/* <NavCol className="center">
                     <i className="fa fa-search"></i>
@@ -93,5 +92,9 @@ const OverallPostsLayout = ({ children }) => {
         </>
     );
 };
+
+OverallPostsLayout.propTypes = {
+    children: PropTypes.object.isRequired,
+}
 
 export default OverallPostsLayout;

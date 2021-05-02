@@ -2,6 +2,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import styled from 'styled-components'
+import PropTypes from 'prop-types';
 
 
 
@@ -92,6 +93,10 @@ const CommentsWrapper = ({postId}) => {
         </CommentsLayout>
     )
 };
+
+CommentsWrapper.propTypes = {
+    postId: PropTypes.number.isRequired,
+}
 
 
 export default CommentsWrapper;

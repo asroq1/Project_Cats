@@ -5,6 +5,7 @@ import {Link, useHistory} from 'react-router-dom'
 
 import styled from 'styled-components';
 import 'font-awesome/css/font-awesome.min.css';
+import PropTypes from 'prop-types';
 
 import CommentForm from './CommentForm';
 
@@ -101,7 +102,6 @@ const PostView = ({ postId, post, error }) => {
         }
         return <h2>에러가 발생했습니다.</h2>;
     }
-
     if (!post){
         return null;
     }
@@ -147,5 +147,11 @@ const PostView = ({ postId, post, error }) => {
         </OverallContainer>
     );
 };
+
+PostView.propTypes = {
+    postId: PropTypes.number.isRequired,
+    post: PropTypes.object.isRequired,
+    error: PropTypes.object
+}
 
 export default PostView;

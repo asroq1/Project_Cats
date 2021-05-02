@@ -4,6 +4,7 @@ import { useHistory, BrowserRouter as Router, Link } from 'react-router-dom';
 import ModalMenu from '../modal/ModalMenu';
 import styled from 'styled-components';
 import 'font-awesome/css/font-awesome.min.css';
+import PropTypes from 'prop-types';
 
 const InnerGlobal = styled.div`
     a {
@@ -112,5 +113,11 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
         </InnerGlobal>
     );
 };
+
+TopBar.propTypes = {
+    cat: PropTypes.object.isRequired,
+    currentIndex: PropTypes.number.isRequired,
+    onSelect: PropTypes.func.isRequired,
+}
 
 export default TopBar;

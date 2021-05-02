@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ADD_COMMENT_REQUEST } from '../../reducers/post';
 
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import useInput from '../../hooks/useInput';
 
@@ -84,8 +85,8 @@ const CommentForm = ({ id }) => {
     );
 };
 
-// CommentForm.propTypes = {
-//     post:PropTypes.object.isRequired
-// }
+CommentForm.propTypes = {
+    id:PropTypes.number.isRequired
+}
 
 export default CommentForm;

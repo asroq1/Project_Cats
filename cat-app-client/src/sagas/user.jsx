@@ -24,7 +24,6 @@ import {
 } from '../reducers/user';
 
 import axios from 'axios';
-import jwt from 'jsonwebtoken';
 
 function signUpAPI(data) {
     return axios.post('/api/signup', data);

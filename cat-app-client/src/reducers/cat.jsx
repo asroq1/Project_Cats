@@ -4,9 +4,11 @@ export const initialState = {
     addWeightLoading: false,
     addWeightDone: false,
     addWeightError: null,
+
     deleteWeightLoading: false,
     deleteWeightDone: false,
     deleteWeightError: null,
+
     getWeightLoading: false,
     getWeightDone: false,
     getWeighError: null,
@@ -17,7 +19,6 @@ export const initialState = {
 
     deleteCatLoading: false,
     deleteCatDone: false,
-
     deleteCatError: null,
 
     updateCatLoading: false,
@@ -25,10 +26,7 @@ export const initialState = {
     updateCatError: null,
 
     catWeight: null,
-    user: {
-        isLoggedIn: true,
-        user: 1,
-    },
+
     cat: [
         // {
         //     cat_id: 0,
@@ -52,7 +50,6 @@ export const initialState = {
     isLoading: true,
     currentIndex: 1,
     currImgUrl: null,
-
     currentCatWeights: null,
 };
 
@@ -64,8 +61,7 @@ export const ADD_WEIGHT_FAILURE = 'ADD_WEIGHT_FAILURE';
 export const DELETE_WEIGHT_REQUEST = 'DELETE_WEIGHT_REQUEST';
 export const DELETE_WEIGHT_SUCCESS = 'DELETE_WEIGHT_SUCCESS';
 export const DELETE_WEIGHT_FAILURE = 'DELETE_WEIGHT_FAILURE';
-//
-// 논의할 부분
+
 export const GET_CAT_REQUEST = 'GET_CAT_REQUEST';
 export const GET_CAT_SUCCESS = 'GET_CAT_SUCCESS';
 export const GET_CAT_FAILURE = 'GET_CAT_FAILURE';
@@ -91,56 +87,6 @@ export const GET_WEIGHT_REQUEST = 'GET_WEIGHT_REQUEST';
 export const GET_WEIGHT_SUCCESS = 'GET_WEIGHT_SUCCESS';
 export const GET_WEIGHT_FAILURE = 'GET_WEIGHT_FAILURE';
 
-export const getCatRequestAction = (data) => ({
-    type: GET_CAT_REQUEST,
-    data,
-});
-
-export const getCatSuccessAction = (data) => ({
-    type: GET_CAT_SUCCESS,
-    data,
-});
-export const getCatFailureAction = (data) => ({
-    type: GET_CAT_FAILURE,
-    data,
-});
-
-export const addCatRequestAction = (data) => ({
-    type: ADD_CAT_REQUEST,
-    data,
-});
-export const addCatSuccessAction = (data) => ({
-    type: ADD_CAT_SUCCESS,
-    data,
-});
-export const addCatFailureAction = (data) => ({
-    type: ADD_CAT_FAILURE,
-    data,
-});
-export const deleteCatRequestAction = (data) => ({
-    type: DELETE_CAT_REQUEST,
-    data,
-});
-export const deleteCatSuccessAction = (data) => ({
-    type: DELETE_CAT_SUCCESS,
-    data,
-});
-export const deleteCatFailureAction = (data) => ({
-    type: DELETE_CAT_FAILURE,
-    data,
-});
-export const updateCatRequestAction = (data) => ({
-    type: UPDATE_CAT_REQUEST,
-    data,
-});
-export const updateCatSuccessAction = (data) => ({
-    type: UPDATE_CAT_SUCCESS,
-    data,
-});
-export const updateCatFailureAction = (data) => ({
-    type: UPDATE_CAT_FAILURE,
-    data,
-});
 export const addWeightRequestAction = (data) => {
     return {
         type: ADD_WEIGHT_REQUEST,
@@ -181,19 +127,6 @@ export const deleteWeightFailureAction = (data) => {
     };
 };
 
-export const setCurrentCat = (data) => {
-    return {
-        type: SET_CURRENT_CAT,
-        data,
-    };
-};
-
-export const setCurrentImage = (data) => {
-    return {
-        type: SET_CURRENT_IMAGE,
-        data,
-    };
-};
 
 export const getWeightRequest = (data) => {
     return {
@@ -234,6 +167,7 @@ const reducer = (state = initialState, action) => {
                 draft.isLoading = false;
                 break;
             case GET_CAT_FAILURE:
+                draft.isLoading = false;
                 break;
             case ADD_CAT_REQUEST:
                 draft.addCatLoading = true;
@@ -281,7 +215,6 @@ const reducer = (state = initialState, action) => {
                 draft.addWeightDone = false;
                 draft.addWeightError = null;
                 console.log(`리덕스 요청 weight : ${action.data.weight}`);
-
                 break;
             case ADD_WEIGHT_SUCCESS:
                 draft.addWeightLoading = false;
@@ -319,7 +252,6 @@ const reducer = (state = initialState, action) => {
                 draft.getWeightLoading = true;
                 draft.getWeightDone = false;
                 draft.addWeightError = null;
-
                 draft.currentCatWeights = null;
                 break;
             case GET_WEIGHT_SUCCESS:

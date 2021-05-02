@@ -6,7 +6,7 @@ import useInput from '../../hooks/useInput';
 import { SET_CURRENT_IMAGE, UPDATE_CAT_REQUEST } from '../../reducers/cat';
 
 import 'font-awesome/css/font-awesome.min.css';
-
+import PropTypes from 'prop-types';
 import {InnerGlobal, StyledInputBlock, CenterWrapper, ButtonWrapper, RadioBtnWrapper}from './styles.js';
 
 const CatsUpdate = ({cat, currentIndex}) => {
@@ -183,5 +183,10 @@ const CatsUpdate = ({cat, currentIndex}) => {
         </>
     );
 };
+
+CatsUpdate.propTypes = {
+    currentIndex: PropTypes.number.isRequired,
+    cat:PropTypes.object.isRequired
+}
 
 export default CatsUpdate;
