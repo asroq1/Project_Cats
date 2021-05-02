@@ -28,7 +28,7 @@ const PhotoContainer = styled.img`
     width: 200px;
     height: 200px;
     margin-top: 2rem;
-    border: 2px solid ${({theme}) => theme.palette.navy};
+    border: 2px solid ${({theme}) => theme.navy};
     object-fit: cover;
 `;
 
@@ -38,8 +38,8 @@ const ButtonWrapper = styled.button`
     border-radius: 5px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${({theme}) => theme.palette.navy};
-    color: ${({theme}) => theme.palette.beige};
+    background-color: ${({theme}) => theme.navy};
+    color:${({theme})=>theme.text};
     cursor: pointer;
     border: 1px solid black;
     &:hover {

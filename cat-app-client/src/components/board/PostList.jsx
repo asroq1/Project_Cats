@@ -18,7 +18,7 @@ const PostItemBlock = styled.div`
     position:relative;
     margin-top: 1rem;
     display: flex;
-    // border: 1px solid ${({theme}) => theme.palette.green};
+    // border: 1px solid ${({theme}) => theme.green};
     // border-radius: 10px;
 
     border-bottom: 1px solid gray;
@@ -64,7 +64,7 @@ const SubInfo = styled.div`
     h1 {
         font-size: 1rem;
         font-weight: bold;
-        color: ${({theme}) => theme.palette.navy};
+        color: ${({theme}) => theme.navy};
         margin: 0;
         margin-bottom: 0.25rem;
     }
