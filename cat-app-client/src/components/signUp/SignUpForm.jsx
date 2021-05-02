@@ -34,6 +34,7 @@ const SignUpInput = styled.input`
     font-size: 1rem;
     border-radius: 4px;
     border: 1px solid ${({ theme }) => theme.palette.borderColor};
+    color: ${({ theme }) => theme.text};
     font-family: FontAwesome;
     padding: 1rem;
     ::placeholder {
@@ -59,17 +60,22 @@ const SignUpForm = () => {
     const { register, watch, errors, handleSubmit } = useForm();
     const password = useRef();
     const history = useHistory();
-    const { signUpDone } = useSelector((state) => state.user);
+    const { me } = useSelector((state) => state.user);
     password.current = watch('password');
     const onSubmit = useCallback((data) => {
         delete data.pwdConfirm;
         dispatch(signUpRequest(data));
     }, []);
     useEffect(() => {
-        if (signUpDone) {
+        if (me) {
             history.push('/');
+            try {
+                localStorage.setItem('user', JSON.stringify(me));
+            } catch (e) {
+                alert('회원가입에 실패하였습니다.');
+            }
         }
-    }, [signUpDone]);
+    }, [history, me]);
     return (
         <>
             <SignupContainer onSubmit={handleSubmit(onSubmit)}>

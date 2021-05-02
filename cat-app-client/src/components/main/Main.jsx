@@ -104,7 +104,7 @@ const Main = ({ cat, currentIndex, age }) => {
                     {age[0]}년 {age[1]}개월 |{' '}
                     {currentCat.gender === 'M' ? '수컷' : '암컷'}
                     <Link to="/cat/update">
-                        <i className = "fa fa-edit"></i>
+                        <i className="fa fa-edit"></i>
                     </Link>
                 </div>
                 {currentCat.photo && currentCat.photo !== 'null' ? (
@@ -113,7 +113,7 @@ const Main = ({ cat, currentIndex, age }) => {
                     />
                 ) : (
                     <PhotoContainer>
-                        <i className = "fa fa-paw"></i>
+                        <i className="fa fa-paw"></i>
                     </PhotoContainer>
                 )}
                 <WeightRecordWrapper>
