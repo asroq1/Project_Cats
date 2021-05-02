@@ -38,13 +38,13 @@ public class RecordController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity modify(@PathVariable Long id, @RequestBody RecordDto.Request request) {
-        recordService.modify(id, request);
+    public ResponseEntity modify(Long id, Float weight) {
+        recordService.modify(id, weight);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity remove(Long id) {
+    public ResponseEntity remove(@PathVariable Long id) {
         recordService.remove(id);
         return ResponseEntity.ok().build();
     }

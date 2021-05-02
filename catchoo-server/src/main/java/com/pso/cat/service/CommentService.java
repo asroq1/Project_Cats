@@ -8,6 +8,7 @@ import com.pso.cat.entity.Post;
 import com.pso.cat.entity.User;
 import com.pso.cat.repository.CommentRepository;
 import com.pso.cat.repository.PostRepository;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,10 +35,12 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment modify(Long id, CommentDto.Request commentRequest) {
-        Comment comment = commentRequest.toEntity();
-        comment.setId(id);
-        return commentRepository.save(comment);
+    public void modify(Long id, String content) {
+        Comment comment = commentRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("해당하는 댓글이 없습니다."));
+        comment.setContent(content);
+        comment.setUpdatedDate(new Date());
+        commentRepository.save(comment);
     }
 
     @Transactional

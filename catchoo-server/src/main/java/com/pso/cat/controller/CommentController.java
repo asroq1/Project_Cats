@@ -42,14 +42,14 @@ public class CommentController {
         return ResponseEntity.ok().body(list);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity modify(@PathVariable Long id, @RequestBody CommentDto.Request commentRequest) {
-        commentService.modify(id, commentRequest);
+    @PatchMapping
+    public ResponseEntity modify(Long id, String content) {
+        commentService.modify(id, content);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity remove(Long id) {
+    public ResponseEntity remove(@PathVariable Long id) {
         commentService.remove(id);
         return ResponseEntity.ok().build();
     }

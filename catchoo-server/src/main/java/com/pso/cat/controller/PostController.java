@@ -47,14 +47,14 @@ public class PostController {
         return ResponseEntity.ok().body(postService.read(id));
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity modify(@PathVariable Long id, @RequestBody PostDto.Request postRequest) {
+    @PatchMapping
+    public ResponseEntity modify(Long id, PostDto.Request postRequest) {
         postService.modify(id, postRequest);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity remove(Long id) {
+    public ResponseEntity remove(@PathVariable Long id) {
         postService.remove(id);
         return ResponseEntity.ok().build();
     }

@@ -1,6 +1,7 @@
 package com.pso.cat.repository;
 
 import com.pso.cat.entity.Comment;
+import com.pso.cat.entity.Post;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;

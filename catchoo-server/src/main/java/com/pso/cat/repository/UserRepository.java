@@ -1,5 +1,6 @@
 package com.pso.cat.repository;
 
+import com.pso.cat.entity.Post;
 import com.pso.cat.entity.User;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -15,8 +16,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     int inactive(@Param("id") Long id);
 
     User findByEmailAndPassword(String email, String password);
-    Optional<User> findByEmail(String email);
+    Optional<User> findByEmail(@Param("email") String email);
 
     @EntityGraph(attributePaths = "authorities")
-    Optional<User> findOneWithAuthoritiesByEmail(String email);
+    Optional<User> findOneWithAuthoritiesByEmail(@Param("email") String email);
 }

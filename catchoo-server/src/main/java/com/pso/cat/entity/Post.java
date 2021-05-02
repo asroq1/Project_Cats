@@ -35,11 +35,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_id")
+    @Column(name = "post_id", updatable = false)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", updatable = false)
     private User writer;
 
     @Column(name = "title", length = 100)
@@ -52,7 +52,7 @@ public class Post {
     private int viewCount;
 
     @CreationTimestamp
-    @Column(name = "cdt")
+    @Column(name = "cdt", updatable = false)
     private Date createdDate;
 
     @UpdateTimestamp

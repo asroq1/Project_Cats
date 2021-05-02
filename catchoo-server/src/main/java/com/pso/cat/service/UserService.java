@@ -66,9 +66,11 @@ public class UserService {
         return UserDto.Response.ofEntity(userRepository.findById(id).get());
     }
 
-    public void modify(UserDto.Request request) {
-        User user = request.toEntity();
-        user.setId(SecurityUtil.getCurrentUserId().orElseThrow(() -> new RuntimeException("로그인해주세요")));
+    public void modify(UserDto.Request newUser) {
+        User user = userRepository.findById(SecurityUtil.getCurrentUserId().orElseThrow(() -> new RuntimeException("로그인해주세요")))
+            .orElseThrow(() -> new RuntimeException("해당하는 유저가 없습니다."));
+        user.setPassword(newUser.getPassword());
+        user.setNickname(newUser.getNickname());
         userRepository.save(user);
     }
 
