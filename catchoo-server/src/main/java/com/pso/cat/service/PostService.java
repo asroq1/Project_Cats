@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -60,4 +62,18 @@ public class PostService {
                 .findAllByStateOrderByCreatedDateDesc(1)
                 .stream().map(post -> PostDto.ListResponse.ofEntity(post)).collect(Collectors.toList());
     }
+
+    public List<PostDto.ListResponse> fetchPostPagesBy(
+        Long lastArticleId, int size
+    ) {
+        Page<Post> articles = fetchPages(lastArticleId, size);
+        return articles.getContent()
+            .stream().map(post -> PostDto.ListResponse.ofEntity(post)).collect(Collectors.toList());
+    }
+
+    private Page<Post> fetchPages(Long lastPostId, int size) {
+        PageRequest pageRequest = PageRequest.of(0, size); // 페이지네이션을 위한 PageRequest, 페이지는 0으로 고정한다.
+        return postRepository.findByIdLessThanAndStateOrderByIdDesc(lastPostId, 1, pageRequest); // JPA 쿼리 메소드
+    }
+
 }

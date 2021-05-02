@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -36,9 +37,19 @@ public class PostController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+
+    @GetMapping("/all")
     public ResponseEntity<List<PostDto.ListResponse>> list() {
         List<ListResponse> list = postService.list();
+        return ResponseEntity.ok().body(list);
+    }
+
+
+    @GetMapping
+    public ResponseEntity<List<PostDto.ListResponse>> fetchPostPagesBy(
+        @RequestParam Long lastPostId, @RequestParam int size
+    ) {
+        List<ListResponse> list = postService.fetchPostPagesBy(lastPostId, size);
         return ResponseEntity.ok().body(list);
     }
 
