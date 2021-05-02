@@ -128,7 +128,6 @@ export const deleteWeightFailureAction = (data) => {
     };
 };
 
-
 export const getWeightRequest = (data) => {
     return {
         type: GET_WEIGHT_REQUEST,
@@ -229,11 +228,11 @@ const reducer = (state = initialState, action) => {
                 draft.deleteWeightDone = false;
                 draft.deleteWeightLoading = true;
                 draft.deleteWeightError = null;
-                draft.cat[0].Record.filter((v) => v.id !== action.data);
                 break;
             case DELETE_WEIGHT_SUCCESS:
                 draft.deleteWeightDone = true;
                 draft.deleteWeightLoading = false;
+                draft.currentCatWeights.filter((v) => v.id !== action.data);
                 break;
             case DELETE_WEIGHT_FAILURE:
                 draft.deleteWeightLoading = false;

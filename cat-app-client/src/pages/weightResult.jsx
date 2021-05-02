@@ -7,8 +7,9 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { getWeightRequest } from '../reducers/cat';
+import { getWeightRequest, GET_CAT_REQUEST } from '../reducers/cat';
 import axios from 'axios';
+import { GET_USER_REQUEST } from '../reducers/user';
 
 const Header = styled.header`
     position: sticky;
@@ -62,14 +63,6 @@ const WeightResult = () => {
         setOnList(true);
     };
 
-    useEffect(() => {
-        console.log('커런 인덱', currentIndex);
-        dispatch(getWeightRequest(currentIndex));
-    }, []);
-
-    useEffect(() => {
-        console.log('CurCatWeights', currentCatWeights);
-    });
     return (
         <>
             <Header>

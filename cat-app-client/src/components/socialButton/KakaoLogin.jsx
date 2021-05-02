@@ -84,6 +84,7 @@ const KakaoLogin = () => {
                         const email = response.kakao_account.email;
                         const nickname =
                             response.kakao_account.profile.nickname;
+                        //카카오 로그인 이메일만 보내기
                         const data = { email, nickname, loginType };
                         dispatch(loginRequestAction(data));
                     },

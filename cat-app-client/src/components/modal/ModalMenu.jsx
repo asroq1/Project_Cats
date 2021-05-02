@@ -1,6 +1,6 @@
-import React, { useEffect,useCallback, useState } from 'react';
-import { useSelector,   useDispatch} from 'react-redux';
-import { useHistory,Link } from 'react-router-dom';
+import React, { useEffect, useCallback, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory, Link } from 'react-router-dom';
 import palette from '../../styles/palette';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -19,7 +19,7 @@ const BackgroundWrapper = styled.div`
 
 const Overlay = styled.div`
     width: 100%;
-    max-width: ${({theme}) => theme.width.mobile};
+    max-width: ${({ theme }) => theme.width.mobile};
     box-sizing: border-box;
     height: 100vh;
     margin: 0 auto;
@@ -60,9 +60,7 @@ const MenuWrapper = styled.div`
         text-decoration: none;
     }
     h2 {
-
-        color: ${({theme}) => theme.palette.beige}
-        
+        color: ${({ theme }) => theme.palette.beige};
     }
     h2:hover {
         color: ${({ theme }) => theme.palette.orange};
@@ -87,78 +85,80 @@ const ModalMenu = ({ onClose }) => {
     //나중에 redux 상태 만들어줄 것
     // 야간모드 토글 위치 협의 사항
     const [isNightMode, setNightMode] = useState(false);
-    const { me } = useSelector((state)=>state.user);
+    const { me } = useSelector((state) => state.user);
     const toggleNightMode = useCallback(() => {
         setNightMode(!isNightMode);
     });
 
     const dispatch = useDispatch();
 
-            
     const onLogOut = useCallback(() => {
         dispatch({
             type: LOG_OUT_REQUEST,
-        })
-    })
+        });
+    });
 
     const history = useHistory();
     useEffect(() => {
-        if (!localStorage.token){
-            history.push("/");
+        if (!localStorage.token) {
+            history.push('/');
         }
-    }, [me])
+    }, [me]);
 
     return (
         <BackgroundWrapper>
-        <Overlay>
-            <Header>
-                <h3>
-                    <i onClick={onClose} className="fa fa-times"></i>
-                </h3>
-                <h1>
-                    {' '}
-                    <i className="fa fa-black-tie"></i> {me.nickname} 집사님,{' '}
-                    <br />
-                    안녕하세요!
-                </h1>
-            </Header>
+            <Overlay>
+                <Header>
+                    <h3>
+                        <i onClick={onClose} className="fa fa-times"></i>
+                    </h3>
+                    <h1>
+                        {' '}
+                        <i className="fa fa-black-tie"></i> {me.nickname}{' '}
+                        집사님, <br />
+                        안녕하세요!
+                    </h1>
+                </Header>
 
-            <MenuWrapper>
-                <Link to="/user/main" onClick={onClose}>
-                    <h2>HOME</h2>
-                </Link>
-                <Link to="/post/list" onClick={onClose}>
-                    <h2>커뮤니티</h2>
-                </Link>
-                <Link to="/user/settings" onClick={onClose}>
-                    <h2>집사설정</h2>
-                </Link>
-                <Link to="/user/settings" onClick={onClose}>
-                    <h2>문의하기</h2>
-                </Link>
-                <Link to="#" onClick={onClose}>
-                    <h2> <span onClick={onLogOut}>로그아웃</span></h2>
-                </Link>
-            </MenuWrapper>
+                <MenuWrapper>
+                    <Link to="/user/main" onClick={onClose}>
+                        <h2>HOME</h2>
+                    </Link>
+                    <Link to="/post/list" onClick={onClose}>
+                        <h2>커뮤니티</h2>
+                    </Link>
+                    <Link to="/user/settings" onClick={onClose}>
+                        <h2>집사설정</h2>
+                    </Link>
+                    <Link to="/user/settings" onClick={onClose}>
+                        <h2>문의하기</h2>
+                    </Link>
+                    <Link to="#" onClick={onClose}>
+                        <h2>
+                            {' '}
+                            <span onClick={onLogOut}>로그아웃</span>
+                        </h2>
+                    </Link>
+                </MenuWrapper>
 
-            <NightModeWrapper>
-                {!isNightMode ? (
-                    <span onClick={toggleNightMode}>
-                        야간 모드 <i className="fa fa-toggle-off"></i>
-                    </span>
-                ) : (
-                    <span onClick={toggleNightMode}>
-                        야간 모드 <i className="fa fa-toggle-on"></i>
-                    </span>
-                )}
-            </NightModeWrapper>
-        </Overlay>
+                <NightModeWrapper>
+                    {!isNightMode ? (
+                        <span onClick={toggleNightMode}>
+                            야간 모드 <i className="fa fa-toggle-off"></i>
+                        </span>
+                    ) : (
+                        <span onClick={toggleNightMode}>
+                            야간 모드 <i className="fa fa-toggle-on"></i>
+                        </span>
+                    )}
+                </NightModeWrapper>
+            </Overlay>
         </BackgroundWrapper>
     );
 };
 
 ModalMenu.propTypes = {
     onClose: PropTypes.func.isRequired,
-}
+};
 
 export default ModalMenu;

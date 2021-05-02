@@ -13,8 +13,9 @@ import {
 } from 'recharts';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import { getWeightRequest } from '../../reducers/cat';
+import { getWeightRequest, GET_CAT_REQUEST } from '../../reducers/cat';
 import { useDispatch, useSelector } from 'react-redux';
+import { GET_USER_REQUEST } from '../../reducers/user';
 
 const GraphContainer = styled.div`
     display: grid;
@@ -155,15 +156,36 @@ const data = [
 
 export default function WeightResultGraph() {
     const dispatch = useDispatch();
-    const { Record, currentIndex } = useSelector((state) => state.cat);
+    const { currentIndex, currentCatWeights } = useSelector(
+        (state) => state.cat
+    );
+
     // ** 현재 고양이 id를, currentIndex에 저장하고 있어요 ** //
 
     //나중에 백엔드 연동해서 이렇게 최근순으로 당겨오면됌
     //최근 데이터만 보여줌
-    const perDay = data.slice(-5);
+    const nowaDays = data.slice(-7);
     const comaparisonResult =
         data[data.length - 1].wgt - data[data.length - 2].wgt;
     const Result = Math.floor(comaparisonResult);
+    const weightData = currentCatWeights;
+    useEffect(() => {
+        console.log('이거봐', weightData);
+    });
+    useEffect(() => {
+        dispatch(getWeightRequest(currentIndex));
+        dispatch({
+            type: GET_CAT_REQUEST,
+        });
+        dispatch({
+            type: GET_USER_REQUEST,
+        });
+    }, []);
+
+    useEffect(() => {
+        console.log('CurCatWeights', currentCatWeights);
+        // console.log('이거 봐', currentCatWeights.slice(-7));
+    });
 
     const perDayHandler = () => {
         // axios.get('<주소>').then((res) => {
@@ -180,7 +202,6 @@ export default function WeightResultGraph() {
                 XAxis: data.name,
             };
         });
-        console.log('일마다', XAxis);
     };
     const perMonthHandler = () => {
         // axios.get('<주소>').then((res) => {
@@ -194,7 +215,6 @@ export default function WeightResultGraph() {
         //         };
         //     });
         // });
-        console.log('매달');
     };
 
     return (
@@ -211,7 +231,7 @@ export default function WeightResultGraph() {
                     <ComposedChart
                         width={1000}
                         height={400}
-                        data={perDay}
+                        data={nowaDays}
                         margin={{
                             top: 20,
                             right: 20,

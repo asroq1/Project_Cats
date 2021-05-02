@@ -156,7 +156,7 @@ const AddWeight = () => {
     const history = useHistory();
     const { currentIndex, addWeightDone } = useSelector((state) => state.cat);
     const { logInDone } = useSelector((state) => state.user);
-    const tokenChecker = localStorage.getItem('access_token');
+
     const onTogetherChange = (e) => {
         setTogether(e.target.value);
         if (together < 0) {
@@ -203,7 +203,7 @@ const AddWeight = () => {
 
     useEffect(() => {
         //if (!logInDone) {
-        if (!localStorage.token){
+        if (!localStorage.token) {
             history.push('/');
         }
     }, [logInDone]);
