@@ -9,7 +9,6 @@ Sun = Moon = styled.svg`
     transition: all 0.5s linear;
 `;
 const Toggle = ({ theme, toggleTheme }) => {
-    console.log(toggleTheme);
     return (
         <div onClick={toggleTheme}>
             {theme === 'light' ? (

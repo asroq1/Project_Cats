@@ -1,5 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import LoginForm from '../components/index/LoginForm';
 
@@ -16,6 +17,7 @@ const IndexContainer = styled.div`
 const LogoWrapper = styled.div`
     display: grid;
     align-items: end;
+    position: relative;
 `;
 
 const SignupButton = styled.div`
@@ -65,27 +67,54 @@ const DivdeText = styled.div`
 `;
 
 const Logo = styled.img`
+    width: 100%;
+    position: absolute;
+    top: 3rem;
     margin: 0 auto;
     display: flex;
     align-items: center;
     // width: 30%;
-    width: 80%;
     height: 25vh;
     @media ${({ theme }) => theme.width.mobile} {
         //width: 85vw;
         width: 100vw;
     }
 `;
-const index = () => {
+const LogoFoot = styled.img`
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    height: 20vh;
+`;
+
+const Title = styled.h1`
+    margin: 0 0 2rem 0;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: ${({ theme }) => theme.text};
+`;
+const Index = () => {
+    const { me, logInDone } = useSelector((state) => state.user);
+    const history = useHistory();
+    // useEffect(() => {
+    //     if (logInDone) {
+    //         history.push('/user/main');
+    //     }
+    // }, []);
+
     return (
         <div>
             <IndexContainer>
                 <LogoWrapper>
                     <Link to="/">
-                        <Logo src="/image/cats.png" alt="logo" />
+                        <Logo src="/image/icon/weight-scale.svg" alt="logo" />
+                        <LogoFoot src="/image/icon/pawprint.svg" alt="logo" />
                     </Link>
                 </LogoWrapper>
                 <article>
+                    <Title>Catchoo </Title>
                     <LoginForm />
                     <DivdeContainer>
                         <DivdeLine>
@@ -105,4 +134,4 @@ const index = () => {
     );
 };
 
-export default index;
+export default Index;

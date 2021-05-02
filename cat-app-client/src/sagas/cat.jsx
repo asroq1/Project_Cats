@@ -118,10 +118,6 @@ function addCatWeightAPI(data) {
 function* addWeight(action) {
     try {
         yield call(addCatWeightAPI, action.data);
-        // console.log('action', action);
-        // console.log('action data', action.data);
-        // console.log('result', result);
-        // console.log('result.data.weight', result.data.weight);
         yield put({
             type: ADD_WEIGHT_SUCCESS,
             data: action.data,
@@ -153,17 +149,19 @@ function* deleteWeight(action) {
 }
 
 function getWeightAPI(id) {
-    return axios.get(`api/records?catId=${id}`);
+    return axios.get(`/api/records?catId=${id}`, id);
+
     // 백엔드 팀이랑 api 주소 더 깔끔하게 만드는 것 의논해봐도 될 것 같아요.
     // `api/records/${id}` 이런 식으로 들어가게
 }
 function* getWeight(action) {
     const result = yield (getWeightAPI, action.data);
-    console.log(result);
+    console.log('result', result);
     try {
+        yield (deleteWeightAPI, action.data);
         yield put({
             type: GET_WEIGHT_SUCCESS,
-            data: result.data,
+            data: action.data,
         });
     } catch (err) {
         yield put({

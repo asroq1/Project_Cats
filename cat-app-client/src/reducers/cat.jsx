@@ -53,7 +53,7 @@ export const initialState = {
     currentIndex: 1,
     currImgUrl: null,
 
-    currentCatWeights: null,
+    currentCatWeights: [],
 };
 
 // 몸무게 관련
@@ -280,14 +280,11 @@ const reducer = (state = initialState, action) => {
                 draft.addWeightLoading = true;
                 draft.addWeightDone = false;
                 draft.addWeightError = null;
-                console.log(`리덕스 요청 weight : ${action.data.weight}`);
 
                 break;
             case ADD_WEIGHT_SUCCESS:
                 draft.addWeightLoading = false;
                 draft.addWeightDone = true;
-                console.log(`리덕스 성공${action.data.weight}`);
-                draft.cat.Record.weight.concat(action.data.weight);
                 break;
             case ADD_WEIGHT_FAILURE:
                 draft.addWeightLoading = false;
@@ -319,7 +316,6 @@ const reducer = (state = initialState, action) => {
                 draft.getWeightLoading = true;
                 draft.getWeightDone = false;
                 draft.addWeightError = null;
-
                 draft.currentCatWeights = null;
                 break;
             case GET_WEIGHT_SUCCESS:

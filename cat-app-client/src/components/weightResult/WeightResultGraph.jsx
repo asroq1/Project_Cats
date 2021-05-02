@@ -45,12 +45,6 @@ const DateSelector = styled.button`
     border: none;
 `;
 
-// const MonthSelector = styled.button`
-//     color: ${palette.white};
-//     font-size: 1rem;
-//     background-color: ${palette.borderColor};
-//     border: none;
-// `;
 const DataContainer = styled.div`
     width: 90%;
     margin: 0 auto;
@@ -202,9 +196,6 @@ export default function WeightResultGraph() {
         // });
         console.log('매달');
     };
-    useEffect(() => {
-        dispatch(getWeightRequest(currentIndex));
-    }, []);
 
     return (
         <GraphContainer>
