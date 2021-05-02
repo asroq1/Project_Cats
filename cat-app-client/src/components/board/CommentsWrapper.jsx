@@ -14,7 +14,7 @@ const EachComment = styled.div`
     padding-bottom: 1rem;
     padding-top: 1rem;
     & + & {
-        border-top: 1px dotted ${({ theme }) => theme.palette.green};
+        border-top: 1px dotted ${({ theme }) => theme.green};
     }
 
     button {

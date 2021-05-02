@@ -7,6 +7,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import PropTypes from 'prop-types';
 
 const InnerGlobal = styled.div`
+    background-color: ${({theme})=>theme.navy};
     a {
         color: ${({theme}) => theme.beige};
         text-decoration: none;
@@ -30,7 +31,7 @@ const EachCol = styled.div`
     flex: auto;
     background-color: ${(props) =>
         props.active ? ({theme})=>theme.beige : ({theme})=>theme.navy};
-    &: hover {
+    &:hover {
         background-color: ${(props) =>
             props.active ? ({theme})=>theme.beige : 'black'};
     }
@@ -38,8 +39,10 @@ const EachCol = styled.div`
         max-width: 150px;
         justify-content: center;
         color: ${(props) => (props.active ? ({theme})=>theme.text : ({theme})=>theme.beige)};
-        border-radius: 5px 5px 0 0;
-        border: 1px solid ${(props) => (props.active ? ({theme})=>theme.beige : 'black')};
+        border-radius:  ${(props)=>(props.active? '15px 15px 0 0' : 'none')}; 
+        border-top: 1px solid ${(props) => (props.active ? ({theme})=>theme.beige : 'none')};
+        border-left:  1px solid ${(props)=>(props.active ? ({theme})=>theme.beige : 'none')};
+        border-right: 1px solid ${(props) => (props.active ? ({theme})=>theme.beige : 'none')};
         border-bottom: ${(props) =>
             props.active ? 'none' : '1px solid black'};
         cursor: pointer;
@@ -50,10 +53,11 @@ const EachCol = styled.div`
         justify-content: flex-end;
         border: none;
         border-bottom: 1px solid black;
-        background: ${({theme}) => theme.beige};
+        background: ${({theme}) => theme.navy};
     }
     .fa-cog {
-        color: ${({theme}) => theme.navy};
+        padding-right: 0.5rem;
+        color: ${({theme}) =>  theme.beige};
     }
 `;
 

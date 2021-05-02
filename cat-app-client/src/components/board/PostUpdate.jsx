@@ -58,6 +58,7 @@ const CenterWrapper = styled.div`
     position: relative;
 `;
 
+
 const ImagesContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -69,7 +70,7 @@ const StyledButton = styled.button`
     border-radius: 10px;
     color: white;
     border:none; 
-    background-color: ${({theme}) => theme.palette.green};
+    background-color: ${({theme})=>theme.green};
     font-weight:bold;
     cursor:pointer;
     margin-bottom: 1rem;
@@ -80,7 +81,7 @@ const StyledButton = styled.button`
         background-color: darkgreen;
     }
     &:first-child {
-        background-color: ${({theme}) => theme.palette.navy};
+        background-color: ${({theme}) => theme.navy};
     }
     &:first-child:hover {
         background-color: black;

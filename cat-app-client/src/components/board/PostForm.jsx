@@ -68,7 +68,7 @@ const StyledButton = styled.button`
     border-radius: 10px;
     color: white;
     border:none; 
-    background-color: ${({theme}) => theme.palette.green};
+    background-color: ${({theme})=>theme.green};
     font-weight:bold;
     cursor:pointer;
 
@@ -81,7 +81,7 @@ const StyledButton = styled.button`
         background-color: darkgreen;
     }
     &:first-child {
-        background-color: ${({theme}) => theme.palette.navy};
+        background-color: ${({theme}) => theme.navy};
     }
     &:first-child:hover {
         background-color: black;
