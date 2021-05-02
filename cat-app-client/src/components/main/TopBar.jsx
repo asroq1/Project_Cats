@@ -115,7 +115,7 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
 };
 
 TopBar.propTypes = {
-    cat: PropTypes.object.isRequired,
+    cat: PropTypes.array.isRequired,
     currentIndex: PropTypes.number.isRequired,
     onSelect: PropTypes.func.isRequired,
 }

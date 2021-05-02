@@ -69,11 +69,11 @@ const SignUpForm = () => {
     useEffect(() => {
         if (me) {
             history.push('/');
-            try {
-                localStorage.setItem('user', JSON.stringify(me));
-            } catch (e) {
-                alert('회원가입에 실패하였습니다.');
-            }
+            // try {
+            //     localStorage.setItem('user', JSON.stringify(me));
+            // } catch (e) {
+            //     alert('회원가입에 실패하였습니다.');
+            // }
         }
     }, [history, me]);
     return (

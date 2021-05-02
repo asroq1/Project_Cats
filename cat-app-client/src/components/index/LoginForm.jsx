@@ -76,22 +76,22 @@ const LoginForm = ({ history }) => {
         return dispatch(loginRequestAction(data));
     }, []);
 
-    useEffect(() => {
-        if (me) {
-            history.push('/user/main');
-            try {
-                localStorage.setItem('user', JSON.stringify(me));
-            } catch (e) {
-                alert('로그인에 실패하였습니다.');
-            }
-        }
-    }, [me, history]);
+    // useEffect(() => {
+    //     if (me) {
+    //         history.push('/user/main');
+            // try {
+            //     localStorage.setItem('user', JSON.stringify(me));
+            // } catch (e) {
+            //     alert('로그인에 실패하였습니다.');
+            // }
+        //}
+    // }, [me, history]);
 
-    useEffect(() => {
-        if (!logInDone) {
-            history.push('/');
-        }
-    }, [logInDone]);
+    // useEffect(() => {
+    //     if (!localStorage.token) {
+    //         history.push('/');
+    //     }
+    // }, [logInDone]);
     return (
         <>
             <LoginContainer onSubmit={handleSubmit(onSubmit)}>

@@ -14,7 +14,7 @@ const Main = () => {
     const { cat } = useSelector((state) => state.cat);
     const { currentIndex } = useSelector((state) => state.cat);
 
-    const { logInDone } = useSelector((state) => state.user);
+    const { logInDone, logOutDone } = useSelector((state) => state.user);
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -45,7 +45,8 @@ const Main = () => {
     },[cat, currentIndex]);
     
     useEffect(()=>{
-        if (!logInDone){
+        //if (!logInDone){
+        if (!localStorage.token){
             history.push('/');
         }
         dispatch({
@@ -54,7 +55,7 @@ const Main = () => {
         dispatch({
             type: GET_USER_REQUEST,
         });
-    }, []);
+    }, [logOutDone]);
 
     return (
         <>
