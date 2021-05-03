@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Api(value="댓글 추가, 수정, 삭제, 조회", tags = {"댓글 API"})
-@RequestMapping("/api/comment")
+@RequestMapping("/api/comments")
 public class CommentController {
     private final CommentService commentService;
 
@@ -29,7 +29,7 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity<CommentDto.Response> add(CommentDto.Request comment) {
+    public ResponseEntity<CommentDto.Response> add(@RequestBody CommentDto.Request comment) {
         Long userId = SecurityUtil.getCurrentUserId().orElseThrow(
             () -> new RuntimeException("로그인을 해주세요.")
         );
