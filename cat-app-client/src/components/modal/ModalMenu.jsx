@@ -1,11 +1,12 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
-import palette from '../../styles/palette';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
 import { LOG_OUT_REQUEST } from '../../reducers/user';
+import Toggle from '../toggle/Toggle';
+import { useDarkMode } from '../../hooks/useDarkMode ';
+import { lightTheme, darkTheme } from '../../styles/globalStyles';
 
 const BackgroundWrapper = styled.div`
     position: fixed;
@@ -51,7 +52,7 @@ const MenuWrapper = styled.div`
     margin-bottom: 2rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    
+
     border-top: 1.5px solid ${({ theme }) => theme.beige};
     font-size: 2rem;
     line-height: 2;
@@ -61,17 +62,11 @@ const MenuWrapper = styled.div`
         text-decoration: none;
     }
     h2 {
-<<<<<<< HEAD
         color: ${({ theme }) => theme.palette.beige};
-=======
-
-        color: ${({ theme }) => theme.beige}
-        
->>>>>>> master
     }
-    
+
     h2:hover {
-        color: ${({ theme }) => theme.cOrange}
+        color: ${({ theme }) => theme.cOrange};
     }
 `;
 
@@ -94,6 +89,9 @@ const ModalMenu = ({ onClose }) => {
     // 야간모드 토글 위치 협의 사항
     const [isNightMode, setNightMode] = useState(false);
     const { me } = useSelector((state) => state.user);
+    const [theme, toggleTheme] = useDarkMode();
+    const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
     const toggleNightMode = useCallback(() => {
         setNightMode(!isNightMode);
     });
@@ -150,7 +148,7 @@ const ModalMenu = ({ onClose }) => {
                 </MenuWrapper>
 
                 <NightModeWrapper>
-                    {!isNightMode ? (
+                    {/* {!isNightMode ? (
                         <span onClick={toggleNightMode}>
                             야간 모드 <i className="fa fa-toggle-off"></i>
                         </span>
@@ -158,7 +156,8 @@ const ModalMenu = ({ onClose }) => {
                         <span onClick={toggleNightMode}>
                             야간 모드 <i className="fa fa-toggle-on"></i>
                         </span>
-                    )}
+                    )} */}
+                    <Toggle theme={theme} toggleTheme={toggleTheme} />
                 </NightModeWrapper>
             </Overlay>
         </BackgroundWrapper>

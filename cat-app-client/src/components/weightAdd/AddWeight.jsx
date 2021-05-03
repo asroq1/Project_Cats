@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { addWeightRequestAction } from '../../reducers/cat';
-import { loginChecker } from '../../reducers/user';
-import palette from '../../styles/palette';
 
 const HeaderTitle = styled.span`
     margin: 0 auto;
@@ -154,7 +152,7 @@ const AddWeight = () => {
     const nextRef = useRef(null);
     const dispatch = useDispatch();
     const history = useHistory();
-    const { currentIndex, addWeightDone } = useSelector((state) => state.cat);
+    const { currentIndex } = useSelector((state) => state.cat);
     const { logInDone } = useSelector((state) => state.user);
 
     const onTogetherChange = (e) => {
@@ -174,7 +172,6 @@ const AddWeight = () => {
 
     const onNextPage = (e) => {
         e.preventDefault();
-        // nextRef.current.style.transform += 'translateX(-100vw)';
         nextRef.current.style.transform += 'translateY(-100vh)';
     };
     const onReset = (e) => {
@@ -196,23 +193,17 @@ const AddWeight = () => {
                     id: currentIndex,
                 };
                 dispatch(addWeightRequestAction(body));
+                history.push('/user/main');
             }
         },
         [weightResult]
     );
 
     useEffect(() => {
-        //if (!logInDone) {
         if (!localStorage.token) {
             history.push('/');
         }
     }, [logInDone]);
-
-    useEffect(() => {
-        if (addWeightDone) {
-            history.push('/user/main');
-        }
-    }, [addWeightDone]);
 
     return (
         <>

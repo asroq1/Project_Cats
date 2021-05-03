@@ -4,17 +4,18 @@ import palette from '../../styles/palette';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    deleteWeightRequestAction,
-    getWeightRequest,
-} from '../../reducers/cat';
+import { DELETE_WEIGHT_REQUEST, GET_CAT_REQUEST } from '../../reducers/cat';
+import { useHistory } from 'react-router';
+import { GET_USER_REQUEST } from '../../reducers/user';
+import { getWeightRequest } from '../../reducers/cat';
+
 const ListContainer = styled.div`
     display: grid;
     margin: 0 auto;
     max-height: 100vh;
     overflow-y: auto;
     width: 100%;
-    height: 100%;
+    height: 94vh;
     background-color: ${({ theme }) => theme.resultBackground};
 `;
 
@@ -64,24 +65,36 @@ const DeleteButton = styled.button`
 
 const WeightResultList = ({}) => {
     const dispatch = useDispatch();
-    const { currentIndex, currentCatWeights } = useSelector(
+    const history = useHistory();
+    const { currentCatWeights, deleteWeightDone } = useSelector(
         (state) => state.cat
     );
-    // const onDelete = (id) => {
-    //     console.log('아이디', id);
-    //     dispatch(deleteWeightRequestAction(id));
-    // };
+
     useEffect(() => {
-        console.log(currentCatWeights);
+        if (!localStorage.token) {
+            history.push('/');
+        }
+        dispatch({
+            type: GET_CAT_REQUEST,
+        });
+        dispatch({
+            type: GET_USER_REQUEST,
+        });
     }, []);
 
-    const onRemove = useCallback((e) => {
-        e.preventDefault();
-
-        dispatch(deleteWeightRequestAction(currentCatWeights[0].id));
-
-        console.log(`확인 : ${currentCatWeights[0].id}`);
-        console.log(`값 확인 : ${currentCatWeights[0]}`);
+    useEffect(() => {
+        if (deleteWeightDone) {
+            history.push('/cat/data');
+        }
+    }, []);
+    const onRemove = useCallback((data) => {
+        if (window.confirm('정말로 삭제하시겠어요?')) {
+            dispatch({
+                type: DELETE_WEIGHT_REQUEST,
+                data,
+            });
+        } else {
+        }
     }, []);
     return (
         <ListContainer>
@@ -92,8 +105,7 @@ const WeightResultList = ({}) => {
                         <DataList key={data.id}>
                             <p>{data.createdDate.substr(0, 10)}</p>
                             <p>{data.weight}kg</p>
-                            <p>{data.id}</p>
-                            <DeleteButton onClick={onRemove}>
+                            <DeleteButton onClick={() => onRemove(data.id)}>
                                 <FontAwesomeIcon icon={faTrashAlt} />
                             </DeleteButton>
                         </DataList>

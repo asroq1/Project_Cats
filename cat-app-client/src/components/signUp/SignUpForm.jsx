@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signUpRequest } from '../../reducers/user';
 import 'font-awesome/css/font-awesome.min.css';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
 const SignupContainer = styled.form`
@@ -55,27 +54,17 @@ const ErrorMessages = styled.p`
     color: #db4455;
 `;
 
-const SignUpForm = () => {
+const SignUpForm = ({ error }) => {
     const dispatch = useDispatch();
+
     const { register, watch, errors, handleSubmit } = useForm();
     const password = useRef();
-    const history = useHistory();
-    const { me } = useSelector((state) => state.user);
     password.current = watch('password');
     const onSubmit = useCallback((data) => {
         delete data.pwdConfirm;
         dispatch(signUpRequest(data));
     }, []);
-    useEffect(() => {
-        if (me) {
-            history.push('/');
-            // try {
-            //     localStorage.setItem('user', JSON.stringify(me));
-            // } catch (e) {
-            //     alert('회원가입에 실패하였습니다.');
-            // }
-        }
-    }, [history, me]);
+
     return (
         <>
             <SignupContainer onSubmit={handleSubmit(onSubmit)}>
@@ -86,6 +75,12 @@ const SignUpForm = () => {
                     ref={register({ required: true, pattern: /^\S+@\S+$/i })}
                     placeholder="&#xf0e0;"
                 />
+                {error ? (
+                    <ErrorMessages>이미 사용중인 이메일 입니다.</ErrorMessages>
+                ) : (
+                    ''
+                )}
+
                 {errors.email && (
                     <ErrorMessages>
                         올바른 이메일 양식을 입력해주세요.
@@ -143,7 +138,6 @@ const SignUpForm = () => {
                     name="loginType"
                     value="normal"
                     ref={register()}
-                    // ref={register({ required: true })}
                 />
                 <SubmitButton type="submit">회원가입</SubmitButton>
             </SignupContainer>

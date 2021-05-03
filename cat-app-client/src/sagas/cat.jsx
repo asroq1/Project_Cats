@@ -129,7 +129,7 @@ function* addWeight(action) {
 }
 
 function deleteWeightAPI(data) {
-    return axios.delete(`api/records/${data}`, data);
+    return axios.delete(`api/records/${data}`);
 }
 function* deleteWeight(action) {
     try {

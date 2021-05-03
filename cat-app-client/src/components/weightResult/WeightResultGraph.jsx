@@ -169,9 +169,7 @@ export default function WeightResultGraph() {
         data[data.length - 1].wgt - data[data.length - 2].wgt;
     const Result = Math.floor(comaparisonResult);
     const weightData = currentCatWeights;
-    useEffect(() => {
-        console.log('이거봐', weightData);
-    });
+
     useEffect(() => {
         dispatch(getWeightRequest(currentIndex));
         dispatch({
@@ -181,11 +179,6 @@ export default function WeightResultGraph() {
             type: GET_USER_REQUEST,
         });
     }, []);
-
-    useEffect(() => {
-        console.log('CurCatWeights', currentCatWeights);
-        // console.log('이거 봐', currentCatWeights.slice(-7));
-    });
 
     const perDayHandler = () => {
         // axios.get('<주소>').then((res) => {
@@ -282,14 +275,6 @@ export default function WeightResultGraph() {
                 <ResultWrapper>
                     <p>체중 변화</p>
                     <p>{Result < 0 ? `${Result}` : `+ ${Result}`} kg</p>
-
-                    {/* 테스트 코드 */}
-                    {/* {data.map((data) => {
-                        return (
-                            console.log(dateParser(data.name)),
-                            console.log(data.wgt)
-                        );
-                    })} */}
                 </ResultWrapper>
             </DataContainer>
         </GraphContainer>

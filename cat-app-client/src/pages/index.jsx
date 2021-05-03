@@ -50,20 +50,20 @@ const SignupButton = styled.div`
 const DivdeContainer = styled.div`
     display: flex;
     justify-content: space-around;
-    // width: 85%;
-    width: 100%;
+    width: 85%;
     margin: 0 auto;
+    margin-top: 1rem;
 `;
 
 const DivdeLine = styled.div`
     width: 40%;
-    border-color: ;
+    border-color: ${({ theme }) => theme.palette.borderColor};
 `;
 
 const DivdeText = styled.div`
     width: 15%;
     text-align: center;
-    color: ${({ theme }) => theme.palette.borderColor};
+    color: ${({ theme }) => theme.text};
 `;
 
 const Logo = styled.img`
@@ -96,11 +96,10 @@ const Title = styled.h1`
     color: ${({ theme }) => theme.text};
 `;
 const Index = () => {
-    const { me, logInDone, logOutDone } = useSelector((state) => state.user);
+    const { logInDone, logOutDone } = useSelector((state) => state.user);
     const history = useHistory();
     useEffect(() => {
-        //if (logInDone) {
-        if (localStorage.token){
+        if (localStorage.token) {
             history.push('/user/main');
         }
     }, [logInDone, logOutDone]);

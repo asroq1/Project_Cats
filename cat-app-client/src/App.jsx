@@ -17,7 +17,7 @@ import KakaLogin from './pages/kakaoLogin';
 import NaverLogin from './pages/naverLogin';
 import { GlobalStyles, lightTheme, darkTheme } from './styles/globalStyles';
 import Toggle from './components/toggle/Toggle';
-import { useDarkMode } from './styles/useDarkMode ';
+import { useDarkMode } from './hooks/useDarkMode ';
 import styled, { ThemeProvider } from 'styled-components';
 import { useEffect } from 'react';
 import { loginCheck } from './reducers/user';
@@ -29,7 +29,7 @@ const Container = styled.div`
 
 function App() {
     const [theme, toggleTheme] = useDarkMode();
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
     return (
@@ -37,7 +37,7 @@ function App() {
             <ThemeProvider theme={themeMode}>
                 <Container>
                     <GlobalStyles />
-                    <Toggle theme={theme} toggleTheme={toggleTheme} />
+                    {/* <Toggle theme={theme} toggleTheme={toggleTheme} /> */}
                     <Reset />
                     <Route path="/" component={index} exact />
                     <Route path="/user/signup" component={signUp} exact />
