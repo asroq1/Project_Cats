@@ -33,8 +33,7 @@ public class CommentController {
         Long userId = SecurityUtil.getCurrentUserId().orElseThrow(
             () -> new RuntimeException("로그인을 해주세요.")
         );
-        commentService.save(userId, comment);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(commentService.save(userId, comment));
     }
 
     @GetMapping("/{postId}")

@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
+
+import com.pso.cat.util.SecurityUtil;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,7 +28,10 @@ public class CommentService {
     public CommentDto.Response save(Long userId, CommentDto.Request commentDto) {
         Comment comment = commentDto.toEntity();
         comment.setWriter(User.builder().id(userId).build());
-        return CommentDto.Response.ofEntity(commentRepository.save(comment));
+        Comment addedComment = commentRepository.save(comment);
+        addedComment.getWriter().setNickname(SecurityUtil.getCurrentNickname()
+                .orElseThrow(() -> new RuntimeException("토큰에서 닉네임을 꺼낼 수 없습니다.")));
+        return CommentDto.Response.ofEntity(addedComment);
     }
 
     public CommentDto.Response read(Long id) {

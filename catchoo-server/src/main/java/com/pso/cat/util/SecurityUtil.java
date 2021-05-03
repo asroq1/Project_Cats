@@ -45,4 +45,18 @@ public class SecurityUtil {
         return Optional.ofNullable(userId);
     }
 
+    public static Optional<String> getCurrentNickname() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null) {
+            log.debug("Security Context에 인증 정보가 없습니다.");
+            return Optional.empty();
+        }
+
+        JwtUser springSecurityUser = (JwtUser) authentication.getPrincipal();
+        String nickname = springSecurityUser.getUser().getNickname();
+
+        return Optional.ofNullable(nickname);
+    }
+
 }
