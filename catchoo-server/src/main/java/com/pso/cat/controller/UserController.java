@@ -50,6 +50,13 @@ public class UserController {
     }
 
     /*
+    @ApiOperation("이메일 중복 확인")
+    public ResponseEntity checkEmail() {
+        return ResponseEntity.ok(userService.list());
+    }
+     */
+
+    /*
     @GetMapping("/user/{email}")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<UserDto.Response> getUserInfo(@PathVariable String email) {
