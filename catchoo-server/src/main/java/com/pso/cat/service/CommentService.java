@@ -23,10 +23,10 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    public Comment save(Long userId, CommentDto.Request commentDto) {
+    public CommentDto.Response save(Long userId, CommentDto.Request commentDto) {
         Comment comment = commentDto.toEntity();
         comment.setWriter(User.builder().id(userId).build());
-        return commentRepository.save(comment);
+        return CommentDto.Response.ofEntity(commentRepository.save(comment));
     }
 
     public CommentDto.Response read(Long id) {

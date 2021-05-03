@@ -3,6 +3,7 @@ package com.pso.cat.controller;
 
 import com.pso.cat.dto.CommentDto;
 import com.pso.cat.dto.CommentDto.Response;
+import com.pso.cat.entity.Comment;
 import com.pso.cat.service.CommentService;
 import com.pso.cat.util.SecurityUtil;
 import io.swagger.annotations.Api;
@@ -28,7 +29,7 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity add(CommentDto.Request comment) {
+    public ResponseEntity<CommentDto.Response> add(CommentDto.Request comment) {
         Long userId = SecurityUtil.getCurrentUserId().orElseThrow(
             () -> new RuntimeException("로그인을 해주세요.")
         );
