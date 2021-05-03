@@ -48,6 +48,7 @@ export const initialState = {
         // },
     ],
     isLoading: true,
+    currentWeightIndex: 1,
     currentIndex: 1,
     currImgUrl: null,
 
@@ -218,6 +219,7 @@ const reducer = (state = initialState, action) => {
             case ADD_WEIGHT_SUCCESS:
                 draft.addWeightLoading = false;
                 draft.addWeightDone = true;
+
                 break;
             case ADD_WEIGHT_FAILURE:
                 draft.addWeightLoading = false;
