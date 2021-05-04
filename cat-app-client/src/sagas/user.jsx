@@ -57,9 +57,7 @@ function* logIn(action) {
         const result = yield call(logInAPI, action.data);
         const token = result.data.token;
         localStorage.setItem('token', token);
-
         setAuthorizationToken(token);
-
         yield put({
             type: LOG_IN_SUCCESS,
             data: {
