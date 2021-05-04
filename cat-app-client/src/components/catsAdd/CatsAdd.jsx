@@ -14,6 +14,7 @@ const CatsAdd = ({}) => {
     const history = useHistory();
 
     const {currImgUrl, addCatDone} = useSelector((state) => state.cat);
+    const { me } = useSelector((state) => state.user);
     const [name, onChangeName] = useInput('');
     const [birthyear, onChangeBirthYear] = useInput('');
     const [birthmonth, onChangeBirthMonth] = useInput('');
@@ -67,6 +68,12 @@ const CatsAdd = ({}) => {
             history.push('/user/main');
         }
     }, [addCatDone]);
+
+    useEffect(() => {
+        if (!me){
+            history.push('/');
+        }
+    }, [me]);
 
     const goBack = useCallback(() => {
         history.goBack();

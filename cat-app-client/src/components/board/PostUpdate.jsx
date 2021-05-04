@@ -104,6 +104,9 @@ const PreviewBox = styled.div`
 
 const PostUpdate = ({match, location}) => {
     const { updatePostDone } = useSelector((state) => state.post);
+    
+    const { me } = useSelector((state) => state.user);
+    
     const { postId } = match.params;
 
     const dispatch = useDispatch();
@@ -122,6 +125,12 @@ const PostUpdate = ({match, location}) => {
             history.push(`/post/view/${postId}`)
         }
     },[updatePostDone]);
+
+    useEffect(()=> { 
+        if (!me){
+            history.push('/');
+        }
+    }, [me]);
 
     const imageInput = useRef();
     const history=useHistory();

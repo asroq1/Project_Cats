@@ -113,6 +113,7 @@ const PostForm = () => {
 
     // 게시판에 올리는 사진들은 redux에서 상태 관리
     const { addPostDone, imagePaths } = useSelector((state) => state.post);
+    const { me } = useSelector((state) => state.user)
 
     // 이미지 올리는 input은 숨기고, 버튼을 input과 연결하기 위함
     const onClickImageUpload = useCallback(() => {
@@ -204,7 +205,15 @@ const PostForm = () => {
         if(addPostDone){
             history.push('/post/list');
         }
+
     },[addPostDone]);
+
+    useEffect(() => {
+        
+        if(!me){
+            history.push('/');
+        }
+    }, [me])
     
     return (
         <>

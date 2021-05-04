@@ -79,6 +79,8 @@ const PostView = ({ postId, post, error }) => {
     const dispatch = useDispatch();
     const { removePostDone, imagePaths } = useSelector((state) => state.post);
 
+    const { me } = useSelector((state) => state.user);
+
     const onRemovePost = useCallback(
         (e)=>{
             e.preventDefault();
@@ -94,6 +96,12 @@ const PostView = ({ postId, post, error }) => {
             history.push('/post/list');
         }
     }, [ removePostDone]);
+
+    useEffect(() => { 
+        if (!me){
+            history.push('/');
+        }
+    }, [me]);
     
     //에러 발생 시
     if (error) {
