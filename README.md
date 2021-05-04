@@ -34,7 +34,8 @@ Built with [React + Redux + Redux-Saga] + [Spring Boot + MariaDB]
 - Back-end: SpringBoot + MariaDB
 
 #### General
-- Implemented RESTful Routes <br/>
+- Implemented RESTful Routes 
+- **JWT** used to ensure scalability with a potential increase in the number of users.<br/>
 
 #### Front-end
 - **React** used to optimize rerendering and app performance.
@@ -42,7 +43,6 @@ Built with [React + Redux + Redux-Saga] + [Spring Boot + MariaDB]
 - **React-Router** used to manage routes and links.
 - **Redux** used to centralize the states and logics of the app and to manage them easily.
 - **Redux-Saga** used to manage asynchronous action flows.
-- **JWT** used to ensure scalability with a potential increase in the number of users.
 - Other Settings
   * _immer_ to ensure immutability of states.
   * _Axios_ to handle HTTP requests based on promises.
@@ -54,14 +54,25 @@ Built with [React + Redux + Redux-Saga] + [Spring Boot + MariaDB]
   * _Font-Awesome_  to use various icons.
 
 #### Back-End
-- Spring Boot + Gradle + Java + MariaDB
-- Swagger UI is implemented for better communication using APIs with Front-end team.
+- **Java** used to develop object based apps, which is easier as it helps keeps the system flexible and extensible.
+- **Spring Framework** used to simplify enterprise-level Java development and loose coupling of code by dependency injection and AOP.
+- **Spring Boot** used to make development, testing, and deployment more convenient.
+- **Spring Security** used to implement authentication, authorization, and protection against common attacks.
+- **JPA(Hibernate)** used to manipulate data from database through an object-oriented program and improve productivity.
+- **MariaDB** used to avoid data redundancy and data duplication.
+- **Swagger UI** is implemented for better communication using APIs with Front-end team.
+- Other Settings
+  - *JUnit* used to write and run repeatable automated tests.
+  - *Bean Validation* used to validate user input.
+  - *Lombok* used to reduce boilerplate code for model/data objects. 
+  - *Apache Commons Lang 3* used to manupulate core classes of Java APIs.
 
 #### Deployment
 - Front-end server *temporarily* deployed on Netlify.
 - Back-end server *to be* deployed on AWS <br/>
 
 ## Team Members
+
 - This project is being developed by (2) Front-end engineers and (2) Back-end engineers, gathered via Korean developers' online community - OKKY.kr.
 - Project started on 03/30/21.
 - Tool decision, task distribution, debugging, etc. discussed every day via Slack. Weekly zoom meetings held for deeper discussion and catch-up.
