@@ -98,13 +98,14 @@ function* updatePost(action){
     }
 }
 
-function listPostAPI(){
-    return axios.get("/api/posts");
+function listPostAPI(data){
+    return axios.get(`/api/posts?lastPostId=${data.lastPostId}&size=${data.size}`);
+    //posts?lastPostId=7&size=10
 }
 
 function* listPost(action){
     try {
-        const result= yield call(listPostAPI);
+        const result= yield call(listPostAPI, action.data);
         yield put({
             type: LIST_POST_SUCCESS,
             data: result.data,
@@ -139,7 +140,7 @@ function* addComment(action){
 }
 
 function removeCommentAPI(id){
-    return axios.delete(`/api/comment/{id}?id=${id}`);
+    return axios.delete(`/api/comment/${id}`);
 }
 
 function* removeComment(action){

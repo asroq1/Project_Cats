@@ -12,6 +12,10 @@ const PostList = () => {
     useEffect(() => {
         dispatch({
             type: LIST_POST_REQUEST,
+            data: {
+                size: 10,
+                lastPostId: 7
+            }
         })
     }, []);
     
