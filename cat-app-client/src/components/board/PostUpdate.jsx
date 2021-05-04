@@ -105,6 +105,9 @@ const PreviewBox = styled.div`
 
 const PostUpdate = ({match, location}) => {
     const { updatePostDone } = useSelector((state) => state.post);
+    
+    const { me } = useSelector((state) => state.user);
+    
     const { postId } = match.params;
 
     const dispatch = useDispatch();
@@ -123,6 +126,12 @@ const PostUpdate = ({match, location}) => {
             history.push(`/post/view/${postId}`)
         }
     },[updatePostDone]);
+
+    useEffect(()=> { 
+        if (!me){
+            history.push('/');
+        }
+    }, [me]);
 
     const imageInput = useRef();
     const history=useHistory();
@@ -196,6 +205,7 @@ const PostUpdate = ({match, location}) => {
             });
             formData.append('title', title);
             formData.append('content', text);
+            formData.append('id', postId);
 
             console.log("key")
             for (var key of formData.keys()){
@@ -213,8 +223,8 @@ const PostUpdate = ({match, location}) => {
             }
             return dispatch({
                 type: UPDATE_POST_REQUEST,
-                data: formData,
-            });
+                data: formData
+            })
         },
         [text, imagePaths]
     );
@@ -232,7 +242,7 @@ const PostUpdate = ({match, location}) => {
                             <input
                                 value={title}
                                 onChange={onChangeTitle}
-                                maxLength="20"
+                                maxLength="30"
                                 
                             />
                         </StyledBlock>
