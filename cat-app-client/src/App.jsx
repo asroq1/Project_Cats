@@ -1,4 +1,5 @@
 import './App.css';
+import { useSelector } from 'react-redux';
 import { Reset } from 'styled-reset';
 import { Route } from 'react-router-dom';
 import signUp from './pages/signUp';
@@ -30,7 +31,10 @@ const Container = styled.div`
 function App() {
     const [theme, toggleTheme] = useDarkMode();
     // const dispatch = useDispatch();
-    const themeMode = theme === 'light' ? lightTheme : darkTheme;
+    const {isDarkMode} = useSelector((state) => state.user);
+    //const themeMode = localStorage.theme === 'light' ? lightTheme : darkTheme;
+    const themeMode = isDarkMode === 'light' ? lightTheme : darkTheme;
+    // console.log(themeMode)
 
     return (
         <>

@@ -62,7 +62,7 @@ const MenuWrapper = styled.div`
         text-decoration: none;
     }
     h2 {
-        color: ${({ theme }) => theme.palette.beige};
+        color: ${({ theme }) => theme.beige};
     }
 
     h2:hover {
@@ -90,7 +90,7 @@ const ModalMenu = ({ onClose }) => {
     const [isNightMode, setNightMode] = useState(false);
     const { me } = useSelector((state) => state.user);
     const [theme, toggleTheme] = useDarkMode();
-    const themeMode = theme === 'light' ? lightTheme : darkTheme;
+    //const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
     const toggleNightMode = useCallback(() => {
         setNightMode(!isNightMode);
