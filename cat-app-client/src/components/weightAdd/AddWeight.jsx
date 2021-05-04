@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { addWeightRequestAction } from '../../reducers/cat';
-import palette from '../../styles/palette';
 
 const HeaderTitle = styled.span`
     margin: 0 auto;
@@ -49,11 +49,8 @@ const ContentImage = styled.img`
     //width: 20%;
     width: 50%;
     margin: 0 auto;
-
-    // @media ${({ theme }) => theme.width.mobile} {
-    //     width: 50%;
-    //     margin: 0 auto;
-    // }
+    margin-top: 2rem;
+    margin-bottom: 1rem;
 `;
 
 const ContentMain = styled.div`
@@ -123,7 +120,8 @@ const AddText = styled.p`
     display: flex;
     align-items: center;
     margin: 0 auto;
-    font-size: 2rem;
+    font-size: 3rem;
+    font-weight: bold;
 `;
 
 const ResultButton = styled.button`
@@ -153,9 +151,9 @@ const AddWeight = () => {
     const weightResult = together - alone;
     const nextRef = useRef(null);
     const dispatch = useDispatch();
-    const date = new Date();
+    const history = useHistory();
     const { currentIndex } = useSelector((state) => state.cat);
-    const today = date.toLocaleString();
+    const { logInDone } = useSelector((state) => state.user);
 
     const onTogetherChange = (e) => {
         setTogether(e.target.value);
@@ -174,7 +172,6 @@ const AddWeight = () => {
 
     const onNextPage = (e) => {
         e.preventDefault();
-        // nextRef.current.style.transform += 'translateX(-100vw)';
         nextRef.current.style.transform += 'translateY(-100vh)';
     };
     const onReset = (e) => {
@@ -185,25 +182,29 @@ const AddWeight = () => {
         (e) => {
             e.preventDefault();
             if (weightResult <= 0) {
-                alert('등록실패');
+                alert('다시 등록해 주세요');
                 setTogether(0);
                 setAlone(0);
                 nextRef.current.style.transform = 'translateX(0vw)';
             } else {
-                alert('등록완료');
+                alert('기록완료');
                 const body = {
                     weight: weightResult,
                     id: currentIndex,
-                    // createdDate: today,
                 };
                 dispatch(addWeightRequestAction(body));
+                history.push('/user/main');
             }
         },
-        [weightResult, today]
+        [weightResult]
     );
-    // useEffect(() => {
-    //     console.log(today);
-    // });
+
+    useEffect(() => {
+        if (!localStorage.token) {
+            history.push('/');
+        }
+    }, [logInDone]);
+
     return (
         <>
             <CarouselContainer>
@@ -211,7 +212,10 @@ const AddWeight = () => {
                     <CarouselContent ref={nextRef}>
                         <ContentWrapper>
                             <HeaderTitle>체중 측정 중...</HeaderTitle>
-                            <ContentImage src="/image/scale.png" alt="logo" />
+                            <ContentImage
+                                src="/image/icon/weight-scale.svg"
+                                alt="logo"
+                            />
                             <ContentMain>
                                 <ContentText>
                                     주인님을 들고 체중계 위로 올라가주세요.
@@ -234,7 +238,10 @@ const AddWeight = () => {
                     <CarouselContent ref={nextRef}>
                         <ContentWrapper>
                             <HeaderTitle>체중 측정 중...</HeaderTitle>
-                            <ContentImage src="/image/scale.png" alt="logo" />
+                            <ContentImage
+                                src="/image/icon/weight-scale.svg"
+                                alt="logo"
+                            />
                             <ContentMain>
                                 <ContentText>
                                     집사 혼자 체중계 위로 올라가주세요.
@@ -257,11 +264,14 @@ const AddWeight = () => {
                     <CarouselContent ref={nextRef}>
                         <ContentWrapper>
                             <HeaderTitle>체중 측정 완료!</HeaderTitle>
-                            <ContentImage src="/image/scale.png" alt="" />
+                            <ContentImage
+                                src="/image/icon/weight-scale.svg"
+                                alt="logo"
+                            />
                             <ContentMain>
                                 <ResultBox>
                                     <ContentText>
-                                        주인님 누구누구의 몸무게는 !
+                                        주인님의 몸무게는 !
                                     </ContentText>
                                     <AddText>{weightResult}KG</AddText>
                                 </ResultBox>

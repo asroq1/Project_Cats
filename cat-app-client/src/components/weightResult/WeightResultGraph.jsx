@@ -13,8 +13,9 @@ import {
 } from 'recharts';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import { getWeightRequest } from '../../reducers/cat';
+import { getWeightRequest, GET_CAT_REQUEST } from '../../reducers/cat';
 import { useDispatch, useSelector } from 'react-redux';
+import { GET_USER_REQUEST } from '../../reducers/user';
 
 const GraphContainer = styled.div`
     display: grid;
@@ -45,12 +46,6 @@ const DateSelector = styled.button`
     border: none;
 `;
 
-// const MonthSelector = styled.button`
-//     color: ${palette.white};
-//     font-size: 1rem;
-//     background-color: ${palette.borderColor};
-//     border: none;
-// `;
 const DataContainer = styled.div`
     width: 90%;
     margin: 0 auto;
@@ -161,15 +156,29 @@ const data = [
 
 export default function WeightResultGraph() {
     const dispatch = useDispatch();
-    const { Record, currentIndex } = useSelector((state) => state.cat);
+    const { currentIndex, currentCatWeights } = useSelector(
+        (state) => state.cat
+    );
+
     // ** 현재 고양이 id를, currentIndex에 저장하고 있어요 ** //
 
     //나중에 백엔드 연동해서 이렇게 최근순으로 당겨오면됌
     //최근 데이터만 보여줌
-    const perDay = data.slice(-5);
+    const nowaDays = data.slice(-7);
     const comaparisonResult =
         data[data.length - 1].wgt - data[data.length - 2].wgt;
     const Result = Math.floor(comaparisonResult);
+    const weightData = currentCatWeights;
+
+    useEffect(() => {
+        dispatch(getWeightRequest(currentIndex));
+        dispatch({
+            type: GET_CAT_REQUEST,
+        });
+        dispatch({
+            type: GET_USER_REQUEST,
+        });
+    }, []);
 
     const perDayHandler = () => {
         // axios.get('<주소>').then((res) => {
@@ -186,7 +195,6 @@ export default function WeightResultGraph() {
                 XAxis: data.name,
             };
         });
-        console.log('일마다', XAxis);
     };
     const perMonthHandler = () => {
         // axios.get('<주소>').then((res) => {
@@ -200,11 +208,7 @@ export default function WeightResultGraph() {
         //         };
         //     });
         // });
-        console.log('매달');
     };
-    useEffect(() => {
-        dispatch(getWeightRequest(currentIndex));
-    }, []);
 
     return (
         <GraphContainer>
@@ -220,7 +224,7 @@ export default function WeightResultGraph() {
                     <ComposedChart
                         width={1000}
                         height={400}
-                        data={perDay}
+                        data={nowaDays}
                         margin={{
                             top: 20,
                             right: 20,
@@ -271,14 +275,6 @@ export default function WeightResultGraph() {
                 <ResultWrapper>
                     <p>체중 변화</p>
                     <p>{Result < 0 ? `${Result}` : `+ ${Result}`} kg</p>
-
-                    {/* 테스트 코드 */}
-                    {/* {data.map((data) => {
-                        return (
-                            console.log(dateParser(data.name)),
-                            console.log(data.wgt)
-                        );
-                    })} */}
                 </ResultWrapper>
             </DataContainer>
         </GraphContainer>

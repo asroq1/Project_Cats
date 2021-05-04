@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -36,9 +37,19 @@ public class PostController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+
+    @GetMapping("/all")
     public ResponseEntity<List<PostDto.ListResponse>> list() {
         List<ListResponse> list = postService.list();
+        return ResponseEntity.ok().body(list);
+    }
+
+
+    @GetMapping
+    public ResponseEntity<List<PostDto.ListResponse>> fetchPostPagesBy(
+        @RequestParam Long lastPostId, @RequestParam int size
+    ) {
+        List<ListResponse> list = postService.fetchPostPagesBy(lastPostId, size);
         return ResponseEntity.ok().body(list);
     }
 
@@ -47,14 +58,14 @@ public class PostController {
         return ResponseEntity.ok().body(postService.read(id));
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity modify(@PathVariable Long id, @RequestBody PostDto.Request postRequest) {
+    @PatchMapping
+    public ResponseEntity modify(Long id, PostDto.Request postRequest) {
         postService.modify(id, postRequest);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity remove(Long id) {
+    public ResponseEntity remove(@PathVariable Long id) {
         postService.remove(id);
         return ResponseEntity.ok().build();
     }

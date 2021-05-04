@@ -20,7 +20,7 @@ const ButtonWrapper = styled.button`
     border-radius:10px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${({theme}) => theme.palette.orange};
+    background-color: ${({theme}) => theme.orange};
     cursor: pointer;
     color: white;
     margin-top: 0.5rem;

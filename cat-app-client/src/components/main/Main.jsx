@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 //필요 딱히 없는 건 나중에 지워주기
 //짧은 건 useMemo로 넣어줌
 const InnerGlobal = styled.div`
+    background-color:${({theme})=>theme.beige};
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -25,6 +26,12 @@ const GeneralWrapper = styled.div`
     align-items: center;
     padding: 10px;
     margin-top: 1rem;
+
+    i {
+        text-decoration: none;
+
+        color: ${({theme}) => theme.text};
+    }
 `;
 
 const PhotoContainer = styled.div`
@@ -34,13 +41,13 @@ const PhotoContainer = styled.div`
     margin-top: 0.5rem;
     border-radius: 10px;
     background-size: cover;
-    box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.5);
+    box-shadow:3px 5px 5px  ${({theme})=>theme.shadow};
     display: flex;
     justify-content: center;
     align-items: center;
     .fa-paw {
         font-size: 10rem;
-        color: ${({ theme }) => theme.palette.beige};
+        color: ${({ theme }) => theme.beige};
     }
 `;
 
@@ -52,8 +59,8 @@ const ButtonWrapper = styled.button`
     border-radius: 5px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${({ theme }) => theme.palette.navy};
-    color: white;
+    background-color: ${({ theme }) => theme.navy};
+    color: ${({theme}) => theme.textlight};
     cursor: pointer;
     border: 1px solid black;
     &:hover {
@@ -107,7 +114,7 @@ const Main = ({ cat, currentIndex, age }) => {
                     {age[0]}년 {age[1]}개월 |{' '}
                     {currentCat.gender === 'M' ? '수컷' : '암컷'}
                     <Link to="/cat/update">
-                        <i className = "fa fa-edit"></i>
+                        <i className="fa fa-edit"></i>
                     </Link>
                 </div>
                 {currentCat.photo && currentCat.photo !== 'null' ? (
@@ -116,7 +123,7 @@ const Main = ({ cat, currentIndex, age }) => {
                     />
                 ) : (
                     <PhotoContainer>
-                        <i className = "fa fa-paw"></i>
+                        <i className="fa fa-paw"></i>
                     </PhotoContainer>
                 )}
                 <WeightRecordWrapper>
@@ -170,7 +177,7 @@ const Main = ({ cat, currentIndex, age }) => {
 };
 
 Main.propTypes = {
-    cat: PropTypes.object.isRequired,
+    cat: PropTypes.array.isRequired,
     currentIndex: PropTypes.number.isRequired,
     age: PropTypes.array.isRequired,
 }

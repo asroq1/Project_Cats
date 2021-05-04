@@ -21,15 +21,18 @@ const OverallContainer = styled.div`
     }
 `;
 
+
 const PostHead = styled.div`
-    border-bottom: 1.5px solid ${({ theme }) => theme.palette.green};
+    border-bottom: 1.5px solid ${({theme})=>theme.green};
     border-top:1px solid lightgray;
     padding-bottom: 1rem;
     margin-bottom: 1.25rem;
     margin-top:0.75rem;
+    
     h1 {
         font-weight: bold;
-        color: ${({ theme }) => theme.palette.navy};
+
+        color:${({theme})=>theme.text};
         line-height: 1.5rem;
         font-size: 1.5rem;
         margin-top: 2rem;
@@ -39,8 +42,8 @@ const PostHead = styled.div`
 const ButtonWrapper = styled.div`
     margin-top: 1rem;
     button {
-        background-color: ${({theme}) => theme.palette.orange};
-        color: ${({theme}) => theme.palette.beige};
+        background-color: ${({theme}) => theme.orange};
+        color: ${({theme}) => theme.beige};
         padding: 0.5rem;
         border: none;
         border-radius: 10px;
@@ -49,14 +52,14 @@ const ButtonWrapper = styled.div`
     }
     .EditButton{
         margin-left: 0;
-        background-color: ${({theme})=>theme.palette.green};
+        background-color: ${({theme})=>theme.green};
     }
     `;
 
 const SubInfo = styled.div`
     margin-top: 1rem;
     font-size: 1rem;
-    color: ${({ theme }) => theme.palette.green};
+    color: ${({ theme }) => theme.green};
     span + span:before {
         color: gray;
         padding-left: 0.25rem;
@@ -124,7 +127,7 @@ const PostView = ({ postId, post, error }) => {
                 
                 
                 {/* <ImageCarousel images={currentPost.Images} /> */}
-                <ImageCarousel images={imagePaths}/>
+                {/* <ImageCarousel images={imagePaths}/> */}
                 <h1>{title}</h1>
                 <SubInfo>
                     <span>

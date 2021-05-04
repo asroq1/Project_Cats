@@ -28,9 +28,9 @@ public class RecordService {
         recordRepository.deleteById(id);
     }
 
-    public void modify(Long id, RecordDto.Request request) {
-        Record record = request.toEntity();
-        record.setId(id);
+    public void modify(Long id, Float weight) {
+        Record record = recordRepository.findById(id).orElseThrow(() -> new RuntimeException("해당 기록이 없습니다."));
+        record.setWeight(weight);
         recordRepository.save(record);
     }
 

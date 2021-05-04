@@ -5,6 +5,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from '../reducers';
 import rootSaga from '../sagas';
+import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 // 개발용 - 나중에 지워도 됨
 // 함수 실행마다 로그해줘서 개발에 유용함
@@ -27,5 +28,7 @@ const configureStore = () => {
     
     return store;
 };
+
+setAuthorizationToken(localStorage.token);
 
 export default configureStore;

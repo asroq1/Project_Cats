@@ -10,17 +10,20 @@ const KakaoButton = styled.button`
     display: flex;
     align-items: center;
     flex-direction: inherit;
-    justify-content: space-evenly;
+    justify-content: center;
+    margin: 0 auto;
+    width: 80%;
+    border-radius: 4px;
     background-color: #f7e600;
     color: #3a1d1d;
     font-size: 1rem;
     font-weight: bold;
     border: none;
     height: 48px;
-    // @media ${({ theme }) => theme.width.mobile} {
-    //     width: 49%;
-    //     font-size: 0.8rem;
-    // }
+
+    img {
+        margin-right: 1rem;
+    }
 `;
 
 const KakaoLogo = styled.img`
@@ -29,7 +32,6 @@ const KakaoLogo = styled.img`
 `;
 const KakaoLogin = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
     const { Kakao } = window;
 
     const onKakaoLogin = () => {
@@ -84,6 +86,7 @@ const KakaoLogin = () => {
                         const email = response.kakao_account.email;
                         const nickname =
                             response.kakao_account.profile.nickname;
+                        //카카오 로그인 이메일만 보내기
                         const data = { email, nickname, loginType };
                         dispatch(loginRequestAction(data));
                     },
@@ -99,7 +102,7 @@ const KakaoLogin = () => {
         <>
             <KakaoButton href="#" onClick={onKakaoLogin}>
                 <KakaoLogo src="./image/kakao-btn.png" alt="kakao-logo" />
-                카카오 로그인
+                카카오로 로그인
             </KakaoButton>
         </>
     );

@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 // 스타일링된 input block
 export const InnerGlobal = styled.div`
+    
+    
+    background-color:${({theme})=>theme.beige};
     width: 80%;
     margin: 0 auto;
     & > form > div > label {
@@ -76,10 +79,10 @@ export const ButtonWrapper = styled.button`
     }
     
     &:first-child {
-        background-color: ${({theme}) => theme.palette.navy};
+        background-color: ${({theme}) => theme.navy};
     }
     &:last-child {
-        background-color: ${({theme}) => theme.palette.orange};
+        background-color: ${({theme}) => theme.orange};
     }
 `;
 
@@ -105,6 +108,6 @@ export const RadioBtnWrapper = styled.div`
         margin-left: 0.5rem;
     }
     input:checked + .radiobtn {
-        background-color: ${({theme}) => theme.palette.orange};
+        background-color: ${({theme}) => theme.orange};
     }
 `;

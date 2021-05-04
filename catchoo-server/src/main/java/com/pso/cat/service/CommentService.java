@@ -8,10 +8,13 @@ import com.pso.cat.entity.Post;
 import com.pso.cat.entity.User;
 import com.pso.cat.repository.CommentRepository;
 import com.pso.cat.repository.PostRepository;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
+
+import com.pso.cat.util.SecurityUtil;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,10 +25,13 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    public Comment save(Long userId, CommentDto.Request commentDto) {
+    public CommentDto.Response save(Long userId, CommentDto.Request commentDto) {
         Comment comment = commentDto.toEntity();
         comment.setWriter(User.builder().id(userId).build());
-        return commentRepository.save(comment);
+        Comment addedComment = commentRepository.save(comment);
+        addedComment.getWriter().setNickname(SecurityUtil.getCurrentNickname()
+                .orElseThrow(() -> new RuntimeException("토큰에서 닉네임을 꺼낼 수 없습니다.")));
+        return CommentDto.Response.ofEntity(addedComment);
     }
 
     public CommentDto.Response read(Long id) {
@@ -34,10 +40,12 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment modify(Long id, CommentDto.Request commentRequest) {
-        Comment comment = commentRequest.toEntity();
-        comment.setId(id);
-        return commentRepository.save(comment);
+    public void modify(Long id, String content) {
+        Comment comment = commentRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("해당하는 댓글이 없습니다."));
+        comment.setContent(content);
+        comment.setUpdatedDate(new Date());
+        commentRepository.save(comment);
     }
 
     @Transactional

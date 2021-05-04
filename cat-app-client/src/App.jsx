@@ -1,4 +1,5 @@
 import './App.css';
+import { useSelector } from 'react-redux';
 import { Reset } from 'styled-reset';
 import { Route } from 'react-router-dom';
 import signUp from './pages/signUp';
@@ -17,8 +18,11 @@ import KakaLogin from './pages/kakaoLogin';
 import NaverLogin from './pages/naverLogin';
 import { GlobalStyles, lightTheme, darkTheme } from './styles/globalStyles';
 import Toggle from './components/toggle/Toggle';
-import { useDarkMode } from './styles/useDarkMode ';
+import { useDarkMode } from './hooks/useDarkMode ';
 import styled, { ThemeProvider } from 'styled-components';
+import { useEffect } from 'react';
+import { loginCheck } from './reducers/user';
+import { useDispatch } from 'react-redux';
 
 const Container = styled.div`
     backgroud: black;
@@ -26,14 +30,18 @@ const Container = styled.div`
 
 function App() {
     const [theme, toggleTheme] = useDarkMode();
-    const themeMode = theme === 'light' ? lightTheme : darkTheme;
+    // const dispatch = useDispatch();
+    const {isDarkMode} = useSelector((state) => state.user);
+    //const themeMode = localStorage.theme === 'light' ? lightTheme : darkTheme;
+    const themeMode = isDarkMode === 'light' ? lightTheme : darkTheme;
+    // console.log(themeMode)
 
     return (
         <>
             <ThemeProvider theme={themeMode}>
                 <Container>
                     <GlobalStyles />
-                    <Toggle theme={theme} toggleTheme={toggleTheme} />
+                    {/* <Toggle theme={theme} toggleTheme={toggleTheme} /> */}
                     <Reset />
                     <Route path="/" component={index} exact />
                     <Route path="/user/signup" component={signUp} exact />
@@ -48,7 +56,7 @@ function App() {
                     <Route path="/post/write" component={postWrite} />
                     <Route path="/post/list" component={postList} />
                     <Route path="/post/view/:postId" component={postView} />
-                    <Route path="/post/edit/:postId" component={postEdit}/>
+                    <Route path="/post/edit/:postId" component={postEdit} />
                 </Container>
             </ThemeProvider>
         </>

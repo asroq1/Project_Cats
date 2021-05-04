@@ -15,6 +15,8 @@ export const initialState = {
     token: null,
     signUpData: {},
     loginData: {},
+
+    isDarkMode: localStorage.theme,
 };
 
 // 기본적인 액션 이름들
@@ -36,21 +38,13 @@ export const GET_USER_REQUEST = 'GET_USER_REQUEST';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const GET_USER_FAILURE = 'GET_USER_FAILURE';
 
+export const CHANGE_DARK_MODE = 'CHANGE_DARK_MODE';
+
 //백엔드 연동 전
 //더미데이터
-const dummyUser = (data) => ({
-    ...data,
-    id: 1,
-    user_id: 'dummy user',
-    name: 'dummy user',
-    email: 'abc@gmail.com',
-    pwd: 'aaa',
-    login_type: 'normal', //추가
-});
 
 //액션 함수
 export const loginRequestAction = (data) => {
-    console.log('로그인 시도 (액션함수)');
     return {
         type: LOG_IN_REQUEST,
         data,
@@ -58,17 +52,13 @@ export const loginRequestAction = (data) => {
 };
 
 export const loginSuccessAction = (data) => {
-    console.log('login request act :', data);
     return {
         type: LOG_IN_SUCCESS,
         data,
-
-        // onUser: dummyUser(),
     };
 };
 
 export const loginFailureAction = (data) => {
-    console.log('로그인 실패 (액션함수)');
     return {
         type: LOG_IN_FAILURE,
         data,
@@ -109,7 +99,6 @@ export const signUpSuccess = (data) => {
     };
 };
 export const signUpFailure = (data) => {
-    console.log('실패');
     return {
         type: SIGN_UP_FAILURE,
         data,
@@ -132,6 +121,7 @@ const reducer = (state = initialState, action) =>
                 draft.logInLoading = true;
                 draft.logInDone = false;
                 draft.logInError = null;
+                draft.signUpDone = false;
                 break;
             case LOG_IN_SUCCESS:
                 draft.logInLoading = false;
@@ -150,8 +140,8 @@ const reducer = (state = initialState, action) =>
                 break;
             case LOG_OUT_SUCCESS:
                 draft.logOutLoading = false;
-                draft.logInDone = false;
-                draft.me = action.data;
+                draft.logOutDone = true;
+                draft.me = null;
                 break;
             case LOG_OUT_FAILURE:
                 draft.logOutLoading = false;
@@ -178,6 +168,9 @@ const reducer = (state = initialState, action) =>
                 draft.me = action.data;
                 break;
             case GET_USER_FAILURE:
+                break;
+            case CHANGE_DARK_MODE:
+                draft.isDarkMode = (draft.isDarkMode === 'dark' ? 'light' : 'dark');
                 break;
             default:
                 return state;

@@ -3,11 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginRequestAction } from '../../reducers/user';
 import 'font-awesome/css/font-awesome.min.css';
 import KakaoLogin from '../socialButton/KakaoLogin';
-import NaverLogin from '../socialButton/NaverLogin';
 import { useForm } from 'react-hook-form';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import palette from '../../styles/palette';
 
 const LoginContainer = styled.form`
     margin: 0 auto;
@@ -33,6 +31,7 @@ const LoginInput = styled.input`
     height: 1rem;
     padding: 1rem;
     border: 1px solid #909090;
+    color: ${({ theme }) => theme.text};
     background-color: ${({ theme }) => theme.input};
 `;
 const SubmitButton = styled.button`
@@ -66,29 +65,14 @@ const SocialContainer = styled.div`
     // }
 `;
 
-const LoginForm = ({ history }) => {
+const LoginForm = () => {
     const dispatch = useDispatch();
     const { register, errors, handleSubmit } = useForm();
-    const { logInDone, logInError } = useSelector((state) => state.user);
+    const { logInDone, logInError, me } = useSelector((state) => state.user);
     const onSubmit = useCallback((data) => {
-        console.log('LoginForm', data);
         return dispatch(loginRequestAction(data));
     }, []);
 
-    // const onSubmit = (data) => {
-    //     dispatch(loginRequestAction(data));
-    // };
-
-    useEffect(() => {
-        if (logInDone) {
-            history.push('/user/main');
-        }
-    }, [logInDone]);
-    useEffect(() => {
-        if (!logInDone) {
-            history.push('/');
-        }
-    }, [logInDone]);
     return (
         <>
             <LoginContainer onSubmit={handleSubmit(onSubmit)}>
@@ -128,7 +112,7 @@ const LoginForm = ({ history }) => {
             </LoginContainer>
             <SocialContainer>
                 <KakaoLogin />
-                <NaverLogin />
+                {/* <NaverLogin /> */}
             </SocialContainer>
         </>
     );

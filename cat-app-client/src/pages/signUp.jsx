@@ -1,11 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import SignUpForm from '../components/signUp/SignUpForm';
 import palette from '../styles/palette';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import KakaoSignup from '../components/socialButton/KakaoSignup';
+import { useDispatch, useSelector } from 'react-redux';
+
 const SignupBackground = styled.div`
     // background-color: #f4f1de;
 `;
@@ -47,22 +49,16 @@ const ExitButton = styled.p`
 
 `;
 
-// const DivideLine = styled.div`
-//     width: 30%;
-//     margin: 0 auto;
-//     text-align: center;
-//     padding: 0.5rem 0 0.5rem 0;
-//     border-top: 1px solid #909090;
-//     border-bottom: 1px solid #909090;
-//     color: #909090;
-//     font-size: 1.2rem;
+const SignUp = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const { signUpError, signUpDone } = useSelector((state) => state.user);
 
-//     @media ${(props) => props.theme.mobile} {
-//         width: 85vw;
-//         font-size: 1rem;
-//     } ;
-// `;
-const signUp = () => {
+    useEffect(() => {
+        if (signUpDone) {
+            history.push('/');
+        }
+    });
     return (
         <SignupBackground>
             <SignupWrapper>
@@ -75,7 +71,7 @@ const signUp = () => {
                     <Title>회원가입</Title>
                 </TitleWrapper>
                 <article>
-                    <SignUpForm />
+                    <SignUpForm error={signUpError} />
                     <KakaoSignup />
                 </article>
             </SignupWrapper>
@@ -83,4 +79,4 @@ const signUp = () => {
     );
 };
 
-export default signUp;
+export default SignUp;
