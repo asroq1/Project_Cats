@@ -38,7 +38,11 @@ const PostViewContainer = ({ match }) => {
         <>
             <OverallPostsLayout>
                 <PostViewBody>
-                    <PostView postId={parseInt(postId)}post={currentPost} error={readPostError} />
+                    <PostView
+                        postId={parseInt(postId)}
+                        post={currentPost}
+                        error={readPostError}
+                    />
                 </PostViewBody>
             </OverallPostsLayout>
         </>
@@ -46,8 +50,8 @@ const PostViewContainer = ({ match }) => {
 };
 
 PostViewContainer.propTypes = {
-    match: PropTypes.object.isRequired
-}
+    match: PropTypes.object.isRequired,
+};
 
 //URL 파라미터로 온 id값을 조회해야 하므로 withRouter 사용
 export default withRouter(PostViewContainer);

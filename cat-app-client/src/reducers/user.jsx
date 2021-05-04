@@ -41,7 +41,6 @@ export const GET_USER_FAILURE = 'GET_USER_FAILURE';
 
 //액션 함수
 export const loginRequestAction = (data) => {
-    console.log('로그인 시도 (액션함수)');
     return {
         type: LOG_IN_REQUEST,
         data,
@@ -49,17 +48,13 @@ export const loginRequestAction = (data) => {
 };
 
 export const loginSuccessAction = (data) => {
-    console.log('login request act :', data);
     return {
         type: LOG_IN_SUCCESS,
         data,
-
-        // onUser: dummyUser(),
     };
 };
 
 export const loginFailureAction = (data) => {
-    console.log('로그인 실패 (액션함수)');
     return {
         type: LOG_IN_FAILURE,
         data,
@@ -100,7 +95,6 @@ export const signUpSuccess = (data) => {
     };
 };
 export const signUpFailure = (data) => {
-    console.log('실패');
     return {
         type: SIGN_UP_FAILURE,
         data,
@@ -123,6 +117,7 @@ const reducer = (state = initialState, action) =>
                 draft.logInLoading = true;
                 draft.logInDone = false;
                 draft.logInError = null;
+                draft.signUpDone = false;
                 break;
             case LOG_IN_SUCCESS:
                 draft.logInLoading = false;

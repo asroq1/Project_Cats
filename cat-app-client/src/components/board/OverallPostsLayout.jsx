@@ -6,6 +6,11 @@ import PropTypes from 'prop-types';
 
 import ModalMenu from '../modal/ModalMenu';
 
+
+const BackgroundColor = styled.div` 
+    background-color:${({theme})=>theme.beige};
+`;
+
 const Header = styled.div`
     width: 100%;
     height: 50px;
@@ -14,13 +19,13 @@ const Header = styled.div`
     top: 0; 
     z-index: 1;
     font-size: 1rem;
-    background-color: ${({theme}) => theme.palette.green};
+    background-color: ${({theme}) => theme.green};
     .plus {
         flex-direction: row-reverse;
         cursor: pointer;
     }
     .plus:hover{
-        color:${({theme})=>theme.palette.navy}
+        color:${({theme})=>theme.navy}
     }
 }`;
 
@@ -30,18 +35,20 @@ const NavCol = styled.div`
     font-size: 1.5rem;
     color: white;
     flex: 1;
+    
     a {
-        color: ${({theme}) => theme.palette.beige};
+        color: ${({theme}) => theme.beige};
     }
+    
     a:hover {
-        color:${({theme}) => theme.palette.navy};
+        color:${({theme}) => theme.navy};
     }
 `;
 
 const Footer = styled.div`
     width: 100%;
     height: 50px;
-    background-color: ${({theme}) => theme.palette.green};
+    background-color: ${({theme}) => theme.green};
     position: sticky;
     bottom: 0;
     display: flex;
@@ -60,7 +67,8 @@ const OverallPostsLayout = ({ children }) => {
     }, []);
 
     return (
-        <>
+        
+        <BackgroundColor>
             {showModalMenu && (
                         <ModalMenu
                             onClose={onModalClose}
@@ -89,7 +97,7 @@ const OverallPostsLayout = ({ children }) => {
                     </Link>
                 </NavCol>
             </Footer>
-        </>
+        </BackgroundColor>
     );
 };
 

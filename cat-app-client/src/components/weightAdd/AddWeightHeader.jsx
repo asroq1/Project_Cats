@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 const Header = styled.header`
     height: 10vh;
+    margin: 0;
     background-color: ${({ theme }) => theme.body};
 `;
 const ExitButton = styled.p`

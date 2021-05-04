@@ -79,10 +79,10 @@ export const ButtonWrapper = styled.button`
     }
     
     &:first-child {
-        background-color: ${({theme}) => theme.palette.navy};
+        background-color: ${({theme}) => theme.navy};
     }
     &:last-child {
-        background-color: ${({theme}) => theme.palette.orange};
+        background-color: ${({theme}) => theme.orange};
     }
 `;
 
@@ -108,6 +108,6 @@ export const RadioBtnWrapper = styled.div`
         margin-left: 0.5rem;
     }
     input:checked + .radiobtn {
-        background-color: ${({theme}) => theme.palette.orange};
+        background-color: ${({theme}) => theme.orange};
     }
 `;

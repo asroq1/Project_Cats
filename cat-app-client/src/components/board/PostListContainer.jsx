@@ -8,17 +8,21 @@ import OverallPostsLayout from '../board/OverallPostsLayout';
 
 import PostList from './PostList';
 
-const PostListContainer = ({ }) => {
+const PostListContainer = ({}) => {
     //const dispatch = useDispatch();
-    const { mainPosts, listPostLoading, listPostError } = useSelector((state) => state.post);
+    const { mainPosts, listPostLoading, listPostError } = useSelector(
+        (state) => state.post
+    );
 
-    
-    
     return (
         <>
-        <OverallPostsLayout>  
-            <PostList loading={listPostLoading} error={listPostError} posts={mainPosts}  />
-        </OverallPostsLayout>
+            <OverallPostsLayout>
+                <PostList
+                    loading={listPostLoading}
+                    error={listPostError}
+                    posts={mainPosts}
+                />
+            </OverallPostsLayout>
         </>
     );
 };

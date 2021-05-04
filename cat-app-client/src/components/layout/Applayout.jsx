@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const BodyWrapper = styled.div`
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
     background-size: 100% 100%;
-    //background-color: ${({theme}) => theme.palette.orange};
+    //background-color: ${({theme}) => theme.orange};
 	//animation: gradient 30s ease infinite;
     width: 100%;
     height: 100%;
@@ -29,8 +29,9 @@ const BodyWrapper = styled.div`
 const Global = styled.div`
 
     max-width: ${({theme}) => theme.width.mobile};
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
+    height:100%;
     margin: 0 auto;
     position: relative;
 

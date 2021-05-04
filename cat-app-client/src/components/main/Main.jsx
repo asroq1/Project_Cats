@@ -41,7 +41,7 @@ const PhotoContainer = styled.div`
     margin-top: 0.5rem;
     border-radius: 10px;
     background-size: cover;
-    box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.5);
+    box-shadow:3px 5px 5px  ${({theme})=>theme.shadow};
     display: flex;
     justify-content: center;
     align-items: center;

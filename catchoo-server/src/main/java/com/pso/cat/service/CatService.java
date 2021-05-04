@@ -36,11 +36,12 @@ public class CatService {
     @Transactional
     public void modify(Long id, CatDto.Request newCat) {
         Cat cat = catRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("해당하는 게시글이 없습니다."));
+            .orElseThrow(() -> new RuntimeException("해당하는 고양이가 없습니다."));
         cat.setName(newCat.getName());
         cat.setBirth(newCat.getBirth());
         cat.setGender(newCat.getGender());
         cat.setPhoto(newCat.getPhoto());
+        cat.setGoalWeight(newCat.getGoalWeight());
         catRepository.save(cat);
     }
 

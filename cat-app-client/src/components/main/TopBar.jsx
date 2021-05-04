@@ -7,8 +7,9 @@ import 'font-awesome/css/font-awesome.min.css';
 import PropTypes from 'prop-types';
 
 const InnerGlobal = styled.div`
+    background-color: ${({ theme }) => theme.navy};
     a {
-        color: ${({theme}) => theme.beige};
+        color: ${({ theme }) => theme.beige};
         text-decoration: none;
         font-weight: normal;
     }
@@ -29,17 +30,25 @@ const EachCol = styled.div`
     font-weight: bold;
     flex: auto;
     background-color: ${(props) =>
-        props.active ? ({theme})=>theme.beige : ({theme})=>theme.navy};
-    &: hover {
+        props.active ? ({ theme }) => theme.beige : ({ theme }) => theme.navy};
+    &:hover {
         background-color: ${(props) =>
-            props.active ? ({theme})=>theme.beige : 'black'};
+            props.active ? ({ theme }) => theme.beige : 'black'};
     }
     &:not(:last-child) {
         max-width: 150px;
         justify-content: center;
-        color: ${(props) => (props.active ? ({theme})=>theme.text : ({theme})=>theme.beige)};
-        border-radius: 5px 5px 0 0;
-        border: 1px solid ${(props) => (props.active ? ({theme})=>theme.beige : 'black')};
+        color: ${(props) =>
+            props.active
+                ? ({ theme }) => theme.text
+                : ({ theme }) => theme.beige};
+        border-radius: ${(props) => (props.active ? '15px 15px 0 0' : 'none')};
+        border-top: 1px solid
+            ${(props) => (props.active ? ({ theme }) => theme.beige : 'none')};
+        border-left: 1px solid
+            ${(props) => (props.active ? ({ theme }) => theme.beige : 'none')};
+        border-right: 1px solid
+            ${(props) => (props.active ? ({ theme }) => theme.beige : 'none')};
         border-bottom: ${(props) =>
             props.active ? 'none' : '1px solid black'};
         cursor: pointer;
@@ -50,10 +59,11 @@ const EachCol = styled.div`
         justify-content: flex-end;
         border: none;
         border-bottom: 1px solid black;
-        background: ${({theme}) => theme.beige};
+        background: ${({ theme }) => theme.navy};
     }
     .fa-cog {
-        color: ${({theme}) => theme.navy};
+        padding-right: 0.5rem;
+        color: ${({ theme }) => theme.beige};
     }
 `;
 
@@ -103,11 +113,7 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
                 </EachCol>
                 <EachCol>
                     <i className="fa fa-cog" onClick={onModalMenu}></i>
-                    {showModalMenu && (
-                        <ModalMenu
-                            onClose={onModalClose}
-                        />
-                    )}
+                    {showModalMenu && <ModalMenu onClose={onModalClose} />}
                 </EachCol>
             </div>
         </InnerGlobal>
@@ -118,6 +124,6 @@ TopBar.propTypes = {
     cat: PropTypes.array.isRequired,
     currentIndex: PropTypes.number.isRequired,
     onSelect: PropTypes.func.isRequired,
-}
+};
 
 export default TopBar;

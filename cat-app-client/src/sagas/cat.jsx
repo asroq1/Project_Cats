@@ -129,11 +129,11 @@ function* addWeight(action) {
 }
 
 function deleteWeightAPI(data) {
-    return axios.delete(`api/records/{id}`, data);
+    return axios.delete(`api/records/${data}`);
 }
 function* deleteWeight(action) {
     try {
-        // const result = yield (deleteWeightAPI, action.data);
+        yield call(deleteWeightAPI, action.data);
         yield put({
             type: DELETE_WEIGHT_SUCCESS,
             data: action.data,
@@ -153,7 +153,8 @@ function getWeightAPI(id) {
     // `api/records/${id}` 이런 식으로 들어가게
 }
 function* getWeight(action) {
-    const result = yield (getWeightAPI, action.data);
+    console.log(action);
+    const result = yield call(getWeightAPI, action.data);
     console.log('result', result);
     try {
         //yield (deleteWeightAPI, action.data);

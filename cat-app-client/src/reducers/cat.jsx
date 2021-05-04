@@ -48,6 +48,7 @@ export const initialState = {
         // },
     ],
     isLoading: true,
+    currentWeightIndex: 1,
     currentIndex: 1,
     currImgUrl: null,
 
@@ -127,7 +128,6 @@ export const deleteWeightFailureAction = (data) => {
         data,
     };
 };
-
 
 export const getWeightRequest = (data) => {
     return {
@@ -219,6 +219,7 @@ const reducer = (state = initialState, action) => {
             case ADD_WEIGHT_SUCCESS:
                 draft.addWeightLoading = false;
                 draft.addWeightDone = true;
+
                 break;
             case ADD_WEIGHT_FAILURE:
                 draft.addWeightLoading = false;
@@ -229,11 +230,11 @@ const reducer = (state = initialState, action) => {
                 draft.deleteWeightDone = false;
                 draft.deleteWeightLoading = true;
                 draft.deleteWeightError = null;
-                draft.cat[0].Record.filter((v) => v.id !== action.data);
                 break;
             case DELETE_WEIGHT_SUCCESS:
                 draft.deleteWeightDone = true;
                 draft.deleteWeightLoading = false;
+                draft.currentCatWeights.filter((v) => v.id !== action.data);
                 break;
             case DELETE_WEIGHT_FAILURE:
                 draft.deleteWeightLoading = false;
