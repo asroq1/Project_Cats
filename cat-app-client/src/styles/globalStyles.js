@@ -49,7 +49,7 @@ export const darkTheme = {
     beige: '#121212',
     orange: '#3D405B',
     navy: '#3D405B',
-    green: '#3D405B',
+    green: '#c3c3c3',
 
     shadow: 'rgba(255, 255, 255, 0.5)',
 };

@@ -32,7 +32,8 @@ const PostItemBlock = styled.div`
 
 const PostListBody = styled.div`
     position: relative;
-    min-height: 100vh;
+    
+    min-height:calc(100vh - 100px);
     //padding-top: 50px;
 `;
 
@@ -64,7 +65,7 @@ const SubInfo = styled.div`
     h1 {
         font-size: 1rem;
         font-weight: bold;
-        color: ${({theme}) => theme.navy};
+        color: ${({theme}) => theme.text};
         margin: 0;
         margin-bottom: 0.25rem;
     }
@@ -119,14 +120,6 @@ const PostItem = ({ post }) => {
     return (
         <StyledLink to={`/post/view/${id}`}>
             <PostItemBlock>
-            {/* {"id": 1,
-            "title": "눈누난나",
-            "viewCount": 0,
-            "writer": {
-                "id": 3,
-                "nickname": "펭슈"
-            },
-            "createdDate": "2021-04-29T07:03:16.000+00:00"} */}
                 
                 {/* <PhotoContainer src={Images[0].src} alt="post" /> */}
 
@@ -171,7 +164,7 @@ const PostList = ({ posts, error }) => {
                 <div>
                     {posts.map((post) => (
                         <>
-                        <PostItem post={post} key={post.id} />
+                        <PostItem post={post} key={post.id + post.title.slice(0,10)} />
                         </>
                     ))}
                 </div>

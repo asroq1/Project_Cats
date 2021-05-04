@@ -63,6 +63,8 @@ export const LIST_POST_FAILURE = 'LIST_POST_FAILURE';
 //포스트 페이지에서 벗어날 땐 데이터 비우기
 export const UNLOAD_POST = 'UNLOAD_POST';
 
+export const UNLOAD_POSTS = 'UNLOAD_POSTS';
+
 export const UPLOAD_IMAGES_REQUEST = 'UPLOAD_IMAGES_REQUEST';
 export const UPLOAD_IMAGES_SUCCESS = 'UPLOAD_IMAGES_SUCCESS';
 export const UPLOAD_IMAGES_FAILURE = 'UPLOAD_IMAGES_FAILURE';
@@ -127,8 +129,10 @@ const reducer = (state = initialState, action) => {
             case LIST_POST_SUCCESS:
                 draft.listPostLoading = false;
                 draft.listPostDone = true;
-                draft.mainPosts = action.data;
+                draft.mainPosts = draft.mainPosts.concat(action.data);
                 draft.hasMorePost = draft.mainPosts.length < 50;
+                draft.addPostDone = false;
+
                 draft.removePostDone = false;
                 break;
             case LIST_POST_FAILURE:
@@ -137,6 +141,9 @@ const reducer = (state = initialState, action) => {
                 break;
             case UNLOAD_POST:
                 draft.currentPost = null;
+                break;
+            case UNLOAD_POSTS:
+                draft.mainPosts = [];
                 break;
             case UPDATE_POST_REQUEST:
                 draft.updatePostLoading = true;

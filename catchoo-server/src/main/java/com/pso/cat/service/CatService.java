@@ -3,6 +3,7 @@ package com.pso.cat.service;
 import com.pso.cat.entity.Cat;
 import com.pso.cat.dto.CatDto;
 import com.pso.cat.entity.Post;
+import com.pso.cat.entity.Record;
 import com.pso.cat.repository.CatRepository;
 import com.pso.cat.repository.RecordRepository;
 import java.util.Date;
@@ -30,17 +31,18 @@ public class CatService {
     public CatDto.Response read(Long id) {
         return CatDto.Response.ofEntity(
             catRepository.findById(id).get(),
-            recordRepository.findFirstByCatIdOrderByCreateDateDesc(id));
+            recordRepository.findFirstByCatIdAndStateOrderByCreateDateDesc(id, 1));
     }
 
     @Transactional
     public void modify(Long id, CatDto.Request newCat) {
         Cat cat = catRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("해당하는 게시글이 없습니다."));
+            .orElseThrow(() -> new RuntimeException("해당하는 고양이가 없습니다."));
         cat.setName(newCat.getName());
         cat.setBirth(newCat.getBirth());
         cat.setGender(newCat.getGender());
         cat.setPhoto(newCat.getPhoto());
+        cat.setGoalWeight(newCat.getGoalWeight());
         catRepository.save(cat);
     }
 
@@ -52,6 +54,9 @@ public class CatService {
     public List<CatDto.Response> listByUserId(Long userId) {
         return catRepository
             .findAllByUserIdAndStateOrderByCreatedDateDesc(userId, 1)
-            .stream().map(cat -> CatDto.Response.ofEntity(cat)).collect(Collectors.toList());
+            .stream().map(cat
+                -> CatDto.Response.ofEntity(cat,
+                recordRepository.findFirstByCatIdAndStateOrderByCreateDateDesc(cat.getId(), 1))
+            ).collect(Collectors.toList());
     }
 }

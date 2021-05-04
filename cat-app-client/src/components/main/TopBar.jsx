@@ -5,6 +5,7 @@ import ModalMenu from '../modal/ModalMenu';
 import styled from 'styled-components';
 import 'font-awesome/css/font-awesome.min.css';
 import PropTypes from 'prop-types';
+import theme from '../../styles/theme';
 
 const InnerGlobal = styled.div`
     background-color: ${({ theme }) => theme.navy};
@@ -33,7 +34,7 @@ const EachCol = styled.div`
         props.active ? ({ theme }) => theme.beige : ({ theme }) => theme.navy};
     &:hover {
         background-color: ${(props) =>
-            props.active ? ({ theme }) => theme.beige : 'black'};
+            props.active ? ({ theme }) => theme.beige: ({theme})=>theme.text};
     }
     &:not(:last-child) {
         max-width: 150px;
@@ -68,7 +69,7 @@ const EachCol = styled.div`
 `;
 
 const TopBar = ({ cat, currentIndex, onSelect }) => {
-    const menuStyle = useMemo(() => ({ height: '2rem', display: 'flex' }), []);
+    const menuStyle = useMemo(() => ({ height: '45px', display: 'flex' }), []);
     const fillerCol = useMemo(
         () => ({
             display: 'inline-block',

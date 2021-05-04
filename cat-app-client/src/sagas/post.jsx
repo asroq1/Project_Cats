@@ -38,7 +38,7 @@ function* addPost(action){
 }
 
 function removePostAPI(id){
-    return axios.delete(`api/posts/{id}?id=${id}`);
+    return axios.delete(`api/posts/${id}`);
 }
 
 function* removePost(action){
@@ -79,8 +79,8 @@ function* readPost(action){
     }
 }
 
-function updatePostAPI(id){
-    return axios.patch(`/api/posts/${id}`);
+function updatePostAPI(data){
+    return axios.patch('/api/posts/', data);
 }
 
 function* updatePost(action){
@@ -88,7 +88,7 @@ function* updatePost(action){
         const result = yield call(updatePostAPI,action.data);
         yield put({
             type: UPDATE_POST_SUCCESS,
-            data: result.data
+            data: action.data
         })
     } catch(err){
         yield put({
@@ -98,13 +98,14 @@ function* updatePost(action){
     }
 }
 
-function listPostAPI(){
-    return axios.get("/api/posts");
+function listPostAPI(data){
+    return axios.get(`/api/posts?lastPostId=${data.lastPostId}&size=${data.size}`);
+    //posts?lastPostId=7&size=10
 }
 
 function* listPost(action){
     try {
-        const result= yield call(listPostAPI);
+        const result= yield call(listPostAPI, action.data);
         yield put({
             type: LIST_POST_SUCCESS,
             data: result.data,
@@ -118,12 +119,13 @@ function* listPost(action){
 }
 
 function addCommentAPI(data){
-    return axios.post(`/api/comment?content=${data.content}&postId=${data.postId}`);
+    // return axios.post(`/api/comments?content=${data.content}&postId=${data.postId}`);
+    return axios.post('/api/comments', data);
 }
 
 function* addComment(action){
     try {
-        //console.log(`/api/comment?content=${action.data.content}&postId=${action.data.postId}`)
+        //console.log(`/api/comments?content=${action.data.content}&postId=${action.data.postId}`)
         const result= yield call(addCommentAPI, action.data); // No data returned
 
         yield put({
@@ -139,7 +141,7 @@ function* addComment(action){
 }
 
 function removeCommentAPI(id){
-    return axios.delete(`/api/comment/{id}?id=${id}`);
+    return axios.delete(`/api/comments/${id}`);
 }
 
 function* removeComment(action){
@@ -160,7 +162,7 @@ function* removeComment(action){
 };
 
 function getPostCommentsAPI(postId){
-    return axios.get(`/api/comment/${postId}`);
+    return axios.get(`/api/comments/${postId}`);
 }
 
 function* getPostComments(action){

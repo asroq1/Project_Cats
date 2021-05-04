@@ -22,13 +22,15 @@ public class CatDto {
         private String photo;
         @DateTimeFormat(pattern = "yyyy-MM-dd")
         private Date birth;
+        private Float goalWeight;
 
         public Cat toEntity() {
             return Cat.builder()
                 .name(name)
                 .gender(gender)
                 .photo(photo)
-                .birth(birth).build();
+                .birth(birth)
+                .goalWeight(goalWeight).build();
         }
 
     }
@@ -42,8 +44,9 @@ public class CatDto {
         private final String photo;
         @JsonFormat(pattern = "yyyy-MM-dd")
         private final Date birth;
+        private final Float goalWeight;
         @JsonInclude(Include.NON_NULL)
-        private final RecordDto.Response recentRecord;
+        private RecordDto.Response recentRecord;
 
         public static Response ofEntity(Cat cat, Record recentRecord) {
             return Response.builder()
@@ -52,6 +55,7 @@ public class CatDto {
                 .birth(cat.getBirth())
                 .gender(cat.getGender())
                 .photo(cat.getPhoto())
+                .goalWeight(cat.getGoalWeight())
                 .recentRecord(RecordDto.Response.ofEntity(recentRecord)).build();
         }
 
@@ -61,7 +65,8 @@ public class CatDto {
                 .name(cat.getName())
                 .birth(cat.getBirth())
                 .gender(cat.getGender())
-                .photo(cat.getPhoto()).build();
+                .photo(cat.getPhoto())
+                .goalWeight(cat.getGoalWeight()).build();
         }
 
     }

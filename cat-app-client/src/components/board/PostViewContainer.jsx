@@ -12,12 +12,12 @@ const PostViewBody = styled.div`
     position: relative;
     width: 80%;
     margin: 0 auto;
-    min-height: 100vh;
+    min-height: calc(100vh - 100px);
     padding-top: 50px;
 `;
 
 const PostViewContainer = ({ match }) => {
-    const { currentPost, readPostError } = useSelector((state) => state.post);
+    const { currentPost, readPostError, updatePostDone } = useSelector((state) => state.post);
     const { postId } = match.params;
     const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ const PostViewContainer = ({ match }) => {
                 type: UNLOAD_POST,
             });
         };
-    }, [dispatch, postId]);
+    }, [dispatch, postId, updatePostDone]);
 
     return (
         <>

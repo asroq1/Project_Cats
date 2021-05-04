@@ -15,7 +15,7 @@ const InnerGlobal = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 95vh;
+    height:  calc(100vh - 45px);
     margin: 0;
     padding: 0;
 `;
@@ -32,13 +32,17 @@ const GeneralWrapper = styled.div`
 
         color: ${({theme}) => theme.text};
     }
+
+    h4 {
+        font-size:1.25rem;
+    }
 `;
 
 const PhotoContainer = styled.div`
     width: 200px;
     height: 200px;
     background-color: lightgray;
-    margin-top: 0.5rem;
+    margin-top:0.75rem;
     border-radius: 10px;
     background-size: cover;
     box-shadow:3px 5px 5px  ${({theme})=>theme.shadow};
@@ -100,23 +104,39 @@ const Main = ({ cat, currentIndex, age }) => {
         () => ({
             width: '80%',
             textAlign: 'center',
-            marginTop: '1.5em',
+            marginTop: '0.5em',
             padding: '0',
-        }),
-        []
-    );
+        }),[]);
+
+    const topPaddingStyle = useMemo(
+        () => ({
+            width: '100%',
+            textAlign: 'center',
+            marginTop: '0.5em',
+            padding: '0',
+        }),[]);
+    
     const currentCat = cat.find((v) => v.id === currentIndex);
 
     return (
         <InnerGlobal>
             <GeneralWrapper>
-                <div style={paddingStyle}>
+                <div style={topPaddingStyle}>
+                    {currentCat.goalWeight&& (<h1>목표 체중 : {currentCat.goalWeight } kg</h1>) }
+                </div>
+                <div style={topPaddingStyle}>
+                    <h4>
                     {age[0]}년 {age[1]}개월 |{' '}
                     {currentCat.gender === 'M' ? '수컷' : '암컷'}
-                    <Link to="/cat/update">
+                    <Link to={{
+                        pathname: "/cat/update"
+                    }}>
                         <i className="fa fa-edit"></i>
                     </Link>
+                    </h4>
                 </div>
+                
+                
                 {currentCat.photo && currentCat.photo !== 'null' ? (
                     <PhotoContainer
                         style={{ backgroundImage: `url(${currentCat.photo})` }}
