@@ -205,6 +205,7 @@ const PostUpdate = ({match, location}) => {
             });
             formData.append('title', title);
             formData.append('content', text);
+            formData.append('id', postId);
 
             console.log("key")
             for (var key of formData.keys()){
@@ -222,8 +223,8 @@ const PostUpdate = ({match, location}) => {
             }
             return dispatch({
                 type: UPDATE_POST_REQUEST,
-                data: formData,
-            });
+                data: formData
+            })
         },
         [text, imagePaths]
     );
