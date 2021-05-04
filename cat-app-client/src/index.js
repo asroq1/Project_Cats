@@ -19,6 +19,11 @@ axios.defaults.baseURL =
 
 const store = Store(rootReducer, composeWithDevTools());
 const persistor = persistStore(store);
+
+if(!localStorage.token) { 
+    persistor.purge();
+}
+
 ReactDOM.render(
     <React.StrictMode>
         {/* React.StrictMode는 배포시 지울 코드 */}
