@@ -28,7 +28,7 @@ const BodyWrapper = styled.div`
 
 const Global = styled.div`
 
-    max-width: ${({theme}) => theme.width.mobile};
+    max-width: 414px;
     width: 100%;
     min-height: 100vh;
     height:100%;

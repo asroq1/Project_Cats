@@ -2,7 +2,7 @@
 집사님들을 위한 킹냥이 웹앱 😺
 Web App for Cat Lovers.
 
-Built with [React + Redux + Redux-Saga] + [Spring Boot + MariaDB]
+Built with [React + Redux + Redux-Saga] + [Spring Boot + JPA + MariaDB]
 
 [catchoo.netlify.app](https://catchoo.netlify.app)
 
