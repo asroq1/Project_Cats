@@ -137,7 +137,7 @@ const PostUpdate = ({match, location}) => {
     const history=useHistory();
 
     // 각 form 내용은 useState이용한 커스텀 훅으로 관리
-    const [title, onChangeTitle] =useInput(location.state.originalTitle);
+    const [title,onChangeTitle] =useInput(location.state.originalTitle);
     const [text, onChangeText] =  useInput(location.state.originalContent);
 
 

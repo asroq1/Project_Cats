@@ -15,7 +15,7 @@ const InnerGlobal = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 95vh;
+    height:  calc(100vh - 45px);
     margin: 0;
     padding: 0;
 `;
