@@ -77,7 +77,14 @@ const PostContent = styled.div`
 const PostView = ({ postId, post, error }) => {
     const history = useHistory();
     const goBack = useCallback(()=>{
-        history.goBack();
+
+    
+        if (history.location.pathname ==='/post/list'){
+            history.goBack();
+        }
+        else {
+            history.push('/post/list');
+        }
     })
     const dispatch = useDispatch();
     const { removePostDone, imagePaths } = useSelector((state) => state.post);

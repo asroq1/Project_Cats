@@ -242,7 +242,7 @@ const PostUpdate = ({match, location}) => {
                             <input
                                 value={title}
                                 onChange={onChangeTitle}
-                                maxLength="20"
+                                maxLength="30"
                                 
                             />
                         </StyledBlock>

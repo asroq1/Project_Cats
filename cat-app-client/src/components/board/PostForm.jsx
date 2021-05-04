@@ -228,7 +228,7 @@ const PostForm = () => {
                             <input
                                 value={title}
                                 onChange={onChangeTitle}
-                                maxLength="20"
+                                maxLength="30"
                                 placeholder="제목을 입력하세용"
                             />
                         </StyledBlock>

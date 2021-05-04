@@ -86,6 +86,7 @@ function* logOut() {
         yield delay(1000);
 
         localStorage.removeItem('token');
+        localStorage.removeItem('persist:root')
 
         yield all([
             put({
