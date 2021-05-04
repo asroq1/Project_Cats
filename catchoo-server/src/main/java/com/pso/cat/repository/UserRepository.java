@@ -15,8 +15,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("UPDATE user u SET u.state = 0 where u.id = :id")
     int inactive(@Param("id") Long id);
 
-    User findByEmailAndPassword(String email, String password);
     Optional<User> findByEmail(@Param("email") String email);
+
+    Optional<User> findByNickname(@Param("nickname") String nickname);
 
     @EntityGraph(attributePaths = "authorities")
     Optional<User> findOneWithAuthoritiesByEmail(@Param("email") String email);
