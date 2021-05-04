@@ -25,7 +25,7 @@ const Overlay = styled.div`
     height: 100vh;
     margin: 0 auto;
     padding: 3rem;
-    color: ${({ theme }) => theme.beige};
+    color: ${({ theme })=>theme.textlight};
     background-color: ${({ theme }) => theme.navy};
     display: flex;
     flex-direction: column;
@@ -62,7 +62,7 @@ const MenuWrapper = styled.div`
         text-decoration: none;
     }
     h2 {
-        color: ${({ theme }) => theme.beige};
+        color: ${({ theme })=>theme.textlight};
     }
 
     h2:hover {
@@ -80,9 +80,9 @@ const NightModeWrapper = styled.div`
     cursor: pointer;
 `;
 
-const NightWrapper = styled.button`
-    background: ${({ theme }) => theme.light.mainBackground};
-`;
+// const NightWrapper = styled.button`
+//     background: ${({ theme }) => theme.light.mainBackground};
+// `;
 
 const ModalMenu = ({ onClose }) => {
     //나중에 redux 상태 만들어줄 것

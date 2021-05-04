@@ -17,7 +17,7 @@ const FormBlock = styled.div`
     padding-top: 50px;
     width:80%;
     margin: 0 auto;
-    min-height: 100vh;
+    min-height:calc(100vh - 100px);
 `;
 
 const EditBlock = styled.div`

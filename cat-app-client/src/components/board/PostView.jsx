@@ -145,7 +145,7 @@ const PostView = ({ postId, post, error }) => {
                 </SubInfo>
                 <PostContent>{content}</PostContent>
                 
-                <ButtonWrapper>
+                {me.id === writer.id && (<ButtonWrapper>
                     <Link to ={{
                         pathname: `/post/edit/${id}`,
                         state: {
@@ -158,7 +158,8 @@ const PostView = ({ postId, post, error }) => {
                     </Link>
                     
                     <button type="button"onClick={onRemovePost}>삭제</button>
-                </ButtonWrapper>
+                </ButtonWrapper>)
+            }
             </PostHead>
             <CommentForm id={id} />
             <CommentsWrapper postId={id} />

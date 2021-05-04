@@ -32,7 +32,8 @@ const PostItemBlock = styled.div`
 
 const PostListBody = styled.div`
     position: relative;
-    min-height: 100vh;
+    
+    min-height:calc(100vh - 100px);
     //padding-top: 50px;
 `;
 
@@ -64,7 +65,7 @@ const SubInfo = styled.div`
     h1 {
         font-size: 1rem;
         font-weight: bold;
-        color: ${({theme}) => theme.navy};
+        color: ${({theme}) => theme.text};
         margin: 0;
         margin-bottom: 0.25rem;
     }
