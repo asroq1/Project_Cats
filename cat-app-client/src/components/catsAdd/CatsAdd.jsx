@@ -16,6 +16,7 @@ const CatsAdd = ({}) => {
     const {currImgUrl, addCatDone} = useSelector((state) => state.cat);
     const { me } = useSelector((state) => state.user);
     const [name, onChangeName] = useInput('');
+    const [goalWeight, onChangeGoalWeight] =useInput('');
     const [birthyear, onChangeBirthYear] = useInput('');
     const [birthmonth, onChangeBirthMonth] = useInput('');
     const [birthdate, onChangeBirthDate] = useInput('');
@@ -30,6 +31,7 @@ const CatsAdd = ({}) => {
             formData.append('gender',gender);
             // POST API가 id를 요구하기 때문
             formData.append('name',name);
+            formData.append('goalWeight', goalWeight);
             console.log(currImgUrl);
             formData.append('photo', currImgUrl);
 
@@ -59,7 +61,7 @@ const CatsAdd = ({}) => {
             });
             
         },
-        [currImgUrl, name, birthyear, birthmonth, birthdate, gender,addCatDone]
+        [currImgUrl, name, birthyear, birthmonth, birthdate, gender,addCatDone, goalWeight]
     );
 
     useEffect(() => {
@@ -103,6 +105,22 @@ const CatsAdd = ({}) => {
                                 placeholder="Name"
                                 onChange={onChangeName}
                                 maxLength="50"
+                                required
+                            />
+                        </div>
+                    </StyledInputBlock>
+                    <StyledInputBlock>
+                        <label htmlFor="cat-goal-weight">목표체중</label>
+                        <br />
+                        <div className="inputcontainer">
+                            <input
+                                className="regular"
+                                type="number"
+                                id="cat-goal-weight"
+                                name="cat-goal-weight"
+                                value={goalWeight}
+                                placeholder="Goal Weight"
+                                onChange={onChangeGoalWeight}
                                 required
                             />
                         </div>

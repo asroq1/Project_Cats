@@ -107,13 +107,13 @@ const CatImageUpdate = ({cat, currentIndex}) => {
         });
     }, []);
 
-    useEffect(() =>{
-        setCroppedImage(currentCat.photo);
-        dispatch({
-            type: SET_CURRENT_IMAGE,
-            data: currentCat.photo,
-        });
-    }, []);
+    // useEffect(() =>{
+    //     setCroppedImage(currentCat.photo);
+    //     dispatch({
+    //         type: SET_CURRENT_IMAGE,
+    //         data: currentCat.photo,
+    //     });
+    // }, []);
 
     const onFileChange = async (e) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -216,7 +216,7 @@ function readFile(file) {
 }
 
 CatImageUpdate.propTypes = {
-    cat: PropTypes.object.isRequired,
+    cat: PropTypes.array.isRequired,
     currentIndex: PropTypes.number
 }
 
