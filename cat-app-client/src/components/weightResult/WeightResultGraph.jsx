@@ -10,6 +10,8 @@ import {
     LabelList,
     Area,
     ResponsiveContainer,
+    Label,
+    Bar,
 } from 'recharts';
 import { useEffect } from 'react';
 import styled from 'styled-components';
@@ -42,7 +44,7 @@ const SelectorContainer = styled.div`
 const DateSelector = styled.button`
     color: #fff;
     font-size: 1rem;
-    background-color: ${({ theme }) => theme.button};
+    background-color: ${({ theme }) => theme.palette.orange};
     border: none;
     :hover {
         background: ${({ theme }) => theme.palette.borderColor};
@@ -171,72 +173,63 @@ const WeightResultGraph = ({ currentCatWeights }) => {
 
     //나중에 백엔드 연동해서 이렇게 최근순으로 당겨오면됌
     //최근 데이터만 보여줌
-
-    // const updatedDate = currentCatWeights.
-    const nowaDays = currentCatWeights.slice(0, 7).reverse();
-    const testDays = nowaDays.map((x) => ({
-        ...x,
-
-        createdDate: x.createdDate.substr(5, 5),
+    const perMonth = currentCatWeights;
+    const nowaDays = currentCatWeights.slice(0, 5).reverse();
+    const resultDays = nowaDays.map((data) => ({
+        ...data,
+        createdDate: data.createdDate.substr(5, 5),
     }));
-    // const comaparisonResult =
-    //     currentCatWeights[0].weight - currentCatWeights[1].weight;
 
     useEffect(() => {
-        // dispatch(getWeightRequest(currentIndex));
         dispatch({
             type: GET_CAT_REQUEST,
         });
         dispatch({
             type: GET_USER_REQUEST,
         });
-
-        // console.log(
-        //     'current dat',
-        //     currentCatWeights.map((data) => {
-        //         console.log(data.weight);
-        //     })
-        // );
     }, []);
-    // useEffect(() => {
-    //     dispatch(getWeightRequest(currentIndex));
-    //     dispatch({
-    //         type: GET_CAT_REQUEST,
-    //     });
-    //     dispatch({
-    //         type: GET_USER_REQUEST,
-    //     });
-    // }, []);
 
-    // const perDayHandler = () => {
-    //     // axios.get('<주소>').then((res) => {
-    //     //     const data = res.data.map((data) => {
-    //     //         return {
-    //     //               //코드 작성
-    //     //         };
-    //     //     });
-    //     // });
-    //     data.map((data) => {
-    //         return {
-    //             //나중에 백엔드 연동해서 이렇게 최근 요일순으로 당겨오면됌
-    //             // const perDay = data.slice(-7);
-    //             XAxis: data.name,
-    //         };
-    //     });
-    // };
-    // const perMonthHandler = () => {
-    //     // axios.get('<주소>').then((res) => {
-    //     //     const data = res.data.map((data) => {
-    //     //         return {
-    //     //             XAxis: data.name,
-    //     //             YAxis: data.name,
-    //     //나중에 백엔드 연동해서 이렇게 최근 월별순으로 당겨오면됌
-    //     //그리고 나서 data의 값을 바꾸면 됌
-    //     //
-    //     //         };
-    //     //     });
-    //     // });
-    // };
+    const perWeekHandler = () => {
+        data.map((data) => {
+            return {
+                //나중에 백엔드 연동해서 이렇게 최근 요일순으로 당겨오면됌
+                // const perDay = data.slice(-7);
+                XAxis: data.name,
+            };
+        });
+    };
+    const perMonthHandler = () => {
+        // const arr = data.reduce((acc, cur) => {
+        //     // console.log(cur.createdDate);
+        //     const currentDate = new Date(cur.createdDate);
+        //     const year = currentDate.getFullYear();
+        //     const month = currentDate.getMonth();
+        //     const day = currentDate.getDate();
+        //     const weight = cur.weight;
+        //     console.log('date', cur, month, day, weight);
+        //     const findItem = acc.find(
+        //         (a) => a.year === year && a.month === month
+        //     );
+        //     if (!findItem) {
+        //         acc.push({
+        //             year,
+        //             month,
+        //             day,
+        //             weight,
+        //         });
+        //     }
+        //     if (findItem && findItem.day < day) {
+        //         findItem.weight = weight;
+        //         findItem.year = year;
+        //         findItem.month = month;
+        //         findItem.day = day;
+        //     }
+        //     return acc;
+        // }, []);
+        // console.log('Arr', arr);
+        const resultDays = currentCatWeights;
+        return resultDays;
+    };
 
     return (
         <>
@@ -253,7 +246,7 @@ const WeightResultGraph = ({ currentCatWeights }) => {
                         <ComposedChart
                             width={1000}
                             height={400}
-                            data={testDays}
+                            data={resultDays}
                             margin={{
                                 top: 20,
                                 right: 20,
@@ -261,32 +254,55 @@ const WeightResultGraph = ({ currentCatWeights }) => {
                                 left: 20,
                             }}
                         >
-                            <CartesianGrid stroke="#f5f5f5" />
-                            <XAxis dataKey="createdDate" stroke="#fff" />
-                            <Tooltip stroke="#fff" />
-                            <Area
-                                type="monotone"
-                                dataKey="weight"
-                                fill="#E07A5F"
-                                stroke="#f2cc8f"
+                            {/* 그리드 효과  */}
+                            <CartesianGrid
+                                stroke="#f5f5f5"
+                                opacity={0.1}
+                                vertical={false}
                             />
-                            <Line
+                            <XAxis dataKey="createdDate" stroke="#fff"></XAxis>
+                            <LabelList
+                                dataKey="weight"
+                                position="insideTop"
+                                angle="45"
+                            />
+                            <Tooltip stroke="#fff" />
+                            <defs>
+                                <linearGradient
+                                    id="color"
+                                    x1="0"
+                                    y1="0"
+                                    x2="0"
+                                    y2="1"
+                                >
+                                    <stop
+                                        offset="0%"
+                                        stopColor="#E07A5F"
+                                        stopOpacity={0.4}
+                                    />
+                                    <stop
+                                        offset="75%"
+                                        stopColor="#E07A5F"
+                                        stopOpacity={0.05}
+                                    />
+                                </linearGradient>
+                            </defs>
+
+                            <Area
+                                name="몸무게"
                                 type="monotone"
                                 dataKey="weight"
-                                stroke="#ff7300"
-                            >
-                                <LabelList
-                                    dataKey="weight"
-                                    position="top"
-                                    stroke="#fff"
-                                />
-                            </Line>
+                                fill="url(#color)"
+                                stroke="#f2cc8f"
+                            ></Area>
                         </ComposedChart>
                     </ResponsiveContainer>
                 </div>
                 <SelectorContainer>
-                    <DateSelector>일별</DateSelector>
-                    <DateSelector>월별</DateSelector>
+                    <DateSelector onClick={perWeekHandler}>Weekly</DateSelector>
+                    <DateSelector onClick={() => perMonthHandler(perMonth)}>
+                        Monthly
+                    </DateSelector>
                 </SelectorContainer>
                 <DataContainer>
                     <WeightWrapper>
@@ -350,10 +366,16 @@ const WeightResultGraph = ({ currentCatWeights }) => {
                     <ResultWrapper>
                         <p>체중 변화</p>
                         <p>
-                            {currentCatWeights.length === 2 ? (
+                            {currentCatWeights.length === 1 ? (
                                 <></>
                             ) : (
-                                <>{/* {comaparisonResult} */}</>
+                                <>
+                                    {Math.round(
+                                        (currentCatWeights[0].weight -
+                                            currentCatWeights[1].weight) *
+                                            100
+                                    ) / 100}
+                                </>
                             )}
                             KG
                         </p>
