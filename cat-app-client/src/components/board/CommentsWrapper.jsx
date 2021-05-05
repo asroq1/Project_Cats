@@ -1,14 +1,12 @@
-
-import React, {useCallback, useEffect, useState} from 'react';
-import {useSelector,useDispatch} from 'react-redux';
-import styled from 'styled-components'
+import React, { useCallback, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-
-
-
-
-import { REMOVE_COMMENT_REQUEST, GET_COMMENTS_REQUEST} from  '../../reducers/post'
+import {
+    REMOVE_COMMENT_REQUEST,
+    GET_COMMENTS_REQUEST,
+} from '../../reducers/post';
 
 const EachComment = styled.div`
     padding-bottom: 1rem;
@@ -25,7 +23,7 @@ const EachComment = styled.div`
         border-radius: 10px;
         background-color: lightgray;
     }
-    `;
+`;
 
 const CommentsLayout = styled.div`
     margin-top: 2rem;
@@ -42,66 +40,66 @@ const CommentsLayout = styled.div`
     }
 `;
 
-const CommentsWrapper = ({postId}) => {
-    
-    const {me} = useSelector((state) => state.user)
-    const { addCommentDone, removeCommentDone, currentComments} = useSelector((state) => state.post)
+const CommentsWrapper = ({ postId }) => {
+    const { me } = useSelector((state) => state.user);
+    const { addCommentDone, removeCommentDone, currentComments } = useSelector(
+        (state) => state.post
+    );
 
-    
-    const dispatch=useDispatch();
-    const onRemoveComment = useCallback((commentId)=>{
-        
-
-
-        if(window.confirm("정말로 댓글을 지우시겠습니까??" )){
-        
-             
+    const dispatch = useDispatch();
+    const onRemoveComment = useCallback(
+        (commentId) => {
+            if (window.confirm('정말로 댓글을 지우시겠습니까??')) {
                 dispatch({
                     type: REMOVE_COMMENT_REQUEST,
-                    
-                    data: commentId
-                    })
-                
+
+                    data: commentId,
+                });
             }
-        }, []);
+        },
+        [dispatch]
+    );
 
     // Whenever any change happens (comment added / deleted)
     // Call GET_COMMENTS_REQUEST
     // And re-render Comments
-    useEffect(()=> {
+    useEffect(() => {
         dispatch({
             type: GET_COMMENTS_REQUEST,
-            data: postId
-        })
-    }, [addCommentDone, removeCommentDone])
-    
+            data: postId,
+        });
+    }, [addCommentDone, removeCommentDone, postId, dispatch]);
+
     return (
         <CommentsLayout>
-            <h1>{currentComments.length>0?'댓글':''}</h1>
+            <h1>{currentComments.length > 0 ? '댓글' : ''}</h1>
             <div>
-                {currentComments && currentComments.map((c, i) => (
-                    <EachComment key={c.content + i}>
-                        <div>
-                            <h3>{c.writer.nickname}
-                                {c.writer.nickname == me.nickname && c.id && (
-                                <button type="button" onClick={onRemoveComment(c.id)}>댓글 삭제</button>
-                            
-                                )}    
+                {currentComments &&
+                    currentComments.map((c, i) => (
+                        <EachComment key={c.content + i}>
+                            <div>
+                                <h3>
+                                    {c.writer.nickname}
+                                    {c.writer.nickname === me.nickname && c.id && (
+                                        <button
+                                            type="button"
+                                            onClick={onRemoveComment(c.id)}
+                                        >
+                                            댓글 삭제
+                                        </button>
+                                    )}
                                 </h3>
-                            <div>{c.content}</div>
-                        </div>
-
-                    </EachComment>
-                ))}
+                                <div>{c.content}</div>
+                            </div>
+                        </EachComment>
+                    ))}
             </div>
-        
         </CommentsLayout>
-    )
+    );
 };
 
 CommentsWrapper.propTypes = {
     postId: PropTypes.number.isRequired,
-}
-
+};
 
 export default CommentsWrapper;

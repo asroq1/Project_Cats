@@ -1,6 +1,5 @@
 
-import React, {useCallback} from 'react';
-import {useDispatch} from 'react-redux';
+import React  from 'react';
 import { Link } from 'react-router-dom'
 
 import 'font-awesome/css/font-awesome.min.css';
@@ -37,15 +36,15 @@ const PostListBody = styled.div`
     //padding-top: 50px;
 `;
 
-const PhotoContainer = styled.img`
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    margin-top: 0.25rem;
-    margin-bottom: 0.25rem;
-    border-radius:5px;
-    object-fit: cover;
-`;
+// const PhotoContainer = styled.img`
+//     display: inline-block;
+//     width: 100px;
+//     height: 100px;
+//     margin-top: 0.25rem;
+//     margin-bottom: 0.25rem;
+//     border-radius:5px;
+//     object-fit: cover;
+// `;
 
 const SubInfo = styled.div`
     color: gray;
@@ -94,7 +93,6 @@ const PreviewWrapper = styled.div`
 const StyledLink = styled(Link)`
     text-decoration: none;
     cursor: pointer;
-
     &:focus,
     &:hover,
     &:link,
@@ -107,7 +105,7 @@ const StyledLink = styled(Link)`
 const PostItem = ({ post }) => {
     const {id, title, viewCount, writer, createdDate} = post;
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     // const setCurrentPost = useCallback((id)=>{
     //     dispatch({

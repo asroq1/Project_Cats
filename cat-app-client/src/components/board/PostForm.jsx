@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import useInput from '../../hooks/useInput';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -15,15 +15,9 @@ import OverallPostsLayout from './OverallPostsLayout';
 const FormBlock = styled.div`
     position: relative;
     padding-top: 50px;
-    width:80%;
+    width: 80%;
     margin: 0 auto;
-    min-height:calc(100vh - 100px);
-`;
-
-const EditBlock = styled.div`
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-    color: gray;
+    min-height: calc(100vh - 100px);
 `;
 
 const StyledBlock = styled.div`
@@ -67,13 +61,13 @@ const StyledButton = styled.button`
     padding: 1rem;
     border-radius: 10px;
     color: white;
-    border:none; 
-    background-color: ${({theme})=>theme.green};
-    font-weight:bold;
-    cursor:pointer;
+    border: none;
+    background-color: ${({ theme }) => theme.green};
+    font-weight: bold;
+    cursor: pointer;
 
     margin-bottom: 1rem;
-    
+
     & + & {
         margin-left: 0.5rem;
     }
@@ -81,7 +75,7 @@ const StyledButton = styled.button`
         background-color: darkgreen;
     }
     &:first-child {
-        background-color: ${({theme}) => theme.navy};
+        background-color: ${({ theme }) => theme.navy};
     }
     &:first-child:hover {
         background-color: black;
@@ -105,29 +99,29 @@ const PreviewBox = styled.div`
 const PostForm = () => {
     const dispatch = useDispatch();
     const imageInput = useRef();
-    const history=useHistory();
+    const history = useHistory();
 
     // 각 form 내용은 useState이용한 커스텀 훅으로 관리
-    const [title, onChangeTitle, setTitle] = useInput('');
-    const [text, onChangeText, setText] = useInput('');
+    const [title, onChangeTitle] = useInput('');
+    const [text, onChangeText] = useInput('');
 
     // 게시판에 올리는 사진들은 redux에서 상태 관리
     const { addPostDone, imagePaths } = useSelector((state) => state.post);
-    const { me } = useSelector((state) => state.user)
+    const { me } = useSelector((state) => state.user);
 
     // 이미지 올리는 input은 숨기고, 버튼을 input과 연결하기 위함
     const onClickImageUpload = useCallback(() => {
         imageInput.current.click();
-    }, [imageInput.current]);
+    }, []);
 
     // 이미지 올렸을 때, 파일과 미리보기를 위한 URL 저장
-    const paths = [...imagePaths];
+
     const onChangeImages = useCallback(
         (e) => {
             // const currImagePaths = [...imagePaths];
             const files = e.target.files;
             if (e.target.files.length > 3) {
-                alert("이미지는 최대 3개 업로드 가능합니다");
+                alert('이미지는 최대 3개 업로드 가능합니다');
             } else {
                 Object.keys(files).forEach((i) => {
                     const file = files[i];
@@ -148,10 +142,10 @@ const PostForm = () => {
                     };
                     reader.readAsDataURL(file);
                 });
-
             }
         },
-        [imagePaths]
+        
+        [ dispatch ]
     );
 
     const onRemoveImages = useCallback(
@@ -161,12 +155,13 @@ const PostForm = () => {
                 data: key,
             });
         },
-        []
+
+        [dispatch]
     );
 
-    const goBack = useCallback(()=>{
+    const goBack = useCallback(() => {
         history.goBack();
-    })
+    }, [history]);
 
     const onSubmit = useCallback(
         (e) => {
@@ -182,45 +177,41 @@ const PostForm = () => {
             formData.append('title', title);
             formData.append('content', text);
 
-            console.log("key")
-            for (var key of formData.keys()){
+            console.log('key');
+            for (var key of formData.keys()) {
                 console.log(key);
             }
 
-            console.log("value")
-            for (var value of formData.values()){
+            console.log('value');
+            for (var value of formData.values()) {
                 console.log(value);
             }
 
-            console.log("entry")
-            for (var entry of formData.entries()){
+            console.log('entry');
+            for (var entry of formData.entries()) {
                 console.log(entry);
             }
             dispatch({
                 type: ADD_POST_REQUEST,
                 data: formData,
             });
-
-            
         },
-        [text, imagePaths]
+        [text, title, imagePaths , dispatch]
     );
 
-    useEffect(() =>{
-        if(addPostDone){
+    useEffect(() => {
+        if (addPostDone) {
             history.push('/post/list');
         }
-
-    },[addPostDone]);
+    }, [addPostDone, history]);
 
     useEffect(() => {
-        
-        if(!me){
-            alert("로그인 먼저 해주세요")
+        if (!me) {
+            alert('로그인 먼저 해주세요');
             history.push('/');
         }
-    }, [me])
-    
+    }, [me, history]);
+
     return (
         <>
             <OverallPostsLayout>
@@ -247,22 +238,16 @@ const PostForm = () => {
                                 placeholder="글을 작성해주세용"
                             />
                         </StyledBlock>
-                        
+
                         <CenterWrapper>
-                            <StyledButton
-                                type="button"
-                                onClick={goBack} 
-                            >
+                            <StyledButton type="button" onClick={goBack}>
                                 취소
                             </StyledButton>
-                            <StyledButton
-                                type="primary"
-                                htmltype="submit"
-                            >
+                            <StyledButton type="primary" htmltype="submit">
                                 등록
                             </StyledButton>
                         </CenterWrapper>
-                       
+
                         <CenterWrapper>
                             <input
                                 type="file"
@@ -277,7 +262,8 @@ const PostForm = () => {
                                 type="button"
                                 onClick={onClickImageUpload}
                             >
-                                사진을 올려주세요! (3개 이하) <i className="fa fa-paw"></i>
+                                사진을 올려주세요! (3개 이하){' '}
+                                <i className="fa fa-paw"></i>
                             </StyledButton>
                         </CenterWrapper>
 
