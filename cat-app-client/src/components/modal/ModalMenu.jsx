@@ -129,7 +129,7 @@ const ModalMenu = ({ onClose }) => {
                     </h3>
                     <h1>
                         {' '}
-                        <SvgContainer src =  "/image/icon/elegant-party.svg" alt="Hi"/> {me.nickname}{' '}
+                        <SvgContainer src =  "/image/icon/elegant-party.svg" alt="Hi"/> {me&&me.nickname}{' '}
                         집사님, <br />
                         안녕하세요!
                     </h1>

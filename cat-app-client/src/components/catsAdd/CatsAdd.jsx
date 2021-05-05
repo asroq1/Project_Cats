@@ -32,7 +32,9 @@ const CatsAdd = ({}) => {
             // POST API가 id를 요구하기 때문
             formData.append('name',name);
             formData.append('goalWeight', goalWeight);
-            console.log(currImgUrl);
+            
+            console.log("currImgUrl", currImgUrl); //now currImgUrl is a File object
+            
             formData.append('photo', currImgUrl);
 
             console.log("key")
@@ -72,7 +74,7 @@ const CatsAdd = ({}) => {
     }, [addCatDone]);
 
     useEffect(() => {
-        if (!me)
+        if (!me){
 
             alert('로그인 먼저 해주세요')
             history.push('/');
