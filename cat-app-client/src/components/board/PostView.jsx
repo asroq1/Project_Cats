@@ -90,14 +90,16 @@ const PostView = ({ postId, post, error }) => {
     const { removePostDone, imagePaths } = useSelector((state) => state.post);
 
     const { me } = useSelector((state) => state.user);
-
     const onRemovePost = useCallback(
         (e)=>{
             e.preventDefault();
+
+            if(window.confirm( "정말로 게시글을 지우시겠습니까??")){
             dispatch({
                 type: REMOVE_POST_REQUEST,
                 data: postId
             })
+        }
     },[])
 
     useEffect(() => {
@@ -170,7 +172,9 @@ const PostView = ({ postId, post, error }) => {
 
 PostView.propTypes = {
     postId: PropTypes.number.isRequired,
-    post: PropTypes.object.isRequired,
+    
+    
+    post: PropTypes.object,
     error: PropTypes.object
 }
 
