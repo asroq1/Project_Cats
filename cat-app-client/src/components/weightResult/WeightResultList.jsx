@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DELETE_WEIGHT_REQUEST, GET_CAT_REQUEST } from '../../reducers/cat';
 import { useHistory } from 'react-router';
 import { GET_USER_REQUEST } from '../../reducers/user';
-import { getWeightRequest } from '../../reducers/cat';
 
 const ListContainer = styled.div`
     display: grid;
@@ -62,13 +61,16 @@ const DeleteButton = styled.button`
         transform: scale(0.95);
     }
 `;
-
-const WeightResultList = ({}) => {
+const ErrorMessage = styled.h2`
+    display: grid;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+`;
+const WeightResultList = ({ currentCatWeights }) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { currentCatWeights, deleteWeightDone } = useSelector(
-        (state) => state.cat
-    );
 
     useEffect(() => {
         if (!localStorage.token) {
@@ -83,36 +85,35 @@ const WeightResultList = ({}) => {
         });
     }, []);
 
-    useEffect(() => {
-        if (deleteWeightDone) {
-            history.push('/cat/data');
-        }
-    }, []);
     const onRemove = useCallback((data) => {
         if (window.confirm('정말로 삭제하시겠어요?')) {
             dispatch({
                 type: DELETE_WEIGHT_REQUEST,
                 data,
             });
-        } else {
+            // history.push('/user/main');
         }
     }, []);
     return (
         <ListContainer>
-            {/* {test} */}
-            {currentCatWeights.map((data) => {
-                return (
-                    <DataContainer>
-                        <DataList key={data.id}>
-                            <p>{data.createdDate.substr(0, 10)}</p>
-                            <p>{data.weight}kg</p>
-                            <DeleteButton onClick={() => onRemove(data.id)}>
-                                <FontAwesomeIcon icon={faTrashAlt} />
-                            </DeleteButton>
-                        </DataList>
-                    </DataContainer>
-                );
-            })}
+            {currentCatWeights.length === 0 && (
+                <ErrorMessage>등록된 기록이 없습니다.</ErrorMessage>
+            )}
+            {currentCatWeights && (
+                <DataContainer>
+                    {currentCatWeights.map((data) => {
+                        return (
+                            <DataList key={data.id}>
+                                <p>{data.createdDate.substr(0, 10)}</p>
+                                <p>{data.weight}kg</p>
+                                <DeleteButton onClick={() => onRemove(data.id)}>
+                                    <FontAwesomeIcon icon={faTrashAlt} />
+                                </DeleteButton>
+                            </DataList>
+                        );
+                    })}
+                </DataContainer>
+            )}
         </ListContainer>
     );
 };

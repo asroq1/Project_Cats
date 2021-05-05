@@ -20,22 +20,21 @@ axios.defaults.baseURL =
 const store = Store(rootReducer, composeWithDevTools());
 const persistor = persistStore(store);
 
-if(!localStorage.token) { 
+if (!localStorage.token) {
     persistor.purge();
 }
-
 ReactDOM.render(
     <React.StrictMode>
         {/* React.StrictMode는 배포시 지울 코드 */}
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
-            <ThemeProvider theme={theme}>
-                <Router>
-                    <Applayout>
-                        <App />
-                    </Applayout>
-                </Router>
-            </ThemeProvider>
+                <ThemeProvider theme={theme}>
+                    <Router>
+                        <Applayout>
+                            <App />
+                        </Applayout>
+                    </Router>
+                </ThemeProvider>
             </PersistGate>
         </Provider>
     </React.StrictMode>,
