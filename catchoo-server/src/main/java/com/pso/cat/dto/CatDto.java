@@ -46,7 +46,7 @@ public class CatDto {
         private final Date birth;
         private final Float goalWeight;
         @JsonInclude(Include.NON_NULL)
-        private final RecordDto.Response recentRecord;
+        private RecordDto.Response recentRecord;
 
         public static Response ofEntity(Cat cat, Record recentRecord) {
             return Response.builder()

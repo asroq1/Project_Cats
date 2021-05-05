@@ -129,6 +129,7 @@ const PostUpdate = ({match, location}) => {
 
     useEffect(()=> { 
         if (!me){
+            alert("로그인 먼저 해주세요")
             history.push('/');
         }
     }, [me]);
@@ -137,7 +138,7 @@ const PostUpdate = ({match, location}) => {
     const history=useHistory();
 
     // 각 form 내용은 useState이용한 커스텀 훅으로 관리
-    const [title, onChangeTitle] =useInput(location.state.originalTitle);
+    const [title,onChangeTitle] =useInput(location.state.originalTitle);
     const [text, onChangeText] =  useInput(location.state.originalContent);
 
 

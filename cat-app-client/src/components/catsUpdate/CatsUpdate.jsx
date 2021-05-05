@@ -18,6 +18,7 @@ const CatsUpdate = ({cat, currentIndex}) => {
     const {currImgUrl, updateCatDone} = useSelector((state) => state.cat);
     const [currbirthyear, currbirthmonth, currbirthdate] = currentCat.birth.split("-");
     const [name, onChangeName] =useInput(currentCat.name);
+    const [goalWeight, onChangeGoalWeight] = useInput(currentCat.goalWeight);
     const [birthyear, onChangeBirthYear] = useInput(currbirthyear);
     const [birthmonth, onChangeBirthMonth] = useInput(currbirthmonth);
     const [birthdate, onChangeBirthDate] = useInput(currbirthdate);
@@ -33,6 +34,7 @@ const CatsUpdate = ({cat, currentIndex}) => {
             formData.append('id', parseInt(currentIndex));
             formData.append('name',name);
             console.log(currImgUrl);
+            formData.append('goalWeight', goalWeight);
             formData.append('photo', currImgUrl);
 
             console.log("key")
@@ -60,7 +62,7 @@ const CatsUpdate = ({cat, currentIndex}) => {
                 data: formData,
             });
         },
-        [currImgUrl, name, birthyear, birthmonth, birthdate,gender]
+        [currImgUrl, name, birthyear, birthmonth, birthdate,gender, goalWeight]
     );
 
     const goBack = useCallback(() => {
@@ -70,8 +72,8 @@ const CatsUpdate = ({cat, currentIndex}) => {
     const paddingStyle = useMemo(() => ({ paddingTop: '2rem' }), []);
     const marginTopStyle = useMemo(() =>({ marginTop: '0.5rem' }), []);
 
+    
     useEffect(() => {
-
         if (updateCatDone){
             history.push('/user/main');
         }
@@ -101,6 +103,22 @@ const CatsUpdate = ({cat, currentIndex}) => {
                                 required
                             />
                         </div>
+                    </StyledInputBlock>
+                    <StyledInputBlock>
+                        <label htmlFor="cat-goal-weight">목표체중</label>
+                            <br />
+                            <div className="inputcontainer">
+                                <input
+                                    className="regular"
+                                    type="number"
+                                    id="cat-goal-weight"
+                                    name="cat-goal-weight"
+                                    placeholder="Goal Weight"
+                                    value={goalWeight ? goalWeight : ''}
+                                    onChange={onChangeGoalWeight}
+                                    
+                                />
+                            </div>
                     </StyledInputBlock>
                     {/* 생일 */}
                     <StyledInputBlock>
@@ -186,7 +204,7 @@ const CatsUpdate = ({cat, currentIndex}) => {
 
 CatsUpdate.propTypes = {
     currentIndex: PropTypes.number.isRequired,
-    cat:PropTypes.object.isRequired
+    cat:PropTypes.array.isRequired
 }
 
 export default CatsUpdate;

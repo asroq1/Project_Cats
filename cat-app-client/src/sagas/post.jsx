@@ -38,7 +38,7 @@ function* addPost(action){
 }
 
 function removePostAPI(id){
-    return axios.delete(`api/posts/{id}?id=${id}`);
+    return axios.delete(`api/posts/${id}`);
 }
 
 function* removePost(action){
@@ -88,7 +88,7 @@ function* updatePost(action){
         const result = yield call(updatePostAPI,action.data);
         yield put({
             type: UPDATE_POST_SUCCESS,
-            data: result.data
+            data: action.data
         })
     } catch(err){
         yield put({

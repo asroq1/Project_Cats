@@ -90,8 +90,7 @@ function* deleteCat(action) {
 }
 
 function updateCatAPI(data) {
-    console.log(`data ID = ${data.id}`);
-    return axios.patch(`/api/cats/${data.id}`, data.data);
+    return axios.patch('/api/cats/', data);
 }
 
 function* updateCat(action) {

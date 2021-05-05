@@ -17,7 +17,7 @@ const PostViewBody = styled.div`
 `;
 
 const PostViewContainer = ({ match }) => {
-    const { currentPost, readPostError } = useSelector((state) => state.post);
+    const { currentPost, readPostError, updatePostDone } = useSelector((state) => state.post);
     const { postId } = match.params;
     const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ const PostViewContainer = ({ match }) => {
                 type: UNLOAD_POST,
             });
         };
-    }, [dispatch, postId]);
+    }, [dispatch, postId, updatePostDone]);
 
     return (
         <>

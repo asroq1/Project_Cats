@@ -3,6 +3,7 @@ package com.pso.cat.service;
 import com.pso.cat.entity.Cat;
 import com.pso.cat.dto.CatDto;
 import com.pso.cat.entity.Post;
+import com.pso.cat.entity.Record;
 import com.pso.cat.repository.CatRepository;
 import com.pso.cat.repository.RecordRepository;
 import java.util.Date;
@@ -30,7 +31,7 @@ public class CatService {
     public CatDto.Response read(Long id) {
         return CatDto.Response.ofEntity(
             catRepository.findById(id).get(),
-            recordRepository.findFirstByCatIdOrderByCreateDateDesc(id));
+            recordRepository.findFirstByCatIdAndStateOrderByCreateDateDesc(id, 1));
     }
 
     @Transactional
@@ -53,6 +54,9 @@ public class CatService {
     public List<CatDto.Response> listByUserId(Long userId) {
         return catRepository
             .findAllByUserIdAndStateOrderByCreatedDateDesc(userId, 1)
-            .stream().map(cat -> CatDto.Response.ofEntity(cat)).collect(Collectors.toList());
+            .stream().map(cat
+                -> CatDto.Response.ofEntity(cat,
+                recordRepository.findFirstByCatIdAndStateOrderByCreateDateDesc(cat.getId(), 1))
+            ).collect(Collectors.toList());
     }
 }

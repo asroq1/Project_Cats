@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { LOG_OUT_REQUEST } from '../../reducers/user';
 import Toggle from '../toggle/Toggle';
 import { useDarkMode } from '../../hooks/useDarkMode ';
-import { lightTheme, darkTheme } from '../../styles/globalStyles';
+// import { lightTheme, darkTheme } from '../../styles/globalStyles';
 
 const BackgroundWrapper = styled.div`
     position: fixed;
@@ -37,7 +37,7 @@ const Header = styled.div`
         font-size: 1.25rem;
         text-align: left;
 
-        line-height: 1.25;
+        line-height: 1.75;
     }
     h3 {
         font-size: 1.75rem;
@@ -45,6 +45,14 @@ const Header = styled.div`
         margin-bottom: 1rem;
         text-align: right;
     }
+`;
+
+
+const SvgContainer = styled.img`
+    height: 1.5rem;
+    width: 1.5rem;
+
+    filter: invert(100%);
 `;
 
 const MenuWrapper = styled.div`
@@ -85,8 +93,7 @@ const NightModeWrapper = styled.div`
 // `;
 
 const ModalMenu = ({ onClose }) => {
-    //나중에 redux 상태 만들어줄 것
-    // 야간모드 토글 위치 협의 사항
+    // redux 상태 만들어 줌!
     const [isNightMode, setNightMode] = useState(false);
     const { me } = useSelector((state) => state.user);
     const [theme, toggleTheme] = useDarkMode();
@@ -107,6 +114,8 @@ const ModalMenu = ({ onClose }) => {
     const history = useHistory();
     useEffect(() => {
         if (!localStorage.token) {
+            
+            alert('로그인 먼저 해주세요');
             history.push('/');
         }
     }, [me]);
@@ -120,7 +129,7 @@ const ModalMenu = ({ onClose }) => {
                     </h3>
                     <h1>
                         {' '}
-                        <i className="fa fa-black-tie"></i> {me.nickname}{' '}
+                        <SvgContainer src =  "/image/icon/elegant-party.svg" alt="Hi"/> {me&&me.nickname}{' '}
                         집사님, <br />
                         안녕하세요!
                     </h1>

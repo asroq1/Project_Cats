@@ -69,6 +69,9 @@ const CatImageUpdate = ({cat, currentIndex}) => {
     const [zoom, setZoom] = useInput(1.0);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
     const [croppedImage, setCroppedImage] = useState(currentCat.photo);
+    
+
+    const [imageTitle,setImageTitle] = useState(null)
 
     // 파일 업로드 창 숨기기 위함
     const imageInput = useRef();
@@ -89,10 +92,15 @@ const CatImageUpdate = ({cat, currentIndex}) => {
             );
             console.log('donee', { blobURL });
             setCroppedImage(blobURL);
+
+            
+            let croppedImageFile = await fetch(toSave).then(r => r.blob())
+                .then(blobFile => new File([blobFile],
+                    imageTitle, { type: "image/png"}))
             
             dispatch({
                 type: SET_CURRENT_IMAGE,
-                data: toSave,
+                data: croppedImageFile,
             });
         } catch (e) {
             console.error(e);
@@ -107,18 +115,20 @@ const CatImageUpdate = ({cat, currentIndex}) => {
         });
     }, []);
 
-    useEffect(() =>{
-        setCroppedImage(currentCat.photo);
-        dispatch({
-            type: SET_CURRENT_IMAGE,
-            data: currentCat.photo,
-        });
-    }, []);
+    // useEffect(() =>{
+    //     setCroppedImage(currentCat.photo);
+    //     dispatch({
+    //         type: SET_CURRENT_IMAGE,
+    //         data: currentCat.photo,
+    //     });
+    // }, []);
 
     const onFileChange = async (e) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
             console.log(file);
+            
+            setImageTitle(file.name);
             let imageDataUrl = await readFile(file);
 
             setImageSrc(imageDataUrl);
@@ -216,7 +226,7 @@ function readFile(file) {
 }
 
 CatImageUpdate.propTypes = {
-    cat: PropTypes.object.isRequired,
+    cat: PropTypes.array.isRequired,
     currentIndex: PropTypes.number
 }
 

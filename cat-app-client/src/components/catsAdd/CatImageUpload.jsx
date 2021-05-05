@@ -66,6 +66,7 @@ const CatImageUpload = ({}) => {
     const [zoom, setZoom] = useInput(1.0);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
     const [croppedImage, setCroppedImage] = useState(null);
+    const [imageTitle, setImageTitle] = useState(null);
 
     // 파일 업로드 창 숨기기 위함
     const imageInput = useRef();
@@ -88,10 +89,16 @@ const CatImageUpload = ({}) => {
             );
             console.log('donee', { blobURL });
             setCroppedImage(blobURL);
+
+            // 추가
+            let croppedImgFile = await fetch(toSave).then(r => r.blob())
+                    .then(blobFile => new File([blobFile],
+                    imageTitle, { type: "image/png" }));
             
             dispatch({
                 type: SET_CURRENT_IMAGE,
-                data: toSave,
+                // data: toSave,
+                data: croppedImgFile,
             });
         } catch (e) {
             console.error(e);
@@ -109,6 +116,7 @@ const CatImageUpload = ({}) => {
     const onFileChange = async (e) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
+            setImageTitle(file.name);
             let imageDataUrl = await readFile(file);
 
             setImageSrc(imageDataUrl);
@@ -116,12 +124,6 @@ const CatImageUpload = ({}) => {
     };
 
     const headerStyle = useMemo(() => ({ fontWeight: 'bold',paddingTop: '30px' , lineHeight: '1.5'}), []);
-
-    const flexStyle = useMemo(
-        () => ({ display: 'flex', justifyContent: 'center', height: '80px' }),
-        []
-    );
-    const centerStyle = useMemo(() => ({ margin: '0 auto' }), []);
 
     return (
         <>

@@ -5,6 +5,8 @@ import com.pso.cat.dto.UserDto.Response;
 import com.pso.cat.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.HashMap;
+import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -49,12 +51,21 @@ public class UserController {
         return ResponseEntity.ok(userService.list());
     }
 
-    /*
+
+    @GetMapping("/users/checkEmail")
     @ApiOperation("이메일 중복 확인")
-    public ResponseEntity checkEmail() {
-        return ResponseEntity.ok(userService.list());
+    public ResponseEntity<Map<String, Boolean>> checkDuplicateEmail(String email) {
+        Map<String, Boolean> param = new HashMap<>();
+        param.put("isDuplicate", userService.checkDuplicateEmail(email));
+        return ResponseEntity.ok(param);
     }
-     */
+
+    @GetMapping("/user/checkNickname")
+    public ResponseEntity<Map<String, Boolean>> checkDuplicateNickname(String nickname) {
+        Map<String, Boolean> param = new HashMap<>();
+        param.put("isDuplicate", userService.checkDuplicateNickname(nickname));
+        return ResponseEntity.ok(param);
+    }
 
     /*
     @GetMapping("/user/{email}")

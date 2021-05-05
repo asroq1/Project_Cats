@@ -109,6 +109,7 @@ const PostView = ({ postId, post, error }) => {
 
     useEffect(() => { 
         if (!me){
+            alert("로그인 먼저 해주세요")
             history.push('/');
         }
     }, [me]);
