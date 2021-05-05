@@ -126,25 +126,30 @@ const PostForm = () => {
         (e) => {
             // const currImagePaths = [...imagePaths];
             const files = e.target.files;
-            Object.keys(files).forEach((i) => {
-                const file = files[i];
-                const reader = new FileReader();
-                reader.onload = () => {
-                    const path = [
-                        {
-                            file: file,
-                            url: reader.result,
-                        },
-                    ];
-                    console.log(path);
+            if (e.target.files.length > 3) {
+                alert("이미지는 최대 3개 업로드 가능합니다");
+            } else {
+                Object.keys(files).forEach((i) => {
+                    const file = files[i];
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        const path = [
+                            {
+                                file: file,
+                                url: reader.result,
+                            },
+                        ];
+                        console.log(path);
 
-                    dispatch({
-                        type: UPLOAD_IMAGES_SUCCESS,
-                        data: path,
-                    });
-                };
-                reader.readAsDataURL(file);
-            });
+                        dispatch({
+                            type: UPLOAD_IMAGES_SUCCESS,
+                            data: path,
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                });
+
+            }
         },
         [imagePaths]
     );
@@ -272,7 +277,7 @@ const PostForm = () => {
                                 type="button"
                                 onClick={onClickImageUpload}
                             >
-                                사진을 올려주세요 <i className="fa fa-paw"></i>
+                                사진을 올려주세요! (3개 이하) <i className="fa fa-paw"></i>
                             </StyledButton>
                         </CenterWrapper>
 
