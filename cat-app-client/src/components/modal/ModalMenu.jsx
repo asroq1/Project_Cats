@@ -114,6 +114,8 @@ const ModalMenu = ({ onClose }) => {
     const history = useHistory();
     useEffect(() => {
         if (!localStorage.token) {
+            
+            alert('로그인 먼저 해주세요');
             history.push('/');
         }
     }, [me]);
@@ -127,7 +129,7 @@ const ModalMenu = ({ onClose }) => {
                     </h3>
                     <h1>
                         {' '}
-                        <SvgContainer src =  "/image/icon/elegant-party.svg" alt="Hi"/> {me.nickname}{' '}
+                        <SvgContainer src =  "/image/icon/elegant-party.svg" alt="Hi"/> {me&&me.nickname}{' '}
                         집사님, <br />
                         안녕하세요!
                     </h1>

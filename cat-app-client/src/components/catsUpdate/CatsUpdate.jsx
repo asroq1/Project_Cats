@@ -114,7 +114,7 @@ const CatsUpdate = ({cat, currentIndex}) => {
                                     id="cat-goal-weight"
                                     name="cat-goal-weight"
                                     placeholder="Goal Weight"
-                                    value={goalWeight ? goalWeight : 0}
+                                    value={goalWeight ? goalWeight : ''}
                                     onChange={onChangeGoalWeight}
                                     
                                 />
