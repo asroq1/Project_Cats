@@ -56,14 +56,14 @@ public class UserController {
     @ApiOperation("이메일 중복 확인")
     public ResponseEntity<Map<String, Boolean>> checkDuplicateEmail(String email) {
         Map<String, Boolean> param = new HashMap<>();
-        param.put("isDuplicate", userService.checkDuplicateEmail(email));
+        param.put("duplicateValue", userService.checkDuplicateEmail(email));
         return ResponseEntity.ok(param);
     }
 
     @GetMapping("/user/checkNickname")
     public ResponseEntity<Map<String, Boolean>> checkDuplicateNickname(String nickname) {
         Map<String, Boolean> param = new HashMap<>();
-        param.put("isDuplicate", userService.checkDuplicateNickname(nickname));
+        param.put("duplicateValue", userService.checkDuplicateNickname(nickname));
         return ResponseEntity.ok(param);
     }
 
