@@ -46,7 +46,6 @@ Built with [React + Redux + Redux-Saga] + [Spring Boot + JPA + MariaDB]
 - Other Settings
   * _immer_ to ensure immutability of states.
   * _Axios_ to handle HTTP requests based on promises.
-  * _qs_ to parse query strings.
   * _Styled-component_ to style components without triggering unnecessary rerenders, to store the shared design elements, and to provide dark/light mode options.
   * _React-Easy-Crop_ to crop uploaded images.
   * _React-Slick_ to create image carousels.
@@ -69,7 +68,7 @@ Built with [React + Redux + Redux-Saga] + [Spring Boot + JPA + MariaDB]
 
 #### Deployment
 - Front-end server *temporarily* deployed on Netlify.
-- Back-end server *to be* deployed on AWS <br/>
+- Back-end server deployed on AWS <br/>
 
 ## Team Members
 
