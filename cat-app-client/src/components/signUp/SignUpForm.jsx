@@ -5,6 +5,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useHistory } from 'react-router';
 
 const SignupContainer = styled.form`
     margin: 0 auto;
@@ -59,6 +60,7 @@ const SignUpForm = ({ error }) => {
     const dispatch = useDispatch();
     const { register, watch, errors, handleSubmit } = useForm();
     const password = useRef();
+    const history = useHistory();
     password.current = watch('password');
 
     const onSubmit = useCallback((data) => {
@@ -66,25 +68,6 @@ const SignUpForm = ({ error }) => {
         dispatch(signUpRequest(data));
     }, []);
 
-    const emailChecker = (data) => {
-        console.log(data.email);
-        axios.post('/users/checkEmail', data).then((res) => {
-            console.log('data', data);
-            console.log('res', res);
-        });
-    };
-    const nickChecker = (data) => {
-        console.log(data.email);
-        axios.post('/user/checkNickname', data).then((res) => {
-            console.log('data', data);
-            console.log('res', res);
-        });
-    };
-    const test = null;
-
-    useEffect(() => {
-        console.log('Test', test);
-    }, []);
     return (
         <>
             <SignupContainer onSubmit={handleSubmit(onSubmit)}>
@@ -94,7 +77,6 @@ const SignUpForm = ({ error }) => {
                     type="text"
                     ref={register({ required: true, pattern: /^\S+@\S+$/i })}
                     placeholder="&#xf0e0;"
-                    // onKeyUp={() => emailChecker('asroq1@nate.com')}
                 />
                 {error ? (
                     <ErrorMessages>이미 사용중인 이메일 입니다.</ErrorMessages>
@@ -146,25 +128,8 @@ const SignUpForm = ({ error }) => {
                     ref={register({
                         required: true,
                         maxLength: 10,
-                        validate: {
-                            asyncValidate: async function nickChecker() {
-                                return await fetch('/user/checkNickname').then(
-                                    function (res) {
-                                        console.log(res);
-                                        console.log(res.status);
-
-                                        console.log('test', test);
-                                        if (res.status === 401) {
-                                            const test = false;
-                                            return test;
-                                        }
-                                    }
-                                );
-                            },
-                        },
                     })}
                     placeholder="&#xf2c1;"
-                    // onKeyUp={() => nickChecker(nickname)}
                 />
                 {errors.nickname && errors.nickname.type === 'required' && (
                     <ErrorMessages>닉네임을 입력해주세요.</ErrorMessages>
@@ -172,13 +137,11 @@ const SignUpForm = ({ error }) => {
                 {errors.nickname && errors.nickname.type === 'validate' && (
                     <ErrorMessages>이미 존재하는 닉네임입니다/</ErrorMessages>
                 )}
-                {test === false && <p>가즈아</p>}
                 {errors.nickname && errors.nickname.type === 'maxLength' && (
                     <ErrorMessages>
                         닉네임은 최대 10자까지만 가능합니다.
                     </ErrorMessages>
                 )}
-
                 <SignUpInput
                     type="hidden"
                     name="loginType"
