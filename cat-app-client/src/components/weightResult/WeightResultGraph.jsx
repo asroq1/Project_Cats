@@ -10,8 +10,6 @@ import {
     LabelList,
     Area,
     ResponsiveContainer,
-    Label,
-    Bar,
 } from 'recharts';
 import { useEffect } from 'react';
 import styled from 'styled-components';
@@ -110,57 +108,6 @@ const ErrorMessage = styled.p`
     font-size: 1rem;
 `;
 
-const data = [
-    {
-        name: '2020-01-20',
-        wgt: 22.2,
-    },
-    {
-        name: '2020-20',
-        wgt: 21.2,
-    },
-    {
-        name: '2020-03-20',
-        wgt: 22.2,
-    },
-    {
-        name: '2020-04-20',
-        wgt: 29.2,
-    },
-    {
-        name: '2020-05-20',
-        wgt: 25.2,
-    },
-    {
-        name: '2020-06-20',
-        wgt: 29.2,
-    },
-    {
-        name: '2020-07-20',
-        wgt: 21.2,
-    },
-    {
-        name: '2020-08-20',
-        wgt: 25.2,
-    },
-    {
-        name: '2020-09-20',
-        wgt: 21.2,
-    },
-    {
-        name: '2020-10-20',
-        wgt: 24.2,
-    },
-    {
-        name: '2020-11-12',
-        wgt: 25.2,
-    },
-    {
-        name: '2020-12-24',
-        wgt: 26.2,
-    },
-];
-
 const dateParser = (text) => {
     const { 0: year, 1: month, 2: day } = text.split('-');
     return { year, month, day };
@@ -189,15 +136,7 @@ const WeightResultGraph = ({ currentCatWeights }) => {
         });
     }, []);
 
-    const perWeekHandler = () => {
-        data.map((data) => {
-            return {
-                //나중에 백엔드 연동해서 이렇게 최근 요일순으로 당겨오면됌
-                // const perDay = data.slice(-7);
-                XAxis: data.name,
-            };
-        });
-    };
+    const perWeekHandler = () => {};
     const perMonthHandler = () => {
         // const arr = data.reduce((acc, cur) => {
         //     // console.log(cur.createdDate);
@@ -261,11 +200,7 @@ const WeightResultGraph = ({ currentCatWeights }) => {
                                 vertical={false}
                             />
                             <XAxis dataKey="createdDate" stroke="#fff"></XAxis>
-                            <LabelList
-                                dataKey="weight"
-                                position="insideTop"
-                                angle="45"
-                            />
+
                             <Tooltip stroke="#fff" />
                             <defs>
                                 <linearGradient
@@ -294,7 +229,15 @@ const WeightResultGraph = ({ currentCatWeights }) => {
                                 dataKey="weight"
                                 fill="url(#color)"
                                 stroke="#f2cc8f"
-                            ></Area>
+                            >
+                                <LabelList
+                                    name="몸무게"
+                                    dataKey="weight"
+                                    position="insideTop"
+                                    offset="10"
+                                    fill="#fff"
+                                />
+                            </Area>
                         </ComposedChart>
                     </ResponsiveContainer>
                 </div>

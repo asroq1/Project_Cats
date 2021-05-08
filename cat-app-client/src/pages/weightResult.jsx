@@ -64,7 +64,7 @@ const WeightResult = () => {
     };
     useEffect(() => {
         dispatch(getWeightRequest(currentIndex));
-    }, [deleteWeightDone]);
+    }, []);
 
     return (
         <>
