@@ -46,6 +46,12 @@ const PostListBody = styled.div`
 //     object-fit: cover;
 // `;
 
+const ErrorBox = styled.div`
+
+    height: 100vh;
+
+`;
+
 const SubInfo = styled.div`
     color: gray;
     display: inline-block;
@@ -162,7 +168,7 @@ const PostList = ({ posts, error }) => {
                 <div>
                     {posts.map((post) => (
                         <>
-                        <PostItem post={post} key={post.id + post.title.slice(0,10)} />
+                        <PostItem post={post} key={post.id + post.createdDate} />
                         </>
                     ))}
                 </div>
