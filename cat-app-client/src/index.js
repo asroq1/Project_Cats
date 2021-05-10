@@ -16,7 +16,7 @@ import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 axios.defaults.baseURL =
     
-    'http://ec2-3-36-163-150.ap-northeast-2.compute.amazonaws.com:8080/';
+    'https://cors-everywhere-hh.herokuapp.com/http://ec2-3-36-163-150.ap-northeast-2.compute.amazonaws.com:8080/';
 
 const store = Store(rootReducer, composeWithDevTools());
 const persistor = persistStore(store);
