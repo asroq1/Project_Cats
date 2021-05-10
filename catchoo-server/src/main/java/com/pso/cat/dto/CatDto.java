@@ -6,9 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.pso.cat.entity.Cat;
 import com.pso.cat.entity.Record;
 import java.util.Date;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -74,24 +71,5 @@ public class CatDto {
 
     }
 
-    @Getter
-    @Setter
-    public static class AddRequest {
 
-        private String name;
-        private char gender;
-        @ApiModelProperty(hidden = true)
-        private String photo;
-        @DateTimeFormat(pattern = "yyyy-MM-dd")
-        private Date birth;
-
-        public Cat toEntity() {
-            return Cat.builder()
-                    .name(name)
-                    .gender(gender)
-                    .photo(photo)
-                    .birth(birth).build();
-        }
-
-    }
 }
