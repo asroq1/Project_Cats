@@ -25,7 +25,7 @@ const Overlay = styled.div`
     height: 100vh;
     margin: 0 auto;
     padding: 3rem;
-    color: ${({ theme }) => theme.textlight};
+    color: ${({ theme })=>theme.textlight};
     background-color: ${({ theme }) => theme.navy};
     display: flex;
     flex-direction: column;
@@ -46,6 +46,7 @@ const Header = styled.div`
         text-align: right;
     }
 `;
+
 
 const SvgContainer = styled.img`
     height: 1.5rem;
@@ -69,7 +70,7 @@ const MenuWrapper = styled.div`
         text-decoration: none;
     }
     h2 {
-        color: ${({ theme }) => theme.textlight};
+        color: ${({ theme })=>theme.textlight};
     }
 
     h2:hover {
@@ -113,6 +114,7 @@ const ModalMenu = ({ onClose }) => {
     const history = useHistory();
     useEffect(() => {
         if (!localStorage.token) {
+            
             alert('로그인 먼저 해주세요');
             history.push('/');
         }
@@ -127,11 +129,8 @@ const ModalMenu = ({ onClose }) => {
                     </h3>
                     <h1>
                         {' '}
-                        <SvgContainer
-                            src="/image/icon/elegant-party.svg"
-                            alt="Hi"
-                        />{' '}
-                        {me && me.nickname} 집사님, <br />
+                        <SvgContainer src =  "/image/icon/elegant-party.svg" alt="Hi"/> {me&&me.nickname}{' '}
+                        집사님, <br />
                         안녕하세요!
                     </h1>
                 </Header>
@@ -143,7 +142,10 @@ const ModalMenu = ({ onClose }) => {
                     <Link to="/post/list" onClick={onClose}>
                         <h2>커뮤니티</h2>
                     </Link>
-                    <Link to="#" onClick={onClose}>
+                    <Link to="/user/settings" onClick={onClose}>
+                        <h2>집사설정</h2>
+                    </Link>
+                    <Link to="/user/settings" onClick={onClose}>
                         <h2>문의하기</h2>
                     </Link>
                     <Link to="#" onClick={onClose}>
