@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -49,7 +51,7 @@ public class AuthController {
         final User user = customUserDetailsService.findByEmailAndPassword(email, password);
 
         authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(email, password));
+                new UsernamePasswordAuthenticationToken(email, password));
 
         String jwt = tokenProvider.createToken(user);
 
@@ -57,22 +59,40 @@ public class AuthController {
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 
         return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+
     }
 
     @ApiOperation("불완전한 기능. 아직 구현중.")
-    @PostMapping("/login/social")
+    @PostMapping("/socialLogin")
     public ResponseEntity<TokenDto> authorize(@Valid @RequestBody String email) {
 
+        System.out.println("email = " + email);
+
         User user = customUserDetailsService.findByEmail(email);
+        System.out.println("user = " + user);
 
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(email, ""));
+        System.out.println("AuthController.authorize: found by email");
 
-        String jwt = tokenProvider.createToken(user);
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(email, "1111",
+                            user.getAuthorities().stream().map(auth -> new SimpleGrantedAuthority(auth.getName())).collect(
+                                    Collectors.toList())));
 
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+            System.out.println("AuthController.authorize: authenticated");
 
-        return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+            String jwt = tokenProvider.createToken(user);
+
+            System.out.println("AuthController.authorize: created token");
+
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+            return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCause());
+            e.printStackTrace();
+            throw new RuntimeException("dpfjqkft");
+        }
     }
 }

@@ -66,6 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // user
         "/api/login/**",
+        "/api/socialLogin",
         "/api/signup",
 
         // test
