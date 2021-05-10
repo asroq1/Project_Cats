@@ -60,7 +60,7 @@ public class UserController {
         return ResponseEntity.ok(param);
     }
 
-    @GetMapping("/users/checkNickname")
+    @GetMapping("/user/checkNickname")
     public ResponseEntity<Map<String, Boolean>> checkDuplicateNickname(String nickname) {
         Map<String, Boolean> param = new HashMap<>();
         param.put("duplicateValue", userService.checkDuplicateNickname(nickname));

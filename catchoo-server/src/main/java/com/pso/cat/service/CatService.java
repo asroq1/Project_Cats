@@ -110,7 +110,7 @@ public class CatService {
 
         return CatDto.Response.ofEntity(
             catRepository.findById(id).get(),
-            recordRepository.findFirstByCatIdOrderByCreateDateDesc(id));
+            recordRepository.findFirstByCatIdAndStateOrderByCreateDateDesc(id, 1));
     }
 
     @Transactional
@@ -198,7 +198,7 @@ public class CatService {
             .findAllByUserIdAndStateOrderByCreatedDateDesc(userId, 1)
             .stream().map(cat
                 -> CatDto.Response.ofEntity(cat,
-                recordRepository.findFirstByCatIdOrderByCreateDateDesc(cat.getId()))
+                recordRepository.findFirstByCatIdAndStateOrderByCreateDateDesc(cat.getId(), 1))
             ).collect(Collectors.toList());
     }
 }
