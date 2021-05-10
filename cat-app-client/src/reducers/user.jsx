@@ -15,6 +15,8 @@ export const initialState = {
     token: null,
     signUpData: {},
     loginData: {},
+
+    isDarkMode: localStorage.theme,
 };
 
 // 기본적인 액션 이름들
@@ -35,6 +37,8 @@ export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 export const GET_USER_REQUEST = 'GET_USER_REQUEST';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const GET_USER_FAILURE = 'GET_USER_FAILURE';
+
+export const CHANGE_DARK_MODE = 'CHANGE_DARK_MODE';
 
 //백엔드 연동 전
 //더미데이터
@@ -164,6 +168,9 @@ const reducer = (state = initialState, action) =>
                 draft.me = action.data;
                 break;
             case GET_USER_FAILURE:
+                break;
+            case CHANGE_DARK_MODE:
+                draft.isDarkMode = (draft.isDarkMode === 'dark' ? 'light' : 'dark');
                 break;
             default:
                 return state;

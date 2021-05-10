@@ -57,9 +57,7 @@ function* logIn(action) {
         const result = yield call(logInAPI, action.data);
         const token = result.data.token;
         localStorage.setItem('token', token);
-
         setAuthorizationToken(token);
-
         yield put({
             type: LOG_IN_SUCCESS,
             data: {
@@ -86,6 +84,7 @@ function* logOut() {
         yield delay(1000);
 
         localStorage.removeItem('token');
+        localStorage.removeItem('persist:root');
 
         yield all([
             put({

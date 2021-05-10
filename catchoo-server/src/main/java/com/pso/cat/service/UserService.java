@@ -84,4 +84,11 @@ public class UserService {
         ).collect(Collectors.toList());
     }
 
+    public Boolean checkDuplicateEmail(String email) {
+        return userRepository.findByEmail(email).isPresent();
+    }
+
+    public Boolean checkDuplicateNickname(String nickname) {
+        return userRepository.findByNickname(nickname).isPresent();
+    }
 }

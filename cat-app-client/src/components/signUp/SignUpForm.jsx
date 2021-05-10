@@ -4,6 +4,8 @@ import { signUpRequest } from '../../reducers/user';
 import 'font-awesome/css/font-awesome.min.css';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
+import axios from 'axios';
+import { useHistory } from 'react-router';
 
 const SignupContainer = styled.form`
     margin: 0 auto;
@@ -56,10 +58,11 @@ const ErrorMessages = styled.p`
 
 const SignUpForm = ({ error }) => {
     const dispatch = useDispatch();
-
     const { register, watch, errors, handleSubmit } = useForm();
     const password = useRef();
+    const history = useHistory();
     password.current = watch('password');
+
     const onSubmit = useCallback((data) => {
         delete data.pwdConfirm;
         dispatch(signUpRequest(data));
@@ -122,11 +125,17 @@ const SignUpForm = ({ error }) => {
                 <label>닉네임</label>
                 <SignUpInput
                     name="nickname"
-                    ref={register({ required: true, maxLength: 10 })}
+                    ref={register({
+                        required: true,
+                        maxLength: 10,
+                    })}
                     placeholder="&#xf2c1;"
                 />
                 {errors.nickname && errors.nickname.type === 'required' && (
                     <ErrorMessages>닉네임을 입력해주세요.</ErrorMessages>
+                )}
+                {errors.nickname && errors.nickname.type === 'validate' && (
+                    <ErrorMessages>이미 존재하는 닉네임입니다/</ErrorMessages>
                 )}
                 {errors.nickname && errors.nickname.type === 'maxLength' && (
                     <ErrorMessages>

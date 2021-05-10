@@ -40,10 +40,16 @@ const SelectorContainer = styled.div`
 `;
 
 const DateSelector = styled.button`
-    color: ${({ theme }) => theme.text};
+    color: #fff;
     font-size: 1rem;
-    background-color: ${(props) => (props.primary ? '#E07A5F' : '#d5d3d3')};
+    background-color: ${({ theme }) => theme.palette.orange};
     border: none;
+    :hover {
+        background: ${({ theme }) => theme.palette.borderColor};
+    }
+    &:active {
+        transform: scale(0.9);
+    }
 `;
 
 const DataContainer = styled.div`
@@ -98,80 +104,30 @@ const ResultWrapper = styled.div`
     }
 `;
 
-const data = [
-    {
-        name: '2020-01-20',
-        wgt: 22.2,
-    },
-    {
-        name: '2020-20',
-        wgt: 21.2,
-    },
-    {
-        name: '2020-03-20',
-        wgt: 22.2,
-    },
-    {
-        name: '2020-04-20',
-        wgt: 29.2,
-    },
-    {
-        name: '2020-05-20',
-        wgt: 25.2,
-    },
-    {
-        name: '2020-06-20',
-        wgt: 29.2,
-    },
-    {
-        name: '2020-07-20',
-        wgt: 21.2,
-    },
-    {
-        name: '2020-08-20',
-        wgt: 25.2,
-    },
-    {
-        name: '2020-09-20',
-        wgt: 21.2,
-    },
-    {
-        name: '2020-10-20',
-        wgt: 24.2,
-    },
-    {
-        name: '2020-11-12',
-        wgt: 25.2,
-    },
-    {
-        name: '2020-12-24',
-        wgt: 26.2,
-    },
-];
+const ErrorMessage = styled.p`
+    font-size: 1rem;
+`;
 
-// const dateParser = (text) => {
-//     const { 0: year, 1: month, 2: day } = text.split('-');
-//     return { year, month, day };
-// };
-
-export default function WeightResultGraph() {
+const dateParser = (text) => {
+    const { 0: year, 1: month, 2: day } = text.split('-');
+    return { year, month, day };
+};
+const WeightResultGraph = ({ currentCatWeights }) => {
     const dispatch = useDispatch();
-    const { currentIndex, currentCatWeights } = useSelector(
-        (state) => state.cat
-    );
+    const { currentIndex } = useSelector((state) => state.cat);
 
     // ** 현재 고양이 id를, currentIndex에 저장하고 있어요 ** //
 
     //나중에 백엔드 연동해서 이렇게 최근순으로 당겨오면됌
     //최근 데이터만 보여줌
-    const nowaDays = data.slice(-7);
-    const comaparisonResult =
-        data[data.length - 1].wgt - data[data.length - 2].wgt;
-    const Result = Math.floor(comaparisonResult);
-    const weightData = currentCatWeights;
+    const perMonth = currentCatWeights;
+    const nowaDays = currentCatWeights.slice(0, 5).reverse();
+    const resultDays = nowaDays.map((data) => ({
+        ...data,
+        createdDate: data.createdDate.substr(5, 5),
+    }));
 
     useEffect(() => {
-        dispatch(getWeightRequest(currentIndex));
         dispatch({
             type: GET_CAT_REQUEST,
         });
@@ -180,103 +136,197 @@ export default function WeightResultGraph() {
         });
     }, []);
 
-    const perDayHandler = () => {
-        // axios.get('<주소>').then((res) => {
-        //     const data = res.data.map((data) => {
-        //         return {
-        //               //코드 작성
-        //         };
-        //     });
-        // });
-        data.map((data) => {
-            return {
-                //나중에 백엔드 연동해서 이렇게 최근 요일순으로 당겨오면됌
-                // const perDay = data.slice(-7);
-                XAxis: data.name,
-            };
-        });
-    };
+    const perWeekHandler = () => {};
     const perMonthHandler = () => {
-        // axios.get('<주소>').then((res) => {
-        //     const data = res.data.map((data) => {
-        //         return {
-        //             XAxis: data.name,
-        //             YAxis: data.name,
-        //나중에 백엔드 연동해서 이렇게 최근 월별순으로 당겨오면됌
-        //그리고 나서 data의 값을 바꾸면 됌
-        //
-        //         };
-        //     });
-        // });
+        // const arr = data.reduce((acc, cur) => {
+        //     // console.log(cur.createdDate);
+        //     const currentDate = new Date(cur.createdDate);
+        //     const year = currentDate.getFullYear();
+        //     const month = currentDate.getMonth();
+        //     const day = currentDate.getDate();
+        //     const weight = cur.weight;
+        //     console.log('date', cur, month, day, weight);
+        //     const findItem = acc.find(
+        //         (a) => a.year === year && a.month === month
+        //     );
+        //     if (!findItem) {
+        //         acc.push({
+        //             year,
+        //             month,
+        //             day,
+        //             weight,
+        //         });
+        //     }
+        //     if (findItem && findItem.day < day) {
+        //         findItem.weight = weight;
+        //         findItem.year = year;
+        //         findItem.month = month;
+        //         findItem.day = day;
+        //     }
+        //     return acc;
+        // }, []);
+        // console.log('Arr', arr);
+        const resultDays = currentCatWeights;
+        return resultDays;
     };
 
     return (
-        <GraphContainer>
-            <div
-                style={{
-                    width: '100%',
-                    height: 400,
-                    maxWidth: 1200,
-                    margin: 0,
-                }}
-            >
-                <ResponsiveContainer>
-                    <ComposedChart
-                        width={1000}
-                        height={400}
-                        data={nowaDays}
-                        margin={{
-                            top: 20,
-                            right: 20,
-                            bottom: 20,
-                            left: 20,
-                        }}
-                    >
-                        <CartesianGrid stroke="#f5f5f5" />
-                        <XAxis dataKey="name" stroke="#fff" />
-                        <Tooltip stroke="#fff" />
-                        <Area
-                            type="monotone"
-                            dataKey="wgt"
-                            fill="#E07A5F"
-                            stroke="#f2cc8f"
-                        />
-                        <Line type="monotone" dataKey="wgt" stroke="#ff7300">
-                            <LabelList
-                                dataKey="wgt"
-                                position="top"
-                                stroke="#fff"
+        <>
+            <GraphContainer>
+                <div
+                    style={{
+                        width: '100%',
+                        height: 400,
+                        maxWidth: 1200,
+                        margin: 0,
+                    }}
+                >
+                    <ResponsiveContainer>
+                        <ComposedChart
+                            width={1000}
+                            height={400}
+                            data={resultDays}
+                            margin={{
+                                top: 20,
+                                right: 20,
+                                bottom: 20,
+                                left: 20,
+                            }}
+                        >
+                            {/* 그리드 효과  */}
+                            <CartesianGrid
+                                stroke="#f5f5f5"
+                                opacity={0.1}
+                                vertical={false}
                             />
-                        </Line>
-                    </ComposedChart>
-                </ResponsiveContainer>
-            </div>
-            <SelectorContainer>
-                <DateSelector primary onClick={perDayHandler}>
-                    일별
-                </DateSelector>
-                <DateSelector onClick={perMonthHandler}>월별</DateSelector>
-            </SelectorContainer>
-            <DataContainer>
-                <WeightWrapper>
-                    <h2>오늘 몸무게</h2>
-                    <ul>
-                        <li>{data[data.length - 1].name}</li>
-                        <li>{data[data.length - 1].wgt}KG</li>
-                    </ul>
-                </WeightWrapper>
-                <WeightWrapper>
-                    <h2>이전 몸무게</h2>
-                    <ul>
-                        <li>{data[data.length - 2].name}</li>
-                        <li>{data[data.length - 2].wgt}KG</li>
-                    </ul>
-                </WeightWrapper>
-                <ResultWrapper>
-                    <p>체중 변화</p>
-                    <p>{Result < 0 ? `${Result}` : `+ ${Result}`} kg</p>
-                </ResultWrapper>
-            </DataContainer>
-        </GraphContainer>
+                            <XAxis dataKey="createdDate" stroke="#fff"></XAxis>
+
+                            <Tooltip stroke="#fff" />
+                            <defs>
+                                <linearGradient
+                                    id="color"
+                                    x1="0"
+                                    y1="0"
+                                    x2="0"
+                                    y2="1"
+                                >
+                                    <stop
+                                        offset="0%"
+                                        stopColor="#E07A5F"
+                                        stopOpacity={0.4}
+                                    />
+                                    <stop
+                                        offset="75%"
+                                        stopColor="#E07A5F"
+                                        stopOpacity={0.05}
+                                    />
+                                </linearGradient>
+                            </defs>
+
+                            <Area
+                                name="몸무게"
+                                type="monotone"
+                                dataKey="weight"
+                                fill="url(#color)"
+                                stroke="#f2cc8f"
+                            >
+                                <LabelList
+                                    name="몸무게"
+                                    dataKey="weight"
+                                    position="insideTop"
+                                    offset="10"
+                                    fill="#fff"
+                                />
+                            </Area>
+                        </ComposedChart>
+                    </ResponsiveContainer>
+                </div>
+                <SelectorContainer>
+                    <DateSelector onClick={perWeekHandler}>Weekly</DateSelector>
+                    <DateSelector onClick={() => perMonthHandler(perMonth)}>
+                        Monthly
+                    </DateSelector>
+                </SelectorContainer>
+                <DataContainer>
+                    <WeightWrapper>
+                        <h2>오늘 몸무게</h2>
+                        <ul>
+                            <li>
+                                {currentCatWeights.length === 0 ? (
+                                    <ErrorMessage>
+                                        등록된 기록이 없습니다.
+                                    </ErrorMessage>
+                                ) : (
+                                    <>
+                                        {currentCatWeights[0].createdDate.substr(
+                                            0,
+                                            10
+                                        )}
+                                    </>
+                                )}
+                            </li>
+                            <li>
+                                {currentCatWeights.length === 0 ? (
+                                    <></>
+                                ) : (
+                                    <>
+                                        {currentCatWeights[0].weight}
+                                        KG
+                                    </>
+                                )}
+                            </li>
+                        </ul>
+                    </WeightWrapper>
+                    <WeightWrapper>
+                        <h2>이전 몸무게</h2>
+                        <ul>
+                            <li>
+                                {currentCatWeights.length === 1 ? (
+                                    <ErrorMessage>
+                                        등록된 기록이 없습니다.
+                                    </ErrorMessage>
+                                ) : (
+                                    <>
+                                        {currentCatWeights[1].createdDate.substr(
+                                            0,
+                                            10
+                                        )}
+                                    </>
+                                )}
+                            </li>
+                            <li>
+                                {currentCatWeights.length === 1 ? (
+                                    <></>
+                                ) : (
+                                    <>
+                                        {currentCatWeights[1].weight}
+                                        KG
+                                    </>
+                                )}
+                            </li>
+                        </ul>
+                    </WeightWrapper>
+                    <ResultWrapper>
+                        <p>체중 변화</p>
+                        <p>
+                            {currentCatWeights.length === 1 ? (
+                                <></>
+                            ) : (
+                                <>
+                                    {Math.round(
+                                        (currentCatWeights[0].weight -
+                                            currentCatWeights[1].weight) *
+                                            100
+                                    ) / 100}
+                                </>
+                            )}
+                            KG
+                        </p>
+                    </ResultWrapper>
+                </DataContainer>
+            </GraphContainer>
+        </>
     );
-}
+};
+
+export default WeightResultGraph;

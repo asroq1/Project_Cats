@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import styled, { createGlobalStyle } from 'styled-components';
+
+import styled from 'styled-components';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -16,8 +17,8 @@ const SlickWrapper = styled.div`
     border-radius: 10px;
 
     .slider-initialized {
-        overflow:hidden;
-    }   
+        overflow: hidden;
+    }
 `;
 
 const ImgWrapper = styled.div`
@@ -31,20 +32,20 @@ const ImgWrapper = styled.div`
     }
 `;
 
-const Indicator = styled.div`
-    text-align: center;
-    & > div {
-        width: 75px;
-        height: 30px;
-        line-height: 30px;
-        border-radius: 15px;
-        background: #313131;
-        display: inline-block;
-        text-align: center;
-        color: white;
-        font-size: 15px;
-    }
-`;
+// const Indicator = styled.div`
+//     text-align: center;
+//     & > div {
+//         width: 75px;
+//         height: 30px;
+//         line-height: 30px;
+//         border-radius: 15px;
+//         background: #313131;
+//         display: inline-block;
+//         text-align: center;
+//         color: white;
+//         font-size: 15px;
+//     }
+// `;
 
 const ImageCarousel = ({ images }) => {
     return (
@@ -64,13 +65,13 @@ const ImageCarousel = ({ images }) => {
                             // <ImgWrapper key={v.src}>
                             //     <img src={v.src} alt={v.src} />
                             // </ImgWrapper>
-                            <ImgWrapper key={v.slice(0,10)}>
-                                 <img src={v} alt={v} />
+                            <ImgWrapper key={v.slice(0, 10)}>
+                                <img src={v} alt={v} />
                             </ImgWrapper>
                         ))}
                     </Slider>
                     {/* Slick이 저절로 여기 div들을 carousel로 만들어줌 */}
-                </div>         
+                </div>
             </SlickWrapper>
         </>
     );

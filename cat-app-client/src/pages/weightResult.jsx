@@ -4,7 +4,7 @@ import WeightResultGraph from '../components/weightResult/WeightResultGraph';
 import WeightResultList from '../components/weightResult/WeightResultList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWeightRequest, GET_CAT_REQUEST } from '../reducers/cat';
@@ -30,7 +30,7 @@ const DataButton = styled.button`
     font-size: 1rem;
     background-color: ${({ theme }) => theme.resultHeader};
     border-radius: 8px;
-    color: white;
+    color: #fff;
     font-weight: 600;
     :hover {
         background: ${({ theme }) => theme.palette.borderColor};
@@ -51,7 +51,7 @@ const ExitButton = styled.span`
     }
 `;
 const WeightResult = () => {
-    const { currentCatWeights, currentIndex } = useSelector(
+    const { currentIndex, currentCatWeights, deleteWeightDone } = useSelector(
         (state) => state.cat
     );
     const [onList, setOnList] = useState(false);
@@ -62,6 +62,9 @@ const WeightResult = () => {
     const listHandler = () => {
         setOnList(true);
     };
+    useEffect(() => {
+        dispatch(getWeightRequest(currentIndex));
+    }, []);
 
     return (
         <>
@@ -80,8 +83,12 @@ const WeightResult = () => {
                     </Link>
                 </ExitButton>
             </Header>
-            {!onList && <WeightResultGraph />}
-            {onList && <WeightResultList />}
+            {!onList && currentCatWeights && (
+                <WeightResultGraph currentCatWeights={currentCatWeights} />
+            )}
+            {onList && currentCatWeights && (
+                <WeightResultList currentCatWeights={currentCatWeights} />
+            )}
         </>
     );
 };

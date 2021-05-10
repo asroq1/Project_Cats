@@ -1,4 +1,5 @@
 import './App.css';
+import { useSelector } from 'react-redux';
 import { Reset } from 'styled-reset';
 import { Route } from 'react-router-dom';
 import signUp from './pages/signUp';
@@ -16,21 +17,22 @@ import Settings from './components/settings/setting';
 import KakaLogin from './pages/kakaoLogin';
 import NaverLogin from './pages/naverLogin';
 import { GlobalStyles, lightTheme, darkTheme } from './styles/globalStyles';
-import Toggle from './components/toggle/Toggle';
-import { useDarkMode } from './hooks/useDarkMode ';
+//import Toggle from './components/toggle/Toggle';
+//import { useDarkMode } from './hooks/useDarkMode ';
 import styled, { ThemeProvider } from 'styled-components';
-import { useEffect } from 'react';
-import { loginCheck } from './reducers/user';
-import { useDispatch } from 'react-redux';
+
 
 const Container = styled.div`
     backgroud: black;
 `;
 
 function App() {
-    const [theme, toggleTheme] = useDarkMode();
+    //const [theme, toggleTheme] = useDarkMode();
     // const dispatch = useDispatch();
-    const themeMode = theme === 'light' ? lightTheme : darkTheme;
+    const {isDarkMode} = useSelector((state) => state.user);
+    //const themeMode = localStorage.theme === 'light' ? lightTheme : darkTheme;
+    const themeMode = isDarkMode === 'light' ? lightTheme : darkTheme;
+    // console.log(themeMode)
 
     return (
         <>

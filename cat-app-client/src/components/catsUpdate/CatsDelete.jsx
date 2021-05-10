@@ -42,10 +42,15 @@ const CatsDelete = ({currentIndex}) => {
     const onClick = useCallback(
         (e) => {
             e.preventDefault();
-            dispatch({
-                type: DELETE_CAT_REQUEST,
-                data: currentIndex,
-            });
+
+
+            
+            if (window.confirm("정말로 고양이정보를 지우시겠습니까??")){
+                dispatch({
+                    type: DELETE_CAT_REQUEST,
+                    data: currentIndex,
+                });
+            }
             
             
         }, []);

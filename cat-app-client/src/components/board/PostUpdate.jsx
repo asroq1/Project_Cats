@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, {   useRef, useEffect, useCallback } from 'react';
 import useInput from '../../hooks/useInput';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory,withRouter } from 'react-router-dom';
@@ -22,11 +22,12 @@ const FormBlock = styled.div`
     min-height: 100vh;
 `;
 
-const EditBlock = styled.div`
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-    color: gray;
-`;
+// const EditBlock = styled.div`
+//     padding-top: 5rem;
+//     padding-bottom: 5rem;
+//    color: gray;
+
+//`;
 
 const StyledBlock = styled.div`
     display: flex;
@@ -105,30 +106,38 @@ const PreviewBox = styled.div`
 
 const PostUpdate = ({match, location}) => {
     const { updatePostDone } = useSelector((state) => state.post);
+    
+    const { me } = useSelector((state) => state.user);
     const { postId } = match.params;
+    const history=useHistory();
+
 
     const dispatch = useDispatch();
-
     useEffect(() => {
         dispatch({
             type: READ_POST_REQUEST,
             data: parseInt(postId),
         });
     
-    }, [postId]);
-
+    }, [postId,  dispatch]);
 
     useEffect(()=>{
         if (updatePostDone){
             history.push(`/post/view/${postId}`)
         }
-    },[updatePostDone]);
+    },[updatePostDone,   postId, history]);
+
+    useEffect(()=> { 
+        if (!me){
+            alert("로그인 먼저 해주세요")
+            history.push('/');
+        }
+    }, [me,  history]);
 
     const imageInput = useRef();
-    const history=useHistory();
 
     // 각 form 내용은 useState이용한 커스텀 훅으로 관리
-    const [title, onChangeTitle] =useInput(location.state.originalTitle);
+    const [title,onChangeTitle] =useInput(location.state.originalTitle);
     const [text, onChangeText] =  useInput(location.state.originalContent);
 
 
@@ -138,10 +147,12 @@ const PostUpdate = ({match, location}) => {
     // 이미지 올리는 input은 숨기고, 버튼을 input과 연결하기 위함
     const onClickImageUpload = useCallback(() => {
         imageInput.current.click();
-    }, [imageInput.current]);
+    
+    
+    }, [ ]);
 
     // 이미지 올렸을 때, 파일과 미리보기를 위한 URL 저장
-    const paths = [...imagePaths];
+    
     const onChangeImages = useCallback(
         (e) => {
             // const currImagePaths = [...imagePaths];
@@ -166,7 +177,7 @@ const PostUpdate = ({match, location}) => {
                 reader.readAsDataURL(file);
             });
         },
-        [imagePaths]
+        [ dispatch]
     );
 
     const onRemoveImages = useCallback(
@@ -176,12 +187,12 @@ const PostUpdate = ({match, location}) => {
                 data: key,
             });
         },
-        []
+        [dispatch]
     );
 
     const goBack = useCallback(()=>{
         history.goBack();
-    })
+    }, [history])
 
     const onSubmit = useCallback(
         (e) => {
@@ -196,6 +207,7 @@ const PostUpdate = ({match, location}) => {
             });
             formData.append('title', title);
             formData.append('content', text);
+            formData.append('id', postId);
 
             console.log("key")
             for (var key of formData.keys()){
@@ -213,10 +225,10 @@ const PostUpdate = ({match, location}) => {
             }
             return dispatch({
                 type: UPDATE_POST_REQUEST,
-                data: formData,
-            });
+                data: formData
+            })
         },
-        [text, imagePaths]
+        [text, title, imagePaths , postId, dispatch]
     );
 
     return (
@@ -232,7 +244,7 @@ const PostUpdate = ({match, location}) => {
                             <input
                                 value={title}
                                 onChange={onChangeTitle}
-                                maxLength="20"
+                                maxLength="30"
                                 
                             />
                         </StyledBlock>

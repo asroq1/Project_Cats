@@ -77,18 +77,29 @@ const PostContent = styled.div`
 const PostView = ({ postId, post, error }) => {
     const history = useHistory();
     const goBack = useCallback(()=>{
-        history.goBack();
+
+    
+        if (history.location.pathname ==='/post/list'){
+            history.goBack();
+        }
+        else {
+            history.push('/post/list');
+        }
     })
     const dispatch = useDispatch();
     const { removePostDone, imagePaths } = useSelector((state) => state.post);
 
+    const { me } = useSelector((state) => state.user);
     const onRemovePost = useCallback(
         (e)=>{
             e.preventDefault();
+
+            if(window.confirm( "정말로 게시글을 지우시겠습니까??")){
             dispatch({
                 type: REMOVE_POST_REQUEST,
                 data: postId
             })
+        }
     },[])
 
     useEffect(() => {
@@ -97,6 +108,13 @@ const PostView = ({ postId, post, error }) => {
             history.push('/post/list');
         }
     }, [ removePostDone]);
+
+    useEffect(() => { 
+        if (!me){
+            alert("로그인 먼저 해주세요")
+            history.push('/');
+        }
+    }, [me]);
     
     //에러 발생 시
     if (error) {
@@ -130,7 +148,7 @@ const PostView = ({ postId, post, error }) => {
                 </SubInfo>
                 <PostContent>{content}</PostContent>
                 
-                <ButtonWrapper>
+                {me.id === writer.id && (<ButtonWrapper>
                     <Link to ={{
                         pathname: `/post/edit/${id}`,
                         state: {
@@ -143,7 +161,8 @@ const PostView = ({ postId, post, error }) => {
                     </Link>
                     
                     <button type="button"onClick={onRemovePost}>삭제</button>
-                </ButtonWrapper>
+                </ButtonWrapper>)
+            }
             </PostHead>
             <CommentForm id={id} />
             <CommentsWrapper postId={id} />
@@ -153,7 +172,9 @@ const PostView = ({ postId, post, error }) => {
 
 PostView.propTypes = {
     postId: PropTypes.number.isRequired,
-    post: PropTypes.object.isRequired,
+    
+    
+    post: PropTypes.object,
     error: PropTypes.object
 }
 

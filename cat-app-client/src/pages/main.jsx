@@ -6,7 +6,11 @@ import TopBar from '../components/main/TopBar';
 import MainComponent from '../components/main/Main';
 import MainEmptyComponent from '../components/main/MainEmpty';
 
-import { GET_CAT_REQUEST, SET_CURRENT_CAT } from '../reducers/cat';
+import {
+    GET_CAT_REQUEST,
+    GET_WEIGHT_REQUEST,
+    SET_CURRENT_CAT,
+} from '../reducers/cat';
 import { GET_USER_REQUEST } from '../reducers/user';
 //여기 페이지에 위치해 여러 번 호출되지만 그럼에도 최적의 위치라 판단함
 
@@ -47,6 +51,7 @@ const Main = () => {
     useEffect(() => {
         //if (!logInDone){
         if (!localStorage.token) {
+            alert('로그인 먼저 해주세요');
             history.push('/');
         }
         dispatch({
@@ -54,6 +59,10 @@ const Main = () => {
         });
         dispatch({
             type: GET_USER_REQUEST,
+        });
+        dispatch({
+            type: GET_WEIGHT_REQUEST,
+            data: currentIndex,
         });
     }, [logOutDone]);
 

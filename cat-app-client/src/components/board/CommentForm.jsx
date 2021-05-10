@@ -28,8 +28,7 @@ const CommentSubmitButton = styled.button`
     border: none;
     border-radius: 10px;
 
-    background-color:  lightgray;
-     
+    background-color: lightgray;
 
     //font-size: 1rem;
     padding: 0.5rem;
@@ -39,28 +38,29 @@ const CommentSubmitButton = styled.button`
 
 const CommentForm = ({ id }) => {
     const { addCommentDone } = useSelector((state) => state.post);
-    const {me} = useSelector((state) => state.user);
+    //const {me} = useSelector((state) => state.user);
 
-    
     const dispatch = useDispatch();
     const [commentText, onChangeCommentText, setCommentText] = useInput('');
-
 
     useEffect(() => {
         if (addCommentDone) {
             setCommentText('');
         }
-    }, [addCommentDone]);
+    }, [addCommentDone, setCommentText]);
 
-    const onSubmitComment = useCallback((e) => {
-        e.preventDefault();
-        dispatch({
-            type: ADD_COMMENT_REQUEST,
-            // API와 연동 위해 추가 작업
-            // 댓글 추가할 때마다 댓글 부분 reload되도록 처리
-            data: { content: commentText, postId: id},
-        });
-    }, [commentText]);
+    const onSubmitComment = useCallback(
+        (e) => {
+            e.preventDefault();
+            dispatch({
+                type: ADD_COMMENT_REQUEST,
+                // API와 연동 위해 추가 작업
+                // 댓글 추가할 때마다 댓글 부분 reload되도록 처리
+                data: { content: commentText, postId: id },
+            });
+        },
+        [commentText, dispatch, id]
+    );
 
     return (
         <>
@@ -86,7 +86,7 @@ const CommentForm = ({ id }) => {
 };
 
 CommentForm.propTypes = {
-    id:PropTypes.number.isRequired
-}
+    id: PropTypes.number.isRequired,
+};
 
 export default CommentForm;

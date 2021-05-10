@@ -1,6 +1,5 @@
 
-import React, {useCallback} from 'react';
-import {useDispatch} from 'react-redux';
+import React  from 'react';
 import { Link } from 'react-router-dom'
 
 import 'font-awesome/css/font-awesome.min.css';
@@ -32,19 +31,20 @@ const PostItemBlock = styled.div`
 
 const PostListBody = styled.div`
     position: relative;
-    min-height: 100vh;
+    
+    min-height:calc(100vh - 100px);
     //padding-top: 50px;
 `;
 
-const PhotoContainer = styled.img`
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    margin-top: 0.25rem;
-    margin-bottom: 0.25rem;
-    border-radius:5px;
-    object-fit: cover;
-`;
+// const PhotoContainer = styled.img`
+//     display: inline-block;
+//     width: 100px;
+//     height: 100px;
+//     margin-top: 0.25rem;
+//     margin-bottom: 0.25rem;
+//     border-radius:5px;
+//     object-fit: cover;
+// `;
 
 const SubInfo = styled.div`
     color: gray;
@@ -64,7 +64,7 @@ const SubInfo = styled.div`
     h1 {
         font-size: 1rem;
         font-weight: bold;
-        color: ${({theme}) => theme.navy};
+        color: ${({theme}) => theme.text};
         margin: 0;
         margin-bottom: 0.25rem;
     }
@@ -93,7 +93,6 @@ const PreviewWrapper = styled.div`
 const StyledLink = styled(Link)`
     text-decoration: none;
     cursor: pointer;
-
     &:focus,
     &:hover,
     &:link,
@@ -106,7 +105,7 @@ const StyledLink = styled(Link)`
 const PostItem = ({ post }) => {
     const {id, title, viewCount, writer, createdDate} = post;
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     // const setCurrentPost = useCallback((id)=>{
     //     dispatch({
@@ -119,14 +118,6 @@ const PostItem = ({ post }) => {
     return (
         <StyledLink to={`/post/view/${id}`}>
             <PostItemBlock>
-            {/* {"id": 1,
-            "title": "눈누난나",
-            "viewCount": 0,
-            "writer": {
-                "id": 3,
-                "nickname": "펭슈"
-            },
-            "createdDate": "2021-04-29T07:03:16.000+00:00"} */}
                 
                 {/* <PhotoContainer src={Images[0].src} alt="post" /> */}
 
@@ -171,7 +162,7 @@ const PostList = ({ posts, error }) => {
                 <div>
                     {posts.map((post) => (
                         <>
-                        <PostItem post={post} key={post.id} />
+                        <PostItem post={post} key={post.id + post.title.slice(0,10)} />
                         </>
                     ))}
                 </div>
