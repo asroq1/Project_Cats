@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @Api(value="게시글 추가, 수정, 삭제, 조회", tags = {"게시글 API"})
@@ -56,12 +55,7 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PostDto.SingleResponse> get(@PathVariable Long id) {
-        PostDto.SingleResponse postDto = postService.read(id);
-        String photoPath = System.getProperty("user.dir") + postDto.getPhoto();
-        postDto.setPhoto(photoPath);
-
-        return ResponseEntity.ok().body(postDto);
-		 return ResponseEntity.ok().body(postService.read(id));
+        return ResponseEntity.ok().body(postService.read(id));
     }
 
     @PatchMapping

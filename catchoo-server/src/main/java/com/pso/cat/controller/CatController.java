@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Api(value="고양이 추가, 수정, 삭제, 조회", tags = {"고양이 API"})
 @RequestMapping("/api/cats")
 public class CatController {
-
+    
     private final CatService catService;
 
     public CatController(CatService catService) {
@@ -55,8 +55,8 @@ public class CatController {
     }
 
     @PatchMapping
-    public ResponseEntity modify(Long id, CatDto.Request cat, MultipartFile photoFile) throws Exception {
-        catService.modify(id, cat, photoFile);
+    public ResponseEntity modify(Long id, CatDto.Request cat) {
+        catService.modify(id, cat);
         return ResponseEntity.ok().build();
     }
 
