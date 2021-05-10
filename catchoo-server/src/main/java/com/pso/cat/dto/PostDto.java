@@ -51,11 +51,13 @@ public class PostDto {
 
     @Builder
     @Getter
+    @Setter
     public static class SingleResponse {
 
         private final Long id;
         private final String title;
         private final String content;
+        private String photo;
         private final int viewCount;
         private final UserDto.WriterResponse writer;
         private final Date createdDate;
@@ -67,6 +69,7 @@ public class PostDto {
                 .id(post.getId())
                 .title(post.getTitle())
                 .content(post.getContent())
+                .photo(System.getProperty("user.dir") + post.getPhoto())
                 .viewCount(post.getViewCount())
                 .writer(WriterResponse.ofEntity(post.getWriter()))
                 .createdDate(post.getCreatedDate())
