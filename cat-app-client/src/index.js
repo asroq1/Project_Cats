@@ -16,6 +16,9 @@ import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 axios.defaults.baseURL =
     'http://ec2-3-36-163-150.ap-northeast-2.compute.amazonaws.com:8080/';
+axios.defaults.headers.common['Content-Type'] =
+    'application/x-www-form-urlencoded';
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 const store = Store(rootReducer, composeWithDevTools());
 const persistor = persistStore(store);
