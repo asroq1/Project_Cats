@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @Api(value="고양이 추가, 수정, 삭제, 조회", tags = {"고양이 API"})
@@ -29,10 +31,12 @@ public class CatController {
     }
 
     @PostMapping
-    public ResponseEntity add(CatDto.Request cat) {
+    public ResponseEntity add(CatDto.AddRequest cat, MultipartFile photoFile) throws Exception{
         Long userId = SecurityUtil.getCurrentUserId().orElseThrow(
-            () -> new RuntimeException("로그인을 해주세요."));
-        catService.save(userId, cat);
+                () -> new RuntimeException("로그인을 해주세요."));
+
+        catService.save(userId, cat, photoFile);
+
         return ResponseEntity.ok().build();
     }
 
@@ -46,7 +50,7 @@ public class CatController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CatDto.Response> get(@PathVariable Long id) {
+    public ResponseEntity<CatDto.Response> get(@PathVariable Long id){
         return ResponseEntity.ok().body(catService.read(id));
     }
 
