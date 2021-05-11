@@ -53,19 +53,15 @@ const CatsDelete = ({currentIndex}) => {
             }
             
             
-        }, []);
+        }, [currentIndex]);
         
-
-    const goBack = useCallback(() => {
-        history.goBack();
-    });
 
 
     useEffect(() => {
         if(deleteCatDone){
             history.push('/user/main');
         }
-    }, [deleteCatDone]);
+    }, [deleteCatDone , history]);
 
     return (
         <>

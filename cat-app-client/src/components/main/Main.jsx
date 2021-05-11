@@ -92,14 +92,7 @@ const WeightRecordWrapper = styled.div`
 
 const Main = ({ cat, currentIndex, age }) => {
     // styled-component대신 useMemo 써줌
-    const colStyle = useMemo(
-        () => ({
-            maxWidth: '150px',
-            flex: 'auto',
-            border: '1px solid lightgreen',
-        }),
-        []
-    );
+
     const paddingStyle = useMemo(
         () => ({
             width: '80%',

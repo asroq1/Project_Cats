@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef, useMemo, useEffect } from 'react';
+import React, { useCallback, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -62,14 +62,13 @@ const CatsUpdate = ({cat, currentIndex}) => {
                 data: formData,
             });
         },
-        [currImgUrl, name, birthyear, birthmonth, birthdate,gender, goalWeight]
+        [currImgUrl, name, birthyear, birthmonth, birthdate,gender, currentIndex, goalWeight]
     );
 
     const goBack = useCallback(() => {
         history.goBack();
-    });
+    },[] );
 
-    const paddingStyle = useMemo(() => ({ paddingTop: '2rem' }), []);
     const marginTopStyle = useMemo(() =>({ marginTop: '0.5rem' }), []);
 
     

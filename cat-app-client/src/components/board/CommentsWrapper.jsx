@@ -49,15 +49,11 @@ const CommentsWrapper = ({ postId }) => {
     const dispatch = useDispatch();
     const onRemoveComment = useCallback(
         (commentId) => {
-            if (window.confirm('정말로 댓글을 지우시겠습니까??')) {
                 dispatch({
                     type: REMOVE_COMMENT_REQUEST,
-
                     data: commentId,
                 });
-            }
-        },
-        [dispatch]
+        },[]
     );
 
     // Whenever any change happens (comment added / deleted)
@@ -68,7 +64,7 @@ const CommentsWrapper = ({ postId }) => {
             type: GET_COMMENTS_REQUEST,
             data: postId,
         });
-    }, [addCommentDone, removeCommentDone, postId, dispatch]);
+    }, [addCommentDone, removeCommentDone, postId]);
 
     return (
         <CommentsLayout>

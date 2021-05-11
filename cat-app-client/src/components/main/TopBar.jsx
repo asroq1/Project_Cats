@@ -1,11 +1,10 @@
 import React, { useMemo, useCallback, useState } from 'react';
-import { useHistory, BrowserRouter as Router, Link } from 'react-router-dom';
+import { useHistory  } from 'react-router-dom';
 
 import ModalMenu from '../modal/ModalMenu';
 import styled from 'styled-components';
 import 'font-awesome/css/font-awesome.min.css';
 import PropTypes from 'prop-types';
-import theme from '../../styles/theme';
 
 const InnerGlobal = styled.div`
     background-color: ${({ theme }) => theme.navy};
@@ -70,31 +69,29 @@ const EachCol = styled.div`
 
 const TopBar = ({ cat, currentIndex, onSelect }) => {
     const menuStyle = useMemo(() => ({ height: '45px', display: 'flex' }), []);
-    const fillerCol = useMemo(
-        () => ({
-            display: 'inline-block',
-            flex: 1,
-            borderBottom: '1px solid black',
-            paddingTop: '1.5rem',
-            paddingBottom: '1.5rem',
-            fontSize: '1rem',
-        }),
-        []
-    );
+    // const fillerCol = useMemo(
+    //     () => ({
+    //         display: 'inline-block',
+    //         flex: 1,
+    //         borderBottom: '1px solid black',
+    //         paddingTop: '1.5rem',
+    //         paddingBottom: '1.5rem',
+    //         fontSize: '1rem',
+    //     }),
+    //     []
+    // );
 
     const [showModalMenu, setShowModalMenu] = useState(false);
     const history = useHistory();
     const gotoAddCat = useCallback(() => {
         history.push('/cat/add');
-    });
-
+    }, []);
     const onModalMenu = useCallback(() => {
         setShowModalMenu(true);
-    });
-
+    }, []);
     const onModalClose = useCallback(() => {
         setShowModalMenu(false);
-    });
+    }, []);
 
     return (
         <InnerGlobal>

@@ -111,7 +111,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(ImmutableList.of("http://localhost:3000", "https://catchoo.netlify.app/", "http://devicii-first-deploy.s3-website.ap-northeast-2.amazonaws.com/"));
+        configuration.setAllowedOrigins(ImmutableList.of("http://localhost:3000", "https://catchoo.netlify.app/", "http://devicii-first-deploy.s3-website.ap-northeast-2.amazonaws.com/", "http://catchoo-client-server.s3-website.ap-northeast-2.amazonaws.com/"));
         configuration.setAllowedMethods(ImmutableList.of("HEAD",
             "GET", "POST", "PUT", "DELETE", "PATCH"));
         // setAllowCredentials(true) is important, otherwise:

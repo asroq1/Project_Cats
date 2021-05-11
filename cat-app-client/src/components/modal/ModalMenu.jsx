@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -93,15 +93,13 @@ const NightModeWrapper = styled.div`
 // `;
 
 const ModalMenu = ({ onClose }) => {
-    // redux 상태 만들어 줌!
-    const [isNightMode, setNightMode] = useState(false);
     const { me } = useSelector((state) => state.user);
     const [theme, toggleTheme] = useDarkMode();
     //const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
-    const toggleNightMode = useCallback(() => {
-        setNightMode(!isNightMode);
-    });
+    // const toggleNightMode = useCallback(() => {
+    //     setNightMode(!isNightMode);
+    // });
 
     const dispatch = useDispatch();
 
@@ -109,7 +107,7 @@ const ModalMenu = ({ onClose }) => {
         dispatch({
             type: LOG_OUT_REQUEST,
         });
-    });
+    }, []);
 
     const history = useHistory();
     useEffect(() => {

@@ -46,6 +46,12 @@ const PostListBody = styled.div`
 //     object-fit: cover;
 // `;
 
+const ErrorBox = styled.div`
+
+    height: 100vh;
+
+`;
+
 const SubInfo = styled.div`
     color: gray;
     display: inline-block;
@@ -104,9 +110,7 @@ const StyledLink = styled(Link)`
 
 const PostItem = ({ post }) => {
     const {id, title, viewCount, writer, createdDate} = post;
-
     // const dispatch = useDispatch();
-
     // const setCurrentPost = useCallback((id)=>{
     //     dispatch({
     //         type: READ_POST_REQUEST,
@@ -145,7 +149,8 @@ const PostItem = ({ post }) => {
 const PostList = ({ posts, error }) => {
     //에러
     if (error) {
-        return <h2>에러 발생함</h2>;
+        
+        return <ErrorBox>에러 발생함</ErrorBox>;
     }
 
     
@@ -162,7 +167,7 @@ const PostList = ({ posts, error }) => {
                 <div>
                     {posts.map((post) => (
                         <>
-                        <PostItem post={post} key={post.id + post.title.slice(0,10)} />
+                        <PostItem post={post} key={post.id} />
                         </>
                     ))}
                 </div>

@@ -9,7 +9,7 @@ import 'font-awesome/css/font-awesome.min.css';
 
 import {InnerGlobal, StyledInputBlock, CenterWrapper, ButtonWrapper, RadioBtnWrapper}from './styles.js';
 
-const CatsAdd = ({}) => {
+const CatsAdd = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -71,7 +71,7 @@ const CatsAdd = ({}) => {
         if (addCatDone){
             history.push('/user/main');
         }
-    }, [addCatDone]);
+    }, [addCatDone , history]);
 
     useEffect(() => {
         if (!me){
@@ -79,13 +79,12 @@ const CatsAdd = ({}) => {
             alert('로그인 먼저 해주세요')
             history.push('/');
         }
-    }, [me]);
+    }, [me,  history]);
 
     const goBack = useCallback(() => {
         history.goBack();
-    });
+    }, []);
 
-    const paddingStyle = useMemo(() => ({ paddingTop: '2rem' }), []);
     const marginTopStyle = useMemo(() =>({ marginTop: '0.5rem' }), []);
 
     return (
