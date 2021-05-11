@@ -225,6 +225,8 @@ const reducer = (state = initialState, action) => {
                 draft.getCommentsLoading = true;
                 draft.getCommentsDone = false;
                 draft.getCommentsError = null;
+                draft.addCommentDone = false;
+                draft.removeCommentDone = false;
                 break;
             case GET_COMMENTS_SUCCESS:
                 draft.currentComments = action.data;

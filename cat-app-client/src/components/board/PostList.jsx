@@ -166,9 +166,7 @@ const PostList = ({ posts, error }) => {
             {posts && (
                 <div>
                     {posts.map((post) => (
-                        <>
                         <PostItem post={post} key={post.id} />
-                        </>
                     ))}
                 </div>
             )}

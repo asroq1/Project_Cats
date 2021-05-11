@@ -48,12 +48,12 @@ const CommentsWrapper = ({ postId }) => {
 
     const dispatch = useDispatch();
     const onRemoveComment = useCallback(
-        (commentId) => {
-                dispatch({
-                    type: REMOVE_COMMENT_REQUEST,
-                    data: commentId,
-                });
-        },[]
+        (commentId) => () => {
+            dispatch({
+                type: REMOVE_COMMENT_REQUEST,
+                data: commentId,
+            });
+        }, []
     );
 
     // Whenever any change happens (comment added / deleted)
