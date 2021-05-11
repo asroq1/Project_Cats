@@ -51,16 +51,6 @@ public class CatDto {
         @JsonInclude(Include.NON_NULL)
         private RecordDto.Response recentRecord;
 
-        public static Response ofEntity(Cat cat, Record recentRecord) {
-            return Response.builder()
-                .id(cat.getId())
-                .name(cat.getName())
-                .birth(cat.getBirth())
-                .gender(cat.getGender())
-                .photo(cat.getPhoto())
-                .goalWeight(cat.getGoalWeight())
-                .recentRecord(RecordDto.Response.ofEntity(recentRecord)).build();
-        }
 
         public static Response ofEntity(Cat cat) {
             return Response.builder()
@@ -68,8 +58,19 @@ public class CatDto {
                 .name(cat.getName())
                 .birth(cat.getBirth())
                 .gender(cat.getGender())
-                .photo(cat.getPhoto())
+                .photo(System.getProperty("user.dir") + "/" +cat.getPhoto())
                 .goalWeight(cat.getGoalWeight()).build();
+        }
+
+        public static Response ofEntity(Cat cat, RecordDto.Response recentRecord) {
+            return Response.builder()
+                    .id(cat.getId())
+                    .name(cat.getName())
+                    .birth(cat.getBirth())
+                    .gender(cat.getGender())
+                    .photo(System.getProperty("user.dir") + "/" +cat.getPhoto())
+                    .recentRecord(recentRecord)
+                    .goalWeight(cat.getGoalWeight()).build();
         }
 
     }

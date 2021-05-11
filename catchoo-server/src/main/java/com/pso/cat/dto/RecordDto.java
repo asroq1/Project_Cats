@@ -31,6 +31,9 @@ public class RecordDto {
         private final float weight;
 
         public static Response ofEntity(Record record) {
+            if (record == null) {
+                return null;
+            }
             return Response.builder()
                 .id(record.getId())
                 .createdDate(record.getCreateDate())

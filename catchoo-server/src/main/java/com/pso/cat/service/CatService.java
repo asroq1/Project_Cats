@@ -1,21 +1,15 @@
 package com.pso.cat.service;
 
+import com.pso.cat.dto.RecordDto;
 import com.pso.cat.entity.Cat;
 import com.pso.cat.dto.CatDto;
-import com.pso.cat.entity.Post;
 import com.pso.cat.entity.Record;
 import com.pso.cat.repository.CatRepository;
 import com.pso.cat.repository.RecordRepository;
-
 import java.io.File;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -95,13 +89,12 @@ public class CatService {
     }
 
     public CatDto.Response read(Long id){
-        Cat cat = catRepository.findById(id).get();
-        String photoPath = System.getProperty("user.dir") + "/" + cat.getPhoto();
-        cat.setPhoto(photoPath);
+        Cat cat = catRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("해당하는 고양이가 없습니다."));
 
-        return CatDto.Response.ofEntity(
-            catRepository.findById(id).get(),
-            recordRepository.findFirstByCatIdOrderByCreateDateDesc(id));
+        RecordDto.Response recentRecord = RecordDto.Response.ofEntity(recordRepository.findFirstByCatIdOrderByCreateDateDesc(id));
+
+        return CatDto.Response.ofEntity(cat, recentRecord);
     }
 
     @Transactional
@@ -125,8 +118,10 @@ public class CatService {
         return catRepository
             .findAllByUserIdAndStateOrderByCreatedDateDesc(userId, 1)
             .stream().map(cat
-                -> CatDto.Response.ofEntity(cat,
-                recordRepository.findFirstByCatIdOrderByCreateDateDesc(cat.getId()))
+                -> CatDto.Response.ofEntity(
+                        cat,
+                        RecordDto.Response.ofEntity(recordRepository
+                                .findFirstByCatIdOrderByCreateDateDesc(cat.getId())))
             ).collect(Collectors.toList());
     }
 }
