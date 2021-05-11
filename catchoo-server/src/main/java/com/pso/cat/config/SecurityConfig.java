@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
@@ -66,6 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // user
         "/api/login/**",
+        "/api/socialLogin",
         "/api/signup",
 
         // test
@@ -98,6 +100,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .authorizeRequests()
             .antMatchers(AUTH_WHITELIST).permitAll()
+            .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
             .anyRequest().authenticated()
 
             .and()
@@ -110,7 +113,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(ImmutableList.of("http://localhost:3000", "https://catchoo.netlify.app/", "http://devicii-first-deploy.s3-website.ap-northeast-2.amazonaws.com/", "http://catchoo-client-server.s3-website.ap-northeast-2.amazonaws.com/"));
+        configuration.setAllowedOrigins(ImmutableList.of("http://localhost:3000", "https://catchoo.netlify.app", "http://devicii-first-deploy.s3-website.ap-northeast-2.amazonaws.com", "http://catchoo-client-server.s3-website.ap-northeast-2.amazonaws.com"));
         configuration.setAllowedMethods(ImmutableList.of("HEAD",
             "GET", "POST", "PUT", "DELETE", "PATCH"));
         // setAllowCredentials(true) is important, otherwise:
