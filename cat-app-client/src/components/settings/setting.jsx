@@ -15,7 +15,7 @@ const Settings = () => {
         dispatch({
             type: LOG_OUT_REQUEST,
         })
-    })
+    }, []);
 
     const history = useHistory();
     useEffect(() => {

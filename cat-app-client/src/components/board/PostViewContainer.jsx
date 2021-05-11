@@ -32,7 +32,7 @@ const PostViewContainer = ({ match }) => {
                 type: UNLOAD_POST,
             });
         };
-    }, [dispatch, postId, updatePostDone]);
+    }, [postId, updatePostDone]);
 
     return (
         <>

@@ -177,7 +177,7 @@ const PostUpdate = ({match, location}) => {
                 reader.readAsDataURL(file);
             });
         },
-        [ dispatch]
+        [ ]
     );
 
     const onRemoveImages = useCallback(
@@ -187,12 +187,12 @@ const PostUpdate = ({match, location}) => {
                 data: key,
             });
         },
-        [dispatch]
+        []
     );
 
     const goBack = useCallback(()=>{
         history.goBack();
-    }, [history])
+    }, [])
 
     const onSubmit = useCallback(
         (e) => {
@@ -228,7 +228,7 @@ const PostUpdate = ({match, location}) => {
                 data: formData
             })
         },
-        [text, title, imagePaths , postId, dispatch]
+        [text, title, imagePaths , postId]
     );
 
     return (

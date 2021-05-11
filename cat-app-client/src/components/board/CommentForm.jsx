@@ -59,7 +59,7 @@ const CommentForm = ({ id }) => {
                 data: { content: commentText, postId: id },
             });
         },
-        [commentText, dispatch, id]
+        [commentText, id]
     );
 
     return (

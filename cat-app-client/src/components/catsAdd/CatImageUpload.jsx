@@ -60,7 +60,7 @@ const SliderContainer = styled.div`
     }
 `;
 
-const CatImageUpload = ({}) => {
+const CatImageUpload = () => {
     const [imageSrc, setImageSrc] = useState(null);
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useInput(1.0);
@@ -73,7 +73,7 @@ const CatImageUpload = ({}) => {
 
     const onClickImageUpload = useCallback(() => {
         imageInput.current.click();
-    }, [imageInput.current]);
+    }, []);
 
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels);
@@ -103,7 +103,7 @@ const CatImageUpload = ({}) => {
         } catch (e) {
             console.error(e);
         }
-    }, [imageSrc, croppedAreaPixels]);
+    }, [imageSrc,croppedAreaPixels,imageTitle]);
 
     const resetCroppedImage = useCallback(() => {
         setCroppedImage(null);

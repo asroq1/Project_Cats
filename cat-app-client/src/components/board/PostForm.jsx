@@ -145,7 +145,7 @@ const PostForm = () => {
             }
         },
         
-        [ dispatch ]
+        [  ]
     );
 
     const onRemoveImages = useCallback(
@@ -156,12 +156,12 @@ const PostForm = () => {
             });
         },
 
-        [dispatch]
+        []
     );
 
     const goBack = useCallback(() => {
         history.goBack();
-    }, [history]);
+    }, []);
 
     const onSubmit = useCallback(
         (e) => {
@@ -196,7 +196,7 @@ const PostForm = () => {
                 data: formData,
             });
         },
-        [text, title, imagePaths , dispatch]
+        [text, title, imagePaths]
     );
 
     useEffect(() => {
@@ -255,14 +255,14 @@ const PostForm = () => {
                                 ref={imageInput}
                                 accept="image/*"
                                 name="post-images"
-                                multiple
+                                
                                 onChange={onChangeImages}
                             />
                             <StyledButton
                                 type="button"
                                 onClick={onClickImageUpload}
                             >
-                                사진을 올려주세요! (3개 이하){' '}
+                                사진을 올려주세요! (1개만){' '}
                                 <i className="fa fa-paw"></i>
                             </StyledButton>
                         </CenterWrapper>

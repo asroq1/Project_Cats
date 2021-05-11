@@ -15,7 +15,7 @@ const BackgroundColor = styled.div`
     min-height: 100vh;
 `;
 
-const CatsUpdateContainer = ({}) => {
+const CatsUpdateContainer = () => {
     const { cat, currentIndex } = useSelector((state) => state.cat);
 
     return (

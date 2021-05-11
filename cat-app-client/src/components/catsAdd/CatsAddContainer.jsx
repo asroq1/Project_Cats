@@ -12,7 +12,7 @@ const BackgroundColor = styled.div`
     min-height: 100vh; 
     `;
 
-const CatsAddContainer = ({}) => {
+const CatsAddContainer = () => {
     return (
         <BackgroundColor>
 

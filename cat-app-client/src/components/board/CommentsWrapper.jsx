@@ -53,7 +53,7 @@ const CommentsWrapper = ({ postId }) => {
                     type: REMOVE_COMMENT_REQUEST,
                     data: commentId,
                 });
-        },
+        },[]
     );
 
     // Whenever any change happens (comment added / deleted)
@@ -64,7 +64,7 @@ const CommentsWrapper = ({ postId }) => {
             type: GET_COMMENTS_REQUEST,
             data: postId,
         });
-    }, [addCommentDone, removeCommentDone, postId, dispatch]);
+    }, [addCommentDone, removeCommentDone, postId]);
 
     return (
         <CommentsLayout>

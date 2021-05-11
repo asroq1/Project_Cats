@@ -4,10 +4,27 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const BodyWrapper = styled.div`
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 100% 100%;
+    // Gradient Colorful
+    // background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+        repeating-linear-gradient(-45deg, 
+        #E07A5F , #E07A5F 300px,
+         #3D405B 300px, #3D405B 600px, 
+         #F4F1DE 600px, #F4F1DE 900px,
+        #81B29A 900px, #81B29A 1200px);
+        
+    
+    // Dotted Pattern
+    // background-image: radial-gradient(#E07A5F 20%, transparent 20%),
+    // radial-gradient(#81B29A 20%, transparent 20%);
+    // background-color: #fff;
+    // background-position: 0 0, 50px 50px;
+    // background-size: 100px 100px;
+    
+    //background-size: 100% 100%;
     //background-color: ${({theme}) => theme.orange};
-	//animation: gradient 30s ease infinite;
+	
+    //animation: gradient 30s ease infinite;
     width: 100%;
     height: 100%;
     margin: 0;

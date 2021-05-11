@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import CommentForm from './CommentForm';
 
 import CommentsWrapper from './CommentsWrapper'
-import ImageCarousel from './ImageCarousel';
+// import ImageCarousel from './ImageCarousel';
 import { REMOVE_POST_REQUEST } from '../../reducers/post';
 
 const OverallContainer = styled.div`
@@ -90,9 +90,9 @@ const PostView = ({ postId, post, error }) => {
         else {
             history.push('/post/list');
         }
-    })
+    }, []);
     const dispatch = useDispatch();
-    const { removePostDone, imagePaths } = useSelector((state) => state.post);
+    const { removePostDone } = useSelector((state) => state.post);
 
     const { me } = useSelector((state) => state.user);
     const onRemovePost = useCallback(
@@ -105,7 +105,7 @@ const PostView = ({ postId, post, error }) => {
                 data: postId
             })
         }
-    },[])
+    },[postId])
 
     useEffect(() => {
         if (removePostDone){
@@ -133,7 +133,7 @@ const PostView = ({ postId, post, error }) => {
     }
 
     
-    const { id, title, content, writer, createdDate, comments } = post;
+    const { id, title, content, writer, createdDate } = post;
      
     return (
         <OverallContainer>
@@ -150,6 +150,8 @@ const PostView = ({ postId, post, error }) => {
                     </span>
 
                     <span>{createdDate.slice(0, 10)}</span>
+
+                    <span>{createdDate.slice(11,16)}</span>
                 </SubInfo>
                 <PostContent>{content}</PostContent>
                 

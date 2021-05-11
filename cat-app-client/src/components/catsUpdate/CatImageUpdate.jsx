@@ -77,7 +77,7 @@ const CatImageUpdate = ({cat, currentIndex}) => {
     const imageInput = useRef();
     const onClickImageUpload = useCallback(() => {
         imageInput.current.click();
-    }, [imageInput.current]);
+    },[]);
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels);
     }, []);
@@ -105,7 +105,7 @@ const CatImageUpdate = ({cat, currentIndex}) => {
         } catch (e) {
             console.error(e);
         }
-    }, [imageSrc, croppedAreaPixels]);
+    }, [imageSrc, croppedAreaPixels, imageTitle]);
 
     const resetCroppedImage = useCallback(() => {
         setCroppedImage(null);
