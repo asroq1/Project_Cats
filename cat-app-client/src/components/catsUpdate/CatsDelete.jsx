@@ -64,11 +64,9 @@ const CatsDelete = ({currentIndex}) => {
     }, [deleteCatDone , history]);
 
     return (
-        <>
         <InnerGlobal>
         <ButtonWrapper onClick={onClick}> 고양이 정보 삭제</ButtonWrapper>
         </InnerGlobal>
-        </>
     );
 };
 
