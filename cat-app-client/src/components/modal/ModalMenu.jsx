@@ -33,6 +33,9 @@ const Overlay = styled.div`
 `;
 
 const Header = styled.div`
+    i{
+        padding-right: 1rem;
+    }
     h1 {
         font-size: 1.25rem;
         text-align: left;
@@ -47,13 +50,12 @@ const Header = styled.div`
     }
 `;
 
+// const SvgContainer = styled.img`
+//     height: 1.5rem;
+//     width: 1.5rem;
 
-const SvgContainer = styled.img`
-    height: 1.5rem;
-    width: 1.5rem;
-
-    filter: invert(100%);
-`;
+//     filter: invert(100%);
+// `;
 
 const MenuWrapper = styled.div`
     margin-top: 2rem;
@@ -127,9 +129,11 @@ const ModalMenu = ({ onClose }) => {
                     </h3>
                     <h1>
                         {' '}
-                        <SvgContainer src =  "/image/icon/elegant-party.svg" alt="Hi"/> {me&&me.nickname}{' '}
-                        집사님, <br />
-                        안녕하세요!
+                        {/* <SvgContainer src =  "/image/icon/elegant-party.svg" alt="Hi"/>  */}
+                        <i className="fa fa-paw"></i>
+                            {me&&me.nickname}{' '}
+                            집사님, <br />
+                            안녕하세요!
                     </h1>
                 </Header>
 
