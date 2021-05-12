@@ -32,6 +32,8 @@ const InnerLayout = styled.div`
     h2 {
         margin-top: 1rem;
         font-size: 1rem;
+
+        word-wrap:break-word;
     }
 
     `;
