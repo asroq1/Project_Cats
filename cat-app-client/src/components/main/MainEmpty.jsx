@@ -4,7 +4,7 @@ import 'font-awesome/css/font-awesome.min.css';
 
 const InnerGlobal = styled.div`
     background-color: ${({theme})=>theme.beige};
-    height: calc(100vh - 32px);
+    min-height: calc(100vh - 45px);
     margin: 0 auto;
     display: flex;
     text-align: center;

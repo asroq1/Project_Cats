@@ -12,7 +12,8 @@ const HeaderTitle = styled.span`
 
 const CarouselContainer = styled.div`
     max-width: 100%;
-    height: 90vh;
+    //height: 90vh;
+    height: 100vh;
     //추가
     overflow-x: hidden;
     // overflow-y: auto;

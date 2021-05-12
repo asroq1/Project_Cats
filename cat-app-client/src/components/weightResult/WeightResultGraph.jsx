@@ -21,8 +21,8 @@ const GraphContainer = styled.div`
     display: grid;
     margin: 0 auto;
     //max-width: 1200px;
+    min-height: 94vh;
     width: 100%;
-    height: 94vh;
     background-color: ${({ theme }) => theme.graph};
     align-items: center;
 `;
