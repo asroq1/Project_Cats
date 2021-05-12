@@ -16,6 +16,7 @@ const GeneralWrapper = styled.div`
     .Menu{
 
         text-align:right;
+        font-size: 2rem;
     }
 `;
 
