@@ -140,9 +140,9 @@ const ModalMenu = ({ onClose }) => {
                     <Link to="/post/list" onClick={onClose}>
                         <h2>커뮤니티</h2>
                     </Link>
-                    <Link to="/user/settings" onClick={onClose}>
+                    {/* <Link to="/user/settings" onClick={onClose}>
                         <h2>집사설정</h2>
-                    </Link>
+                    </Link> */}
                     <Link to="/user/settings" onClick={onClose}>
                         <h2>문의하기</h2>
                     </Link>
