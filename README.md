@@ -21,7 +21,7 @@ Built with [React + Redux + Redux-Saga] + [Spring Boot + JPA + MariaDB]
 - Your cat's age is automatically calculated with its birthdate.
 
 2. Registration Made Easy
-- Register as a user using a regular or social login (Kakao, Naver) option!
+- Register as a user using a regular or social login (Kakao) option!
 
 3. Share Your Stories with Other Cat Lovers
 - Post any stories and photos you want to share with other users.
@@ -43,9 +43,10 @@ Built with [React + Redux + Redux-Saga] + [Spring Boot + JPA + MariaDB]
 - **React-Router** used to manage routes and links.
 - **Redux** used to centralize the states and logics of the app and to manage them easily.
 - **Redux-Saga** used to manage asynchronous action flows.
-- Other Settings
+- Other Tools
   * _immer_ to ensure immutability of states.
   * _Axios_ to handle HTTP requests based on promises.
+  * _Redux-Persist_ to maintain states even after page reloads. Root state is purged after logout to ensure security.
   * _Styled-component_ to style components without triggering unnecessary rerenders, to store the shared design elements, and to provide dark/light mode options.
   * _React-Easy-Crop_ to crop uploaded images.
   * _React-Slick_ to create image carousels.
@@ -60,14 +61,14 @@ Built with [React + Redux + Redux-Saga] + [Spring Boot + JPA + MariaDB]
 - **JPA(Hibernate)** used to manipulate data from database through an object-oriented program and improve productivity.
 - **MariaDB** used to avoid data redundancy and data duplication.
 - **Swagger UI** is implemented for better communication using APIs with Front-end team.
-- Other Settings
+- Other Tools
   - *JUnit* used to write and run repeatable automated tests.
   - *Bean Validation* used to validate user input.
   - *Lombok* used to reduce boilerplate code for model/data objects. 
   - *Apache Commons Lang 3* used to manupulate core classes of Java APIs.
 
 #### Deployment
-- Front-end server *temporarily* deployed on Netlify.
+- Front-end server deployed on Netlify (*temporary*) and AWS.
 - Back-end server deployed on AWS <br/>
 
 ## Team Members
