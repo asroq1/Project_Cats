@@ -26,15 +26,14 @@ const GeneralWrapper = styled.div`
     align-items: center;
     padding: 10px;
     margin-top: 1rem;
-
     i {
         text-decoration: none;
 
         color: ${({theme}) => theme.text};
     }
-
     h4 {
         font-size:1.25rem;
+        font-weight:900;
     }
 `;
 
@@ -79,20 +78,21 @@ const WeightRecordWrapper = styled.div`
     h1 {
         font-size: 1rem;
 
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
     }
     h2 {
         font-size: 1.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
     }
     h3 {
-        font-size: 2rem;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        font-weight: 900;
     }
 `;
 
 const Main = ({ cat, currentIndex, age }) => {
     // styled-component대신 useMemo 써줌
-
     const paddingStyle = useMemo(
         () => ({
             width: '80%',
@@ -130,7 +130,8 @@ const Main = ({ cat, currentIndex, age }) => {
                 </div>
                 
                 
-                {currentCat.photo && currentCat.photo !== 'null' ? (
+                {currentCat.photo && currentCat.photo !=='/home/admin/app/step1/Project_Cats/catchoo-server/build/libs/null'
+                ? (
                     <PhotoContainer
                         style={{ backgroundImage: `url(${currentCat.photo})` }}
                     />
@@ -142,11 +143,11 @@ const Main = ({ cat, currentIndex, age }) => {
                 <WeightRecordWrapper>
                     <h1>마지막 체중 기록</h1>
                     <h2>
-                        {currentCat.Record ? currentCat.Record.cdt : '체중을'}
+                        {currentCat.recentRecord ? currentCat.recentRecord.createdDate.slice(0,10) : '체중을'}
                     </h2>
                     <h3>
-                        {currentCat.Record
-                            ? currentCat.Record.wgt
+                        {currentCat.recentRecord
+                            ? currentCat.recentRecord.weight + " kg"
                             : '기록해주세용'}
                     </h3>
                 </WeightRecordWrapper>
@@ -192,7 +193,7 @@ const Main = ({ cat, currentIndex, age }) => {
 Main.propTypes = {
     cat: PropTypes.array.isRequired,
     currentIndex: PropTypes.number.isRequired,
-    age: PropTypes.array.isRequired,
+    age: PropTypes.array,
 }
 
 export default Main;

@@ -207,7 +207,6 @@ const reducer = (state = initialState, action) => {
                 draft.updateCatError = null;
                 break;
             case UPDATE_CAT_SUCCESS:
-                draft.cat[draft.currentIndex - 1] = action.data;
                 draft.updateCatDone = true;
                 break;
             case UPDATE_CAT_FAILURE:
