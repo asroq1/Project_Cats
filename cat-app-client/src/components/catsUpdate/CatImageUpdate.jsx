@@ -69,7 +69,6 @@ const CatImageUpdate = ({cat, currentIndex}) => {
     const [zoom, setZoom] = useInput(1.0);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
     const [croppedImage, setCroppedImage] = useState(currentCat.photo);
-    
 
     const [imageTitle,setImageTitle] = useState(null)
 
