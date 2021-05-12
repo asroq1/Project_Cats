@@ -91,7 +91,6 @@ const WeightResultList = ({ currentCatWeights }) => {
                 type: DELETE_WEIGHT_REQUEST,
                 data,
             });
-            // history.push('/user/main');
         }
     }, []);
     return (

@@ -13,8 +13,8 @@ import {
 } from 'recharts';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import { getWeightRequest, GET_CAT_REQUEST } from '../../reducers/cat';
-import { useDispatch, useSelector } from 'react-redux';
+import { GET_CAT_REQUEST } from '../../reducers/cat';
+import { useDispatch } from 'react-redux';
 import { GET_USER_REQUEST } from '../../reducers/user';
 
 const GraphContainer = styled.div`
@@ -114,13 +114,7 @@ const dateParser = (text) => {
 };
 const WeightResultGraph = ({ currentCatWeights }) => {
     const dispatch = useDispatch();
-    const { currentIndex } = useSelector((state) => state.cat);
 
-    // ** 현재 고양이 id를, currentIndex에 저장하고 있어요 ** //
-
-    //나중에 백엔드 연동해서 이렇게 최근순으로 당겨오면됌
-    //최근 데이터만 보여줌
-    const perMonth = currentCatWeights;
     const nowaDays = currentCatWeights.slice(0, 5).reverse();
     const resultDays = nowaDays.map((data) => ({
         ...data,
@@ -135,40 +129,6 @@ const WeightResultGraph = ({ currentCatWeights }) => {
             type: GET_USER_REQUEST,
         });
     }, []);
-
-    const perWeekHandler = () => {};
-    const perMonthHandler = () => {
-        // const arr = data.reduce((acc, cur) => {
-        //     // console.log(cur.createdDate);
-        //     const currentDate = new Date(cur.createdDate);
-        //     const year = currentDate.getFullYear();
-        //     const month = currentDate.getMonth();
-        //     const day = currentDate.getDate();
-        //     const weight = cur.weight;
-        //     console.log('date', cur, month, day, weight);
-        //     const findItem = acc.find(
-        //         (a) => a.year === year && a.month === month
-        //     );
-        //     if (!findItem) {
-        //         acc.push({
-        //             year,
-        //             month,
-        //             day,
-        //             weight,
-        //         });
-        //     }
-        //     if (findItem && findItem.day < day) {
-        //         findItem.weight = weight;
-        //         findItem.year = year;
-        //         findItem.month = month;
-        //         findItem.day = day;
-        //     }
-        //     return acc;
-        // }, []);
-        // console.log('Arr', arr);
-        const resultDays = currentCatWeights;
-        return resultDays;
-    };
 
     return (
         <>
@@ -241,12 +201,12 @@ const WeightResultGraph = ({ currentCatWeights }) => {
                         </ComposedChart>
                     </ResponsiveContainer>
                 </div>
-                <SelectorContainer>
+                {/* <SelectorContainer>
                     <DateSelector onClick={perWeekHandler}>Weekly</DateSelector>
                     <DateSelector onClick={() => perMonthHandler(perMonth)}>
                         Monthly
                     </DateSelector>
-                </SelectorContainer>
+                </SelectorContainer> */}
                 <DataContainer>
                     <WeightWrapper>
                         <h2>오늘 몸무게</h2>

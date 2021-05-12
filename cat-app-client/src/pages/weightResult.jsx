@@ -4,13 +4,10 @@ import WeightResultGraph from '../components/weightResult/WeightResultGraph';
 import WeightResultList from '../components/weightResult/WeightResultList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWeightRequest, GET_CAT_REQUEST } from '../reducers/cat';
-import axios from 'axios';
-import { GET_USER_REQUEST } from '../reducers/user';
-
 const Header = styled.header`
     position: sticky;
     top: 0;
@@ -51,7 +48,7 @@ const ExitButton = styled.span`
     }
 `;
 const WeightResult = () => {
-    const { currentIndex, currentCatWeights, deleteWeightDone } = useSelector(
+    const { currentIndex, currentCatWeights } = useSelector(
         (state) => state.cat
     );
     const [onList, setOnList] = useState(false);

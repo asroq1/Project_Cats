@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginRequestAction } from '../../reducers/user';
 import 'font-awesome/css/font-awesome.min.css';
@@ -68,7 +68,7 @@ const SocialContainer = styled.div`
 const LoginForm = () => {
     const dispatch = useDispatch();
     const { register, errors, handleSubmit } = useForm();
-    const { logInDone, logInError, me } = useSelector((state) => state.user);
+    const { logInError } = useSelector((state) => state.user);
     const onSubmit = useCallback((data) => {
         return dispatch(loginRequestAction(data));
     }, []);

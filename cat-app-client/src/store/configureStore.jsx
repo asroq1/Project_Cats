@@ -11,7 +11,6 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
 // 함수 실행마다 로그해줘서 개발에 유용함
 // 이런 식으로 middleware를 직접 만들어 Redux기능을 확장시켜줄 수 있다
 const loggerMiddleware = ({ dispatch, getState }) => (next) => (action) => {
-    console.log(action);
     return next(action);
 };
 
@@ -22,10 +21,10 @@ const configureStore = () => {
         process.env.NODE_ENV === 'production'
             ? compose(applyMiddleware(...middlewares)) //배포용
             : composeWithDevTools(applyMiddleware(...middlewares));
-    
+
     const store = createStore(rootReducer, enhancer);
     store.sagaTask = sagaMiddleware.run(rootSaga);
-    
+
     return store;
 };
 

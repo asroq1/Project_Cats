@@ -166,7 +166,7 @@ const reducer = (state = initialState, action) => {
                 draft.addCatDone = false;
                 draft.updateCatDone = false;
 
-                draft.deleteCatDone = false; 
+                draft.deleteCatDone = false;
                 draft.isLoading = false;
                 break;
             case GET_CAT_FAILURE:
