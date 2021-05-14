@@ -92,8 +92,8 @@ export const GET_COMMENTS_FAILURE = 'GET_COMMENTS_FAILURE';
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 
 
-const reducer = (state = initialState, action) => {
-    return produce(state, (draft) => {
+const reducer = (state = initialState, action) => 
+    produce(state, (draft) => {
         switch (action.type) {
             case ADD_POST_REQUEST:
                 draft.addPostLoading = true;
@@ -253,6 +253,5 @@ const reducer = (state = initialState, action) => {
                 break;
         }
     });
-};
 
 export default reducer;

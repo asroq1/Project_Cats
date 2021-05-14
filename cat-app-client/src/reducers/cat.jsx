@@ -151,7 +151,7 @@ export const getWeightFailure = (data) => {
 // 이전 상태를 액션을 통해 다음 상태로 만드는 함수
 // 단 불변성은 지켜야 함
 // 'draft'를 state로 생각하면 됨
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) =>
     // state는 가만히 두고
     // draft이용해 상태 바꿈 (state를 모두 draft로 대체)
     // immer가 알아서 불변성 지키며 바꿔줌
@@ -269,6 +269,7 @@ const reducer = (state = initialState, action) => {
                 break;
         }
     });
-};
+
+
 
 export default reducer;
