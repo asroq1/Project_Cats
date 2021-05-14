@@ -64,6 +64,10 @@ const EachCol = styled.div`
     .fa-cog {
         padding-right: 0.5rem;
         color: ${({ theme }) => theme.beige};
+
+        &:active{
+            transform: scale(0.9);
+        }
     }
 `;
 

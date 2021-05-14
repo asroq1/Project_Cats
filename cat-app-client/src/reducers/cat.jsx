@@ -155,7 +155,7 @@ const reducer = (state = initialState, action) => {
     // state는 가만히 두고
     // draft이용해 상태 바꿈 (state를 모두 draft로 대체)
     // immer가 알아서 불변성 지키며 바꿔줌
-    return produce(state, (draft) => {
+    produce(state, (draft) => {
         switch (action.type) {
             case GET_CAT_REQUEST:
                 draft.isLoading = true;
