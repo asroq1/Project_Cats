@@ -4,7 +4,9 @@ Web App for Cat Lovers.
 
 Built with [React + Redux + Redux-Saga] + [Spring Boot + JPA + MariaDB]
 
-[Catchoo](http://catchoo-client-server.s3-website.ap-northeast-2.amazonaws.com/)
+[Catchoo Web App](http://catchoo-client-server.s3-website.ap-northeast-2.amazonaws.com/)
+
+* Layout optimized for mobile screen
 
 
 
