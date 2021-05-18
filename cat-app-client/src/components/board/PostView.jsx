@@ -75,6 +75,8 @@ const SubInfo = styled.div`
 
 const PostContent = styled.div`
     margin-top: 1rem;
+
+    white-space:pre-wrap;
     font-size: 1rem;
     color: gray;
 `;
@@ -83,13 +85,7 @@ const PostView = ({ postId, post, error }) => {
     const history = useHistory();
     const goBack = useCallback(()=>{
 
-    
-        if (history.location.pathname ==='/post/list'){
-            history.goBack();
-        }
-        else {
-            history.push('/post/list');
-        }
+        history.push('/post/list');
     }, []);
     const dispatch = useDispatch();
     const { removePostDone } = useSelector((state) => state.post);

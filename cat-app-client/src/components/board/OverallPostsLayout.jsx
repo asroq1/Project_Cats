@@ -21,10 +21,21 @@ const Header = styled.div`
     font-size: 1rem;
     background-color: ${({theme}) => theme.green};
     .plus {
+        
+        
+        
+        
         flex-direction: row-reverse;
+        
+    }
+    
+    .plus i {
+        transition: 0.5s;
         cursor: pointer;
     }
-    .plus:hover{
+    .plus i:hover{
+        
+        transform: rotate(-20deg);
         color:${({theme})=>theme.navy}
     }
 }`;

@@ -38,8 +38,7 @@ const EachCol = styled.div`
     &:not(:last-child) {
         max-width: 150px;
         justify-content: center;
-        color: ${(props) =>
-            props.active
+        color: ${(props) => props.active
                 ? ({ theme }) => theme.text
                 : ({ theme }) => theme.beige};
         border-radius: ${(props) => (props.active ? '15px 15px 0 0' : 'none')};
@@ -51,7 +50,7 @@ const EachCol = styled.div`
             ${(props) => (props.active ? ({ theme }) => theme.beige : 'none')};
         border-bottom: ${(props) =>
             props.active ? 'none' : '1px solid black'};
-        cursor: pointer;
+        cursor:pointer;
     }
     &:last-child {
         font-size: 2rem;
@@ -63,12 +62,16 @@ const EachCol = styled.div`
     }
     .fa-cog {
         padding-right: 0.5rem;
+        cursor:pointer;
+        
         color: ${({ theme }) => theme.beige};
+        transition:0.5s;
+        &:hover{
 
-        &:active{
-            transform: scale(0.9);
+            transform:rotate(-10deg);
         }
     }
+
 `;
 
 const TopBar = ({ cat, currentIndex, onSelect }) => {

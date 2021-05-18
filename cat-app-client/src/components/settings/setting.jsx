@@ -37,6 +37,16 @@ const InnerLayout = styled.div`
         word-wrap:break-word;
     }
 
+    i { 
+        transition:0.5s;
+    }
+    
+    i:hover {
+        cursor: pointer;
+        transform: rotate(-20deg);
+
+    }
+
     `;
 
 const Settings = () => {

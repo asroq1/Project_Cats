@@ -113,7 +113,8 @@ const Index = () => {
                         <LogoFoot src="/image/icon/pawprint.svg" alt="logo" />
                     </Link>
                 </LogoWrapper>
-                <article>
+
+                <article style={{zIndex:'1'}}>
                     <Title>Catchoo </Title>
                     <LoginForm />
                     <DivdeContainer>

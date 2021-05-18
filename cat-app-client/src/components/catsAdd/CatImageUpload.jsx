@@ -48,8 +48,15 @@ const CenterWrapper = styled.div`
 
 const CropperContainer = styled.div`
     margin-top: 1rem;
+    line-height:1.25;
     height: 200px;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    text-align: center;
 `;
 
 const SliderContainer = styled.div`
@@ -136,6 +143,7 @@ const CatImageUpload = () => {
                 {!croppedImage ? (
                     <div>
                         <CropperContainer>
+                            이미지를 올려주세요 <br />(선택)
                             <Cropper
                                 image={imageSrc}
                                 crop={crop}

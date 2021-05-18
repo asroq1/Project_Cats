@@ -9,6 +9,8 @@ import {
 } from '../../reducers/post';
 
 const EachComment = styled.div`
+    
+    white-space:pre-wrap;
     padding-bottom: 1rem;
     padding-top: 1rem;
     & + & {
@@ -75,7 +77,8 @@ const CommentsWrapper = ({ postId }) => {
                         <EachComment key={c.content + i}>
                             <div>
                                 <h3>
-                                    {c.writer.nickname}
+                                    
+                                    {c.writer?.nickname}
                                     {c.writer.nickname === me.nickname && c.id && (
                                         <button
                                             type="button"

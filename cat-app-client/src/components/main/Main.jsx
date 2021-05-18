@@ -2,12 +2,10 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import 'font-awesome/css/font-awesome.min.css';
 
-import PropTypes from 'prop-types';
-
 //코드 너무 장황해지니
-//필요 딱히 없는 건 나중에 지워주기
 //짧은 건 useMemo로 넣어줌
 const InnerGlobal = styled.div`
     background-color:${({theme})=>theme.beige};
@@ -18,6 +16,11 @@ const InnerGlobal = styled.div`
     min-height:  calc(100vh - 45px);
     margin: 0;
     padding: 0;
+
+    & a:last-child button { 
+        margin-bottom: 2rem;
+    }
+    
 `;
 
 const GeneralWrapper = styled.div`
@@ -183,7 +186,7 @@ const Main = ({ cat, currentIndex, age }) => {
                         //cat_id: current_index,
                     }}
                 >
-                    <ButtonWrapper>이전 데이터 보기</ButtonWrapper>
+                    <ButtonWrapper >이전 데이터 보기</ButtonWrapper>
                 </Link>
             </div>
         </InnerGlobal>

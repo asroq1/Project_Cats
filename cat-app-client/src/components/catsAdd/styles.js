@@ -53,6 +53,7 @@ export const StyledInputBlock = styled.div`
 
 export const CenterWrapper = styled.div`
     width: 100%;
+    padding-bottom:2rem;
     display: flex;
     position: relative;
     justify-content: center;
