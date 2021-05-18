@@ -4,7 +4,8 @@ Web App for Cat Lovers.
 
 Built with [React + Redux + Redux-Saga] + [Spring Boot + JPA + MariaDB]
 
-[catchoo.netlify.app](https://catchoo.netlify.app)
+[Catchoo](http://catchoo-client-server.s3-website.ap-northeast-2.amazonaws.com/)
+
 
 
 ![home](./cat-app-client/public/readMeImg/Catchoo_home.png)|![main](./cat-app-client/public/readMeImg/Catchoo_main.png)|![add](./cat-app-client/public/readMeImg/Catchoo_add.png)
