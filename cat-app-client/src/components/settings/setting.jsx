@@ -41,7 +41,7 @@ const InnerLayout = styled.div`
         transition:0.5s;
     }
     
-    i:hover {
+    i:hover, i:focus {
         cursor: pointer;
         transform: rotate(-20deg);
 

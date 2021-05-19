@@ -74,7 +74,7 @@ export const ButtonWrapper = styled.button`
     & + & {
         margin-left: 0.5rem;
     }
-    &:hover {
+    &:hover, &:focus {
         background: darkred;
     }
     

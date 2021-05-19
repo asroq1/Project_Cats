@@ -29,7 +29,7 @@ const DataButton = styled.button`
     border-radius: 8px;
     color: #fff;
     font-weight: 600;
-    :hover {
+    &:hover, &:focus {
         background: ${({ theme }) => theme.palette.borderColor};
     }
     &:active {

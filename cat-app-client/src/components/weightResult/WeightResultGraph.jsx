@@ -44,7 +44,7 @@ const DateSelector = styled.button`
     font-size: 1rem;
     background-color: ${({ theme }) => theme.palette.orange};
     border: none;
-    :hover {
+    &:hover,&:focus {
         background: ${({ theme }) => theme.palette.borderColor};
     }
     &:active {

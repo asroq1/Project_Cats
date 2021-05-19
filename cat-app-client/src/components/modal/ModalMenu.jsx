@@ -75,7 +75,7 @@ const MenuWrapper = styled.div`
         color: ${({ theme })=>theme.textlight};
     }
 
-    h2:hover {
+    h2:hover, h2:focus {
         color: ${({ theme }) => theme.cOrange};
     }
 `;
