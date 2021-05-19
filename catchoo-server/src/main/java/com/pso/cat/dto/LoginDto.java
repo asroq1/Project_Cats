@@ -8,18 +8,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class LoginDto {
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class BasicReq {
+        @NotNull
+        @Size(min = 3, max = 50)
+        private String email;
 
-    @NotNull
-    @Size(min = 3, max = 50)
-    private String email;
+        @NotNull
+        @Size(min = 3, max = 100)
+        private String password;
+    }
 
-    @NotNull
-    @Size(min = 3, max = 100)
-    private String password;
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class SocialReq {
+        @NotNull
+        @Size(min = 3, max = 50)
+        private String email;
+    }
 }

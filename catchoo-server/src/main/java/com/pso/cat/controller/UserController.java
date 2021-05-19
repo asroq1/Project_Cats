@@ -45,7 +45,7 @@ public class UserController {
     }
 
     @ApiOperation("테스트를 위한 전체 회원 정보 확인 기능: 로그인 필요 없음")
-    @GetMapping("/users/")
+    @GetMapping("/users")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<List<Response>> list() {
         return ResponseEntity.ok(userService.list());

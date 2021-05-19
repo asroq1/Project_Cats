@@ -106,7 +106,7 @@ public class CatService {
     }
 
     @Transactional
-    public void modify(Long id, CatDto.Request newCat,MultipartFile photoFile) throws Exception {
+    public void modify(Long id, CatDto.Request newCat, MultipartFile photoFile) throws Exception {
 
         // 파일 이름을 업로드 한 날짜로 바꾸어서 저장할 것이다
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
