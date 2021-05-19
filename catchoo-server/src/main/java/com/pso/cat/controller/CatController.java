@@ -55,8 +55,8 @@ public class CatController {
     }
 
     @PatchMapping
-    public ResponseEntity modify(Long id, CatDto.Request cat) {
-        catService.modify(id, cat);
+    public ResponseEntity modify(Long id, CatDto.Request cat, MultipartFile photoFile) throws Exception {
+        catService.modify(id, cat, photoFile);
         return ResponseEntity.ok().build();
     }
 
