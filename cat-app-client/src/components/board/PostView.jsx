@@ -134,6 +134,7 @@ const PostView = ({ postId, post, error }) => {
     return (
         <OverallContainer>
             <h1 onClick={goBack}><i className = "fa fa-arrow-left"></i> 전체게시글 </h1>
+            <img src="/home/admin/app/step1/Project_Cats/catchoo-server/build/libs/upload/cat/20210519/3281555102146933.jpg"></img>
             <PostHead>
                 
                 

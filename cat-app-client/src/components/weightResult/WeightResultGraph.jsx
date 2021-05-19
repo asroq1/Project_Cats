@@ -209,7 +209,7 @@ const WeightResultGraph = ({ currentCatWeights }) => {
                 </SelectorContainer> */}
                 <DataContainer>
                     <WeightWrapper>
-                        <h2>오늘 몸무게</h2>
+                        <h2>최근 몸무게</h2>
                         <ul>
                             <li>
                                 {currentCatWeights.length === 0 ? (
