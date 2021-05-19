@@ -69,7 +69,7 @@ const ButtonWrapper = styled.button`
     color: ${({theme}) => theme.textlight};
     cursor: pointer;
     border: 1px solid black;
-    &:hover {
+    &:hover, &:focus {
         background: black;
     }
 `;

@@ -101,6 +101,7 @@ const StyledLink = styled(Link)`
     cursor: pointer;
     &:focus,
     &:hover,
+    &:focus,
     &:link,
     &:visited,
     &active {

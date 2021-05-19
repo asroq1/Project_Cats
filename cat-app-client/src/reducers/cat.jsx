@@ -49,7 +49,7 @@ export const initialState = {
     ],
     isLoading: true,
     currentWeightIndex: 1,
-    currentIndex: 1,
+    currentIndex: -1,
     currImgUrl: null,
 
     currentCatWeights: [],
@@ -162,7 +162,7 @@ const reducer = (state = initialState, action) =>
                 break;
             case GET_CAT_SUCCESS:
                 draft.cat = action.data;
-                draft.currentIndex = action.data[0].id;
+                draft.currentIndex = draft.currentIndex === -1 ? action.data[0].id : draft.currentIndex;
                 draft.addCatDone = false;
                 draft.updateCatDone = false;
 
@@ -252,18 +252,18 @@ const reducer = (state = initialState, action) =>
                 draft.getWeightLoading = true;
                 draft.getWeightDone = false;
                 draft.addWeightError = null;
-                draft.currentCatWeights = null;
+                draft.currentCatWeights = [];
                 break;
             case GET_WEIGHT_SUCCESS:
                 draft.getWeightDone = true;
                 draft.getWeightLoading = false;
-                draft.getWeighError = null;
+                draft.getWeightError = null;
                 draft.currentCatWeights = action.data;
                 break;
             case GET_WEIGHT_FAILURE:
                 draft.getWeightLoading = false;
                 draft.getWeightDone = false;
-                draft.getWeighError = action.error;
+                draft.getWeightError = action.error;
                 break;
             default:
                 break;

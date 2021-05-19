@@ -53,7 +53,7 @@ const DeleteButton = styled.button`
     font-size: 1.6rem;
     color: ${palette.borderColor};
 
-    &:hover {
+    &:hover, &:focus {
         color: #ff6666;
     }
 

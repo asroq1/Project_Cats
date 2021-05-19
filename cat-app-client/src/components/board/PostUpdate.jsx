@@ -78,13 +78,13 @@ const StyledButton = styled.button`
     & + & {
         margin-left: 0.5rem;
     }
-    &:hover {
+    &:hover,&:focus {
         background-color: darkgreen;
     }
     &:first-child {
         background-color: ${({theme}) => theme.navy};
     }
-    &:first-child:hover {
+    &:first-child:hover, &:first-child:focus {
         background-color: black;
     }
 `;

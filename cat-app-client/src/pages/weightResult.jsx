@@ -29,7 +29,7 @@ const DataButton = styled.button`
     border-radius: 8px;
     color: #fff;
     font-weight: 600;
-    :hover {
+    &:hover, &:focus {
         background: ${({ theme }) => theme.palette.borderColor};
     }
     &:active {
@@ -48,7 +48,7 @@ const ExitButton = styled.span`
     }
 `;
 const WeightResult = () => {
-    const { currentIndex, currentCatWeights } = useSelector(
+    const { currentIndex, currentCatWeights, addWeightDone, deleteWeightDone } = useSelector(
         (state) => state.cat
     );
     const [onList, setOnList] = useState(false);
@@ -61,7 +61,7 @@ const WeightResult = () => {
     };
     useEffect(() => {
         dispatch(getWeightRequest(currentIndex));
-    }, []);
+    }, [addWeightDone, deleteWeightDone]);
 
     return (
         <>
@@ -80,10 +80,10 @@ const WeightResult = () => {
                     </Link>
                 </ExitButton>
             </Header>
-            {!onList && currentCatWeights && (
+            {!onList && currentCatWeights.length > 0 && (
                 <WeightResultGraph currentCatWeights={currentCatWeights} />
             )}
-            {onList && currentCatWeights && (
+            {onList && currentCatWeights.length > 0 && (
                 <WeightResultList currentCatWeights={currentCatWeights} />
             )}
         </>

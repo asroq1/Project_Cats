@@ -111,7 +111,7 @@ const LoginForm = () => {
                 <SubmitButton type="submit">로그인</SubmitButton>
             </LoginContainer>
             <SocialContainer>
-                {/* <KakaoLogin /> */}
+                <KakaoLogin />
                 {/* <NaverLogin /> */}
             </SocialContainer>
         </>

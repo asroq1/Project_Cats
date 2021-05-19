@@ -62,10 +62,10 @@ const Main = () => {
         dispatch({
             type: GET_USER_REQUEST,
         });
-        dispatch({
-            type: GET_WEIGHT_REQUEST,
-            data: currentIndex,
-        });
+        // dispatch({
+        //     type: GET_WEIGHT_REQUEST,
+        //     data: currentIndex,
+        // });
     }, [logOutDone]);
 
     return (

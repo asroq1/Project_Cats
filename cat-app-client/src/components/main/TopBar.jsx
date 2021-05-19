@@ -31,7 +31,7 @@ const EachCol = styled.div`
     flex: auto;
     background-color: ${(props) =>
         props.active ? ({ theme }) => theme.beige : ({ theme }) => theme.navy};
-    &:hover {
+    &:hover, &:focus {
         background-color: ${(props) =>
             props.active ? ({ theme }) => theme.beige: ({theme})=>theme.text};
     }
@@ -66,9 +66,9 @@ const EachCol = styled.div`
         
         color: ${({ theme }) => theme.beige};
         transition:0.5s;
-        &:hover{
+        &:hover, &:focus{
 
-            transform:rotate(-10deg);
+            transform:rotate(20deg);
         }
     }
 

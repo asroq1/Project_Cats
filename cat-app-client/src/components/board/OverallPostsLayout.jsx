@@ -33,7 +33,7 @@ const Header = styled.div`
         transition: 0.5s;
         cursor: pointer;
     }
-    .plus i:hover{
+    .plus i:hover, i:focus{
         
         transform: rotate(-20deg);
         color:${({theme})=>theme.navy}

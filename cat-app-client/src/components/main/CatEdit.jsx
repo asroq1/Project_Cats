@@ -42,7 +42,7 @@ const ButtonWrapper = styled.button`
     color:${({theme})=>theme.text};
     cursor: pointer;
     border: 1px solid black;
-    &:hover {
+    &:hover, &:focus {
         background: black;
     }
     margin-top: 0.5rem;
