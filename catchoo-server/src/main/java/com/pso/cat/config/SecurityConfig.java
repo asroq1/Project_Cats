@@ -74,6 +74,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         "/api/users/**",
         "/api/posts/**",
 
+        "/upload/**",
+
         "/error",
     };
 
