@@ -18,7 +18,7 @@ const CatsUpdate = ({cat, currentIndex}) => {
     const {currImgUrl, updateCatDone} = useSelector((state) => state.cat);
     const [currbirthyear, currbirthmonth, currbirthdate] = currentCat.birth.split("-");
     const [name, onChangeName] =useInput(currentCat.name);
-    const [goalWeight, onChangeGoalWeight] = useInput(currentCat.goalWeight);
+    //const [goalWeight, onChangeGoalWeight] = useInput(currentCat.goalWeight);
     const [birthyear, onChangeBirthYear] = useInput(currbirthyear);
     const [birthmonth, onChangeBirthMonth] = useInput(currbirthmonth);
     const [birthdate, onChangeBirthDate] = useInput(currbirthdate);
@@ -34,8 +34,8 @@ const CatsUpdate = ({cat, currentIndex}) => {
             formData.append('id', parseInt(currentIndex));
             formData.append('name',name);
             console.log(currImgUrl);
-            formData.append('goalWeight', goalWeight);
-            formData.append('photo', currImgUrl);
+            //formData.append('goalWeight', goalWeight);
+            formData.append('photoFile', currImgUrl);
 
             console.log("key")
             for (var key of formData.keys()){
@@ -62,7 +62,7 @@ const CatsUpdate = ({cat, currentIndex}) => {
                 data: formData,
             });
         },
-        [currImgUrl, name, birthyear, birthmonth, birthdate,gender, currentIndex, goalWeight]
+        [currImgUrl, name, birthyear, birthmonth, birthdate,gender, currentIndex]
     );
 
     const goBack = useCallback(() => {
@@ -103,7 +103,7 @@ const CatsUpdate = ({cat, currentIndex}) => {
                             />
                         </div>
                     </StyledInputBlock>
-                    <StyledInputBlock>
+                    {/* <StyledInputBlock>
                         <label htmlFor="cat-goal-weight">목표체중</label>
                             <br />
                             <div className="inputcontainer">
@@ -118,7 +118,7 @@ const CatsUpdate = ({cat, currentIndex}) => {
                                     
                                 />
                             </div>
-                    </StyledInputBlock>
+                    </StyledInputBlock> */}
                     {/* 생일 */}
                     <StyledInputBlock>
                         <label htmlFor="cat-birthyear">생일</label>

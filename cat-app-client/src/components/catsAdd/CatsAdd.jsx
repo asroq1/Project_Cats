@@ -16,7 +16,7 @@ const CatsAdd = () => {
     const {currImgUrl, addCatDone} = useSelector((state) => state.cat);
     const { me } = useSelector((state) => state.user);
     const [name, onChangeName] = useInput('');
-    const [goalWeight, onChangeGoalWeight] =useInput('');
+    //const [goalWeight, onChangeGoalWeight] =useInput('');
     const [birthyear, onChangeBirthYear] = useInput('');
     const [birthmonth, onChangeBirthMonth] = useInput('');
     const [birthdate, onChangeBirthDate] = useInput('');
@@ -31,11 +31,11 @@ const CatsAdd = () => {
             formData.append('gender',gender);
             // POST API가 id를 요구하기 때문
             formData.append('name',name);
-            formData.append('goalWeight', goalWeight);
+            //formData.append('goalWeight', goalWeight);
             
             console.log("currImgUrl", currImgUrl); //now currImgUrl is a File object
             
-            formData.append('photo', currImgUrl);
+            formData.append('photoFile', currImgUrl);
 
             console.log("key")
             for (var key of formData.keys()){
@@ -63,7 +63,7 @@ const CatsAdd = () => {
             });
             
         },
-        [currImgUrl, name, birthyear, birthmonth, birthdate, gender,addCatDone, goalWeight]
+        [currImgUrl, name, birthyear, birthmonth, birthdate, gender,addCatDone]
     );
 
     useEffect(() => {
@@ -112,7 +112,7 @@ const CatsAdd = () => {
                             />
                         </div>
                     </StyledInputBlock>
-                    <StyledInputBlock>
+                    {/* <StyledInputBlock>
                         <label htmlFor="cat-goal-weight">목표체중</label>
                         <br />
                         <div className="inputcontainer">
@@ -127,7 +127,7 @@ const CatsAdd = () => {
                                 required
                             />
                         </div>
-                    </StyledInputBlock>
+                    </StyledInputBlock> */}
                     {/* 생일 */}
                     <StyledInputBlock>
                         <label htmlFor="cat-birthyear">생일</label>

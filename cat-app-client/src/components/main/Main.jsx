@@ -117,9 +117,9 @@ const Main = ({ cat, currentIndex, age }) => {
     return (
         <InnerGlobal>
             <GeneralWrapper>
-                <div style={topPaddingStyle}>
+                {/* <div style={ topPaddingStyle }>
                     {currentCat.goalWeight&& (<h1>목표 체중 : {currentCat.goalWeight } kg</h1>) }
-                </div>
+                </div> */}
                 <div style={topPaddingStyle}>
                     <h4>
                     {age[0]}년 {age[1]}개월 |{' '}
