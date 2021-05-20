@@ -21,7 +21,6 @@ import { GlobalStyles, lightTheme, darkTheme } from './styles/globalStyles';
 //import { useDarkMode } from './hooks/useDarkMode ';
 import styled, { ThemeProvider } from 'styled-components';
 
-
 const Container = styled.div`
     backgroud: black;
 `;
@@ -29,7 +28,7 @@ const Container = styled.div`
 function App() {
     //const [theme, toggleTheme] = useDarkMode();
     // const dispatch = useDispatch();
-    const {isDarkMode} = useSelector((state) => state.user);
+    const { isDarkMode } = useSelector((state) => state.user);
     //const themeMode = localStorage.theme === 'light' ? lightTheme : darkTheme;
     const themeMode = isDarkMode === 'light' ? lightTheme : darkTheme;
     // console.log(themeMode)
@@ -39,7 +38,7 @@ function App() {
             <ThemeProvider theme={themeMode}>
                 <Container>
                     <GlobalStyles />
-                    {/* <Toggle theme={theme} toggleTheme={toggleTheme} /> */}
+                    {/* <Toggle theme={theme} toggleTheme={toggleTheme} /> */}{' '}
                     <Reset />
                     <Route path="/" component={index} exact />
                     <Route path="/user/signup" component={signUp} exact />

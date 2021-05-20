@@ -33,8 +33,9 @@ const Main = () => {
     const today = new Date();
     const getAge = useCallback(() => {
         const currentCat = cat.find((v) => v.id === currentIndex);
-        if (currentCat){
-            const [birthYear, birthMonth, birthDate] = currentCat.birth.split('-');
+        if (currentCat) {
+            const [birthYear, birthMonth, birthDate] =
+                currentCat.birth.split('-');
             let ageYear = today.getFullYear() - parseInt(birthYear);
             let ageMonth = today.getMonth() + 1 - parseInt(birthMonth);
             let ageDate = today.getDate() - parseInt(birthDate);

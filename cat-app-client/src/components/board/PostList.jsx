@@ -1,6 +1,5 @@
-
-import React  from 'react';
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 import 'font-awesome/css/font-awesome.min.css';
 import styled from 'styled-components';
@@ -14,10 +13,10 @@ const PostItemsContainer = styled.div`
 const PostItemBlock = styled.div`
     padding-top: 0.25rem;
     padding-bottom: 0.75rem;
-    position:relative;
+    position: relative;
     margin-top: 1rem;
     display: flex;
-    // border: 1px solid ${({theme}) => theme.green};
+    // border: 1px solid ${({ theme }) => theme.green};
     // border-radius: 10px;
 
     border-bottom: 1px solid gray;
@@ -31,8 +30,8 @@ const PostItemBlock = styled.div`
 
 const PostListBody = styled.div`
     position: relative;
-    
-    min-height:calc(100vh - 100px);
+
+    min-height: calc(100vh - 100px);
     //padding-top: 50px;
 `;
 
@@ -47,9 +46,7 @@ const PostListBody = styled.div`
 // `;
 
 const ErrorBox = styled.div`
-
     height: 100vh;
-
 `;
 
 const SubInfo = styled.div`
@@ -70,13 +67,13 @@ const SubInfo = styled.div`
     h1 {
         font-size: 1rem;
         font-weight: bold;
-        color: ${({theme}) => theme.text};
+        color: ${({ theme }) => theme.text};
         margin: 0;
         margin-bottom: 0.25rem;
     }
     div {
         font-size: 0.75rem;
-        margin:0;
+        margin: 0;
         padding: 0;
         text-align: start;
     }
@@ -110,7 +107,7 @@ const StyledLink = styled(Link)`
 `;
 
 const PostItem = ({ post }) => {
-    const {id, title, viewCount, writer, createdDate} = post;
+    const { id, title, viewCount, writer, createdDate } = post;
     // const dispatch = useDispatch();
     // const setCurrentPost = useCallback((id)=>{
     //     dispatch({
@@ -123,7 +120,6 @@ const PostItem = ({ post }) => {
     return (
         <StyledLink to={`/post/view/${id}`}>
             <PostItemBlock>
-                
                 {/* <PhotoContainer src={Images[0].src} alt="post" /> */}
 
                 <SubInfo>
@@ -133,7 +129,7 @@ const PostItem = ({ post }) => {
                             <b>{writer.nickname}</b>
                         </span>
                         {/* <span>{new Date(date)}</span> */}
-                        <span>{createdDate.slice(0,10)}</span>
+                        <span>{createdDate.slice(0, 10)}</span>
                     </div>
                     <PreviewWrapper>
                         {/* <i className="fa fa-comment"></i>
@@ -150,11 +146,8 @@ const PostItem = ({ post }) => {
 const PostList = ({ posts, error }) => {
     //에러
     if (error) {
-        
         return <ErrorBox>에러 발생함</ErrorBox>;
     }
-
-    
 
     return (
         <>
@@ -162,16 +155,15 @@ const PostList = ({ posts, error }) => {
             {/* {!loading && posts && ( */}
 
             <PostListBody>
-
-            <PostItemsContainer>
-            {posts && (
-                <div>
-                    {posts.map((post) => (
-                        <PostItem post={post} key={post.id} />
-                    ))}
-                </div>
-            )}
-            </PostItemsContainer>
+                <PostItemsContainer>
+                    {posts && (
+                        <div>
+                            {posts.map((post) => (
+                                <PostItem post={post} key={post.id} />
+                            ))}
+                        </div>
+                    )}
+                </PostItemsContainer>
             </PostListBody>
         </>
     );
@@ -179,11 +171,11 @@ const PostList = ({ posts, error }) => {
 
 PostItem.propTypes = {
     post: PropTypes.object,
-}
+};
 
 PostList.propTypes = {
     posts: PropTypes.arrayOf(PropTypes.object),
-    error: PropTypes.object
-}
+    error: PropTypes.object,
+};
 
 export default PostList;
