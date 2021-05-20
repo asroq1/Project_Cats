@@ -1,7 +1,5 @@
 # Catchoo
-집사님들을 위한 킹냥이 웹앱 😺
-<br />
-Web App for Cat Lovers.
+Web App for Cat Lovers. 😺
 <br />
 
 [*한글*](https://github.com/asroq1/Project_Cats/blob/master/README.ko.md)
@@ -23,7 +21,6 @@ Built with [React + Redux + Redux-Saga] + [Spring Boot + JPA + MariaDB]
 
 ## Functionalities
 1. Track Weight of Your Cats
-- Set your cat's goal weight!
 - Measure and record your cat's weight every day to track it in graphs or tables.
 - Your cat's age is automatically calculated with its birthdate.
 
