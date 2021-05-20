@@ -1,4 +1,4 @@
-# Catchoo (In Progress)
+# Catchoo
 집사님들을 위한 킹냥이 웹앱 😺
 Web App for Cat Lovers.
 
