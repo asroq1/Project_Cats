@@ -32,8 +32,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 
     public User findByEmail(String email) {
-        return userRepository.findOneWithAuthoritiesByEmail(email)
+        System.out.println("findByEmail: email = " + email);
+        User user =  userRepository.findByEmail(email)
             .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 Email입니다."));
+        return user;
     }
 
     public User findByEmailAndPassword(String email, String password) {

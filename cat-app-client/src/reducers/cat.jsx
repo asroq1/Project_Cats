@@ -51,7 +51,6 @@ export const initialState = {
     currentWeightIndex: 1,
     currentIndex: -1,
     currImgUrl: null,
-
     currentCatWeights: [],
 };
 
@@ -269,7 +268,5 @@ const reducer = (state = initialState, action) =>
                 break;
         }
     });
-
-
 
 export default reducer;

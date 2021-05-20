@@ -2,6 +2,7 @@ package com.pso.cat.controller;
 
 import com.pso.cat.dto.LoginDto;
 import com.pso.cat.dto.TokenDto;
+import com.pso.cat.entity.Authority;
 import com.pso.cat.entity.User;
 import com.pso.cat.jwt.JwtFilter;
 import com.pso.cat.jwt.TokenProvider;
@@ -12,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -43,10 +45,10 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto) {
+    public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto.BasicReq basicReq) {
 
-        String email = loginDto.getEmail();
-        String password = loginDto.getPassword();
+        String email = basicReq.getEmail();
+        String password = basicReq.getPassword();
 
         final User user = customUserDetailsService.findByEmailAndPassword(email, password);
 
@@ -64,8 +66,9 @@ public class AuthController {
 
     @ApiOperation("불완전한 기능. 아직 구현중.")
     @PostMapping("/socialLogin")
-    public ResponseEntity<TokenDto> authorize(@Valid @RequestBody String email) {
+    public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto.SocialReq socialReq) {
 
+        String email = socialReq.getEmail();
         System.out.println("email = " + email);
 
         User user = customUserDetailsService.findByEmail(email);
@@ -73,9 +76,13 @@ public class AuthController {
 
         System.out.println("AuthController.authorize: found by email");
 
+        for (Authority authority : user.getAuthorities()) {
+            System.out.println("authority.getName() = " + authority.getName());
+        }
+
         try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(email, "1111",
+            SecurityContextHolder.getContext().setAuthentication(
+                    new UsernamePasswordAuthenticationToken(email, null,
                             user.getAuthorities().stream().map(auth -> new SimpleGrantedAuthority(auth.getName())).collect(
                                     Collectors.toList())));
 
