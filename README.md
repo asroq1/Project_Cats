@@ -1,6 +1,10 @@
 # Catchoo
 집사님들을 위한 킹냥이 웹앱 😺
+<br />
 Web App for Cat Lovers.
+<br />
+
+[*한글*](https://github.com/asroq1/Project_Cats/blob/master/README.ko.md)
 
 Built with [React + Redux + Redux-Saga] + [Spring Boot + JPA + MariaDB]
 
