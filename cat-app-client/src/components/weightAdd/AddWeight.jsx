@@ -202,8 +202,7 @@ const AddWeight = () => {
 
     useEffect(() => {
         if (!localStorage.token) {
-            
-            alert('로그인 먼저 해주세요')
+            alert('로그인 먼저 해주세요');
             history.push('/');
         }
     }, [logInDone]);

@@ -96,14 +96,15 @@ const Title = styled.h1`
     color: ${({ theme }) => theme.text};
 `;
 const Index = () => {
-    const { logInDone, logOutDone } = useSelector((state) => state.user);
+    const { logInDone, logOutDone, kakaoLogInDone } = useSelector(
+        (state) => state.user
+    );
     const history = useHistory();
     useEffect(() => {
         if (localStorage.token) {
             history.push('/user/main');
         }
-    }, [logInDone, logOutDone]);
-
+    }, [kakaoLogInDone, logInDone, logOutDone]);
     return (
         <div>
             <IndexContainer>
@@ -113,8 +114,7 @@ const Index = () => {
                         <LogoFoot src="/image/icon/pawprint.svg" alt="logo" />
                     </Link>
                 </LogoWrapper>
-
-                <article style={{zIndex:'1'}}>
+                <article style={{ zIndex: '1' }}>
                     <Title>Catchoo </Title>
                     <LoginForm />
                     <DivdeContainer>

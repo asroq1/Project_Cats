@@ -29,7 +29,8 @@ const DataButton = styled.button`
     border-radius: 8px;
     color: #fff;
     font-weight: 600;
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         background: ${({ theme }) => theme.palette.borderColor};
     }
     &:active {
@@ -47,10 +48,23 @@ const ExitButton = styled.span`
         color: ${({ theme }) => theme.resultExit};
     }
 `;
+
+const ExecptionContainer = styled.div`
+    height: 94vh;
+    width: 100%;
+    background-color: ${({ theme }) => theme.resultBackground};
+
+    h1 {
+        width: 100%;
+        height: 94vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+`;
 const WeightResult = () => {
-    const { currentIndex, currentCatWeights, addWeightDone, deleteWeightDone } = useSelector(
-        (state) => state.cat
-    );
+    const { currentIndex, currentCatWeights, addWeightDone, deleteWeightDone } =
+        useSelector((state) => state.cat);
     const [onList, setOnList] = useState(false);
     const dispatch = useDispatch();
     const chartHandler = () => {
@@ -80,6 +94,11 @@ const WeightResult = () => {
                     </Link>
                 </ExitButton>
             </Header>
+            {currentCatWeights.length === 0 && (
+                <ExecptionContainer>
+                    <h1>기록이 존재하지 않습니다.</h1>
+                </ExecptionContainer>
+            )}
             {!onList && currentCatWeights.length > 0 && (
                 <WeightResultGraph currentCatWeights={currentCatWeights} />
             )}

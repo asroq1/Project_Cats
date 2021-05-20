@@ -33,7 +33,6 @@ const KakaoLogo = styled.img`
 const KakaoSignup = () => {
     const loginType = 'kakao';
     const dispatch = useDispatch();
-    const history = useHistory();
     const { Kakao } = window;
     const onKakaoLogin = () => {
         Kakao.Auth.login({

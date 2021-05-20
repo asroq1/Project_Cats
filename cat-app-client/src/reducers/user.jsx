@@ -1,6 +1,9 @@
 import produce from 'immer';
 
 export const initialState = {
+    KakaologInLoading: false,
+    KakaologInDone: false,
+    KakaologInError: null,
     logInLoading: false, //로그인 시도중
     logInDone: false, //로그인 완료
     logInError: null, //로그인 에러
@@ -25,6 +28,10 @@ export const initialState = {
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
 export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
+
+export const KAKAO_LOG_IN_REQUEST = 'KAKAO_LOG_IN_REQUEST';
+export const KAKAO_LOG_IN_SUCCESS = 'KAKAO_LOG_IN_SUCCESS';
+export const KAKAO_LOG_IN_FAILURE = 'KAKAO_LOG_IN_FAILURE';
 
 export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
@@ -65,6 +72,26 @@ export const loginFailureAction = (data) => {
     };
 };
 
+export const kakaoLoginRequestAction = (data) => {
+    return {
+        type: KAKAO_LOG_IN_REQUEST,
+        data,
+    };
+};
+
+export const kakaoLoginSuccessAction = (data) => {
+    return {
+        type: KAKAO_LOG_IN_SUCCESS,
+        data,
+    };
+};
+
+export const kakaoLoginFailureAction = (data) => {
+    return {
+        type: KAKAO_LOG_IN_FAILURE,
+        data,
+    };
+};
 export const logoutRequestAction = () => {
     return {
         type: LOG_OUT_REQUEST,
@@ -105,12 +132,6 @@ export const signUpFailure = (data) => {
     };
 };
 
-// export const getUserRequest = () => {
-//     return {
-//         type: GET_USER_REQUEST,
-//     };
-// };
-
 //Reducer
 // 이전 상태를 액션을 통해 다음 상태로 만들어내는 함수(불변성 유지)
 
@@ -132,6 +153,22 @@ const reducer = (state = initialState, action) =>
                 draft.logInLoading = false;
                 draft.logInDone = false;
                 draft.logInError = action.error;
+                break;
+            case KAKAO_LOG_IN_REQUEST:
+                draft.kakaoLogInLoading = true;
+                draft.kakaoLogInDone = false;
+                draft.kakaoLogInError = null;
+                draft.signUpDone = false;
+                break;
+            case KAKAO_LOG_IN_SUCCESS:
+                draft.kakaoLogInLoading = false;
+                draft.kakaoLogInDone = true;
+                draft.me = action.data;
+                break;
+            case KAKAO_LOG_IN_FAILURE:
+                draft.kakaoLogInLoading = false;
+                draft.kakaoLogInDone = false;
+                draft.kakaoLogInError = action.error;
                 break;
             case LOG_OUT_REQUEST:
                 draft.logOutLoading = true;
@@ -170,7 +207,8 @@ const reducer = (state = initialState, action) =>
             case GET_USER_FAILURE:
                 break;
             case CHANGE_DARK_MODE:
-                draft.isDarkMode = (draft.isDarkMode === 'dark' ? 'light' : 'dark');
+                draft.isDarkMode =
+                    draft.isDarkMode === 'dark' ? 'light' : 'dark';
                 break;
             default:
                 return state;

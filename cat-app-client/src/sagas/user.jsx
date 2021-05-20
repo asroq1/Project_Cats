@@ -21,6 +21,9 @@ import {
     GET_USER_REQUEST,
     GET_USER_SUCCESS,
     GET_USER_FAILURE,
+    KAKAO_LOG_IN_SUCCESS,
+    KAKAO_LOG_IN_FAILURE,
+    KAKAO_LOG_IN_REQUEST,
 } from '../reducers/user';
 
 import axios from 'axios';
@@ -67,6 +70,32 @@ function* logIn(action) {
     } catch (err) {
         yield put({
             type: LOG_IN_FAILURE,
+            error: err,
+        });
+    }
+}
+
+function kakaoLogInAPI(data) {
+    return axios.post('/api/socialLogin', data);
+}
+
+// 2 call은 동기 await역할 fork는 비동기
+function* kakaoLogIn(action) {
+    try {
+        const result = yield call(kakaoLogInAPI, action.data);
+        console.log('form back', result);
+        const token = result.data.token;
+        localStorage.setItem('token', token);
+        setAuthorizationToken(token);
+        yield put({
+            type: KAKAO_LOG_IN_SUCCESS,
+            data: {
+                data: result.data,
+            },
+        });
+    } catch (err) {
+        yield put({
+            type: KAKAO_LOG_IN_FAILURE,
             error: err,
         });
     }
@@ -130,6 +159,9 @@ function* goToHome() {
 function* watchLogIn() {
     yield takeLatest(LOG_IN_REQUEST, logIn);
 }
+function* watchKakaoLogIn() {
+    yield takeLatest(KAKAO_LOG_IN_REQUEST, kakaoLogIn);
+}
 
 function* watchLogOut() {
     yield takeLatest(LOG_OUT_REQUEST, logOut);
@@ -147,6 +179,7 @@ export default function* userSaga() {
     yield all(
         [
             fork(watchLogIn),
+            fork(watchKakaoLogIn),
             fork(watchLogOut),
             fork(watchSignUp),
             fork(watchGetUser),
