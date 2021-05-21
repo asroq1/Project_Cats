@@ -48,7 +48,7 @@ const PostList = () => {
 
             if (
                 window.scrollY + document.documentElement.clientHeight >
-                document.documentElement.scrollHeight - 10
+                document.documentElement.scrollHeight - 50
             ) {
                 if (hasMorePosts && !listPostLoading && mainPosts) {
                     dispatch({
