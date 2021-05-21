@@ -62,11 +62,14 @@ const PostList = () => {
             }
         }
         window.addEventListener('scroll', onScroll);
+        window.addEventListener('touchmove',onScroll);
+        
         //useEffect에서 window함수 쓸 때 중요한 건
         //이렇게 해제해주는 것
         //메모리 누수 방지
         return () => {
             window.removeEventListener('scroll', onScroll);
+            window.removeEventListener('touchmove', onScroll);
         };
     }, [mainPosts, hasMorePosts, listPostLoading]);
 
