@@ -43,11 +43,12 @@ const PostList = () => {
             console.log(
                 window.scrollY,
                 document.documentElement.clientHeight,
+                window.innerHeight,
                 document.documentElement.scrollHeight
             );
 
             if (
-                window.scrollY + document.documentElement.clientHeight >
+                window.scrollY + window.innerHeight >
                 document.documentElement.scrollHeight - 50
             ) {
                 if (hasMorePosts && !listPostLoading && mainPosts) {
