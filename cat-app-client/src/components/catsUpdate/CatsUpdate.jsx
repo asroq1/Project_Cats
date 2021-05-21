@@ -35,6 +35,8 @@ const CatsUpdate = ({cat, currentIndex}) => {
             formData.append('name',name);
             console.log(currImgUrl);
             //formData.append('goalWeight', goalWeight);
+            formData.append('goalWeight', 1); //temp to meet BackEnd API 
+            formData.append('photo', 'a'); //temp to meet BackEnd API
             formData.append('photoFile', currImgUrl);
 
             console.log("key")

@@ -20,6 +20,7 @@ const EachComment = styled.div`
     button {
         margin-left: 0.75rem;
         padding: 0.25rem;
+        cursor:pointer;
 
         border: none;
         border-radius: 10px;
