@@ -29,19 +29,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class CatController {
 
     private final CatService catService;
-    private final S3Uploader s3Uploader;
 
     @PostMapping
     public ResponseEntity add(CatDto.AddRequest cat, MultipartFile multipartFile) throws Exception{
-        Long userId = SecurityUtil.getCurrentUserId().orElseThrow(
-                () -> new RuntimeException("로그인을 해주세요."));
-
-        String fileUrl = s3Uploader.upload(multipartFile, "cat");
-
-        cat.setPhoto(fileUrl);
-
-        catService.save(userId, cat);
-
+        catService.save(cat, multipartFile);
         return ResponseEntity.ok().build();
     }
 

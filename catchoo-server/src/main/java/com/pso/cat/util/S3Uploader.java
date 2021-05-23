@@ -1,6 +1,7 @@
 package com.pso.cat.util;
 
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,9 @@ import java.util.UUID;
 public class S3Uploader {
 
     private final AmazonS3Client amazonS3Client;
+
+    @Value("${custom.domain.url}")
+    private String domain;
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
@@ -48,6 +52,11 @@ public class S3Uploader {
     private String putS3(File uploadFile, String fileName) {
         amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile));
         return amazonS3Client.getUrl(bucket, fileName).toString();
+    }
+
+    public void removeFromS3(String photoUrl) {
+        String key = photoUrl.replaceFirst(domain, "");
+        amazonS3Client.deleteObject(new DeleteObjectRequest(bucket, key));
     }
 
     private void removeNewFile(File targetFile) {
