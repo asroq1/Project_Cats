@@ -1,43 +1,37 @@
 package com.pso.cat.service;
 
-import com.pso.cat.dto.RecordDto;
 import com.pso.cat.entity.Cat;
 import com.pso.cat.dto.CatDto;
-import com.pso.cat.entity.Post;
-import com.pso.cat.entity.Record;
 import com.pso.cat.repository.CatRepository;
 import com.pso.cat.repository.RecordRepository;
 
 import java.io.File;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
+import com.pso.cat.util.SecurityUtil;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
+@RequiredArgsConstructor
 public class CatService {
     private final CatRepository catRepository;
     private final RecordRepository recordRepository;
-    private final ServletContext servletContext;
-    private HttpServletResponse response;
 
-    public CatService(CatRepository catRepository, RecordRepository recordRepository, ServletContext servletContext) {
-        this.catRepository = catRepository;
-        this.recordRepository = recordRepository;
-        this.servletContext = servletContext;
+
+    public Cat save(Long userId, CatDto.AddRequest catDto) {
+        Cat cat = catDto.toEntity();
+        cat.setUserId(SecurityUtil.getCurrentUserId()
+                .orElseThrow(() -> new RuntimeException("로그인이 필요합니다.")));
+        return catRepository.save(cat);
     }
+
 
     public Cat save(Long userId, CatDto.AddRequest catDto, MultipartFile photoFile) throws Exception {
 
