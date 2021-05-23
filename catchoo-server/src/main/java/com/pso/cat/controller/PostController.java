@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @Api(value="게시글 추가, 수정, 삭제, 조회", tags = {"게시글 API"})
@@ -30,11 +29,11 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity add(PostDto.AddRequest post, MultipartFile photoFile) throws Exception {
+    public ResponseEntity add(PostDto.Request post) {
         Long userId = SecurityUtil.getCurrentUserId().orElseThrow(
             () -> new RuntimeException("로그인을 해주세요.")
         );
-        postService.save(userId, post, photoFile);
+        postService.save(userId, post);
         return ResponseEntity.ok().build();
     }
 
@@ -60,8 +59,8 @@ public class PostController {
     }
 
     @PatchMapping
-    public ResponseEntity modify(Long id, PostDto.Request post, MultipartFile photoFile) throws Exception {
-        postService.modify(id, post, photoFile);
+    public ResponseEntity modify(Long id, PostDto.Request postRequest) {
+        postService.modify(id, postRequest);
         return ResponseEntity.ok().build();
     }
 
