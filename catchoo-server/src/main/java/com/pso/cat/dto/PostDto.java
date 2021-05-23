@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.pso.cat.entity.User;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,11 +21,13 @@ public class PostDto {
 
         private String title;
         private String content;
+        private String photo;
 
         public Post toEntity() {
             return Post.builder()
                 .title(this.getTitle())
                 .content(this.getContent())
+                .photo(this.getPhoto())
                 .build();
         }
     }
@@ -51,11 +54,13 @@ public class PostDto {
 
     @Builder
     @Getter
+    @Setter
     public static class SingleResponse {
 
         private final Long id;
         private final String title;
         private final String content;
+        private String photo;
         private final int viewCount;
         private final UserDto.WriterResponse writer;
         private final Date createdDate;
@@ -67,6 +72,7 @@ public class PostDto {
                 .id(post.getId())
                 .title(post.getTitle())
                 .content(post.getContent())
+                .photo(System.getProperty("user.dir") + post.getPhoto())
                 .viewCount(post.getViewCount())
                 .writer(WriterResponse.ofEntity(post.getWriter()))
                 .createdDate(post.getCreatedDate())
@@ -76,6 +82,24 @@ public class PostDto {
                     .collect(Collectors.toList()))
                 .build();
 
+        }
+    }
+
+    @Setter
+    @Getter
+    public static class AddRequest {
+
+        private String title;
+        private String content;
+        @ApiModelProperty(hidden = true)
+        private String photo;
+
+        public Post toEntity() {
+            return Post.builder()
+                    .title(title)
+                    .content(content)
+                    .photo(photo)
+                    .build();
         }
     }
 
