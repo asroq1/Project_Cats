@@ -30,6 +30,7 @@ const Overlay = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
+
 `;
 
 const Header = styled.div`
@@ -48,6 +49,9 @@ const Header = styled.div`
         margin-bottom: 1rem;
         text-align: right;
     }
+    
+
+    transition: all 1s;
 `;
 
 // const SvgContainer = styled.img`
@@ -78,6 +82,9 @@ const MenuWrapper = styled.div`
     h2:hover, h2:focus {
         color: ${({ theme }) => theme.cOrange};
     }
+
+
+    transition:all 1s;
 `;
 
 const NightModeWrapper = styled.div`
@@ -88,6 +95,9 @@ const NightModeWrapper = styled.div`
     border-top: 1.5px solid ${({ theme }) => theme.beige};
     margin-top: auto;
     cursor: pointer;
+
+
+    transition:all 1s;
 `;
 
 // const NightWrapper = styled.button`
