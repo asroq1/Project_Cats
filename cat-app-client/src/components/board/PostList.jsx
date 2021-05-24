@@ -16,10 +16,10 @@ const PostItemBlock = styled.div`
     position: relative;
     margin-top: 1rem;
     display: flex;
-    // border: 1px solid ${({ theme }) => theme.green};
-    // border-radius: 10px;
 
-    border-bottom: 1px solid gray;
+    &:not(last-child) {
+        border-bottom: 1px solid gray;
+    }
     &:first-child {
         padding-top: 0;
     }

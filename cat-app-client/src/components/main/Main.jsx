@@ -68,7 +68,7 @@ const ButtonWrapper = styled.button`
     background-color: ${({ theme }) => theme.navy};
     color: ${({theme}) => theme.textlight};
     cursor: pointer;
-    border: 1px solid black;
+    border:none;
     &:hover, &:focus {
         background: black;
     }
