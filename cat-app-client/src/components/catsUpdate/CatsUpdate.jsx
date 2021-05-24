@@ -33,25 +33,25 @@ const CatsUpdate = ({cat, currentIndex}) => {
             formData.append('gender',gender);
             formData.append('id', parseInt(currentIndex));
             formData.append('name',name);
-            console.log(currImgUrl);
-            //formData.append('goalWeight', goalWeight);
+            //console.log(currImgUrl);
+            formData.append('goalWeight', goalWeight);
             formData.append('goalWeight', 1); //temp to meet BackEnd API 
             formData.append('photoFile', currImgUrl);
 
-            console.log("key")
-            for (var key of formData.keys()){
-                console.log(key);
-            }
+            // console.log("key")
+            // for (var key of formData.keys()){
+            //     console.log(key);
+            // }
 
-            console.log("value")
-            for (var value of formData.values()){
-                console.log(value);
-            }
+            // console.log("value")
+            // for (var value of formData.values()){
+            //     console.log(value);
+            // }
 
-            console.log("entry")
-            for (var entry of formData.entries()){
-                console.log(entry);
-            }
+            // console.log("entry")
+            // for (var entry of formData.entries()){
+            //     console.log(entry);
+            // }
 
             dispatch({
                 type: SET_CURRENT_IMAGE,
@@ -104,7 +104,7 @@ const CatsUpdate = ({cat, currentIndex}) => {
                             />
                         </div>
                     </StyledInputBlock>
-                    {/* <StyledInputBlock>
+                    <StyledInputBlock>
                         <label htmlFor="cat-goal-weight">목표체중</label>
                             <br />
                             <div className="inputcontainer">
@@ -119,7 +119,7 @@ const CatsUpdate = ({cat, currentIndex}) => {
                                     
                                 />
                             </div>
-                    </StyledInputBlock> */}
+                    </StyledInputBlock>
                     {/* 생일 */}
                     <StyledInputBlock>
                         <label htmlFor="cat-birthyear">생일</label>
