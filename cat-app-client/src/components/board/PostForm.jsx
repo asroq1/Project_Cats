@@ -255,7 +255,7 @@ const PostForm = () => {
                                 ref={imageInput}
                                 accept="image/*"
                                 name="post-images"
-                                
+                                multiple
                                 onChange={onChangeImages}
                             />
                             <StyledButton

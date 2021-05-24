@@ -35,7 +35,7 @@ const CatsAdd = () => {
             
             console.log("currImgUrl", currImgUrl); //now currImgUrl is a File object
             
-            formData.append('photoFile', currImgUrl);
+            formData.append('multipartFile', currImgUrl);
 
             console.log("key")
             for (var key of formData.keys()){
