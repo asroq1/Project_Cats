@@ -18,7 +18,7 @@ const CatsUpdate = ({cat, currentIndex}) => {
     const {currImgUrl, updateCatDone} = useSelector((state) => state.cat);
     const [currbirthyear, currbirthmonth, currbirthdate] = currentCat.birth.split("-");
     const [name, onChangeName] =useInput(currentCat.name);
-    //const [goalWeight, onChangeGoalWeight] = useInput(currentCat.goalWeight);
+    const [goalWeight, onChangeGoalWeight] = useInput(currentCat.goalWeight);
     const [birthyear, onChangeBirthYear] = useInput(currbirthyear);
     const [birthmonth, onChangeBirthMonth] = useInput(currbirthmonth);
     const [birthdate, onChangeBirthDate] = useInput(currbirthdate);

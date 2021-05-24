@@ -16,7 +16,7 @@ const CatsAdd = () => {
     const {currImgUrl, addCatDone} = useSelector((state) => state.cat);
     const { me } = useSelector((state) => state.user);
     const [name, onChangeName] = useInput('');
-    //const [goalWeight, onChangeGoalWeight] =useInput('');
+    const [goalWeight, onChangeGoalWeight] =useInput('');
     const [birthyear, onChangeBirthYear] = useInput('');
     const [birthmonth, onChangeBirthMonth] = useInput('');
     const [birthdate, onChangeBirthDate] = useInput('');
