@@ -151,15 +151,17 @@ ALTER TABLE heart
 
 
 -- user Table Create SQL
-CREATE TABLE pht_post
+drop table post_pht;
+
+CREATE TABLE post_pht
 (
     `pht_id`   INT            NOT NULL    AUTO_INCREMENT,
     `post_id`  INT            NOT NULL,
-    `name`     VARCHAR(45)    NOT NULL,
+    `url`     VARCHAR(45)    NOT NULL,
     CONSTRAINT PRIMARY KEY (pht_id)
 );
 
-ALTER TABLE pht_post
+ALTER TABLE post_pht
     ADD CONSTRAINT FK_pht_post_post_id_post_post_id FOREIGN KEY (post_id)
         REFERENCES post (post_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
