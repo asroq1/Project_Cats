@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.pso.cat.entity.PostPhoto;
 import com.pso.cat.entity.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -62,8 +63,9 @@ public class PostDto {
         private final Date createdDate;
         private final Date updatedDate;
         private final List<CommentDto.Response> comments;
+        private final List<String> images;
 
-        public static SingleResponse ofEntity(Post post) {
+        public static SingleResponse ofEntity(Post post, List<PostPhoto> photos) {
             return SingleResponse.builder()
                 .id(post.getId())
                 .title(post.getTitle())
@@ -72,6 +74,9 @@ public class PostDto {
                 .writer(WriterResponse.ofEntity(post.getWriter()))
                 .createdDate(post.getCreatedDate())
                 .updatedDate(post.getUpdatedDate())
+                .images(photos.stream()
+                        .map(PostPhoto::getUrl)
+                        .collect(Collectors.toList()))
                 .comments(post.getComments().stream()
                     .map(Response::ofEntity)
                     .collect(Collectors.toList()))

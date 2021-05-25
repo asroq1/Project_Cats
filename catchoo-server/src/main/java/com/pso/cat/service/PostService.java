@@ -12,7 +12,6 @@ import com.pso.cat.util.S3Uploader;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
@@ -54,13 +53,12 @@ public class PostService {
     }
 
     public PostDto.SingleResponse read (Long id){
-        Optional<Post> post = postRepository.findById(id);
-        post.ifPresent(p -> {
-            postRepository.updateViewCount(p.getId());
-            p.setComments(commentRepository.findAllByPostIdAndStateOrderByCreatedDateDesc(id, 1));
-        });
-        PostDto.SingleResponse.ofEntity(post.get());
-        return PostDto.SingleResponse.ofEntity(post.get());
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("게시글을 찾지 못했습니다."));
+        postRepository.updateViewCount(post.getId());
+        post.setComments(commentRepository.findAllByPostIdAndStateOrderByCreatedDateDesc(id, 1));
+        List<PostPhoto> photos = postPhotoRepository.findAllByPostId(id);
+        return PostDto.SingleResponse.ofEntity(post, photos);
     }
 
     @Transactional
