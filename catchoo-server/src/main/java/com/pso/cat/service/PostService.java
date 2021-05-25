@@ -1,35 +1,56 @@
 package com.pso.cat.service;
 
 import com.pso.cat.dto.PostDto;
-import com.pso.cat.entity.Comment;
 import com.pso.cat.entity.Post;
+import com.pso.cat.entity.PostPhoto;
 import com.pso.cat.entity.User;
 import com.pso.cat.repository.CommentRepository;
+import com.pso.cat.repository.PostPhotoRepository;
 import com.pso.cat.repository.PostRepository;
-import com.pso.cat.util.SecurityUtil;
+import com.pso.cat.util.S3Uploader;
+
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
+@RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
+    private final PostPhotoRepository postPhotoRepository;
     private final CommentRepository commentRepository;
 
-    public PostService(PostRepository postRepository, CommentRepository commentRepository) {
-        this.postRepository = postRepository;
-        this.commentRepository = commentRepository;
-    }
+    private final S3Uploader s3Uploader;
 
-    public Post save(Long userId, PostDto.Request postDto) {
+    @Transactional
+    public Post save(Long userId, PostDto.Request postDto, MultipartFile[] images) throws IOException {
         Post post = postDto.toEntity();
         post.setWriter(User.builder().id(userId).build());
+        post = postRepository.save(post);
+
+        savePhotos(post.getId(), images);
+
         return postRepository.save(post);
+        //String fileUrl = s3Uploader.upload(multipartFile, "post");
+    }
+
+    private void savePhotos(Long postId, MultipartFile[] images) throws IOException {
+        PostPhoto photo = new PostPhoto();
+        photo.setPostId(postId);
+        for (MultipartFile image : images) {
+            String url = s3Uploader.upload(image, "post");
+            photo.setUrl(url);
+            postPhotoRepository.save(photo);
+        }
     }
 
     public PostDto.SingleResponse read (Long id){
