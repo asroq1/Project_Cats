@@ -66,7 +66,7 @@ const ImageCarousel = ({ images }) => {
                             //     <img src={v.src} alt={v.src} />
                             // </ImgWrapper>
                             <ImgWrapper key={v.slice(0, 10)}>
-                                <img src={v} alt={v} />
+                                <img src={v} alt="img" />
                             </ImgWrapper>
                         ))}
                     </Slider>

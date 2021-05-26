@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import CommentForm from './CommentForm';
 
 import CommentsWrapper from './CommentsWrapper';
-// import ImageCarousel from './ImageCarousel';
+import ImageCarousel from './ImageCarousel';
 import { REMOVE_POST_REQUEST } from '../../reducers/post';
 
 const OverallContainer = styled.div`
@@ -73,7 +73,6 @@ const SubInfo = styled.div`
 
 const PostContent = styled.div`
     margin-top: 1rem;
-
     white-space: pre-wrap;
     font-size: 1rem;
     color: gray;
@@ -126,7 +125,7 @@ const PostView = ({ postId, post, error }) => {
         return null;
     }
 
-    const { id, title, content, writer, createdDate } = post;
+    const { id, title, content, writer, createdDate, images } = post;
 
     return (
         <OverallContainer>
@@ -134,20 +133,16 @@ const PostView = ({ postId, post, error }) => {
                 <i className="fa fa-arrow-left"></i> 전체게시글{' '}
             </h1>
             <PostHead>
-                {/* <ImageCarousel images={currentPost.Images} /> */}
-                {/* <ImageCarousel images={imagePaths}/> */}
+                {images && <ImageCarousel images={images} />}
                 <h1>{title}</h1>
                 <SubInfo>
                     <span>
                         <b>{writer.nickname}</b>
                     </span>
-
                     <span>{createdDate.slice(0, 10)}</span>
-
                     <span>{createdDate.slice(11, 16)}</span>
                 </SubInfo>
                 <PostContent>{content}</PostContent>
-
                 {me && me.id === writer.id && (
                     <ButtonWrapper>
                         <Link
@@ -163,7 +158,6 @@ const PostView = ({ postId, post, error }) => {
                                 수정
                             </button>
                         </Link>
-
                         <button type="button" onClick={onRemovePost}>
                             삭제
                         </button>
@@ -178,7 +172,6 @@ const PostView = ({ postId, post, error }) => {
 
 PostView.propTypes = {
     postId: PropTypes.number.isRequired,
-
     post: PropTypes.object,
     error: PropTypes.object,
 };
