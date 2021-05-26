@@ -157,12 +157,11 @@ CREATE TABLE post_pht
 (
     `pht_id`   INT            NOT NULL    AUTO_INCREMENT,
     `post_id`  INT            NOT NULL,
-    `url`     VARCHAR(45)    NOT NULL,
+    `url`     VARCHAR(200)    NOT NULL,
     CONSTRAINT PRIMARY KEY (pht_id)
 );
 
 ALTER TABLE post_pht
     ADD CONSTRAINT FK_pht_post_post_id_post_post_id FOREIGN KEY (post_id)
         REFERENCES post (post_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
 

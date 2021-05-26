@@ -31,24 +31,24 @@ public class PostService {
     private final S3Uploader s3Uploader;
 
     @Transactional
-    public Post save(Long userId, PostDto.Request postDto, MultipartFile[] images) throws IOException {
+    public Post save(Long userId, PostDto.Request postDto, List<MultipartFile> photos) throws IOException {
         Post post = postDto.toEntity();
         post.setWriter(User.builder().id(userId).build());
         post = postRepository.save(post);
 
-        savePhotos(post.getId(), images);
+        savePhotos(post.getId(), photos);
 
         return postRepository.save(post);
         //String fileUrl = s3Uploader.upload(multipartFile, "post");
     }
 
-    private void savePhotos(Long postId, MultipartFile[] images) throws IOException {
-        PostPhoto photo = new PostPhoto();
-        photo.setPostId(postId);
-        for (MultipartFile image : images) {
-            String url = s3Uploader.upload(image, "post");
-            photo.setUrl(url);
-            postPhotoRepository.save(photo);
+    private void savePhotos(Long postId, List<MultipartFile> photos) throws IOException {
+        for (MultipartFile photo : photos) {
+            String url = s3Uploader.upload(photo, "post");
+            PostPhoto photoEntity = new PostPhoto();
+            photoEntity.setPostId(postId);
+            photoEntity.setUrl(url);
+            postPhotoRepository.save(photoEntity);
         }
     }
 

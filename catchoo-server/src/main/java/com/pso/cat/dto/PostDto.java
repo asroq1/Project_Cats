@@ -63,7 +63,7 @@ public class PostDto {
         private final Date createdDate;
         private final Date updatedDate;
         private final List<CommentDto.Response> comments;
-        private final List<String> images;
+        private final List<String> photos;
 
         public static SingleResponse ofEntity(Post post, List<PostPhoto> photos) {
             return SingleResponse.builder()
@@ -74,7 +74,7 @@ public class PostDto {
                 .writer(WriterResponse.ofEntity(post.getWriter()))
                 .createdDate(post.getCreatedDate())
                 .updatedDate(post.getUpdatedDate())
-                .images(photos.stream()
+                .photos(photos.stream()
                         .map(PostPhoto::getUrl)
                         .collect(Collectors.toList()))
                 .comments(post.getComments().stream()
