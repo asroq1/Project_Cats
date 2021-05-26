@@ -54,6 +54,14 @@ public class S3Uploader {
         return amazonS3Client.getUrl(bucket, fileName).toString();
     }
 
+    private String updateS3(File uploadFile, String url) {
+        String fileName = url
+                .replace(domain, "")
+                .replace("post",  "");
+        amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile));
+        return amazonS3Client.getUrl(bucket, fileName).toString();
+    }
+
     public void removeFromS3(String photoUrl) {
         String key = photoUrl.replaceFirst(domain, "");
         amazonS3Client.deleteObject(new DeleteObjectRequest(bucket, key));
