@@ -79,11 +79,9 @@ function kakaoLogInAPI(data) {
     return axios.post('/api/socialLogin', data);
 }
 
-// 2 call은 동기 await역할 fork는 비동기
 function* kakaoLogIn(action) {
     try {
         const result = yield call(kakaoLogInAPI, action.data);
-        console.log('form back', result);
         const token = result.data.token;
         localStorage.setItem('token', token);
         setAuthorizationToken(token);

@@ -15,6 +15,8 @@ const IndexContainer = styled.div`
 `;
 
 const LogoWrapper = styled.div`
+    width: 45%;
+    margin: 0 auto;
     display: grid;
     align-items: end;
     position: relative;
@@ -81,6 +83,7 @@ const Logo = styled.img`
     }
 `;
 const LogoFoot = styled.img`
+    width: 70%;
     position: relative;
     margin: 0 auto;
     display: flex;
