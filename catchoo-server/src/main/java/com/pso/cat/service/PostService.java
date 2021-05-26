@@ -4,12 +4,12 @@ import com.pso.cat.dto.PostDto;
 import com.pso.cat.entity.Post;
 import com.pso.cat.entity.PostPhoto;
 import com.pso.cat.entity.User;
+import com.pso.cat.error.exception.EntityNotFoundException;
 import com.pso.cat.repository.CommentRepository;
 import com.pso.cat.repository.PostPhotoRepository;
 import com.pso.cat.repository.PostRepository;
 import com.pso.cat.util.S3Uploader;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +31,7 @@ public class PostService {
     private final S3Uploader s3Uploader;
 
     @Transactional
-    public Post save(Long userId, PostDto.Request postDto, List<MultipartFile> photos) throws IOException {
+    public Post save(Long userId, PostDto.Request postDto, List<MultipartFile> photos) {
         Post post = postDto.toEntity();
         post.setWriter(User.builder().id(userId).build());
         post = postRepository.save(post);
@@ -42,13 +42,27 @@ public class PostService {
         //String fileUrl = s3Uploader.upload(multipartFile, "post");
     }
 
-    private void savePhotos(Long postId, List<MultipartFile> photos) throws IOException {
-        for (MultipartFile photo : photos) {
-            String url = s3Uploader.upload(photo, "post");
+    private void savePhotos(Long postId, List<MultipartFile> photos) {
+        try {
             PostPhoto photoEntity = new PostPhoto();
             photoEntity.setPostId(postId);
-            photoEntity.setUrl(url);
-            postPhotoRepository.save(photoEntity);
+            for (MultipartFile photo : photos) {
+                String url = s3Uploader.upload(photo, "post");
+                photoEntity.setUrl(url);
+                postPhotoRepository.save(photoEntity);
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    private void removeOldPhotos(List<String> deletedPhotos) {
+        try {
+            for (String photo : deletedPhotos) {
+                s3Uploader.removeFromS3(photo);
+            }
+        } catch (Exception e) {
+
         }
     }
 
@@ -62,12 +76,19 @@ public class PostService {
     }
 
     @Transactional
-    public void modify (Long id, PostDto.Request newPost){
+    public void modify (Long id,
+                        PostDto.Request newPost,
+                        List<MultipartFile> photos,
+                        List<String> deletedPhotos){
         Post post = postRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("해당하는 게시글이 없습니다."));
+            .orElseThrow(EntityNotFoundException::new);
         post.setTitle(newPost.getTitle());
         post.setContent(newPost.getContent());
         post.setUpdatedDate(new Date());
+
+        removeOldPhotos(deletedPhotos);
+        savePhotos(id, photos);
+
         postRepository.save(post);
     }
 
@@ -79,7 +100,7 @@ public class PostService {
     public List<PostDto.ListResponse> list () {
         return postRepository
                 .findAllByStateOrderByCreatedDateDesc(1)
-                .stream().map(post -> PostDto.ListResponse.ofEntity(post)).collect(Collectors.toList());
+                .stream().map(PostDto.ListResponse::ofEntity).collect(Collectors.toList());
     }
 
     public List<PostDto.ListResponse> fetchPostPagesBy(

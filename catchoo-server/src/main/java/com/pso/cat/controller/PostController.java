@@ -59,8 +59,11 @@ public class PostController {
     }
 
     @PatchMapping
-    public ResponseEntity modify(Long id, PostDto.Request postRequest) {
-        postService.modify(id, postRequest);
+    public ResponseEntity modify(Long id,
+                                 PostDto.Request postRequest,
+                                 List<MultipartFile> photos,
+                                 List<String> deletedPhotos) {
+        postService.modify(id, postRequest, photos, deletedPhotos);
         return ResponseEntity.ok().build();
     }
 
