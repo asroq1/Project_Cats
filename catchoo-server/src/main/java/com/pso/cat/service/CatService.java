@@ -2,6 +2,7 @@ package com.pso.cat.service;
 
 import com.pso.cat.entity.Cat;
 import com.pso.cat.dto.CatDto;
+import com.pso.cat.error.exception.EntityNotFoundException;
 import com.pso.cat.repository.CatRepository;
 import com.pso.cat.repository.RecordRepository;
 
@@ -36,7 +37,6 @@ public class CatService {
         cat.setPhoto(fileUrl);
         return catRepository.save(cat);
     }
-
 
     public Cat save(Long userId, CatDto.AddRequest catDto, MultipartFile photoFile) throws Exception {
 
@@ -97,14 +97,14 @@ public class CatService {
     public CatDto.Response read(Long id){
         return CatDto.Response.ofEntity(
             catRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("해당하는 고양이가 없습니다.")),
+                    .orElseThrow(EntityNotFoundException::new),
             recordRepository.findFirstByCatIdOrderByCreateDateDesc(id));
     }
 
     @Transactional
     public void modify(Long id, CatDto.Request newCat, MultipartFile multipartFile) throws Exception {
         Cat cat = catRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("해당하는 고양이가 없습니다."));
+                .orElseThrow(EntityNotFoundException::new);
 
         // S3에 있는 기존 사진 삭제해주기
         s3Uploader.removeFromS3(cat.getPhoto());
