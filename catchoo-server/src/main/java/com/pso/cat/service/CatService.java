@@ -1,5 +1,6 @@
 package com.pso.cat.service;
 
+import com.pso.cat.dto.RecordDto;
 import com.pso.cat.entity.Cat;
 import com.pso.cat.dto.CatDto;
 import com.pso.cat.error.exception.EntityNotFoundException;
@@ -7,35 +8,34 @@ import com.pso.cat.repository.CatRepository;
 import com.pso.cat.repository.RecordRepository;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
-import com.pso.cat.util.S3Uploader;
-import com.pso.cat.util.SecurityUtil;
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-@RequiredArgsConstructor
 public class CatService {
     private final CatRepository catRepository;
     private final RecordRepository recordRepository;
-    private final S3Uploader s3Uploader;
+    private final ServletContext servletContext;
+    private HttpServletResponse response;
 
-    @Transactional
-    public Cat save(CatDto.AddRequest catDto, MultipartFile multipartFile) throws IOException {
-        Cat cat = catDto.toEntity();
-        cat.setUserId(SecurityUtil.getCurrentUserId()
-                .orElseThrow(() -> new RuntimeException("로그인이 필요합니다.")));
-        String fileUrl = s3Uploader.upload(multipartFile, "cat");
-        cat.setPhoto(fileUrl);
-        return catRepository.save(cat);
+    public CatService(CatRepository catRepository, RecordRepository recordRepository, ServletContext servletContext) {
+        this.catRepository = catRepository;
+        this.recordRepository = recordRepository;
+        this.servletContext = servletContext;
     }
 
     public Cat save(Long userId, CatDto.AddRequest catDto, MultipartFile photoFile) throws Exception {
@@ -95,6 +95,10 @@ public class CatService {
     }
 
     public CatDto.Response read(Long id){
+        Cat cat = catRepository.findById(id).get();
+        String photoPath = System.getProperty("user.dir") + "/" + cat.getPhoto();
+        cat.setPhoto(photoPath);
+
         return CatDto.Response.ofEntity(
             catRepository.findById(id)
                     .orElseThrow(EntityNotFoundException::new),
@@ -114,7 +118,7 @@ public class CatService {
 
         catRepository.save(newCat.toEntity(cat, photoUrl));
     }
-
+}
     /*
     @Transactional
     public void modify(Long id, CatDto.Request newCat, MultipartFile photoFile) throws Exception {
@@ -124,7 +128,7 @@ public class CatService {
         String current_date = simpleDateFormat.format(new Date());
 
         // 프로젝트 폴더에 저장하기 위해 절대경로를 설정 (Window 의 Tomcat 은 Temp 파일을 이용한다)
-        String absolutePath = new File("").getAbsolutePath() + "\\";
+        String absolutePath = new File("").getAbsolutePath() + "/";
 
         // 경로를 지정하고 그곳에다가 저장할 심산이다
         String path = "upload/cat/" + current_date;
@@ -176,11 +180,9 @@ public class CatService {
 
         catRepository.save(cat);
     }
-     */
 
     @Transactional
     public void remove(Long id) {
-
         catRepository.inactive(id);
     }
 
@@ -193,3 +195,4 @@ public class CatService {
             ).collect(Collectors.toList());
     }
 }
+*/

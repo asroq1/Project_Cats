@@ -13,6 +13,7 @@ import com.pso.cat.util.S3Uploader;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final PostPhotoRepository postPhotoRepository;
     private final CommentRepository commentRepository;
+	private HttpServletResponse response;
 
     private final S3Uploader s3Uploader;
 

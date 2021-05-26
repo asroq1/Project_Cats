@@ -6,6 +6,7 @@ import Cropper from 'react-easy-crop';
 import { getCroppedImg } from './canvasUtils';
 import useInput from '../../hooks/useInput';
 
+
 import styled from 'styled-components';
 import 'font-awesome/css/font-awesome.min.css';
 
@@ -89,7 +90,7 @@ const CatImageUpdate = ({cat, currentIndex}) => {
                 imageSrc,
                 croppedAreaPixels
             );
-            console.log('donee', { blobURL });
+            // console.log('donee', { blobURL });
             setCroppedImage(blobURL);
 
             

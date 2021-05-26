@@ -65,19 +65,19 @@ const StyledButton = styled.button`
     background-color: ${({ theme }) => theme.green};
     font-weight: bold;
     cursor: pointer;
-
     margin-bottom: 1rem;
-
     & + & {
         margin-left: 0.5rem;
     }
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         background-color: darkgreen;
     }
     &:first-child {
         background-color: ${({ theme }) => theme.navy};
     }
-    &:first-child:hover, &:first-child:focus {
+    &:first-child:hover,
+    &:first-child:focus {
         background-color: black;
     }
 `;
@@ -144,8 +144,8 @@ const PostForm = () => {
                 });
             }
         },
-        
-        [  ]
+
+        []
     );
 
     const onRemoveImages = useCallback(
@@ -155,7 +155,6 @@ const PostForm = () => {
                 data: key,
             });
         },
-
         []
     );
 
@@ -171,26 +170,27 @@ const PostForm = () => {
                 return alert('게시글 작성해주세용');
             }
             const formData = new FormData();
+            const photos = [];
             imagePaths.forEach((p) => {
-                formData.append('image', p.file);
+                photos.push(p.file);
             });
+            formData.append('photos', photos);
             formData.append('title', title);
             formData.append('content', text);
 
-            console.log('key');
-            for (var key of formData.keys()) {
-                console.log(key);
-            }
-
-            console.log('value');
-            for (var value of formData.values()) {
-                console.log(value);
-            }
-
-            console.log('entry');
-            for (var entry of formData.entries()) {
-                console.log(entry);
-            }
+            // console.log('key');
+            // for (var key of formData.keys()) {
+            //     console.log(key);
+            // }
+            // console.log('value');
+            // for (var value of formData.values()) {
+            //     console.log(value);
+            // }
+            // console.log('entry');
+            // for (var entry of formData.entries()) {
+            //     console.log(entry);
+            // }
+            
             dispatch({
                 type: ADD_POST_REQUEST,
                 data: formData,
@@ -255,14 +255,14 @@ const PostForm = () => {
                                 ref={imageInput}
                                 accept="image/*"
                                 name="post-images"
-                                
+                                multiple
                                 onChange={onChangeImages}
                             />
                             <StyledButton
                                 type="button"
                                 onClick={onClickImageUpload}
                             >
-                                사진을 올려주세요! (1개만){' '}
+                                사진을 올려주세요! (3개 이하){' '}
                                 <i className="fa fa-paw"></i>
                             </StyledButton>
                         </CenterWrapper>

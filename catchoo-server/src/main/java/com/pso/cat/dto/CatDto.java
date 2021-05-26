@@ -22,26 +22,18 @@ public class CatDto {
 
         private String name;
         private char gender;
+        private String photo;
         @DateTimeFormat(pattern = "yyyy-MM-dd")
         private Date birth;
         private Float goalWeight;
 
-        public Cat toEntity(String photoUrl) {
+        public Cat toEntity() {
             return Cat.builder()
                 .name(name)
                 .gender(gender)
+                .photo(photo)
                 .birth(birth)
-                .photo(photoUrl)
                 .goalWeight(goalWeight).build();
-        }
-
-        public Cat toEntity(Cat cat, String photoUrl) {
-            cat.setName(name);
-            cat.setGender(gender);
-            cat.setBirth(birth);
-            cat.setGoalWeight(goalWeight);
-            cat.setPhoto(photoUrl);
-            return cat;
         }
 
     }
@@ -88,6 +80,8 @@ public class CatDto {
 
         private String name;
         private char gender;
+        @ApiModelProperty(hidden = true)
+        private String photo;
         @DateTimeFormat(pattern = "yyyy-MM-dd")
         private Date birth;
         private Float goalWeight;

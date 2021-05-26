@@ -16,10 +16,10 @@ const PostItemBlock = styled.div`
     position: relative;
     margin-top: 1rem;
     display: flex;
-    // border: 1px solid ${({ theme }) => theme.green};
-    // border-radius: 10px;
 
-    border-bottom: 1px solid gray;
+    &:not(last-child) {
+        border-bottom: 1px solid gray;
+    }
     &:first-child {
         padding-top: 0;
     }
@@ -35,15 +35,32 @@ const PostListBody = styled.div`
     //padding-top: 50px;
 `;
 
-// const PhotoContainer = styled.img`
-//     display: inline-block;
-//     width: 100px;
-//     height: 100px;
-//     margin-top: 0.25rem;
-//     margin-bottom: 0.25rem;
-//     border-radius:5px;
-//     object-fit: cover;
-// `;
+const PhotoContainer = styled.div`
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    border-radius: 10px;
+    border-bottom: 2px solid gray;
+
+    background-size: cover;
+    background-color: lightgray;
+
+    .flex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        height: 100%;
+
+        .fa-paw {
+            font-size: 3.5rem;
+            color: ${({ theme }) => theme.beige};
+        }
+    }
+`;
 
 const ErrorBox = styled.div`
     height: 100vh;
@@ -107,7 +124,7 @@ const StyledLink = styled(Link)`
 `;
 
 const PostItem = ({ post }) => {
-    const { id, title, viewCount, writer, createdDate } = post;
+    const { id, title, viewCount, writer, createdDate, images } = post;
     // const dispatch = useDispatch();
     // const setCurrentPost = useCallback((id)=>{
     //     dispatch({
@@ -120,7 +137,17 @@ const PostItem = ({ post }) => {
     return (
         <StyledLink to={`/post/view/${id}`}>
             <PostItemBlock>
-                {/* <PhotoContainer src={Images[0].src} alt="post" /> */}
+                {images ? (
+                    <PhotoContainer
+                        style={{ backgroundImage: `url(${images[0]})` }}
+                    />
+                ) : (
+                    <PhotoContainer>
+                        <div class="flex">
+                            <i className="fa fa-paw"></i>
+                        </div>
+                    </PhotoContainer>
+                )}
 
                 <SubInfo>
                     <h1>{title}</h1>

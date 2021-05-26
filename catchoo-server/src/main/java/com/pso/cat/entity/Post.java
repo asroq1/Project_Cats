@@ -41,6 +41,9 @@ public class Post {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "photo")
+    private String photo;
+
     @Column(name = "vw_cnt")
     private int viewCount;
 
