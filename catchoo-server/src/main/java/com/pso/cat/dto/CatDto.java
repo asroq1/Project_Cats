@@ -90,11 +90,13 @@ public class CatDto {
         private char gender;
         @DateTimeFormat(pattern = "yyyy-MM-dd")
         private Date birth;
+        private Float goalWeight;
 
         public Cat toEntity() {
             return Cat.builder()
                     .name(name)
                     .gender(gender)
+                    .goalWeight(goalWeight)
                     .birth(birth).build();
         }
 
