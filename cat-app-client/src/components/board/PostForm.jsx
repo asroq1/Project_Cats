@@ -170,28 +170,28 @@ const PostForm = () => {
                 return alert('게시글 작성해주세용');
             }
             const formData = new FormData();
-            /*
-            const photos = [];
+            // const photos = [];
             imagePaths.forEach((p) => {
-                photos.push(p.file);
+                
+                
+                formData.append('photo', p.file);
             });
-            formData.append('photos', photos);
-            */
+            //formData.append('photos', photos);
             formData.append('title', title);
             formData.append('content', text);
 
-            //console.log('key');
+            console.log('key');
             for (var key of formData.keys()) {
-               console.log(key);
+                console.log(key);
             }
-            // console.log('value');
-            // for (var value of formData.values()) {
-            //     console.log(value);
-            // }
-            // console.log('entry');
-            // for (var entry of formData.entries()) {
-            //     console.log(entry);
-            // }
+            console.log('value');
+            for (var value of formData.values()) {
+                console.log(value);
+            }
+            console.log('entry');
+            for (var entry of formData.entries()) {
+                console.log(entry);
+            }
             
             dispatch({
                 type: ADD_POST_REQUEST,

@@ -203,7 +203,7 @@ const PostUpdate = ({match, location}) => {
             }
             const formData = new FormData();
             imagePaths.forEach((p) => {
-                formData.append('image', p.file);
+                formData.append('photo', p.file);
             });
             formData.append('title', title);
             formData.append('content', text);
