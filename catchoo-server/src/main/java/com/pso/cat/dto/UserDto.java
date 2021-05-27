@@ -24,6 +24,20 @@ public class UserDto {
         }
     }
 
+    public static class UpdateRequest {
+        private String password;
+        private String nickname;
+
+        public User toEntity(User user) {
+            User newUser = new User();
+            if (password == null) newUser.setPassword(user.getPassword());
+            if (nickname == null) newUser.setNickname(user.getNickname());
+            return newUser;
+        }
+    }
+
+
+
     @Builder
     @Getter
     public static class Response {

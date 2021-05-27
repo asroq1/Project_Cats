@@ -57,11 +57,14 @@ public class CatService {
         Cat cat = catRepository.findById(id)
                 .orElseThrow(EntityNotFoundException::new);
 
-        // S3에 있는 기존 사진 삭제해주기
-        s3Uploader.removeFromS3(cat.getPhoto());
+        String photoUrl = null;
+        if (multipartFile != null) {
+            // S3에 있는 기존 사진 삭제해주기
+            s3Uploader.removeFromS3(cat.getPhoto());
 
-        // 새로 업로드하기
-        String photoUrl = s3Uploader.upload(multipartFile, "cat");
+            // 새로 업로드하기
+            photoUrl = s3Uploader.upload(multipartFile, "cat");
+        }
 
         catRepository.save(newCat.toEntity(cat, photoUrl));
     }

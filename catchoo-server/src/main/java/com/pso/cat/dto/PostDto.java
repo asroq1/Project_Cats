@@ -23,14 +23,20 @@ public class PostDto {
 
         private String title;
         private String content;
-        private String photo;
 
         public Post toEntity() {
             return Post.builder()
                 .title(this.getTitle())
                 .content(this.getContent())
-                .photo(this.getPhoto())
                 .build();
+        }
+
+        public Post toEntity(Post post) {
+            Post newPost = new Post();
+            if (title == null) newPost.setTitle(post.getTitle());
+            if (content == null) newPost.setContent(post.getContent());
+            post.setUpdatedDate(new Date());
+            return post;
         }
     }
 
