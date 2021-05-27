@@ -27,13 +27,22 @@ public class CatDto {
         private Date birth;
         private Float goalWeight;
 
-        public Cat toEntity() {
+        public Cat toEntity(String photoUrl) {
             return Cat.builder()
                 .name(name)
                 .gender(gender)
-                .photo(photo)
+                .photo(photoUrl)
                 .birth(birth)
                 .goalWeight(goalWeight).build();
+        }
+
+        public Cat toEntity(Cat cat, String photoUrl) {
+            cat.setName(name);
+            cat.setGender(gender);
+            cat.setBirth(birth);
+            cat.setGoalWeight(goalWeight);
+            cat.setPhoto(photoUrl);
+            return cat;
         }
 
     }

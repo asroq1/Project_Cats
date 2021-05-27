@@ -69,16 +69,8 @@ public class AuthController {
     public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto.SocialReq socialReq) {
 
         String email = socialReq.getEmail();
-        System.out.println("email = " + email);
 
         User user = customUserDetailsService.findByEmail(email);
-        System.out.println("user = " + user);
-
-        System.out.println("AuthController.authorize: found by email");
-
-        for (Authority authority : user.getAuthorities()) {
-            System.out.println("authority.getName() = " + authority.getName());
-        }
 
         try {
             SecurityContextHolder.getContext().setAuthentication(
@@ -96,8 +88,6 @@ public class AuthController {
             httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
             return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getCause());
             e.printStackTrace();
             throw new RuntimeException("dpfjqkft");
         }

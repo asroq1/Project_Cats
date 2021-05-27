@@ -34,6 +34,8 @@ public class PostService {
 
     @Transactional
     public Post save(Long userId, PostDto.Request postDto, List<MultipartFile> photos) {
+        System.out.println("photos = " + photos);
+        System.out.println("photos.size() = " + photos.size());
         Post post = postDto.toEntity();
         post.setWriter(User.builder().id(userId).build());
         post = postRepository.save(post);
@@ -41,7 +43,6 @@ public class PostService {
         savePhotos(post.getId(), photos);
 
         return postRepository.save(post);
-        //String fileUrl = s3Uploader.upload(multipartFile, "post");
     }
 
     private void savePhotos(Long postId, List<MultipartFile> photos) {
