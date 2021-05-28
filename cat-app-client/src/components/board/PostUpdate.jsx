@@ -221,7 +221,7 @@ const PostUpdate = ({ match, location }) => {
             formData.append('id', postId);
 
             deletedPhotoUrls.forEach(p => {
-                formData.append('deletedUrl', p);
+                formData.append('deletedPhotos', p);
 
             });
 
