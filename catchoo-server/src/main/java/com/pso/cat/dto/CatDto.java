@@ -21,19 +21,32 @@ public class CatDto {
     public static class Request {
 
         private String name;
-        private char gender;
-        private String photo;
+        private Character gender;
         @DateTimeFormat(pattern = "yyyy-MM-dd")
         private Date birth;
         private Float goalWeight;
 
-        public Cat toEntity() {
+        public Cat toEntity(String photoUrl) {
             return Cat.builder()
                 .name(name)
                 .gender(gender)
-                .photo(photo)
+                .photo(photoUrl)
                 .birth(birth)
                 .goalWeight(goalWeight).build();
+        }
+
+        public Cat toEntity(Cat cat, String photoUrl) {
+            Cat newCat = new Cat();
+            if (name == null) newCat.setName(cat.getName());
+            if (gender == null) newCat.setGender(cat.getGender());
+            if (birth == null) newCat.setBirth(cat.getBirth());
+            if (goalWeight == null) newCat.setGoalWeight(cat.getGoalWeight());
+            if (photoUrl != null) {
+                newCat.setPhoto(photoUrl);
+            } else {
+                newCat.setPhoto(cat.getPhoto());
+            }
+            return cat;
         }
 
     }

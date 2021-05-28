@@ -23,14 +23,20 @@ public class PostDto {
 
         private String title;
         private String content;
-        private String photo;
 
         public Post toEntity() {
             return Post.builder()
                 .title(this.getTitle())
                 .content(this.getContent())
-                .photo(this.getPhoto())
                 .build();
+        }
+
+        public Post toEntity(Post post) {
+            Post newPost = new Post();
+            if (title == null) newPost.setTitle(post.getTitle());
+            if (content == null) newPost.setContent(post.getContent());
+            post.setUpdatedDate(new Date());
+            return post;
         }
     }
 
@@ -62,7 +68,6 @@ public class PostDto {
         private final Long id;
         private final String title;
         private final String content;
-        private String photo;
         private final int viewCount;
         private final UserDto.WriterResponse writer;
         private final Date createdDate;
@@ -75,7 +80,6 @@ public class PostDto {
                 .id(post.getId())
                 .title(post.getTitle())
                 .content(post.getContent())
-                .photo(System.getProperty("user.dir") + post.getPhoto())
                 .viewCount(post.getViewCount())
                 .writer(WriterResponse.ofEntity(post.getWriter()))
                 .createdDate(post.getCreatedDate())

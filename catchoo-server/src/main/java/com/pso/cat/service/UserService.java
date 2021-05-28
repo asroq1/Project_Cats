@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityExistsException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -66,12 +67,10 @@ public class UserService {
         return UserDto.Response.ofEntity(userRepository.findById(id).get());
     }
 
-    public void modify(UserDto.Request newUser) {
+    public void modify(UserDto.UpdateRequest newUser) {
         User user = userRepository.findById(SecurityUtil.getCurrentUserId().orElseThrow(() -> new RuntimeException("로그인해주세요")))
-            .orElseThrow(() -> new RuntimeException("해당하는 유저가 없습니다."));
-        user.setPassword(newUser.getPassword());
-        user.setNickname(newUser.getNickname());
-        userRepository.save(user);
+            .orElseThrow(EntityExistsException::new);
+        userRepository.save(newUser.toEntity(user));
     }
 
     public void remove() {

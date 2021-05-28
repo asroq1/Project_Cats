@@ -34,21 +34,22 @@ public class PostService {
 
     @Transactional
     public Post save(Long userId, PostDto.Request postDto, List<MultipartFile> photos) {
+        System.out.println("photos = " + photos);
+        System.out.println("photos.size() = " + photos.size());
         Post post = postDto.toEntity();
         post.setWriter(User.builder().id(userId).build());
         post = postRepository.save(post);
 
         savePhotos(post.getId(), photos);
 
-        return postRepository.save(post);
-        //String fileUrl = s3Uploader.upload(multipartFile, "post");
+        return post;
     }
 
     private void savePhotos(Long postId, List<MultipartFile> photos) {
         try {
-            PostPhoto photoEntity = new PostPhoto();
-            photoEntity.setPostId(postId);
             for (MultipartFile photo : photos) {
+                PostPhoto photoEntity = new PostPhoto();
+                photoEntity.setPostId(postId);
                 String url = s3Uploader.upload(photo, "post");
                 photoEntity.setUrl(url);
                 postPhotoRepository.save(photoEntity);
@@ -82,15 +83,14 @@ public class PostService {
                         PostDto.Request newPost,
                         List<MultipartFile> photos,
                         List<String> deletedPhotos){
-        Post post = postRepository.findById(id)
-            .orElseThrow(EntityNotFoundException::new);
-        post.setTitle(newPost.getTitle());
-        post.setContent(newPost.getContent());
-        post.setUpdatedDate(new Date());
-
-        removeOldPhotos(deletedPhotos);
-        savePhotos(id, photos);
-
+        Post post = newPost.toEntity(postRepository.findById(id)
+            .orElseThrow(EntityNotFoundException::new));
+        if (deletedPhotos != null || !deletedPhotos.isEmpty()) {
+            removeOldPhotos(deletedPhotos);
+        }
+         if (photos != null || !photos.isEmpty()) {
+             savePhotos(id, photos);
+         }
         postRepository.save(post);
     }
 

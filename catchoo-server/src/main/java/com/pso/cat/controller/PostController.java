@@ -29,12 +29,12 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity add(PostDto.Request post, List<MultipartFile> photos) throws Exception{
+    public ResponseEntity add(PostDto.Request post, List<MultipartFile> photo) throws Exception{
         Long userId = SecurityUtil.getCurrentUserId().orElseThrow(
                 () -> new RuntimeException("로그인을 해주세요.")
         );
 
-        postService.save(userId, post, photos);
+        postService.save(userId, post, photo);
         return ResponseEntity.ok().build();
     }
 

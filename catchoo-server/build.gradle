@@ -10,6 +10,7 @@ sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
+	maven { url 'https://repo.spring.io/libs-milestone'}
 }
 
 dependencies {
@@ -48,13 +49,24 @@ dependencies {
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
 
 	//javassist
-	implementation group: 'org.javassist', name:'javassist', version: '3.15.0-GA'
+	implementation group: 'org.javassist', name: 'javassist', version: '3.15.0-GA'
 
 	//upload
 	compile group: 'commons-io', name: 'commons-io', version: '2.6'
 	compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.3'
+
+	// aws S3
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws'
+
+	test {
+		useJUnitPlatform()
+	}
 }
 
-test {
-	useJUnitPlatform()
+dependencyManagement {
+	imports {
+		mavenBom 'org.springframework.cloud:spring-cloud-aws:2.2.1.RELEASE'
+	}
 }
+
+

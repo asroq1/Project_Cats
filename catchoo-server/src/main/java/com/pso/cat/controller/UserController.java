@@ -76,7 +76,7 @@ public class UserController {
      */
 
     @PatchMapping("/user")
-    public ResponseEntity modify(UserDto.Request request) {
+    public ResponseEntity modify(UserDto.UpdateRequest request) {
         userService.modify(request);
         return ResponseEntity.ok().build();
     }

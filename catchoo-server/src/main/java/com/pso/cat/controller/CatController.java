@@ -7,6 +7,8 @@ import com.pso.cat.service.CatService;
 import com.pso.cat.util.SecurityUtil;
 import io.swagger.annotations.Api;
 import java.util.List;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,21 +24,14 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @Api(value="고양이 추가, 수정, 삭제, 조회", tags = {"고양이 API"})
 @RequestMapping("/api/cats")
+@RequiredArgsConstructor
 public class CatController {
 
     private final CatService catService;
 
-    public CatController(CatService catService) {
-        this.catService = catService;
-    }
-
     @PostMapping
-    public ResponseEntity add(CatDto.AddRequest cat, MultipartFile photoFile) throws Exception{
-        Long userId = SecurityUtil.getCurrentUserId().orElseThrow(
-                () -> new RuntimeException("로그인을 해주세요."));
-
-        catService.save(userId, cat, photoFile);
-
+    public ResponseEntity add(CatDto.AddRequest cat, MultipartFile multipartFile) throws Exception {
+        catService.save(cat, multipartFile);
         return ResponseEntity.ok().build();
     }
 
