@@ -64,7 +64,7 @@ const CatsUpdate = ({cat, currentIndex}) => {
                 data: formData,
             });
         },
-        [currImgUrl, name, birthyear, birthmonth, birthdate,gender, currentIndex]
+        [currImgUrl, name, birthyear, birthmonth, birthdate,goalWeight,gender, currentIndex]
     );
 
     const goBack = useCallback(() => {
@@ -115,7 +115,7 @@ const CatsUpdate = ({cat, currentIndex}) => {
                                     id="cat-goal-weight"
                                     name="cat-goal-weight"
                                     placeholder="Goal Weight"
-                                    value={goalWeight ? goalWeight : ''}
+                                    value={goalWeight}
                                     onChange={onChangeGoalWeight}
                                     
                                 />

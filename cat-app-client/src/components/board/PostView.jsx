@@ -16,8 +16,11 @@ import { REMOVE_POST_REQUEST } from '../../reducers/post';
 const OverallContainer = styled.div`
     color: gray;
     line-height: 1.25rem;
-    h1 {
-        cursor: pointer;
+
+
+
+    h1:first-child{
+        cursor:pointer;
     }
 `;
 
@@ -125,15 +128,16 @@ const PostView = ({ postId, post, error }) => {
         return null;
     }
 
-    const { id, title, content, writer, createdDate, images } = post;
+    const { id, title, content, writer, createdDate, photos } = post;
 
     return (
         <OverallContainer>
             <h1 onClick={goBack}>
                 <i className="fa fa-arrow-left"></i> 전체게시글{' '}
             </h1>
+            
             <PostHead>
-                {images && <ImageCarousel images={images} />}
+                {photos && <ImageCarousel photos={photos} />}
                 <h1>{title}</h1>
                 <SubInfo>
                     <span>
@@ -151,6 +155,7 @@ const PostView = ({ postId, post, error }) => {
                                 state: {
                                     originalTitle: title,
                                     originalContent: content,
+                                    originalPhotos: photos,
                                 },
                             }}
                         >

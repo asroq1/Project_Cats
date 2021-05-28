@@ -100,13 +100,15 @@ const CatImageUpload = () => {
             // 추가
             let croppedImgFile = await fetch(toSave).then(r => r.blob())
                     .then(blobFile => new File([blobFile],
-                    imageTitle, { type: "image/png" }));
-            
+                    imageTitle, { type: "image/png" }))
+                
             dispatch({
                 type: SET_CURRENT_IMAGE,
                 // data: toSave,
                 data: croppedImgFile,
-            });
+            })
+            
+            
         } catch (e) {
             console.error(e);
         }
