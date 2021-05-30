@@ -32,9 +32,8 @@ public class PostDto {
         }
 
         public Post toEntity(Post post) {
-            Post newPost = new Post();
-            if (title == null) newPost.setTitle(post.getTitle());
-            if (content == null) newPost.setContent(post.getContent());
+            if (title != null) post.setTitle(title);
+            if (content != null) post.setContent(content);
             post.setUpdatedDate(new Date());
             return post;
         }

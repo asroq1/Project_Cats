@@ -37,6 +37,7 @@ public class CatService {
             cat.setPhoto(fileUrl);
         } catch (Exception e) {
             log.info(e.getMessage());
+            throw new RuntimeException("사진이 정상적으로 저장되지 않았습니다.");
         }
         return catRepository.save(cat);
     }

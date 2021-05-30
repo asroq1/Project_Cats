@@ -36,15 +36,12 @@ public class CatDto {
         }
 
         public Cat toEntity(Cat cat, String photoUrl) {
-            Cat newCat = new Cat();
-            if (name == null) newCat.setName(cat.getName());
-            if (gender == null) newCat.setGender(cat.getGender());
-            if (birth == null) newCat.setBirth(cat.getBirth());
-            if (goalWeight == null) newCat.setGoalWeight(cat.getGoalWeight());
+            if (name != null) cat.setName(name);
+            if (gender != null) cat.setGender(gender);
+            if (birth != null) cat.setBirth(birth);
+            if (goalWeight != null) cat.setGoalWeight(goalWeight);
             if (photoUrl != null) {
-                newCat.setPhoto(photoUrl);
-            } else {
-                newCat.setPhoto(cat.getPhoto());
+                cat.setPhoto(photoUrl);
             }
             return cat;
         }
