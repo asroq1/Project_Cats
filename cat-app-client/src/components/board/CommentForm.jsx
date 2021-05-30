@@ -30,7 +30,7 @@ const CommentSubmitButton = styled.button`
 
     background-color: lightgray;
 
-    //font-size: 1rem;
+    
     padding: 0.5rem;
 
     cursor: pointer;

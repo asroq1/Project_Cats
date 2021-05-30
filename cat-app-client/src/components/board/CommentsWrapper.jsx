@@ -31,6 +31,7 @@ const EachComment = styled.div`
 const CommentsLayout = styled.div`
     margin-top: 2rem;
     font-size: 1rem;
+    margin-bottom:5rem;
     color: gray;
     h1 {
         font-weight: bold;

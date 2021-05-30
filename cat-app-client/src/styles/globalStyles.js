@@ -24,6 +24,7 @@ export const lightTheme = {
     beige: '#F4F1DE',
     orange: '#E07A5F',
     navy: '#3D405B',
+    navy2: '#3D455B',
     green: '#81B29A',
     shadow: 'rgba(0,0,0,0.5)',
 };
@@ -49,6 +50,7 @@ export const darkTheme = {
     beige: '#121212',
     orange: '#3D405B',
     navy: '#3D405B',
+    navy2:'#3D455B',
     green: '#c3c3c3',
 
     shadow: 'rgba(255, 255, 255, 0.5)',

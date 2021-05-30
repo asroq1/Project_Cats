@@ -115,7 +115,10 @@ const Main = ({ cat, currentIndex, age }) => {
     const currentCat = cat.find((v) => v.id === currentIndex);
 
     return (
+        
         <InnerGlobal>
+            {currentCat && (
+                <>
             <GeneralWrapper>
                 <div style={ topPaddingStyle }>
                     {currentCat.goalWeight&& (<h1>목표 체중 : {currentCat.goalWeight } kg</h1>) }
@@ -189,6 +192,9 @@ const Main = ({ cat, currentIndex, age }) => {
                     <ButtonWrapper >이전 데이터 보기</ButtonWrapper>
                 </Link>
             </div>
+
+            </>
+            )}
         </InnerGlobal>
     );
 };

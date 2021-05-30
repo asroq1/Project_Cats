@@ -124,7 +124,7 @@ const StyledLink = styled(Link)`
 `;
 
 const PostItem = ({ post }) => {
-    const { id, title, viewCount, writer, createdDate, images } = post;
+    const { id, title, viewCount, writer, createdDate, photos } = post;
     // const dispatch = useDispatch();
     // const setCurrentPost = useCallback((id)=>{
     //     dispatch({
@@ -137,9 +137,10 @@ const PostItem = ({ post }) => {
     return (
         <StyledLink to={`/post/view/${id}`}>
             <PostItemBlock>
-                {images ? (
+                
+                {photos ? (
                     <PhotoContainer
-                        style={{ backgroundImage: `url(${images[0]})` }}
+                        style={{ backgroundImage: `url(${photos[0]})` }}
                     />
                 ) : (
                     <PhotoContainer>

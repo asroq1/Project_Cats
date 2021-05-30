@@ -118,6 +118,7 @@ const reducer = (state = initialState, action) =>
             case READ_POST_SUCCESS:
                 draft.currentPost = action.data;
                 draft.updatePostDone = false;
+                draft.imagePaths = [];
                 // draft.imagePaths = draft.currentPost.images;
                 break;
             case READ_POST_FAILURE:
@@ -132,6 +133,7 @@ const reducer = (state = initialState, action) =>
                 draft.mainPosts = draft.mainPosts.concat(action.data);
                 draft.hasMorePost = draft.mainPosts.length < 50;
                 draft.addPostDone = false;
+                draft.imagePaths = [];
 
                 draft.removePostDone = false;
                 break;

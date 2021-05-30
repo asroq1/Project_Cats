@@ -47,7 +47,7 @@ const ImgWrapper = styled.div`
 //     }
 // `;
 
-const ImageCarousel = ({ images }) => {
+const ImageCarousel = ({ photos }) => {
     return (
         <>
             <SlickWrapper>
@@ -61,7 +61,7 @@ const ImageCarousel = ({ images }) => {
                         slidesToShow={1}
                         slidesToScroll={1}
                     >
-                        {images.map((v) => (
+                        {photos.map((v) => (
                             // <ImgWrapper key={v.src}>
                             //     <img src={v.src} alt={v.src} />
                             // </ImgWrapper>
@@ -78,7 +78,7 @@ const ImageCarousel = ({ images }) => {
 };
 
 ImageCarousel.propTypes = {
-    images: PropTypes.arrayOf(PropTypes.object).isRequired,
+    photos: PropTypes.arrayOf(String).isRequired,
 };
 
 export default ImageCarousel;
