@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-
 import styled from 'styled-components';
 
 import 'slick-carousel/slick/slick.css';
@@ -9,13 +8,14 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const SlickWrapper = styled.div`
     margin-top: 1rem;
+    margin-bottom: 2.5rem;
+
     // padding-top: 2rem;
     // padding-bottom: 2rem;
     // height: calc(100% - 44px);
+
     background: lightgray;
-
     border-radius: 10px;
-
     .slider-initialized {
         overflow: hidden;
     }
@@ -29,7 +29,6 @@ const ImgWrapper = styled.div`
         max-width: 95%;
         object-fit: contain;
         overflow: hidden;
-
         border-radius: 10px;
     }
 `;

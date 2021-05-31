@@ -217,7 +217,7 @@ const PostUpdate = ({ match, location }) => {
             } else {
                 const formData = new FormData();
                 imagePaths.forEach((p) => {
-                    formData.append('photo', p.file);
+                    formData.append('photos', p.file);
                 });
                 formData.append('title', title);
                 formData.append('content', text);
@@ -298,7 +298,7 @@ const PostUpdate = ({ match, location }) => {
                                 type="button"
                                 onClick={onClickImageUpload}
                             >
-                                사진을 올려주세요 <i className="fa fa-paw"></i>
+                                사진을 올려주세요! (3개 이하) <i className="fa fa-paw"></i>
                             </StyledButton>
                         </CenterWrapper>
 
