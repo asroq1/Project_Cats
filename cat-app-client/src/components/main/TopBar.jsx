@@ -21,12 +21,15 @@ const InnerGlobal = styled.div`
 `;
 
 const EachCol = styled.div`
+    padding: 0.25rem;
+    
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     display: flex;
     align-items: center;
     text-decoration: none;
     font-size: 1.25rem;
+    word-wrap: break-word;
     font-weight: bold;
     flex: auto;
     
@@ -88,13 +91,16 @@ const EachCol = styled.div`
 
 const TopBar = ({ cat, currentIndex, onSelect }) => {
     const menuStyle = useMemo(() => ({ height: '45px', display: 'flex' }), []);
-
     const [showCatIndex, setShowCatIndex] = useState(0);
-    const [shownCats, setShownCats] = useState([...cat].slice(0, 3));
+    const [shownCats, setShownCats] = useState([]);
 
     const [moreCatsLeft, setMoreCatsLeft] = useState(false);
     const [moreCatsRight, setMoreCatsRight] = useState(false);
 
+    useEffect(() => {
+        setShownCats([...cat].slice(0,3))
+    }, [cat]);
+    
     useEffect(() => {
         console.log("showCatIndex",showCatIndex);
         console.log("cat", cat)
@@ -111,7 +117,7 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
         } else {
             setMoreCatsLeft(false);
         }
-    }, [showCatIndex]);
+    }, [showCatIndex, cat]);
 
     const showCatsLeft = useCallback(() => {
         const newShowCatIndex = showCatIndex - 3 >= 0 ? showCatIndex - 3: 0;
@@ -119,7 +125,7 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
         setShowCatIndex(newShowCatIndex);
         console.log(showCatIndex);
         setShownCats([...cat].slice(newShowCatIndex, newShowCatIndex + 3));
-    }, [showCatIndex]);
+    }, [showCatIndex, cat]);
 
     const showCatsRight = useCallback(() => {
 
@@ -127,9 +133,8 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
         setShowCatIndex(newShowCatIndex);
         console.log(showCatIndex);
         
-        
         setShownCats([...cat].slice(newShowCatIndex, newShowCatIndex + 3));
-    }, [showCatIndex]);
+    }, [showCatIndex, cat]);
 
     // const fillerCol = useMemo(
     //     () => ({

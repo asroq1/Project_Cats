@@ -158,6 +158,7 @@ const reducer = (state = initialState, action) =>
         switch (action.type) {
             case GET_CAT_REQUEST:
                 draft.isLoading = true;
+                draft.currentIndex = -1;
                 break;
             case GET_CAT_SUCCESS:
                 draft.cat = action.data;

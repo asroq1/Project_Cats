@@ -107,7 +107,7 @@ const CatsAdd = () => {
                                 value={name}
                                 placeholder="Name"
                                 onChange={onChangeName}
-                                maxLength="50"
+                                maxLength="10"
                                 required
                             />
                         </div>

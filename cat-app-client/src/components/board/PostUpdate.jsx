@@ -106,6 +106,7 @@ const PreviewBox = styled.div`
 const PostUpdate = ({ match, location }) => {
     const { updatePostDone, currentPost } = useSelector((state) => state.post);
     const { originalTitle, originalContent, originalPhotos } = location.state;
+    const originalPhotoNum = originalPhotos.length;
     const [originalPhotoUrls, setOriginalPhotoUrls] = useState(originalPhotos);
     const [deletedPhotoUrls, setDeletedPhotoUrls] = useState([]);
     const { me } = useSelector((state) => state.user);
@@ -211,7 +212,7 @@ const PostUpdate = ({ match, location }) => {
             console.log(imagePaths);
             if (!text || !text.trim()) {
                 return alert('게시글 작성해주세용');
-            } else if (3 - deletedPhotoUrls.length + imagePaths.length > 3) {
+            } else if (originalPhotoNum - deletedPhotoUrls.length + imagePaths.length > 3) {
                 return alert('이미지는 최대 3개 업로드 가능합니다');
             } else {
                 const formData = new FormData();

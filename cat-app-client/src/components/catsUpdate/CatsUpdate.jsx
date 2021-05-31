@@ -100,7 +100,7 @@ const CatsUpdate = ({cat, currentIndex}) => {
                                 placeholder="Name"
                                 value={name}
                                 onChange={onChangeName}
-                                maxLength="50"
+                                maxLength="10"
                                 required
                             />
                         </div>
