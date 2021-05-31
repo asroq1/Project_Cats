@@ -48,14 +48,16 @@ public class PostDto {
         private final int viewCount;
         private final UserDto.WriterResponse writer;
         private final Date createdDate;
+        private final String thumbnail;
 
-        public static ListResponse ofEntity(Post post) {
+        public static ListResponse ofEntity(Post post, String url) {
             return ListResponse.builder()
                 .id(post.getId())
                 .title(post.getTitle())
                 .viewCount(post.getViewCount())
                 .writer(WriterResponse.ofEntity(post.getWriter()))
-                .createdDate(post.getCreatedDate()).build();
+                .createdDate(post.getCreatedDate())
+                .thumbnail(url).build();
         }
     }
 
