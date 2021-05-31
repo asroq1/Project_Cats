@@ -21,6 +21,7 @@ const KakaoButton = styled.button`
     color: #3a1d1d;
     font-size: 1rem;
     font-weight: bold;
+    cursor: pointer;
     border: none;
     height: 48px;
 

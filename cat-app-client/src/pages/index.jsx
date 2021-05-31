@@ -35,6 +35,7 @@ const SignupButton = styled.div`
     background-color: ${({ theme }) => theme.button};
     border-radius: 4px;
     color: #fff;
+    cursor: pointer;
     font-size: 1rem;
     font-weight: bold;
     text-decoration: none;

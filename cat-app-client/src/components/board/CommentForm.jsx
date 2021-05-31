@@ -27,12 +27,8 @@ const CommentSubmitButton = styled.button`
     bottom: -40;
     border: none;
     border-radius: 10px;
-
     background-color: lightgray;
-
-    
     padding: 0.5rem;
-
     cursor: pointer;
 `;
 

@@ -39,6 +39,7 @@ const SubmitButton = styled.button`
     color: #fff;
     font-size: 1rem;
     font-weight: bold;
+    cursor:pointer;
     border: none;
     background-color: ${({ theme }) => theme.button};
 `;
