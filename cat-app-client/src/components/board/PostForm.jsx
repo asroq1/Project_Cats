@@ -169,6 +169,10 @@ const PostForm = () => {
             if (!text || !text.trim()) {
                 return alert('게시글 작성해주세용');
             }
+            else if (imagePaths.length> 3) {
+                return alert('이미지는 최대 3개 업로드 가능합니다');
+            } 
+            else {
             const formData = new FormData();
             // const photos = [];
             imagePaths.forEach((p) => {
@@ -197,6 +201,7 @@ const PostForm = () => {
                 type: ADD_POST_REQUEST,
                 data: formData,
             });
+        }
         },
         [text, title, imagePaths]
     );

@@ -9,9 +9,9 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const SlickWrapper = styled.div`
     margin-top: 1rem;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    height: calc(100% - 44px);
+    // padding-top: 2rem;
+    // padding-bottom: 2rem;
+    // height: calc(100% - 44px);
     background: lightgray;
 
     border-radius: 10px;
@@ -26,9 +26,11 @@ const ImgWrapper = styled.div`
     & img {
         margin: 0 auto;
         max-height: 250px;
-        max-width: 250px;
+        max-width: 95%;
         object-fit: contain;
         overflow: hidden;
+
+        border-radius: 10px;
     }
 `;
 

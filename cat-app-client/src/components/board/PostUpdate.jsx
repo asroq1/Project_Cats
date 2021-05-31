@@ -179,18 +179,18 @@ const PostUpdate = ({ match, location }) => {
     const onRemoveOriginalImages = useCallback(
         (url) => () => {
             setDeletedPhotoUrls([...deletedPhotoUrls, url]);
-            
-            console.log("originalPhotoUrls",originalPhotoUrls)
-            
-            const newArr = originalPhotoUrls.filter(v => v !==url);
+
+            console.log('originalPhotoUrls', originalPhotoUrls);
+
+            const newArr = originalPhotoUrls.filter((v) => v !== url);
             setOriginalPhotoUrls(newArr);
         },
-        [originalPhotoUrls,deletedPhotoUrls]
+        [originalPhotoUrls, deletedPhotoUrls]
     );
     useEffect(() => {
-        console.log("change",deletedPhotoUrls)
-        console.log("change original",originalPhotoUrls)
-    }, [deletedPhotoUrls, originalPhotoUrls])
+        console.log('change', deletedPhotoUrls);
+        console.log('change original', originalPhotoUrls);
+    }, [deletedPhotoUrls, originalPhotoUrls]);
     const onRemoveImages = useCallback(
         (key) => () => {
             dispatch({
@@ -211,40 +211,42 @@ const PostUpdate = ({ match, location }) => {
             console.log(imagePaths);
             if (!text || !text.trim()) {
                 return alert('게시글 작성해주세용');
+            } else if (3 - deletedPhotoUrls.length + imagePaths.length > 3) {
+                return alert('이미지는 최대 3개 업로드 가능합니다');
+            } else {
+                const formData = new FormData();
+                imagePaths.forEach((p) => {
+                    formData.append('photo', p.file);
+                });
+                formData.append('title', title);
+                formData.append('content', text);
+                formData.append('id', postId);
+
+                deletedPhotoUrls.forEach((p) => {
+                    formData.append('deletedPhotos', p);
+                });
+
+                console.log('key');
+                for (var key of formData.keys()) {
+                    console.log(key);
+                }
+
+                console.log('value');
+                for (var value of formData.values()) {
+                    console.log(value);
+                }
+
+                console.log('entry');
+                for (var entry of formData.entries()) {
+                    console.log(entry);
+                }
+                return dispatch({
+                    type: UPDATE_POST_REQUEST,
+                    data: formData,
+                });
             }
-            const formData = new FormData();
-            imagePaths.forEach((p) => {
-                formData.append('photo', p.file);
-            });
-            formData.append('title', title);
-            formData.append('content', text);
-            formData.append('id', postId);
-
-            deletedPhotoUrls.forEach(p => {
-                formData.append('deletedPhotos', p);
-
-            });
-
-            console.log('key');
-            for (var key of formData.keys()) {
-                console.log(key);
-            }
-
-            console.log('value');
-            for (var value of formData.values()) {
-                console.log(value);
-            }
-
-            console.log('entry');
-            for (var entry of formData.entries()) {
-                console.log(entry);
-            }
-            return dispatch({
-                type: UPDATE_POST_REQUEST,
-                data: formData,
-            });
         },
-        [text, title, deletedPhotoUrls,imagePaths, postId]
+        [text, title, deletedPhotoUrls, imagePaths, postId]
     );
 
     return (
