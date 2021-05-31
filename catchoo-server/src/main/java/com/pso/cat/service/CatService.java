@@ -32,12 +32,14 @@ public class CatService {
         Cat cat = catDto.toEntity();
         cat.setUserId(SecurityUtil.getCurrentUserId()
                 .orElseThrow(() -> new RuntimeException("로그인이 필요합니다.")));
-        try {
-            String fileUrl = s3Uploader.upload(multipartFile, "cat");
-            cat.setPhoto(fileUrl);
-        } catch (Exception e) {
-            log.info(e.getMessage());
-            throw new RuntimeException("사진이 정상적으로 저장되지 않았습니다.");
+        if (multipartFile != null) {
+            try {
+                String fileUrl = s3Uploader.upload(multipartFile, "cat");
+                cat.setPhoto(fileUrl);
+            } catch (Exception e) {
+                log.info(e.getMessage());
+                throw new RuntimeException("사진이 정상적으로 저장되지 않았습니다.");
+            }
         }
         return catRepository.save(cat);
     }
@@ -54,18 +56,26 @@ public class CatService {
     }
 
     @Transactional
-    public void modify(Long id, CatDto.Request newCat, MultipartFile multipartFile) throws Exception {
+    public void modify(Long id, CatDto.Request newCat, MultipartFile multipartFile) {
         Cat cat = catRepository.findById(id)
                 .orElseThrow(EntityNotFoundException::new);
 
         String photoUrl = null;
-        if (multipartFile != null) {
-            // S3에 있는 기존 사진 삭제해주기
-            s3Uploader.removeFromS3(cat.getPhoto());
 
-            // 새로 업로드하기
-            photoUrl = s3Uploader.upload(multipartFile, "cat");
+        try {
+            if (multipartFile != null) {
+                // S3에 있는 기존 사진 삭제해주기
+                if (cat.getPhoto() != null) {
+                    s3Uploader.removeFromS3(cat.getPhoto());
+                }
+
+                // 새로 업로드하기
+                photoUrl = s3Uploader.upload(multipartFile, "cat");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("사진을 업로드하는 도중 오류가 발생했습니다.");
         }
+
 
         catRepository.save(newCat.toEntity(cat, photoUrl));
     }
