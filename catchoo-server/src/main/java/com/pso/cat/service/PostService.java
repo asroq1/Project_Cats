@@ -111,7 +111,11 @@ public class PostService {
     private List<PostDto.ListResponse> toPhotoList(Iterable<Post> articles) {
         List<PostDto.ListResponse> list = new ArrayList<>();
         for (Post post : articles) {
-            String thumbnail = postPhotoRepository.findFirstByPostId(post.getId()).getUrl();
+            PostPhoto photo = postPhotoRepository.findFirstByPostId(post.getId());
+            String thumbnail = null;
+            if (photo != null) {
+                thumbnail = photo.getUrl();
+            }
             list.add(PostDto.ListResponse.ofEntity(post, thumbnail));
         }
         return list;
