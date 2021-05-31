@@ -22,17 +22,9 @@ const FormBlock = styled.div`
     min-height: 100vh;
 `;
 
-// const EditBlock = styled.div`
-//     padding-top: 5rem;
-//     padding-bottom: 5rem;
-//    color: gray;
-
-//`;
-
 const StyledBlock = styled.div`
     display: flex;
     line-height: 1.5rem;
-
     textarea,
     input {
         margin-top: 1rem;
@@ -104,7 +96,7 @@ const PreviewBox = styled.div`
 `;
 
 const PostUpdate = ({ match, location }) => {
-    const { updatePostDone, currentPost } = useSelector((state) => state.post);
+    const { updatePostDone } = useSelector((state) => state.post);
     const { originalTitle, originalContent, originalPhotos } = location.state;
     const originalPhotoNum = originalPhotos.length;
     const [originalPhotoUrls, setOriginalPhotoUrls] = useState(originalPhotos);
@@ -205,11 +197,14 @@ const PostUpdate = ({ match, location }) => {
     const onSubmit = useCallback(
         (e) => {
             e.preventDefault();
-            
+
             // console.log(imagePaths);
             if (!text || !text.trim()) {
                 return alert('게시글 작성해주세용');
-            } else if (originalPhotoNum - deletedPhotoUrls.length + imagePaths.length > 3) {
+            } else if (
+                originalPhotoNum - deletedPhotoUrls.length + imagePaths.length >
+                3
+            ) {
                 return alert('이미지는 최대 3개 업로드 가능합니다');
             } else {
                 const formData = new FormData();
@@ -295,7 +290,8 @@ const PostUpdate = ({ match, location }) => {
                                 type="button"
                                 onClick={onClickImageUpload}
                             >
-                                사진을 올려주세요! (3개 이하) <i className="fa fa-paw"></i>
+                                사진을 올려주세요! (3개 이하){' '}
+                                <i className="fa fa-paw"></i>
                             </StyledButton>
                         </CenterWrapper>
 

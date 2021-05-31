@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import 'font-awesome/css/font-awesome.min.css';
 
 const InnerGlobal = styled.div`
-    background-color: ${({theme})=>theme.beige};
+    background-color: ${({ theme }) => theme.beige};
     min-height: calc(100vh - 45px);
     margin: 0 auto;
     display: flex;

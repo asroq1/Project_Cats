@@ -1,9 +1,7 @@
-// import {createAction, handleActions} from 'redux-actions';
 import produce from 'immer';
-//import shortId from 'shortid';
 
 const initialState = {
-    mainPosts:[],  
+    mainPosts: [],
     imagePaths: [
         // 'https://images.unsplash.com/photo-1572097664187-7b183a6bda78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=675&q=80',
         // 'https://lh3.googleusercontent.com/proxy/zf7oU6Dpf3eVygxcgjUyt0zQMUiH7mO1Hvr9ygse9b_PhGgrD7iPj7cR9aFBNy53_JGupIhtNOpRCKTv7eHT0sqfzggWM5lpzcD5gT-E0kkoB5QAkhM5-r6euWU4zEpxCH022ksHXbyGQ3J91-09cSYiG_E1gxbdMc-sZc6Y3mXvLrCf',
@@ -18,7 +16,7 @@ const initialState = {
 
     getCommentsLoading: false,
     getCommentsDone: false,
-    getCommentsError:null,
+    getCommentsError: null,
 
     removeCommentLoading: false,
     removeCommentDone: false,
@@ -26,13 +24,13 @@ const initialState = {
 
     readPostLoading: false,
     readPostDone: false,
-    readPostError:null,
+    readPostError: null,
 
-    addPostLoading:false,
+    addPostLoading: false,
     addPostDone: false,
     addPostError: null,
 
-    udpatePostLoading:false,
+    udpatePostLoading: false,
     updatePostDone: false,
     updatePostError: null,
 
@@ -62,7 +60,6 @@ export const LIST_POST_FAILURE = 'LIST_POST_FAILURE';
 
 //포스트 페이지에서 벗어날 땐 데이터 비우기
 export const UNLOAD_POST = 'UNLOAD_POST';
-
 export const UNLOAD_POSTS = 'UNLOAD_POSTS';
 
 export const UPLOAD_IMAGES_REQUEST = 'UPLOAD_IMAGES_REQUEST';
@@ -91,8 +88,7 @@ export const GET_COMMENTS_FAILURE = 'GET_COMMENTS_FAILURE';
 
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 
-
-const reducer = (state = initialState, action) => 
+const reducer = (state = initialState, action) =>
     produce(state, (draft) => {
         switch (action.type) {
             case ADD_POST_REQUEST:
@@ -101,14 +97,13 @@ const reducer = (state = initialState, action) =>
                 draft.addPostError = null;
                 break;
             case ADD_POST_SUCCESS:
-                //draft.mainPosts.unshift(action.data);
                 draft.imagePaths = [];
                 draft.addPostLoading = false;
                 draft.addPostDone = true;
                 break;
             case ADD_POST_FAILURE:
                 draft.addPostLoading = false;
-                draft.addPostErrror = action.data;    
+                draft.addPostErrror = action.data;
                 break;
             case READ_POST_REQUEST:
                 draft.readPostLoading = true;
@@ -119,7 +114,7 @@ const reducer = (state = initialState, action) =>
                 draft.currentPost = action.data;
                 draft.updatePostDone = false;
                 draft.imagePaths = [];
-                // draft.imagePaths = draft.currentPost.images;
+
                 break;
             case READ_POST_FAILURE:
                 draft.error = action.data;
@@ -134,7 +129,6 @@ const reducer = (state = initialState, action) =>
                 draft.hasMorePost = draft.mainPosts.length < 50;
                 draft.addPostDone = false;
                 draft.imagePaths = [];
-
                 draft.removePostDone = false;
                 break;
             case LIST_POST_FAILURE:
@@ -149,7 +143,7 @@ const reducer = (state = initialState, action) =>
                 break;
             case UPDATE_POST_REQUEST:
                 draft.updatePostLoading = true;
-                draft.updatePostDone= false;
+                draft.updatePostDone = false;
                 draft.updatePostError = null;
                 break;
             case UPDATE_POST_SUCCESS:
@@ -173,7 +167,7 @@ const reducer = (state = initialState, action) =>
                 //     (v) => v.id !== action.data.PostId
                 // );
                 draft.removePostLoading = false;
-                draft.removePostDone= true;
+                draft.removePostDone = true;
                 break;
             case REMOVE_POST_FAILURE:
                 draft.removePostLoading = false;
@@ -189,11 +183,9 @@ const reducer = (state = initialState, action) =>
                 //     (v) => v.id === action.data.postId
                 // );
                 // post.Comments.unshift(action.data);
-
                 // draft.currentPost.comments.unshift(action.data);
                 // 어차피 댓글 전체를 다시 불러오는 식으로 설계돼서
                 // 아래와 같은 코드 필요 x
-                
                 // draft.currentComments.unshift(action.data);
                 draft.addCommentLoading = false;
                 draft.addCommentDone = true;
@@ -223,7 +215,7 @@ const reducer = (state = initialState, action) =>
             case GET_COMMENTS_REQUEST:
                 // 댓글 변화가 게시글 내의 댓글 (GET /api/posts/{id} 시 반환되는)에는 반영이 현재 되지 않아
                 // 댓글 부분은 현재 게시글과 따로 구현 (GET /api/comment/{postId})
-                draft.currentComments =[];    
+                draft.currentComments = [];
                 draft.getCommentsLoading = true;
                 draft.getCommentsDone = false;
                 draft.getCommentsError = null;
@@ -238,7 +230,7 @@ const reducer = (state = initialState, action) =>
             case GET_COMMENTS_FAILURE:
                 draft.getCommentsLoading = false;
                 draft.getCommentsError = action.data;
-                break; 
+                break;
             case UPLOAD_IMAGES_REQUEST:
                 break;
             case UPLOAD_IMAGES_SUCCESS:

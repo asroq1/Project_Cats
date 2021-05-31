@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { LOG_OUT_REQUEST } from '../../reducers/user';
 import Toggle from '../toggle/Toggle';
 import { useDarkMode } from '../../hooks/useDarkMode ';
-// import { lightTheme, darkTheme } from '../../styles/globalStyles';
 
 const BackgroundWrapper = styled.div`
     position: fixed;
@@ -25,16 +24,15 @@ const Overlay = styled.div`
     height: 100vh;
     margin: 0 auto;
     padding: 3rem;
-    color: ${({ theme })=>theme.textlight};
+    color: ${({ theme }) => theme.textlight};
     background-color: ${({ theme }) => theme.navy};
     display: flex;
     flex-direction: column;
     text-align: center;
-
 `;
 
 const Header = styled.div`
-    i{
+    i {
         padding-right: 1rem;
     }
     h1 {
@@ -49,42 +47,31 @@ const Header = styled.div`
         margin-bottom: 1rem;
         text-align: right;
     }
-    
 
     transition: all 1s;
 `;
-
-// const SvgContainer = styled.img`
-//     height: 1.5rem;
-//     width: 1.5rem;
-
-//     filter: invert(100%);
-// `;
 
 const MenuWrapper = styled.div`
     margin-top: 2rem;
     margin-bottom: 2rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
-
     border-top: 1.5px solid ${({ theme }) => theme.beige};
     font-size: 2rem;
     line-height: 2;
     cursor: pointer;
-
     a {
         text-decoration: none;
     }
     h2 {
-        color: ${({ theme })=>theme.textlight};
+        color: ${({ theme }) => theme.textlight};
     }
-
-    h2:hover, h2:focus {
+    h2:hover,
+    h2:focus {
         color: ${({ theme }) => theme.cOrange};
     }
 
-
-    transition:all 1s;
+    transition: all 1s;
 `;
 
 const NightModeWrapper = styled.div`
@@ -95,36 +82,21 @@ const NightModeWrapper = styled.div`
     border-top: 1.5px solid ${({ theme }) => theme.beige};
     margin-top: auto;
     cursor: pointer;
-
-
-    transition:all 1s;
+    transition: all 1s;
 `;
-
-// const NightWrapper = styled.button`
-//     background: ${({ theme }) => theme.light.mainBackground};
-// `;
 
 const ModalMenu = ({ onClose }) => {
     const { me } = useSelector((state) => state.user);
     const [theme, toggleTheme] = useDarkMode();
-    //const themeMode = theme === 'light' ? lightTheme : darkTheme;
-
-    // const toggleNightMode = useCallback(() => {
-    //     setNightMode(!isNightMode);
-    // });
-
     const dispatch = useDispatch();
-
     const onLogOut = useCallback(() => {
         dispatch({
             type: LOG_OUT_REQUEST,
         });
     }, []);
-
     const history = useHistory();
     useEffect(() => {
         if (!localStorage.token) {
-            
             alert('로그인 먼저 해주세요');
             history.push('/');
         }
@@ -141,9 +113,8 @@ const ModalMenu = ({ onClose }) => {
                         {' '}
                         {/* <SvgContainer src =  "/image/icon/elegant-party.svg" alt="Hi"/>  */}
                         <i className="fa fa-paw"></i>
-                            {me&&me.nickname}{' '}
-                            집사님, <br />
-                            안녕하세요!
+                        {me && me.nickname} 집사님, <br />
+                        안녕하세요!
                     </h1>
                 </Header>
 

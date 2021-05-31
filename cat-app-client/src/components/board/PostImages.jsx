@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImageCarousel from './ImageCarousel'
+import ImageCarousel from './ImageCarousel';
 
-const PostImages = ({images}) => {
+const PostImages = ({ images }) => {
     return (
         <>
-            {showImagesZoom && <ImageCarousel images = {images} onClose = {onClose} />}
+            {showImagesZoom && (
+                <ImageCarousel images={images} onClose={onClose} />
+            )}
         </>
-        )
-}
+    );
+};
 
 PostImages.propTypes = {
-    images: PropTypes.arrayOf(PropTypes.object)
-}
+    images: PropTypes.arrayOf(PropTypes.object),
+};
 export default PostImages;

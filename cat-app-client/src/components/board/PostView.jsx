@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { Link, useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -8,7 +7,6 @@ import 'font-awesome/css/font-awesome.min.css';
 import PropTypes from 'prop-types';
 
 import CommentForm from './CommentForm';
-
 import CommentsWrapper from './CommentsWrapper';
 import ImageCarousel from './ImageCarousel';
 import { REMOVE_POST_REQUEST } from '../../reducers/post';
@@ -16,11 +14,8 @@ import { REMOVE_POST_REQUEST } from '../../reducers/post';
 const OverallContainer = styled.div`
     color: gray;
     line-height: 1.25rem;
-
-
-
-    h1:first-child{
-        cursor:pointer;
+    h1:first-child {
+        cursor: pointer;
     }
 `;
 
@@ -30,10 +25,8 @@ const PostHead = styled.div`
     padding-bottom: 1rem;
     margin-bottom: 1.25rem;
     margin-top: 0.75rem;
-
     h1 {
         font-weight: bold;
-
         color: ${({ theme }) => theme.text};
         line-height: 1.5rem;
         font-size: 1.5rem;
@@ -88,7 +81,6 @@ const PostView = ({ postId, post, error }) => {
     }, []);
     const dispatch = useDispatch();
     const { removePostDone } = useSelector((state) => state.post);
-
     const { me } = useSelector((state) => state.user);
     const onRemovePost = useCallback(
         (e) => {
@@ -127,15 +119,14 @@ const PostView = ({ postId, post, error }) => {
     if (!post) {
         return null;
     }
-
     const { id, title, content, writer, createdDate, photos } = post;
 
     return (
         <OverallContainer>
             <h1 onClick={goBack}>
-                <i className="fa fa-arrow-left"></i> 전체게시글{' '}
+                <i className="fa fa-arrow-left"></i> 전체게시글 
             </h1>
-            
+
             <PostHead>
                 {photos && <ImageCarousel photos={photos} />}
                 <h1>{title}</h1>

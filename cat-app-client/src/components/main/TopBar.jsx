@@ -22,7 +22,6 @@ const InnerGlobal = styled.div`
 
 const EachCol = styled.div`
     padding: 0.25rem;
-    
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     display: flex;
@@ -32,17 +31,18 @@ const EachCol = styled.div`
     word-wrap: break-word;
     font-weight: bold;
     flex: auto;
-    
-    
-    &:nth-child(even){
+    &:nth-child(even) {
         background-color: ${(props) =>
-            props.active ? ({ theme }) => theme.beige : ({ theme }) => theme.navy};
-        }
-    &:nth-child(odd){
-        background-color: ${(props) =>
-            props.active ? ({ theme }) => theme.beige : ({ theme }) => theme.navy2
+            props.active
+                ? ({ theme }) => theme.beige
+                : ({ theme }) => theme.navy};
     }
-}
+    &:nth-child(odd) {
+        background-color: ${(props) =>
+            props.active
+                ? ({ theme }) => theme.beige
+                : ({ theme }) => theme.navy2};
+    }
     &:hover,
     &:focus {
         background-color: ${(props) =>
@@ -93,14 +93,13 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
     const menuStyle = useMemo(() => ({ height: '45px', display: 'flex' }), []);
     const [showCatIndex, setShowCatIndex] = useState(0);
     const [shownCats, setShownCats] = useState([]);
-
     const [moreCatsLeft, setMoreCatsLeft] = useState(false);
     const [moreCatsRight, setMoreCatsRight] = useState(false);
 
     useEffect(() => {
-        setShownCats([...cat].slice(0,3))
+        setShownCats([...cat].slice(0, 3));
     }, [cat]);
-    
+
     useEffect(() => {
         // console.log("showCatIndex",showCatIndex);
         // console.log("cat", cat)
@@ -111,7 +110,6 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
         } else {
             setMoreCatsRight(false);
         }
-
         if (showCatIndex >= 3) {
             setMoreCatsLeft(true);
         } else {
@@ -120,34 +118,19 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
     }, [showCatIndex, cat]);
 
     const showCatsLeft = useCallback(() => {
-        const newShowCatIndex = showCatIndex - 3 >= 0 ? showCatIndex - 3: 0;
-
+        const newShowCatIndex = showCatIndex - 3 >= 0 ? showCatIndex - 3 : 0;
         setShowCatIndex(newShowCatIndex);
         // console.log(showCatIndex);
         setShownCats([...cat].slice(newShowCatIndex, newShowCatIndex + 3));
     }, [showCatIndex, cat]);
 
     const showCatsRight = useCallback(() => {
-
-        const newShowCatIndex = showCatIndex + 3 < cat.length ? showCatIndex + 3 : cat.length-1;
+        const newShowCatIndex =
+            showCatIndex + 3 < cat.length ? showCatIndex + 3 : cat.length - 1;
         setShowCatIndex(newShowCatIndex);
-        
         // console.log(showCatIndex);
-        
         setShownCats([...cat].slice(newShowCatIndex, newShowCatIndex + 3));
     }, [showCatIndex, cat]);
-
-    // const fillerCol = useMemo(
-    //     () => ({
-    //         display: 'inline-block',
-    //         flex: 1,
-    //         borderBottom: '1px solid black',
-    //         paddingTop: '1.5rem',
-    //         paddingBottom: '1.5rem',
-    //         fontSize: '1rem',
-    //     }),
-    //     []
-    // );
 
     const [showModalMenu, setShowModalMenu] = useState(false);
     const history = useHistory();
@@ -165,7 +148,9 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
         <InnerGlobal>
             <div style={menuStyle}>
                 {moreCatsLeft && (
-                    <EachCol onClick={ showCatsLeft}><i className= "fa fa-chevron-left"></i></EachCol>
+                    <EachCol onClick={showCatsLeft}>
+                        <i className="fa fa-chevron-left"></i>
+                    </EachCol>
                 )}
                 {shownCats.map((el) => (
                     <EachCol
@@ -178,7 +163,9 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
                     </EachCol>
                 ))}
                 {moreCatsRight && (
-                    <EachCol onClick={showCatsRight}><i className =  "fa fa-chevron-right"></i></EachCol>
+                    <EachCol onClick={showCatsRight}>
+                        <i className="fa fa-chevron-right"></i>
+                    </EachCol>
                 )}
                 <EachCol onClick={gotoAddCat}>
                     <i className="fa fa-plus"></i>

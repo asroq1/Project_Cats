@@ -1,4 +1,4 @@
-import product, { produce } from 'immer';
+import { produce } from 'immer';
 
 export const initialState = {
     addWeightLoading: false,
@@ -162,7 +162,10 @@ const reducer = (state = initialState, action) =>
                 break;
             case GET_CAT_SUCCESS:
                 draft.cat = action.data;
-                draft.currentIndex = draft.currentIndex === -1 ? action.data[0].id : draft.currentIndex;
+                draft.currentIndex =
+                    draft.currentIndex === -1
+                        ? action.data[0].id
+                        : draft.currentIndex;
                 draft.addCatDone = false;
                 draft.updateCatDone = false;
 
@@ -220,7 +223,6 @@ const reducer = (state = initialState, action) =>
             case ADD_WEIGHT_SUCCESS:
                 draft.addWeightLoading = false;
                 draft.addWeightDone = true;
-
                 break;
             case ADD_WEIGHT_FAILURE:
                 draft.addWeightLoading = false;

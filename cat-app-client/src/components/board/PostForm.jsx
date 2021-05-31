@@ -7,9 +7,10 @@ import {
     UPLOAD_IMAGES_SUCCESS,
     REMOVE_IMAGE,
 } from '../../reducers/post';
-import styled from 'styled-components';
 
+import styled from 'styled-components';
 import 'font-awesome/css/font-awesome.min.css';
+
 import OverallPostsLayout from './OverallPostsLayout';
 
 const FormBlock = styled.div`
@@ -23,7 +24,6 @@ const FormBlock = styled.div`
 const StyledBlock = styled.div`
     display: flex;
     line-height: 1.5rem;
-
     textarea,
     input {
         margin-top: 1rem;
@@ -39,7 +39,6 @@ const StyledBlock = styled.div`
         padding: 1rem;
         margin-bottom: 1rem;
     }
-
     input::placeholder {
         text-align: start;
     }
@@ -90,7 +89,6 @@ const PreviewBox = styled.div`
         border: 1px solid gray;
         padding: 0.25rem;
         background-color: none;
-
         margin-top: 0.5rem;
         width: 100%;
     }
@@ -165,44 +163,40 @@ const PostForm = () => {
     const onSubmit = useCallback(
         (e) => {
             e.preventDefault();
-            
+
             // console.log(imagePaths);
             if (!text || !text.trim()) {
                 return alert('게시글 작성해주세용');
-            }
-            else if (imagePaths.length> 3) {
+            } else if (imagePaths.length > 3) {
                 return alert('이미지는 최대 3개 업로드 가능합니다');
-            } 
-            else {
-            const formData = new FormData();
-            // const photos = [];
-            imagePaths.forEach((p) => {
-                
-                
-                formData.append('photo', p.file);
-            });
-            //formData.append('photos', photos);
-            formData.append('title', title);
-            formData.append('content', text);
+            } else {
+                const formData = new FormData();
+                // const photos = [];
+                imagePaths.forEach((p) => {
+                    formData.append('photo', p.file);
+                });
+                //formData.append('photos', photos);
+                formData.append('title', title);
+                formData.append('content', text);
 
-            // console.log('key');
-            // for (var key of formData.keys()) {
-            //     console.log(key);
-            // }
-            // console.log('value');
-            // for (var value of formData.values()) {
-            //     console.log(value);
-            // }
-            // console.log('entry');
-            // for (var entry of formData.entries()) {
-            //     console.log(entry);
-            // }
-            
-            dispatch({
-                type: ADD_POST_REQUEST,
-                data: formData,
-            });
-        }
+                // console.log('key');
+                // for (var key of formData.keys()) {
+                //     console.log(key);
+                // }
+                // console.log('value');
+                // for (var value of formData.values()) {
+                //     console.log(value);
+                // }
+                // console.log('entry');
+                // for (var entry of formData.entries()) {
+                //     console.log(entry);
+                // }
+
+                dispatch({
+                    type: ADD_POST_REQUEST,
+                    data: formData,
+                });
+            }
         },
         [text, title, imagePaths]
     );

@@ -28,7 +28,7 @@ const PhotoContainer = styled.img`
     width: 200px;
     height: 200px;
     margin-top: 2rem;
-    border: 2px solid ${({theme}) => theme.navy};
+    border: 2px solid ${({ theme }) => theme.navy};
     object-fit: cover;
 `;
 
@@ -38,11 +38,12 @@ const ButtonWrapper = styled.button`
     border-radius: 5px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${({theme}) => theme.navy};
-    color:${({theme})=>theme.text};
+    background-color: ${({ theme }) => theme.navy};
+    color: ${({ theme }) => theme.text};
     cursor: pointer;
     border: 1px solid black;
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         background: black;
     }
     margin-top: 0.5rem;
@@ -119,6 +120,6 @@ const CatEdit = ({ cat, currentIndex }) => {
 CatEdit.propTypes = {
     cat: PropTypes.object.isRequired,
     currentIndex: PropTypes.number.isRequired,
-}
+};
 
 export default CatEdit;

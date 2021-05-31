@@ -11,10 +11,8 @@ const BackgroundColor = styled.div`
     background-color: ${({ theme }) => theme.beige};
     margin: 0;
     padding: 0;
-    padding-bottom:1rem;
-
+    padding-bottom: 1rem;
     min-height: 100vh;
-    
 `;
 
 const CatsUpdateContainer = () => {

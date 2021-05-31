@@ -1,11 +1,8 @@
 import React, { useEffect, useCallback } from 'react';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { ADD_COMMENT_REQUEST } from '../../reducers/post';
-
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
 import useInput from '../../hooks/useInput';
 
 const CommentFormWrapper = styled.div`
@@ -34,8 +31,6 @@ const CommentSubmitButton = styled.button`
 
 const CommentForm = ({ id }) => {
     const { addCommentDone } = useSelector((state) => state.post);
-    //const {me} = useSelector((state) => state.user);
-
     const dispatch = useDispatch();
     const [commentText, onChangeCommentText, setCommentText] = useInput('');
 

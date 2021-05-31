@@ -16,7 +16,6 @@ const PostItemBlock = styled.div`
     position: relative;
     margin-top: 1rem;
     display: flex;
-
     &:not(last-child) {
         border-bottom: 1px solid gray;
     }
@@ -30,7 +29,6 @@ const PostItemBlock = styled.div`
 
 const PostListBody = styled.div`
     position: relative;
-
     min-height: calc(100vh - 100px);
     //padding-top: 50px;
 `;
@@ -43,18 +41,14 @@ const PhotoContainer = styled.div`
     margin-bottom: 0.25rem;
     border-radius: 10px;
     border-bottom: 2px solid gray;
-
     background-size: cover;
     background-color: lightgray;
-
     .flex {
         display: flex;
         align-items: center;
         justify-content: center;
-
         width: 100%;
         height: 100%;
-
         .fa-paw {
             font-size: 3.5rem;
             color: ${({ theme }) => theme.beige};
@@ -124,20 +118,11 @@ const StyledLink = styled(Link)`
 `;
 
 const PostItem = ({ post }) => {
-    const { id, title, viewCount, writer, createdDate, thumbnail } = post;
-    // const dispatch = useDispatch();
-    // const setCurrentPost = useCallback((id)=>{
-    //     dispatch({
-    //         type: READ_POST_REQUEST,
-    //         data: id,
-
-    //     })
-    // }, []);
+    const { id, title, viewCount, writer, createdDate, thumbnail } = post;    
 
     return (
         <StyledLink to={`/post/view/${id}`}>
             <PostItemBlock>
-                
                 {thumbnail ? (
                     <PhotoContainer
                         style={{ backgroundImage: `url(${thumbnail})` }}

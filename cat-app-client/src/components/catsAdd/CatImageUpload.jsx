@@ -14,19 +14,18 @@ import { SET_CURRENT_IMAGE } from '../../reducers/cat';
 const InnerGlobal = styled.div`
     width: 80%;
     margin: 0 auto;
-    margin-bottom:0.25rem;
+    margin-bottom: 0.25rem;
     display: flex;
-
     justify-content: space-between;
 `;
 
 const ImageUploadButtons = styled.button`
     flex: 1;
     padding: 1rem;
-    border-radius:10px;
+    border-radius: 10px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${({theme}) => theme.orange};
+    background-color: ${({ theme }) => theme.orange};
     border: none;
     cursor: pointer;
     color: white;
@@ -34,7 +33,8 @@ const ImageUploadButtons = styled.button`
     & + & {
         margin-left: 0.5rem;
     }
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         background: darkred;
     }
 `;
@@ -48,13 +48,12 @@ const CenterWrapper = styled.div`
 
 const CropperContainer = styled.div`
     margin-top: 1rem;
-    line-height:1.25;
+    line-height: 1.25;
     height: 200px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-
     font-weight: bold;
     text-align: center;
 `;
@@ -98,21 +97,22 @@ const CatImageUpload = () => {
             setCroppedImage(blobURL);
 
             // 추가
-            let croppedImgFile = await fetch(toSave).then(r => r.blob())
-                    .then(blobFile => new File([blobFile],
-                    imageTitle, { type: "image/png" }))
-                
+            let croppedImgFile = await fetch(toSave)
+                .then((r) => r.blob())
+                .then(
+                    (blobFile) =>
+                        new File([blobFile], imageTitle, { type: 'image/png' })
+                );
+
             dispatch({
                 type: SET_CURRENT_IMAGE,
                 // data: toSave,
                 data: croppedImgFile,
-            })
-            
-            
+            });
         } catch (e) {
             console.error(e);
         }
-    }, [imageSrc,croppedAreaPixels,imageTitle]);
+    }, [imageSrc, croppedAreaPixels, imageTitle]);
 
     const resetCroppedImage = useCallback(() => {
         setCroppedImage(null);
@@ -127,12 +127,14 @@ const CatImageUpload = () => {
             const file = e.target.files[0];
             setImageTitle(file.name);
             let imageDataUrl = await readFile(file);
-
             setImageSrc(imageDataUrl);
         }
     };
 
-    const headerStyle = useMemo(() => ({ fontWeight: 'bold',paddingTop: '30px' , lineHeight: '1.5'}), []);
+    const headerStyle = useMemo(
+        () => ({ fontWeight: 'bold', paddingTop: '30px', lineHeight: '1.5' }),
+        []
+    );
 
     return (
         <>
@@ -145,7 +147,8 @@ const CatImageUpload = () => {
                 {!croppedImage ? (
                     <div>
                         <CropperContainer>
-                            이미지를 올려주세요 <br />(선택)
+                            이미지를 올려주세요 <br />
+                            (선택)
                             <Cropper
                                 image={imageSrc}
                                 crop={crop}
@@ -185,7 +188,10 @@ const CatImageUpload = () => {
                                 >
                                     <i className="fa fa-upload"></i>
                                 </ImageUploadButtons>
-                                <ImageUploadButtons type="button"onClick={showCroppedImage}>
+                                <ImageUploadButtons
+                                    type="button"
+                                    onClick={showCroppedImage}
+                                >
                                     <i className="fa fa-check"></i>
                                 </ImageUploadButtons>
                             </CenterWrapper>
@@ -205,8 +211,11 @@ const CatImageUpload = () => {
                             }}
                         ></div>
                         <InnerGlobal>
-                            <ImageUploadButtons type="button"onClick={resetCroppedImage}>
-                                <i className ="fa fa-undo"></i>
+                            <ImageUploadButtons
+                                type="button"
+                                onClick={resetCroppedImage}
+                            >
+                                <i className="fa fa-undo"></i>
                             </ImageUploadButtons>
                         </InnerGlobal>
                     </div>

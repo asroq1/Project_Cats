@@ -6,12 +6,8 @@ import TopBar from '../components/main/TopBar';
 import MainComponent from '../components/main/Main';
 import MainEmptyComponent from '../components/main/MainEmpty';
 
-import {
-    GET_CAT_REQUEST,
-    SET_CURRENT_CAT,
-} from '../reducers/cat';
+import { GET_CAT_REQUEST, SET_CURRENT_CAT } from '../reducers/cat';
 import { GET_USER_REQUEST } from '../reducers/user';
-//여기 페이지에 위치해 여러 번 호출되지만 그럼에도 최적의 위치라 판단함
 
 const Main = () => {
     const { cat } = useSelector((state) => state.cat);
@@ -20,7 +16,6 @@ const Main = () => {
 
     const dispatch = useDispatch();
     const history = useHistory();
-
     const onSelect = useCallback((index) => {
         dispatch({
             type: SET_CURRENT_CAT,
@@ -44,13 +39,11 @@ const Main = () => {
                 ageMonth += 12;
                 ageYear -= 1;
             }
-            //setAge([ageYear, ageMonth]);
             return [ageYear, ageMonth];
         }
     }, [cat, currentIndex]);
 
     useEffect(() => {
-        //if (!logInDone){
         if (!localStorage.token) {
             alert('로그인 먼저 해주세요');
             history.push('/');
@@ -61,10 +54,6 @@ const Main = () => {
         dispatch({
             type: GET_USER_REQUEST,
         });
-        // dispatch({
-        //     type: GET_WEIGHT_REQUEST,
-        //     data: currentIndex,
-        // });
     }, [logOutDone]);
 
     return (

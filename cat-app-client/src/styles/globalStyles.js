@@ -7,7 +7,6 @@ body{
     transition: all 0.5s linear
 }
 `;
-
 export const lightTheme = {
     body: '#F4F1DE', //배경색(beige)
     text: '#484848',
@@ -44,14 +43,11 @@ export const darkTheme = {
 
     // alt colors for dark mode
     textlight: '#d8d8d8',
-
     cOrange: '#E07A5F',
-
     beige: '#121212',
     orange: '#3D405B',
     navy: '#3D405B',
-    navy2:'#3D455B',
+    navy2: '#3D455B',
     green: '#c3c3c3',
-
     shadow: 'rgba(255, 255, 255, 0.5)',
 };

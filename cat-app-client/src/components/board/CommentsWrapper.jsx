@@ -9,19 +9,15 @@ import {
 } from '../../reducers/post';
 
 const EachComment = styled.div`
-    
-    white-space:pre-wrap;
+    white-space: pre-wrap;
     padding-bottom: 1rem;
     padding-top: 1rem;
     & + & {
         border-top: 1px dotted ${({ theme }) => theme.green};
     }
-
     button {
         margin-left: 0.75rem;
         padding: 0.25rem;
-        cursor:pointer;
-
         border: none;
         border-radius: 10px;
         background-color: lightgray;
@@ -31,7 +27,7 @@ const EachComment = styled.div`
 const CommentsLayout = styled.div`
     margin-top: 2rem;
     font-size: 1rem;
-    margin-bottom:5rem;
+    margin-bottom: 5rem;
     color: gray;
     h1 {
         font-weight: bold;
@@ -49,7 +45,6 @@ const CommentsWrapper = ({ postId }) => {
     const { addCommentDone, removeCommentDone, currentComments } = useSelector(
         (state) => state.post
     );
-
     const dispatch = useDispatch();
     const onRemoveComment = useCallback(
         (commentId) => () => {
@@ -57,7 +52,8 @@ const CommentsWrapper = ({ postId }) => {
                 type: REMOVE_COMMENT_REQUEST,
                 data: commentId,
             });
-        }, []
+        },
+        []
     );
 
     // Whenever any change happens (comment added / deleted)
@@ -79,7 +75,6 @@ const CommentsWrapper = ({ postId }) => {
                         <EachComment key={c.content + i}>
                             <div>
                                 <h3>
-                                    
                                     {c.writer?.nickname}
                                     {c.writer.nickname === me.nickname && c.id && (
                                         <button

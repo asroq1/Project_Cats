@@ -1,35 +1,37 @@
 // Based on the example on https://www.npmjs.com/package/react-easy-crop
 // https://codesandbox.io/s/y09komm059
-import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react';
+import React, {
+    useState,
+    useMemo,
+    useRef,
+    useCallback,
+} from 'react';
 import { useDispatch } from 'react-redux';
 import Cropper from 'react-easy-crop';
 import { getCroppedImg } from './canvasUtils';
 import useInput from '../../hooks/useInput';
 
-
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import 'font-awesome/css/font-awesome.min.css';
-
-import PropTypes from  'prop-types';
 
 import { SET_CURRENT_IMAGE } from '../../reducers/cat';
 
 const InnerGlobal = styled.div`
     width: 80%;
     margin: 0 auto;
-    margin-bottom:0.25rem;
+    margin-bottom: 0.25rem;
     display: flex;
-
-    justify-content:space-between;
+    justify-content: space-between;
 `;
 
 const ImageUploadButtons = styled.button`
     flex: 1;
-    padding:1rem;
-    border-radius:10px;
+    padding: 1rem;
+    border-radius: 10px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: ${({theme}) => theme.orange};
+    background-color: ${({ theme }) => theme.orange};
     border: none;
     cursor: pointer;
     color: white;
@@ -37,7 +39,8 @@ const ImageUploadButtons = styled.button`
     & + & {
         margin-left: 0.5rem;
     }
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         background: darkred;
     }
 `;
@@ -63,27 +66,25 @@ const SliderContainer = styled.div`
     }
 `;
 
-const CatImageUpdate = ({cat, currentIndex}) => {
+const CatImageUpdate = ({ cat, currentIndex }) => {
     const currentCat = cat.find((v) => v.id === currentIndex);
     const [imageSrc, setImageSrc] = useState(null);
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useInput(1.0);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
     const [croppedImage, setCroppedImage] = useState(currentCat.photo);
-
-    const [imageTitle,setImageTitle] = useState(null)
+    const [imageTitle, setImageTitle] = useState(null);
 
     // 파일 업로드 창 숨기기 위함
     const imageInput = useRef();
     const onClickImageUpload = useCallback(() => {
         imageInput.current.click();
-    },[]);
+    }, []);
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels);
     }, []);
 
     const dispatch = useDispatch();
-
     const showCroppedImage = useCallback(async () => {
         try {
             const [toSave, blobURL] = await getCroppedImg(
@@ -93,11 +94,13 @@ const CatImageUpdate = ({cat, currentIndex}) => {
             // console.log('donee', { blobURL });
             setCroppedImage(blobURL);
 
-            
-            let croppedImageFile = await fetch(toSave).then(r => r.blob())
-                .then(blobFile => new File([blobFile],
-                    imageTitle, { type: "image/png"}))
-            
+            let croppedImageFile = await fetch(toSave)
+                .then((r) => r.blob())
+                .then(
+                    (blobFile) =>
+                        new File([blobFile], imageTitle, { type: 'image/png' })
+                );
+
             dispatch({
                 type: SET_CURRENT_IMAGE,
                 data: croppedImageFile,
@@ -126,16 +129,16 @@ const CatImageUpdate = ({cat, currentIndex}) => {
     const onFileChange = async (e) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
-            // console.log(file);
-            
             setImageTitle(file.name);
             let imageDataUrl = await readFile(file);
-
             setImageSrc(imageDataUrl);
         }
     };
 
-    const headerStyle = useMemo(() => ({ fontWeight: 'bold',paddingTop: '30px' , lineHeight: '1.5'}), []);
+    const headerStyle = useMemo(
+        () => ({ fontWeight: 'bold', paddingTop: '30px', lineHeight: '1.5' }),
+        []
+    );
 
     return (
         <>
@@ -207,7 +210,7 @@ const CatImageUpdate = ({cat, currentIndex}) => {
                         ></div>
                         <InnerGlobal>
                             <ImageUploadButtons onClick={resetCroppedImage}>
-                                <i className ="fa fa-undo"></i>
+                                <i className="fa fa-undo"></i>
                             </ImageUploadButtons>
                         </InnerGlobal>
                     </div>
@@ -227,7 +230,7 @@ function readFile(file) {
 
 CatImageUpdate.propTypes = {
     cat: PropTypes.array.isRequired,
-    currentIndex: PropTypes.number
-}
+    currentIndex: PropTypes.number,
+};
 
 export default CatImageUpdate;
