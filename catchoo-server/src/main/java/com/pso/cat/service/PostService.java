@@ -10,10 +10,8 @@ import com.pso.cat.repository.PostPhotoRepository;
 import com.pso.cat.repository.PostRepository;
 import com.pso.cat.util.S3Uploader;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 import lombok.RequiredArgsConstructor;
@@ -28,7 +26,6 @@ public class PostService {
     private final PostRepository postRepository;
     private final PostPhotoRepository postPhotoRepository;
     private final CommentRepository commentRepository;
-	private HttpServletResponse response;
 
     private final S3Uploader s3Uploader;
 
@@ -100,17 +97,28 @@ public class PostService {
     }
 
     public List<PostDto.ListResponse> list () {
-        return postRepository
-                .findAllByStateOrderByCreatedDateDesc(1)
-                .stream().map(PostDto.ListResponse::ofEntity).collect(Collectors.toList());
+        return toPhotoList(postRepository
+                .findAllByStateOrderByCreatedDateDesc(1));
     }
 
     public List<PostDto.ListResponse> fetchPostPagesBy(
         Long lastArticleId, int size
     ) {
         Page<Post> articles = fetchPages(lastArticleId, size);
-        return articles.getContent()
-            .stream().map(post -> PostDto.ListResponse.ofEntity(post)).collect(Collectors.toList());
+        return toPhotoList(articles);
+    }
+
+    private List<PostDto.ListResponse> toPhotoList(Iterable<Post> articles) {
+        List<PostDto.ListResponse> list = new ArrayList<>();
+        for (Post post : articles) {
+            PostPhoto photo = postPhotoRepository.findFirstByPostId(post.getId());
+            String thumbnail = null;
+            if (photo != null) {
+                thumbnail = photo.getUrl();
+            }
+            list.add(PostDto.ListResponse.ofEntity(post, thumbnail));
+        }
+        return list;
     }
 
     private Page<Post> fetchPages(Long lastPostId, int size) {
