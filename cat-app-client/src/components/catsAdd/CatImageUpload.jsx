@@ -94,7 +94,7 @@ const CatImageUpload = () => {
                 imageSrc,
                 croppedAreaPixels
             );
-            console.log('donee', { blobURL });
+            // console.log('donee', { blobURL });
             setCroppedImage(blobURL);
 
             // 추가

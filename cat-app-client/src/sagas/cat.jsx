@@ -149,7 +149,7 @@ function getWeightAPI(id) {
 }
 function* getWeight(action) {
     const result = yield call(getWeightAPI, action.data);
-    console.log('result', result);
+    // console.log('result', result);
     try {
         yield put({
             type: GET_WEIGHT_SUCCESS,

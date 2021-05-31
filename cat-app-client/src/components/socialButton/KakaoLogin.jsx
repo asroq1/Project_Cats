@@ -42,7 +42,7 @@ const KakaoLogin = () => {
         Kakao.Auth.login({
             scope: 'profile, account_email',
             success: function (authObj) {
-                console.log(`계정 정보:${authObj}`);
+                // console.log(`계정 정보:${authObj}`);
                 Kakao.API.request({
                     url: '/v2/user/me',
                     data: {
@@ -57,7 +57,7 @@ const KakaoLogin = () => {
                         dispatch(kakaoLoginRequestAction(data));
                     },
                     fail: function (error) {
-                        console.log(error);
+                        // console.log(error);
                         alert('로그인에 실패하였습니다.');
                     },
                 });

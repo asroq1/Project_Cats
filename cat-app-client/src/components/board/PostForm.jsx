@@ -133,7 +133,7 @@ const PostForm = () => {
                                 url: reader.result,
                             },
                         ];
-                        console.log(path);
+                        // console.log(path);
 
                         dispatch({
                             type: UPLOAD_IMAGES_SUCCESS,
@@ -165,7 +165,8 @@ const PostForm = () => {
     const onSubmit = useCallback(
         (e) => {
             e.preventDefault();
-            console.log(imagePaths);
+            
+            // console.log(imagePaths);
             if (!text || !text.trim()) {
                 return alert('게시글 작성해주세용');
             }
@@ -184,18 +185,18 @@ const PostForm = () => {
             formData.append('title', title);
             formData.append('content', text);
 
-            console.log('key');
-            for (var key of formData.keys()) {
-                console.log(key);
-            }
-            console.log('value');
-            for (var value of formData.values()) {
-                console.log(value);
-            }
-            console.log('entry');
-            for (var entry of formData.entries()) {
-                console.log(entry);
-            }
+            // console.log('key');
+            // for (var key of formData.keys()) {
+            //     console.log(key);
+            // }
+            // console.log('value');
+            // for (var value of formData.values()) {
+            //     console.log(value);
+            // }
+            // console.log('entry');
+            // for (var entry of formData.entries()) {
+            //     console.log(entry);
+            // }
             
             dispatch({
                 type: ADD_POST_REQUEST,

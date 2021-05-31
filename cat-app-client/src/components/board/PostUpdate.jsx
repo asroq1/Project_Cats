@@ -165,7 +165,7 @@ const PostUpdate = ({ match, location }) => {
                             url: reader.result,
                         },
                     ];
-                    console.log(path);
+                    // console.log(path);
 
                     dispatch({
                         type: UPLOAD_IMAGES_SUCCESS,
@@ -181,17 +181,13 @@ const PostUpdate = ({ match, location }) => {
         (url) => () => {
             setDeletedPhotoUrls([...deletedPhotoUrls, url]);
 
-            console.log('originalPhotoUrls', originalPhotoUrls);
+            // console.log('originalPhotoUrls', originalPhotoUrls);
 
             const newArr = originalPhotoUrls.filter((v) => v !== url);
             setOriginalPhotoUrls(newArr);
         },
         [originalPhotoUrls, deletedPhotoUrls]
     );
-    useEffect(() => {
-        console.log('change', deletedPhotoUrls);
-        console.log('change original', originalPhotoUrls);
-    }, [deletedPhotoUrls, originalPhotoUrls]);
     const onRemoveImages = useCallback(
         (key) => () => {
             dispatch({
@@ -209,7 +205,8 @@ const PostUpdate = ({ match, location }) => {
     const onSubmit = useCallback(
         (e) => {
             e.preventDefault();
-            console.log(imagePaths);
+            
+            // console.log(imagePaths);
             if (!text || !text.trim()) {
                 return alert('게시글 작성해주세용');
             } else if (originalPhotoNum - deletedPhotoUrls.length + imagePaths.length > 3) {
@@ -227,20 +224,20 @@ const PostUpdate = ({ match, location }) => {
                     formData.append('deletedPhotos', p);
                 });
 
-                console.log('key');
-                for (var key of formData.keys()) {
-                    console.log(key);
-                }
+                // console.log('key');
+                // for (var key of formData.keys()) {
+                //     console.log(key);
+                // }
 
-                console.log('value');
-                for (var value of formData.values()) {
-                    console.log(value);
-                }
+                // console.log('value');
+                // for (var value of formData.values()) {
+                //     console.log(value);
+                // }
 
-                console.log('entry');
-                for (var entry of formData.entries()) {
-                    console.log(entry);
-                }
+                // console.log('entry');
+                // for (var entry of formData.entries()) {
+                //     console.log(entry);
+                // }
                 return dispatch({
                     type: UPDATE_POST_REQUEST,
                     data: formData,

@@ -38,7 +38,7 @@ const KakaoSignup = () => {
         Kakao.Auth.login({
             scope: 'profile, account_email',
             success: function (authObj) {
-                console.log(`계정 정보:${authObj}`);
+                // console.log(`계정 정보:${authObj}`);
                 Kakao.API.request({
                     url: '/v2/user/me',
                     data: {
@@ -48,8 +48,8 @@ const KakaoSignup = () => {
                         ],
                     },
                     success: function (response) {
-                        console.log(response.kakao_account.email);
-                        console.log(response.kakao_account.profile.nickname);
+                        // console.log(response.kakao_account.email);
+                        // console.log(response.kakao_account.profile.nickname);
                         const email = response.kakao_account.email;
                         const nickname =
                             response.kakao_account.profile.nickname;

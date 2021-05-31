@@ -147,7 +147,7 @@ function removeCommentAPI(id){
 function* removeComment(action){
     try {
         const result= yield call(removeCommentAPI, action.data);
-        console.log(result);
+        // console.log(result);
 
         yield put({
             type: REMOVE_COMMENT_SUCCESS,
@@ -168,7 +168,7 @@ function getPostCommentsAPI(postId){
 function* getPostComments(action){
     try {
         const result= yield call(getPostCommentsAPI, action.data);
-        console.log(result);
+        // console.log(result);
 
         yield put({
             type: GET_COMMENTS_SUCCESS,

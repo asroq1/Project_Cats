@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -8,7 +8,6 @@ import MainEmptyComponent from '../components/main/MainEmpty';
 
 import {
     GET_CAT_REQUEST,
-    GET_WEIGHT_REQUEST,
     SET_CURRENT_CAT,
 } from '../reducers/cat';
 import { GET_USER_REQUEST } from '../reducers/user';
@@ -17,8 +16,7 @@ import { GET_USER_REQUEST } from '../reducers/user';
 const Main = () => {
     const { cat } = useSelector((state) => state.cat);
     const { currentIndex } = useSelector((state) => state.cat);
-
-    const { logInDone, logOutDone } = useSelector((state) => state.user);
+    const { logOutDone } = useSelector((state) => state.user);
 
     const dispatch = useDispatch();
     const history = useHistory();

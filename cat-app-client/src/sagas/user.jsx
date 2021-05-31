@@ -35,14 +35,14 @@ function signUpAPI(data) {
 
 function* signUp(action) {
     try {
-        console.log('SAGA SIGN UP', action);
+        // console.log('SAGA SIGN UP', action);
         const result = yield call(signUpAPI, action.data);
         yield put({
             type: SIGN_UP_SUCCESS,
             data: result.data,
         });
     } catch (err) {
-        console.log('SAGA SIGN UP ERR', err);
+        // console.log('SAGA SIGN UP ERR', err);
         yield put({
             type: SIGN_UP_FAILURE,
             error: err,

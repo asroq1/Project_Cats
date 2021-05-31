@@ -39,14 +39,12 @@ const PostList = () => {
             // scrollHeight: 총 길이
             // 따라서 끝까지 내렸을 때
             // scrollY + clientHeight=scrollHeight!!
-
-            console.log(
-                window.scrollY,
-                document.documentElement.clientHeight,
-                window.innerHeight,
-                document.documentElement.scrollHeight
-            );
-
+            // console.log(
+            //     window.scrollY,
+            //     document.documentElement.clientHeight,
+            //     window.innerHeight,
+            //     document.documentElement.scrollHeight
+            // );
             if (
                 window.scrollY + window.innerHeight >
                 document.documentElement.scrollHeight - 50

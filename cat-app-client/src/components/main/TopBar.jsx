@@ -102,10 +102,10 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
     }, [cat]);
     
     useEffect(() => {
-        console.log("showCatIndex",showCatIndex);
-        console.log("cat", cat)
-        console.log("shownCats",shownCats)
-        console.log("currentIndex",currentIndex)
+        // console.log("showCatIndex",showCatIndex);
+        // console.log("cat", cat)
+        // console.log("shownCats",shownCats)
+        // console.log("currentIndex",currentIndex)
         if (cat.length - showCatIndex > 3) {
             setMoreCatsRight(true);
         } else {
@@ -123,7 +123,7 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
         const newShowCatIndex = showCatIndex - 3 >= 0 ? showCatIndex - 3: 0;
 
         setShowCatIndex(newShowCatIndex);
-        console.log(showCatIndex);
+        // console.log(showCatIndex);
         setShownCats([...cat].slice(newShowCatIndex, newShowCatIndex + 3));
     }, [showCatIndex, cat]);
 
@@ -131,7 +131,8 @@ const TopBar = ({ cat, currentIndex, onSelect }) => {
 
         const newShowCatIndex = showCatIndex + 3 < cat.length ? showCatIndex + 3 : cat.length-1;
         setShowCatIndex(newShowCatIndex);
-        console.log(showCatIndex);
+        
+        // console.log(showCatIndex);
         
         setShownCats([...cat].slice(newShowCatIndex, newShowCatIndex + 3));
     }, [showCatIndex, cat]);

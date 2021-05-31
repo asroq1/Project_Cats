@@ -39,20 +39,20 @@ const CatsUpdate = ({cat, currentIndex}) => {
                 formData.append('photoFile', currImgUrl);
             }
 
-            console.log("key")
-            for (var key of formData.keys()){
-                console.log(key);
-            }
+            // console.log("key")
+            // for (var key of formData.keys()){
+            //     console.log(key);
+            // }
 
-            console.log("value")
-            for (var value of formData.values()){
-                console.log(value);
-            }
+            // console.log("value")
+            // for (var value of formData.values()){
+            //     console.log(value);
+            // }
 
-            console.log("entry")
-            for (var entry of formData.entries()){
-                console.log(entry);
-            }
+            // console.log("entry")
+            // for (var entry of formData.entries()){
+            //     console.log(entry);
+            // }
 
             dispatch({
                 type: SET_CURRENT_IMAGE,

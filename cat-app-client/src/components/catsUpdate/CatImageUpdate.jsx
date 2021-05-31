@@ -126,7 +126,7 @@ const CatImageUpdate = ({cat, currentIndex}) => {
     const onFileChange = async (e) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
-            console.log(file);
+            // console.log(file);
             
             setImageTitle(file.name);
             let imageDataUrl = await readFile(file);

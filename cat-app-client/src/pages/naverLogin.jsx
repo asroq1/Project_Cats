@@ -71,7 +71,7 @@ const NaverLogin = () => {
     const dispatch = useDispatch();
     const { register, errors, handleSubmit } = useForm();
     const onSubmit = useCallback((data) => {
-        console.log('success', data);
+        // console.log('success', data);
         dispatch(signUpRequest(data));
     }, []);
     return (
