@@ -62,7 +62,7 @@ public class PostController {
     public ResponseEntity modify(Long id,
                                  PostDto.Request postRequest,
                                  List<MultipartFile> photos,
-                                 List<String> deletedPhotos) {
+                                 String[] deletedPhotos) {
         postService.modify(id, postRequest, photos, deletedPhotos);
         return ResponseEntity.ok().build();
     }

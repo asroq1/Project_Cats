@@ -56,13 +56,14 @@ public class PostService {
         }
     }
 
-    private void removeOldPhotos(List<String> deletedPhotos) {
+    private void removeOldPhotos(String[] deletedPhotos) {
         try {
             for (String photo : deletedPhotos) {
                 s3Uploader.removeFromS3(photo);
+                postPhotoRepository.deleteByUrl(photo);
             }
         } catch (Exception e) {
-
+            throw new RuntimeException("사진을 지우던 중 에러 발생");
         }
     }
 
@@ -79,13 +80,13 @@ public class PostService {
     public void modify (Long id,
                         PostDto.Request newPost,
                         List<MultipartFile> photos,
-                        List<String> deletedPhotos){
+                        String[] deletedPhotos){
         Post post = newPost.toEntity(postRepository.findById(id)
             .orElseThrow(EntityNotFoundException::new));
-        if (deletedPhotos != null || !deletedPhotos.isEmpty()) {
+        if (deletedPhotos != null && deletedPhotos.length != 0) {
             removeOldPhotos(deletedPhotos);
         }
-         if (photos != null || !photos.isEmpty()) {
+         if (photos != null && photos.size() != 0) {
              savePhotos(id, photos);
          }
         postRepository.save(post);
