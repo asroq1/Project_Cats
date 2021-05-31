@@ -79,15 +79,15 @@ public class PostService {
     @Transactional
     public void modify (Long id,
                         PostDto.Request newPost,
-                        List<MultipartFile> photos,
+                        List<MultipartFile> photo,
                         String[] deletedPhotos){
         Post post = newPost.toEntity(postRepository.findById(id)
             .orElseThrow(EntityNotFoundException::new));
         if (deletedPhotos != null && deletedPhotos.length != 0) {
             removeOldPhotos(deletedPhotos);
         }
-         if (photos != null && photos.size() != 0) {
-             savePhotos(id, photos);
+         if (photo != null && photo.size() != 0) {
+             savePhotos(id, photo);
          }
         postRepository.save(post);
     }
