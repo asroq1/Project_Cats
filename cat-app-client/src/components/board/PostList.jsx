@@ -138,7 +138,7 @@ const PostItem = ({ post }) => {
         <StyledLink to={`/post/view/${id}`}>
             <PostItemBlock>
                 
-                {photos ? (
+                {thumbnail ? (
                     <PhotoContainer
                         style={{ backgroundImage: `url(${thumbnail})` }}
                     />
