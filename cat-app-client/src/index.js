@@ -26,8 +26,6 @@ if (!localStorage.token) {
     persistor.purge();
 }
 ReactDOM.render(
-    <React.StrictMode>
-        {/* React.StrictMode는 배포시 지울 코드 */}
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <ThemeProvider theme={theme}>
@@ -38,7 +36,6 @@ ReactDOM.render(
                     </Router>
                 </ThemeProvider>
             </PersistGate>
-        </Provider>
-    </React.StrictMode>,
+        </Provider>,
     document.getElementById('root')
 );
