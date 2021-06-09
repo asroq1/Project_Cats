@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
+import Loader from '../modal/Loader';
 import 'font-awesome/css/font-awesome.min.css';
 
 //코드 너무 장황해지니
@@ -94,7 +96,7 @@ const WeightRecordWrapper = styled.div`
     }
 `;
 
-const Main = ({ cat, currentIndex, age }) => {
+const Main = ({ cat, currentIndex, age, loading }) => {
     // styled-component대신 useMemo 써줌
     const paddingStyle = useMemo(
         () => ({
@@ -120,6 +122,11 @@ const Main = ({ cat, currentIndex, age }) => {
 
     return (
         <InnerGlobal>
+            {loading && (
+                <GeneralWrapper>
+                    <Loader />
+                </GeneralWrapper>
+            )}
             {currentCat && (
                 <>
                     <GeneralWrapper>

@@ -47,7 +47,7 @@ export const initialState = {
         //     ],
         // },
     ],
-    isLoading: true,
+    isLoading: false,
     currentWeightIndex: 1,
     currentIndex: -1,
     currImgUrl: null,

@@ -11,7 +11,7 @@ import { GET_USER_REQUEST } from '../reducers/user';
 
 const Main = () => {
     const { cat } = useSelector((state) => state.cat);
-    const { currentIndex } = useSelector((state) => state.cat);
+    const { currentIndex, isLoading } = useSelector((state) => state.cat);
     const { logOutDone } = useSelector((state) => state.user);
 
     const dispatch = useDispatch();
@@ -65,6 +65,7 @@ const Main = () => {
                     cat={cat}
                     currentIndex={currentIndex}
                     age={getAge()}
+                    loading={isLoading}
                 />
             ) : (
                 <MainEmptyComponent></MainEmptyComponent>

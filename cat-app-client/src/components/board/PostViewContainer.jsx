@@ -17,7 +17,7 @@ const PostViewBody = styled.div`
 `;
 
 const PostViewContainer = ({ match }) => {
-    const { currentPost, readPostError, updatePostDone } = useSelector(
+    const { currentPost, readPostError, readPostLoading, updatePostDone } = useSelector(
         (state) => state.post
     );
     const { postId } = match.params;
@@ -44,6 +44,7 @@ const PostViewContainer = ({ match }) => {
                         postId={parseInt(postId)}
                         post={currentPost}
                         error={readPostError}
+                        loading={readPostLoading}
                     />
                 </PostViewBody>
             </OverallPostsLayout>

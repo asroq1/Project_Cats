@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import 'font-awesome/css/font-awesome.min.css';
 import styled from 'styled-components';
+
+import Loader from '../modal/Loader';
 import PropTypes from 'prop-types';
 
 const PostItemsContainer = styled.div`
@@ -31,6 +33,19 @@ const PostListBody = styled.div`
     position: relative;
     min-height: calc(100vh - 100px);
     //padding-top: 50px;
+`;
+
+const LoaderWrapper = styled.div`
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
 `;
 
 const PhotoContainer = styled.div`
@@ -156,7 +171,7 @@ const PostItem = ({ post }) => {
     );
 };
 
-const PostList = ({ posts, error }) => {
+const PostList = ({ posts, loading, error }) => {
     //에러
     if (error) {
         return <ErrorBox>에러 발생함</ErrorBox>;
@@ -164,10 +179,13 @@ const PostList = ({ posts, error }) => {
 
     return (
         <>
-            {/* 로딩 중 아니고 포스트 배열 존재할 때만 */}
-            {/* {!loading && posts && ( */}
-
             <PostListBody>
+                {loading &&
+                    <LoaderWrapper>
+                        <Loader />
+                    </LoaderWrapper>
+                    
+                }
                 <PostItemsContainer>
                     {posts && (
                         <div>
@@ -177,6 +195,7 @@ const PostList = ({ posts, error }) => {
                         </div>
                     )}
                 </PostItemsContainer>
+
             </PostListBody>
         </>
     );

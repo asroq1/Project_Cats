@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import 'font-awesome/css/font-awesome.min.css';
 import PropTypes from 'prop-types';
 
+import Loader from '../modal/Loader';
+
 import CommentForm from './CommentForm';
 import CommentsWrapper from './CommentsWrapper';
 import ImageCarousel from './ImageCarousel';
@@ -17,6 +19,21 @@ const OverallContainer = styled.div`
     h1:first-child {
         cursor: pointer;
     }
+`;
+
+const LoaderWrapper = styled.div`
+    position: fixed;
+    z-index: 5;
+
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
 `;
 
 const PostHead = styled.div`
@@ -74,7 +91,7 @@ const PostContent = styled.div`
     color: gray;
 `;
 
-const PostView = ({ postId, post, error }) => {
+const PostView = ({ postId, post, loading, error }) => {
     const history = useHistory();
     const goBack = useCallback(() => {
         history.push('/post/list');
@@ -123,8 +140,13 @@ const PostView = ({ postId, post, error }) => {
 
     return (
         <OverallContainer>
+            {loading && (
+                <LoaderWrapper>
+                    <Loader />
+                </LoaderWrapper>
+            )}
             <h1 onClick={goBack}>
-                <i className="fa fa-arrow-left"></i> 전체게시글 
+                <i className="fa fa-arrow-left"></i> 전체게시글
             </h1>
 
             <PostHead>

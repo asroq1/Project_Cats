@@ -111,13 +111,16 @@ const reducer = (state = initialState, action) =>
                 draft.readPostError = null;
                 break;
             case READ_POST_SUCCESS:
+                draft.readPostLoading = false;
+                draft.readPostDone = true;
                 draft.currentPost = action.data;
                 draft.updatePostDone = false;
                 draft.imagePaths = [];
 
                 break;
             case READ_POST_FAILURE:
-                draft.error = action.data;
+                draft.readPostLoading = false;
+                draft.readPostError = action.data;
                 break;
             case LIST_POST_REQUEST:
                 draft.listPostLoading = true;
