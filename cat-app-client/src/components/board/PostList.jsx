@@ -58,8 +58,9 @@ const PhotoContainer = styled.div`
     border-bottom: 2px solid gray;
     background-size: cover;
     background-color: lightgray;
-    .flex {
+    .flex {        
         display: flex;
+        margin: 0;
         align-items: center;
         justify-content: center;
         width: 100%;
