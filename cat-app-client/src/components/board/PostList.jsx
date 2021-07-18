@@ -176,7 +176,8 @@ const PostList = ({ posts, loading, error }) => {
     //에러
     if (error) {
 
-        console.log(error);
+        console.error(error);
+        console.dir(error);
         return <ErrorBox>에러 발생함</ErrorBox>;
     }
 
