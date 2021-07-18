@@ -131,9 +131,10 @@ const reducer = (state = initialState, action) =>
                 draft.listPostLoading = false;
                 draft.listPostDone = true;
                 draft.mainPosts = draft.mainPosts.concat(action.data);
-                draft.hasMorePosts = 
-                    draft.mainPosts[draft.mainPosts.length - 1].id> 5 
-                    && draft.mainPosts.length < 50;
+                draft.hasMorePosts =
+                    draft.mainPosts.length > 0 &&
+                    draft.mainPosts[draft.mainPosts.length - 1].id > 5 &&
+                    draft.mainPosts.length < 50;
                 draft.addPostDone = false;
                 draft.imagePaths = [];
                 draft.removePostDone = false;

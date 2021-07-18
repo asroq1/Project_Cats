@@ -58,7 +58,7 @@ const PhotoContainer = styled.div`
     border-bottom: 2px solid gray;
     background-size: cover;
     background-color: lightgray;
-    .flex {        
+    .flex {
         display: flex;
         margin: 0;
         align-items: center;
@@ -134,7 +134,7 @@ const StyledLink = styled(Link)`
 `;
 
 const PostItem = ({ post }) => {
-    const { id, title, viewCount, writer, createdDate, thumbnail } = post;    
+    const { id, title, viewCount, writer, createdDate, thumbnail } = post;
 
     return (
         <StyledLink to={`/post/view/${id}`}>
@@ -175,21 +175,17 @@ const PostItem = ({ post }) => {
 const PostList = ({ posts, loading, error }) => {
     //에러
     if (error) {
-
-        console.error(error);
-        console.dir(error);
         return <ErrorBox>에러 발생함</ErrorBox>;
     }
 
     return (
         <>
             <PostListBody>
-                {loading &&
+                {loading && (
                     <LoaderWrapper>
                         <Loader />
                     </LoaderWrapper>
-                    
-                }
+                )}
                 <PostItemsContainer>
                     {posts && (
                         <div>
@@ -199,7 +195,6 @@ const PostList = ({ posts, loading, error }) => {
                         </div>
                     )}
                 </PostItemsContainer>
-
             </PostListBody>
         </>
     );
