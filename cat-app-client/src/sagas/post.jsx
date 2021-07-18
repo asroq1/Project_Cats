@@ -138,7 +138,7 @@ function* listPost(action) {
     } catch (err) {
         yield put({
             type: LIST_POST_FAILURE,
-            data: err.response.data,
+            data: err
         });
     }
 }
